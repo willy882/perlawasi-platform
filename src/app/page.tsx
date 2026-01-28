@@ -234,14 +234,14 @@ export default function HomePage() {
                         </div>
                         <div className="order-1 md:order-2 space-y-8">
                             <div>
-                                <span className="text-gray-500 font-bold uppercase tracking-widest text-xs">El Alma de los Andes</span>
-                                <h2 className="text-4xl md:text-5xl font-display font-bold mt-2">Licorería de Autor</h2>
+                                <span className="text-gray-500 font-bold uppercase tracking-widest text-xs">Con Sabor a Selva</span>
+                                <h2 className="text-4xl md:text-5xl font-display font-bold mt-2">Licoreres Perlamayo</h2>
                                 <p className="text-gray-600 text-lg mt-6 leading-relaxed">
-                                    Destilados premium y macerados artesanales que capturan la esencia de nuestra biodiversidad. Una curaduría de licores diseñados para los momentos más especiales.
+                                    Destilados premium, cocteles y macerados artesanales que capturan la esencia de nuestra biodiversidad. Una curaduría de licores diseñados para los momentos más especiales.
                                 </p>
                             </div>
                             <Link href="/licoreria" className="btn bg-gray-900 text-white px-10 py-4 rounded-full inline-block font-bold hover:bg-gray-800 transition-all">
-                                Explorar Destilados →
+                                Explorar Lircores →
                             </Link>
                         </div>
                     </div>
@@ -262,7 +262,14 @@ export default function HomePage() {
                             <div className="mt-12 z-10">
                                 <span className="btn bg-black text-white px-8 py-3 rounded-full text-sm font-bold inline-block">Explorar Colección</span>
                             </div>
-                            <div className="absolute -bottom-10 -right-10 text-[15rem] opacity-5 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-4">👕</div>
+                            <div className="absolute top-1/2 -right-20 w-80 h-80 -translate-y-1/2 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-4">
+                                <Image
+                                    src="/images/polo_mockup.png"
+                                    alt="Ropa Esencial"
+                                    fill
+                                    className="object-contain drop-shadow-xl"
+                                />
+                            </div>
                         </Link>
 
                         {/* Plants Section */}
