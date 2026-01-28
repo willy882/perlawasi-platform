@@ -62,7 +62,7 @@ export default function HomePage() {
                             <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Felicidad en cada bocado</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold">Heladería Vibrante</h2>
                             <p className="text-gray-600 text-lg leading-relaxed">
-                                Refrescos y delicias cremosas preparadas con las mejores frutas de la región. Un paraíso de sabores naturales que celebran la biodiversidad de nuestra tierra.
+                                Delicias cremosas preparadas con las mejores frutas de la región. Un paraíso de sabores naturales que celebran la biodiversidad de nuestra tierra.
                             </p>
                             <Link href="/heladeria" className="btn btn-primary px-10 py-4 rounded-full inline-block text-lg">
                                 Probar Sabores →

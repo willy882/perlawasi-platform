@@ -1,10 +1,7 @@
-import Link from 'next/link'
-import { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-    title: 'Heladería Perlawasi - Sabores Artesanales de la Amazonía | San Martín',
-    description: 'Helados artesanales elaborados con frutas frescas de la región. Sabores únicos que celebran la biodiversidad amazónica.',
-}
+import Link from 'next/link'
+import AnimatedIceCreamCharacter from '@/components/AnimatedIceCreamCharacter'
 
 export default function HeladeriaPage() {
     return (
@@ -17,20 +14,28 @@ export default function HeladeriaPage() {
                     <div className="absolute top-1/2 left-1/3 text-7xl animate-float" style={{ animationDelay: '0.5s' }}>🍧</div>
                 </div>
 
-                <div className="relative z-20 container-custom text-white">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <span className="inline-block px-4 py-2 bg-white text-pink-600 text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
-                            Felicidad en Cada Bocado
-                        </span>
-                        <h1 className="text-6xl md:text-8xl font-display font-bold mb-6 leading-tight">
-                            Heladería Vibrante
-                        </h1>
-                        <p className="text-2xl text-white/95 mb-10 leading-relaxed">
-                            Sabores artesanales que celebran las frutas amazónicas. Frescura natural en cada cucharada.
-                        </p>
-                        <Link href="#sabores" className="btn bg-white text-pink-600 px-12 py-5 text-xl font-bold hover:bg-pink-50">
-                            Descubre los Sabores
-                        </Link>
+                <div className="relative z-20 container-custom">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        {/* Contenido de texto */}
+                        <div className="text-white text-center lg:text-left">
+                            <span className="inline-block px-4 py-2 bg-white text-pink-600 text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
+                                Felicidad en Cada Bocado
+                            </span>
+                            <h1 className="text-6xl md:text-8xl font-display font-bold mb-6 leading-tight">
+                                Heladería Vibrante
+                            </h1>
+                            <p className="text-2xl text-white/95 mb-10 leading-relaxed">
+                                Sabores artesanales que celebran las frutas amazónicas. Frescura natural en cada cucharada.
+                            </p>
+                            <Link href="#sabores" className="btn bg-white text-pink-600 px-12 py-5 text-xl font-bold hover:bg-pink-50">
+                                Descubre los Sabores
+                            </Link>
+                        </div>
+
+                        {/* Personaje Animado */}
+                        <div className="hidden lg:flex justify-center items-center">
+                            <AnimatedIceCreamCharacter />
+                        </div>
                     </div>
                 </div>
             </section>
