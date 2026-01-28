@@ -10,6 +10,19 @@ function Model(props: any) {
     // Cargar el modelo desde la carpeta pública
     const { scene } = useGLTF('/models/oversized_t-shirt/scene.gltf')
 
+    // Limpieza de texturas y fondo
+    if (scene) {
+        scene.traverse((child: any) => {
+            if (child.isMesh) {
+                child.material.map = null
+                child.material.color = new THREE.Color('white')
+                child.material.roughness = 0.6
+                child.material.metalness = 0.05
+                child.material.needsUpdate = true
+            }
+        })
+    }
+
     // Rotación automática
     useFrame((state, delta) => {
         if (group.current) {
@@ -40,8 +53,7 @@ export default function Polo3D() {
                 <Suspense fallback={null}>
                     <PresentationControls
                         global
-                        config={{ mass: 2, tension: 500 }}
-                        snap={{ mass: 4, tension: 1500 }}
+                        snap={true} // Simplificado para evitar error de TS
                         rotation={[0, 0.3, 0]}
                         polar={[-Math.PI / 3, Math.PI / 3]}
                         azimuth={[-Math.PI / 1.4, Math.PI / 2]}
