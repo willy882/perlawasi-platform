@@ -1,44 +1,47 @@
 'use client'
 
-import { useRef, Suspense } from 'react'
+import { useRef, Suspense, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, Environment, PresentationControls, ContactShadows } from '@react-three/drei'
 import * as THREE from 'three'
 
 function Model(props: any) {
     const group = useRef<THREE.Group>(null)
-    // Cargar el modelo desde la carpeta pública
     const { scene } = useGLTF('/models/oversized_t-shirt/scene.gltf')
 
-    // Material blanco puro nuevo
-    const whiteMaterial = new THREE.MeshStandardMaterial({
-        color: 'white',
-        roughness: 0.5,
-        metalness: 0.1,
-    })
+    // Clonar la escena para asegurar una instancia fresca y modificable
+    const clone = useMemo(() => {
+        const clonedScene = scene.clone()
 
-    // Aplicar el nuevo material a todo el modelo
-    if (scene) {
-        scene.traverse((child: any) => {
+        // Material blanco puro nuevo (creado una sola vez)
+        const whiteMaterial = new THREE.MeshStandardMaterial({
+            color: '#FFFFFF', // Blanco explícito
+            roughness: 0.3,   // Un poco más suave para que refleje mejor la luz
+            metalness: 0.0,   // Nada metálico
+            emissive: '#111111', // Sutil auto-iluminación para que no se vea gris
+        })
+
+        clonedScene.traverse((child: any) => {
             if (child.isMesh) {
                 child.material = whiteMaterial
                 child.castShadow = true
                 child.receiveShadow = true
             }
         })
-    }
+
+        return clonedScene
+    }, [scene])
 
     // Rotación automática
     useFrame((state, delta) => {
         if (group.current) {
-            // Rotar en el eje Y continuamente
-            group.current.rotation.y += delta * 0.5 // Velocidad de rotación
+            group.current.rotation.y += delta * 0.5
         }
     })
 
     return (
         <group ref={group} {...props} dispose={null}>
-            <primitive object={scene} scale={2.5} />
+            <primitive object={clone} scale={2.5} />
         </group>
     )
 }
