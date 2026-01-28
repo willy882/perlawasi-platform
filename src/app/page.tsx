@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import AnimatedIceCreamCharacter from '@/components/AnimatedIceCreamCharacter'
-import AnimatedPolo from '@/components/AnimatedPolo'
+import Polo3D from '@/components/Polo3D'
 
 export default function HomePage() {
     return (
@@ -263,8 +263,8 @@ export default function HomePage() {
                             <div className="mt-12 z-10">
                                 <span className="btn bg-black text-white px-8 py-3 rounded-full text-sm font-bold inline-block">Explorar Colección</span>
                             </div>
-                            <div className="absolute top-1/2 -right-20 -translate-y-1/2 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-4">
-                                <AnimatedPolo />
+                            <div className="absolute top-1/2 -right-32 w-[500px] h-[500px] -translate-y-1/2 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-4 pointer-events-none md:pointer-events-auto">
+                                <Polo3D />
                             </div>
                         </Link>
 
