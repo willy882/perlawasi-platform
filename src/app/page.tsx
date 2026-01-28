@@ -225,7 +225,7 @@ export default function HomePage() {
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div className="order-2 md:order-1 relative h-[500px] rounded-[3rem] overflow-hidden group shadow-soft">
                             <Image
-                                src="https://images.unsplash.com/photo-1569100139305-a3f28205f02c?auto=format&fit=crop&q=80&w=1200"
+                                src="/images/fondo_licores.png"
                                 alt="Licorería de Autor"
                                 fill
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
