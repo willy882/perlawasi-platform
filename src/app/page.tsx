@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import dynamic from 'next/dynamic'
 import AnimatedIceCreamCharacter from '@/components/AnimatedIceCreamCharacter'
-import Polo3D from '@/components/Polo3D'
+const Polo3D = dynamic(() => import('@/components/Polo3D'), { ssr: false })
 
 export default function HomePage() {
     return (
