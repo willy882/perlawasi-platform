@@ -257,8 +257,8 @@ export default function HomePage() {
                         <Link href="/ropa" className="group bg-[#F4F1ED] rounded-[3rem] p-12 flex flex-col justify-between relative overflow-hidden transition-all hover:bg-[#EEEAE5]">
                             <div className="z-10 relative">
                                 <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-4">Conscious Wear</span>
-                                <h3 className="text-4xl font-display font-bold text-gray-900">Ropa Esencial</h3>
-                                <p className="text-gray-500 mt-4 max-w-xs text-lg">Básicos sostenibles diseñados para tu ritual diario en armonía con el entorno.</p>
+                                <h3 className="text-4xl font-display font-bold text-gray-900">Ropa Esencial con Boutique Perlamayo</h3>
+                                <p className="text-gray-500 mt-4 max-w-xs text-lg">Básicos sostenibles diseñados para tu ritual diario en armonía con el entorno, desde zandalias, ropa interior y mucho más.</p>
                             </div>
                             <div className="mt-12 z-10">
                                 <span className="btn bg-black text-white px-8 py-3 rounded-full text-sm font-bold inline-block">Explorar Colección</span>
@@ -278,7 +278,14 @@ export default function HomePage() {
                             <div className="mt-12 z-10">
                                 <span className="text-sm font-bold border-b-2 border-gray-900 pb-1 hover:border-plants transition-colors">Comprar Plantas →</span>
                             </div>
-                            <div className="absolute -bottom-10 -right-10 text-[15rem] opacity-10 transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-6">🌿</div>
+                            <div className="absolute top-0 right-0 w-2/3 h-full opacity-60 mix-blend-multiply transition-transform duration-700 group-hover:scale-110">
+                                <Image
+                                    src="/images/fondo_buho1.png"
+                                    alt="Verdor Interior"
+                                    fill
+                                    className="object-cover mask-image-gradient"
+                                />
+                            </div>
                         </Link>
                     </div>
                 </div>
