@@ -28,7 +28,7 @@ export default function AnimatedIceCreamCharacter() {
                 }}
             >
                 <Image
-                    src="/images/kawaii-icecream.png"
+                    src="/images/kawaii-icecream-transparent.png"
                     alt="Personaje Kawaii de Helado"
                     width={300}
                     height={300}
