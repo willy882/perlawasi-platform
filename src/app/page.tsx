@@ -97,10 +97,20 @@ export default function HomePage() {
                             </div>
 
                             <div className="grid grid-cols-2 gap-8">
-                                <div className="p-6 bg-white/5 rounded-2xl border border-white/10 hover:bg-white/10 transition-colors">
-                                    <div className="text-3xl mb-3">☕</div>
-                                    <h3 className="font-bold text-lg mb-1">Café Premium</h3>
-                                    <p className="text-xs text-gray-400">Granos seleccionados a mano en las alturas andinas.</p>
+                                <div className="p-6 relative rounded-2xl border border-white/10 hover:border-primary-500/50 transition-all overflow-hidden group">
+                                    <div className="absolute inset-0">
+                                        <Image
+                                            src="/images/fondo_cafe1.png"
+                                            alt="Fondo Café"
+                                            fill
+                                            className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
+                                    </div>
+                                    <div className="relative z-10 flex flex-col justify-end h-full min-h-[100px]">
+                                        <h3 className="font-bold text-lg mb-1 text-white group-hover:text-primary-400 transition-colors">Café Premium</h3>
+                                        <p className="text-xs text-gray-300 group-hover:text-white transition-colors">Granos seleccionados a mano en las alturas andinas.</p>
+                                    </div>
                                 </div>
                                 <div className="p-6 relative rounded-2xl border border-white/10 hover:border-primary-500/50 transition-all overflow-hidden group">
                                     <div className="absolute inset-0">
