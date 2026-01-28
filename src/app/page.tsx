@@ -282,13 +282,14 @@ export default function HomePage() {
                             <div className="mt-12 z-10">
                                 <span className="text-sm font-bold border-b-2 border-gray-900 pb-1 hover:border-plants transition-colors">Comprar Plantas →</span>
                             </div>
-                            <div className="absolute top-0 right-0 w-2/3 h-full opacity-60 mix-blend-multiply transition-transform duration-700 group-hover:scale-110">
+                            <div className="absolute top-0 right-0 w-full h-full opacity-90 transition-transform duration-700 group-hover:scale-105">
                                 <Image
                                     src="/images/fondo_buho1.png"
                                     alt="Verdor Interior"
                                     fill
-                                    className="object-cover mask-image-gradient"
+                                    className="object-cover object-center mask-image-gradient-wide"
                                 />
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#E8F3ED] via-transparent to-transparent" />
                             </div>
                         </Link>
                     </div>

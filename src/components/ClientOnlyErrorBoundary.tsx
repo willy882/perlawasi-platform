@@ -29,11 +29,13 @@ class ClientOnlyErrorBoundary extends Component<Props, State> {
             // Fallback UI si hay error
             return (
                 this.props.fallback || (
-                    <div className="flex items-center justify-center w-full h-full min-h-[300px] bg-gray-50 rounded-3xl p-8 text-center">
-                        <div className="text-gray-400">
-                            <span className="text-4xl block mb-2">👕</span>
-                            <p className="text-sm">Vista 3D no disponible temporalmente</p>
-                        </div>
+                    <div className="flex items-center justify-center w-full h-full relative p-4">
+                        {/* Fallback silencioso: Imagen estática del polo si falla el 3D */}
+                        <img
+                            src="/images/polo_fallback.png"
+                            alt="Polo Mockup"
+                            className="w-full h-full object-contain drop-shadow-xl opacity-90 hover:opacity-100 transition-opacity"
+                        />
                     </div>
                 )
             )
