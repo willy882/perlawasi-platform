@@ -1,5 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
+import AnimatedIceCreamCharacter from '@/components/AnimatedIceCreamCharacter'
 
 export default function HomePage() {
     return (
@@ -45,11 +48,12 @@ export default function HomePage() {
 
             </section>
 
-            {/* Heladería - Sección Artesanal */}
-            < section className="section bg-white overflow-hidden" >
+            {/* Heladería - Sección Artesanal con Personaje Animado */}
+            <section className="section bg-gradient-to-b from-pink-50 via-white to-white overflow-hidden">
                 <div className="container-custom">
-                    <div className="grid md:grid-cols-2 gap-12 items-center">
-                        <div className="relative h-[450px] rounded-[3rem] overflow-hidden shadow-medium bg-icecream-light/30 group">
+                    <div className="grid lg:grid-cols-3 gap-8 items-center">
+                        {/* Imagen de helados */}
+                        <div className="relative h-[400px] lg:h-[500px] rounded-[3rem] overflow-hidden shadow-medium bg-icecream-light/30 group">
                             <Image
                                 src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&q=80&w=1200"
                                 alt="Helados Artesanales"
@@ -58,7 +62,9 @@ export default function HomePage() {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                         </div>
-                        <div className="space-y-6 px-4">
+
+                        {/* Contenido de texto */}
+                        <div className="space-y-6 px-4 lg:col-span-1">
                             <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Felicidad en cada bocado</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold">Heladería Vibrante</h2>
                             <p className="text-gray-600 text-lg leading-relaxed">
@@ -68,9 +74,14 @@ export default function HomePage() {
                                 Probar Sabores →
                             </Link>
                         </div>
+
+                        {/* Personaje Animado */}
+                        <div className="hidden lg:flex justify-center items-center">
+                            <AnimatedIceCreamCharacter />
+                        </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Café & Cacao - Sección Fusionada (Dark) */}
             < section className="py-24 bg-brand-dark text-white relative overflow-hidden" >
