@@ -22,7 +22,7 @@ export default function AlojamientoPage() {
                             Descanso Profundo
                         </span>
                         <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
-                            Santuario de Alojamiento
+                            Brisa Lodge
                         </h1>
                         <p className="text-xl text-white/90 mb-8 leading-relaxed">
                             Suites diseñadas para la paz y el reencuentro con la naturaleza. Lujo sostenible en el corazón de San Martín.

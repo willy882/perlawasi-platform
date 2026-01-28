@@ -156,12 +156,12 @@ export default function HomePage() {
                 <div className="container-custom">
                     <div className="text-center mb-16">
                         <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-xs">Descanso Profundo</span>
-                        <h2 className="text-4xl md:text-6xl font-display font-bold mt-4">Santuario de Alojamiento</h2>
+                        <h2 className="text-4xl md:text-6xl font-display font-bold mt-4">Brisa Lodge</h2>
                     </div>
                     <div className="relative h-[600px] rounded-[3rem] overflow-hidden group shadow-soft">
                         <Image
-                            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=1920"
-                            alt="Alojamiento en la Selva"
+                            src="/images/fondo_alojamiento.png"
+                            alt="Brisa Lodge - Alojamiento en la Selva"
                             fill
                             className="object-cover transition-transform duration-1000 group-hover:scale-105"
                         />
