@@ -10,15 +10,20 @@ function Model(props: any) {
     // Cargar el modelo desde la carpeta pública
     const { scene } = useGLTF('/models/oversized_t-shirt/scene.gltf')
 
-    // Limpieza de texturas y fondo
+    // Material blanco puro nuevo
+    const whiteMaterial = new THREE.MeshStandardMaterial({
+        color: 'white',
+        roughness: 0.5,
+        metalness: 0.1,
+    })
+
+    // Aplicar el nuevo material a todo el modelo
     if (scene) {
         scene.traverse((child: any) => {
             if (child.isMesh) {
-                child.material.map = null
-                child.material.color = new THREE.Color('white')
-                child.material.roughness = 0.6
-                child.material.metalness = 0.05
-                child.material.needsUpdate = true
+                child.material = whiteMaterial
+                child.castShadow = true
+                child.receiveShadow = true
             }
         })
     }
