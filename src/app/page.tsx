@@ -115,15 +115,14 @@ export default function HomePage() {
                                 <div className="p-6 relative rounded-2xl border border-white/10 hover:border-primary-500/50 transition-all overflow-hidden group">
                                     <div className="absolute inset-0">
                                         <Image
-                                            src="/images/fondo_cafe.png"
+                                            src="/images/fondo_cacao.png"
                                             alt="Fondo Cacao"
                                             fill
                                             className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
                                     </div>
-                                    <div className="relative z-10">
-                                        <div className="text-3xl mb-3 transform group-hover:scale-110 transition-transform duration-300">🍫</div>
+                                    <div className="relative z-10 flex flex-col justify-end h-full min-h-[100px]">
                                         <h3 className="font-bold text-lg mb-1 text-white group-hover:text-primary-400 transition-colors">Cacao Fino</h3>
                                         <p className="text-xs text-gray-300 group-hover:text-white transition-colors">Chocolatería artesanal con 100% pureza de origen.</p>
                                     </div>
