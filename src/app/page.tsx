@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import dynamic from 'next/dynamic'
 import AnimatedIceCreamCharacter from '@/components/AnimatedIceCreamCharacter'
+import ClientOnlyErrorBoundary from '@/components/ClientOnlyErrorBoundary'
 const Polo3D = dynamic(() => import('@/components/Polo3D'), { ssr: false })
 
 export default function HomePage() {
@@ -265,7 +266,9 @@ export default function HomePage() {
                                 <span className="btn bg-black text-white px-8 py-3 rounded-full text-sm font-bold inline-block">Explorar Colección</span>
                             </div>
                             <div className="absolute top-1/2 -right-32 w-[500px] h-[500px] -translate-y-1/2 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-4 pointer-events-none md:pointer-events-auto">
-                                <Polo3D />
+                                <ClientOnlyErrorBoundary>
+                                    <Polo3D />
+                                </ClientOnlyErrorBoundary>
                             </div>
                         </Link>
 
