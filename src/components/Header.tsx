@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { FiShoppingCart, FiUser, FiMenu, FiX, FiSearch } from 'react-icons/fi'
 
 const categories = [
@@ -19,6 +20,7 @@ const categories = [
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [searchOpen, setSearchOpen] = useState(false)
+    const pathname = usePathname()
 
     return (
         <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
@@ -40,15 +42,21 @@ export default function Header() {
 
                     {/* Desktop Navigation */}
                     <nav className="hidden lg:flex items-center gap-6">
-                        {categories.map((cat) => (
-                            <Link
-                                key={cat.slug}
-                                href={`/${cat.slug}`}
-                                className="text-[11px] font-bold text-gray-700 hover:text-primary-500 transition-colors uppercase tracking-widest"
-                            >
-                                {cat.name}
-                            </Link>
-                        ))}
+                        {categories.map((cat) => {
+                            const isActive = pathname === `/${cat.slug}`
+                            return (
+                                <Link
+                                    key={cat.slug}
+                                    href={`/${cat.slug}`}
+                                    className={`text-[11px] font-bold transition-all uppercase tracking-widest relative pb-1 ${isActive
+                                            ? 'text-primary-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-600'
+                                            : 'text-gray-700 hover:text-primary-500'
+                                        }`}
+                                >
+                                    {cat.name}
+                                </Link>
+                            )
+                        })}
                     </nav>
 
                     {/* Actions */}
@@ -123,17 +131,23 @@ export default function Header() {
                             Categorías
                         </div>
 
-                        {categories.map((cat) => (
-                            <Link
-                                key={cat.slug}
-                                href={`/${cat.slug}`}
-                                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                <span className="text-xl">{cat.icon}</span>
-                                <span>{cat.name}</span>
-                            </Link>
-                        ))}
+                        {categories.map((cat) => {
+                            const isActive = pathname === `/${cat.slug}`
+                            return (
+                                <Link
+                                    key={cat.slug}
+                                    href={`/${cat.slug}`}
+                                    className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive
+                                            ? 'bg-primary-50 text-primary-700 font-semibold border-l-4 border-primary-600'
+                                            : 'hover:bg-gray-50'
+                                        }`}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    <span className="text-xl">{cat.icon}</span>
+                                    <span>{cat.name}</span>
+                                </Link>
+                            )
+                        })}
 
                         <Link
                             href="/nosotros"
