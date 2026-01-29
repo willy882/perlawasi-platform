@@ -303,19 +303,20 @@ export default function HomePage() {
             {/* CTA Final */}
             < section className="py-32 relative overflow-hidden bg-white" >
                 <div className="container-custom">
-                    <div className="bg-brand-dark rounded-[4rem] p-16 md:p-24 text-center relative overflow-hidden group shadow-2xl">
+                    <div className="bg-brand-dark rounded-[4rem] p-16 md:p-24 text-center relative overflow-hidden group shadow-2xl min-h-[500px] flex items-center justify-center">
                         <div className="absolute inset-0">
                             <Image
                                 src="/images/agencias.png"
                                 alt="Fondo Experiencia Perlawasi"
                                 fill
-                                className="object-cover opacity-40 transition-transform duration-[10s] group-hover:scale-110"
+                                className="object-cover opacity-60 transition-transform duration-[10s] group-hover:scale-105"
+                                priority
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+                            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/60" />
                         </div>
-                        <div className="relative z-10">
+                        <div className="relative z-10 w-full">
                             <h2 className="text-4xl md:text-7xl font-display font-bold text-white mb-8 leading-tight">Tu viaje a la esencia<br />comienza aquí</h2>
-                            <p className="text-white/60 text-xl mb-12 max-w-2xl mx-auto">Únete a nosotros en una experiencia que trasciende lo convencional. Perlawasi es tu hogar en la selva.</p>
+                            <p className="text-white/80 text-xl mb-12 max-w-2xl mx-auto">Únete a nosotros en una experiencia que trasciende lo convencional. Perlawasi es tu hogar en la selva.</p>
                             <Link href="/reservar" className="btn btn-primary px-16 py-6 text-2xl rounded-full font-bold shadow-strong transition-all hover:px-20">
                                 Planear tu Visita
                             </Link>
