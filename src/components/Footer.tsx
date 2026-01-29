@@ -24,15 +24,18 @@ export default function Footer() {
                             Un espacio para reencontrarse con la tierra, disfrutar de sabores auténticos y descansar bajo el manto estelar de las montañas.
                         </p>
                         <div className="flex gap-4 pt-2">
-                            <Link href="#" className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all">
+                            <a href="https://www.facebook.com/perlawasi/?locale=es_LA" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all">
                                 <FaFacebook className="w-4 h-4 text-white" />
-                            </Link>
-                            <Link href="#" className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all">
+                            </a>
+                            <a href="https://www.instagram.com/explore/locations/176851519353099/recreo-turistico-perlawasi/" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all">
                                 <FaInstagram className="w-4 h-4 text-white" />
-                            </Link>
-                            <Link href="#" className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all">
+                            </a>
+                            <a href="https://www.youtube.com/@perlawasi" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all">
+                                <FaYoutube className="w-4 h-4 text-white" />
+                            </a>
+                            <a href="https://wa.me/51928141669" target="_blank" rel="noopener noreferrer" className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-primary-500 hover:border-primary-500 transition-all">
                                 <FaWhatsapp className="w-4 h-4 text-white" />
-                            </Link>
+                            </a>
                         </div>
                     </div>
 
@@ -77,7 +80,7 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs tracking-widest uppercase">
-                    <p>© 2026 Perlawasi Lodge & Experiences. Todos los derechos reservados. <span className="opacity-30 ml-2">v2.7</span></p>
+                    <p>© 2026 Perlawasi Lodge & Experiences. Todos los derechos reservados. <span className="opacity-30 ml-2">v2.8</span></p>
                     <div className="flex gap-8">
                         <Link href="/privacidad" className="hover:text-white transition-colors">Privacidad</Link>
                         <Link href="/terminos" className="hover:text-white transition-colors">Términos</Link>
