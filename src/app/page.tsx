@@ -315,7 +315,7 @@ export default function HomePage() {
                             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-black/60" />
                         </div>
                         <div className="relative z-10 w-full">
-                            <h2 className="text-4xl md:text-7xl font-display font-bold text-white mb-8 leading-tight">Tu viaje a la esencia<br />comienza aquí</h2>
+                            <h2 className="text-4xl md:text-7xl font-display font-bold text-white mb-8 leading-tight uppercase tracking-tight">+50 AGENCIAS<br />ELIGEN PERLWASI</h2>
                             <p className="text-white/80 text-xl mb-12 max-w-2xl mx-auto">Únete a nosotros en una experiencia que trasciende lo convencional. Perlawasi es tu hogar en la selva.</p>
                             <Link href="/reservar" className="btn btn-primary px-16 py-6 text-2xl rounded-full font-bold shadow-strong transition-all hover:px-20">
                                 Planear tu Visita
