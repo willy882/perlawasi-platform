@@ -13,19 +13,31 @@ function Model(props: any) {
     const clone = useMemo(() => {
         const clonedScene = scene.clone()
 
+            // ASEGURAR TRANSPARENCIA TOTAL
+            ; (clonedScene as any).background = null
+
         // Material blanco puro nuevo (creado una sola vez)
         const whiteMaterial = new THREE.MeshStandardMaterial({
             color: '#FFFFFF', // Blanco explícito
-            roughness: 0.3,   // Un poco más suave para que refleje mejor la luz
-            metalness: 0.0,   // Nada metálico
-            emissive: '#111111', // Sutil auto-iluminación para que no se vea gris
+            roughness: 0.4,   // Ajustado para realismo
+            metalness: 0.05,  // Mínimo brillo
         })
 
         clonedScene.traverse((child: any) => {
+            // Eliminar fondos o cámaras que traiga el modelo
+            if (child.isCamera || child.isLight) {
+                child.visible = false
+            }
+
             if (child.isMesh) {
-                child.material = whiteMaterial
-                child.castShadow = true
-                child.receiveShadow = true
+                // Solo aplicar a la ropa, si hay un plano de fondo, ocultarlo
+                if (child.name.toLowerCase().includes('background') || child.name.toLowerCase().includes('plane')) {
+                    child.visible = false
+                } else {
+                    child.material = whiteMaterial
+                    child.castShadow = true
+                    child.receiveShadow = true
+                }
             }
         })
 
