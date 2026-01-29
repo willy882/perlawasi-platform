@@ -270,6 +270,15 @@ export default function HomePage() {
                                     <Polo3D />
                                 </ClientOnlyErrorBoundary>
                             </div>
+                            <div className="absolute inset-0 opacity-40 transition-transform duration-700 group-hover:scale-105">
+                                <Image
+                                    src="/images/fondo_boutique.png"
+                                    alt="Boutique Perlawasi"
+                                    fill
+                                    className="object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#F4F1ED] via-transparent to-transparent" />
+                            </div>
                         </Link>
 
                         {/* Plants Section */}
