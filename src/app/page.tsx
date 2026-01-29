@@ -265,19 +265,14 @@ export default function HomePage() {
                             <div className="mt-12 z-10">
                                 <span className="btn bg-black text-white px-8 py-3 rounded-full text-sm font-bold inline-block">Explorar Colección</span>
                             </div>
-                            <div className="absolute top-1/2 -right-32 w-[500px] h-[500px] -translate-y-1/2 transition-transform duration-700 group-hover:scale-110 group-hover:-translate-x-4 pointer-events-none md:pointer-events-auto">
-                                <ClientOnlyErrorBoundary>
-                                    <Polo3D />
-                                </ClientOnlyErrorBoundary>
-                            </div>
-                            <div className="absolute inset-0 opacity-40 transition-transform duration-700 group-hover:scale-105">
+                            <div className="absolute inset-0 opacity-100 transition-transform duration-700 group-hover:scale-105">
                                 <Image
                                     src="/images/fondo_boutique.png"
                                     alt="Boutique Perlawasi"
                                     fill
-                                    className="object-cover"
+                                    className="object-cover object-center"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-r from-[#F4F1ED] via-transparent to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-r from-[#F4F1ED] via-[#F4F1ED]/50 to-transparent w-2/3" />
                             </div>
                         </Link>
 
