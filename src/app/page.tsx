@@ -16,8 +16,8 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-transparent z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/images/luisk-chef.png"
-                        alt="Nuestro Chef Luis K - Restaurante Perlawasi"
+                        src="/images/hero_restaurante.png"
+                        alt="Restaurante Perlawasi"
                         fill
                         className="object-cover"
                         priority
