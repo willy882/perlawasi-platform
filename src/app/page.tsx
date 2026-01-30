@@ -16,7 +16,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-transparent z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/images/hero_restaurante.png"
+                        src="/images/luisk-chef.png"
                         alt="Restaurante Perlawasi"
                         fill
                         className="object-cover"
@@ -27,17 +27,16 @@ export default function HomePage() {
 
                 <div className="relative z-20 container-custom w-full h-full flex items-end pb-24 md:pb-32">
                     <div className="max-w-2xl animate-fade-in pl-8 lg:pl-16">
-
-
-
-
-
-
-
-
-
-
-
+                        <div className="mb-12 flex items-center gap-6 opacity-80 overflow-hidden">
+                            <div className="relative h-12 w-full max-w-[400px]">
+                                <Image
+                                    src="/images/agencias.png"
+                                    alt="Agencias Aliadas"
+                                    fill
+                                    className="object-contain object-left"
+                                />
+                            </div>
+                        </div>
                         <div className="flex gap-4">
                             <Link href="/restaurante" className="btn btn-primary px-10 py-4 text-lg shadow-2xl transform hover:scale-105 transition-all outline-none">
                                 Reservar Mesa

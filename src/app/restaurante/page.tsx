@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -12,8 +13,14 @@ export default function RestaurantePage() {
             {/* Hero Section */}
             <section className="relative h-[70vh] flex items-center overflow-hidden">
                 <div className="absolute inset-0 bg-black/40 z-10" />
-                <div className="absolute inset-0 bg-restaurant-dark flex items-center justify-center text-9xl">
-                    🍽️
+                <div className="absolute inset-0">
+                    <Image
+                        src="/images/hero_restaurante.png"
+                        alt="Gastronomía Perlawasi"
+                        fill
+                        className="object-cover"
+                        priority
+                    />
                 </div>
 
                 <div className="relative z-20 container-custom text-white">
