@@ -15,7 +15,7 @@ export default function RestaurantePage() {
                 <div className="absolute inset-0 bg-black/40 z-10" />
                 <div className="absolute inset-0">
                     <Image
-                        src="/images/hero_restaurante.png"
+                        src="/images/hero_restaurante_v2.png"
                         alt="Gastronomía Perlawasi"
                         fill
                         className="object-cover"
