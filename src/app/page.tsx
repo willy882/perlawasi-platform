@@ -106,6 +106,7 @@ export default function HomePage() {
                                             alt="Fondo Café"
                                             fill
                                             className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                            quality={100}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
                                     </div>
@@ -121,6 +122,7 @@ export default function HomePage() {
                                             alt="Fondo Cacao"
                                             fill
                                             className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
+                                            quality={100}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
                                     </div>
@@ -214,6 +216,7 @@ export default function HomePage() {
                                 alt="Cervecería Artesanal"
                                 fill
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                quality={100}
                             />
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/10 to-transparent" />
                         </div>
@@ -231,6 +234,7 @@ export default function HomePage() {
                                 alt="Licorería de Autor"
                                 fill
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                quality={100}
                             />
                             <div className="absolute inset-0 bg-gradient-to-bl from-orange-100/30 to-transparent" />
                         </div>
@@ -270,6 +274,7 @@ export default function HomePage() {
                                     alt="Boutique Perlawasi"
                                     fill
                                     className="object-cover object-center"
+                                    quality={100}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-[#F4F1ED] via-[#F4F1ED]/50 to-transparent w-2/3" />
                             </div>
@@ -291,6 +296,7 @@ export default function HomePage() {
                                     alt="Verdor Interior"
                                     fill
                                     className="object-cover object-right mask-image-gradient-wide"
+                                    quality={100}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-[#E8F3ED] via-transparent to-transparent" />
                             </div>
