@@ -209,30 +209,43 @@ export default function RestaurantePage() {
                         <h2 className="text-4xl md:text-6xl font-display font-bold mt-4">Experiencias Exclusivas</h2>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
+                    <div className="grid md:grid-cols-3 gap-8">
                         {/* Experiencia 1 */}
-                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-white/10 transition-all">
-                            <div className="text-6xl mb-6">👨‍🍳</div>
-                            <h3 className="text-3xl font-display font-bold mb-4">Mesa del Chef</h3>
-                            <p className="text-white/80 text-lg mb-6 leading-relaxed">
-                                Menú degustación de 7 tiempos diseñado exclusivamente por nuestro chef. Incluye maridaje con vinos peruanos y visita a la cocina.
+                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-white/10 transition-all flex flex-col">
+                            <div className="text-6xl mb-6">🍫</div>
+                            <h3 className="text-2xl font-display font-bold mb-4">Degustación de Chocolate</h3>
+                            <p className="text-white/80 text-lg mb-6 leading-relaxed flex-grow">
+                                Un viaje sensorial por los aromas y sabores del cacao amazónico en sus diferentes concentraciones y texturas.
                             </p>
-                            <div className="flex items-center justify-between">
-                                <span className="text-3xl font-bold text-primary-400">S/ 180</span>
-                                <Link href="#reservar" className="btn btn-primary px-8 py-3">Reservar</Link>
+                            <div className="flex items-center justify-between mt-auto">
+                                <span className="text-2xl font-bold text-primary-400">Consultar</span>
+                                <Link href="#reservar" className="btn btn-primary px-6 py-2">Reservar</Link>
                             </div>
                         </div>
 
                         {/* Experiencia 2 */}
-                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-white/10 transition-all">
-                            <div className="text-6xl mb-6">🌿</div>
-                            <h3 className="text-3xl font-display font-bold mb-4">Tour de la Huerta</h3>
-                            <p className="text-white/80 text-lg mb-6 leading-relaxed">
-                                Recorrido guiado por nuestra huerta orgánica seguido de almuerzo campestre con ingredientes recién cosechados.
+                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-white/10 transition-all flex flex-col">
+                            <div className="text-6xl mb-6">☕</div>
+                            <h3 className="text-2xl font-display font-bold mb-4">Tour del Café</h3>
+                            <p className="text-white/80 text-lg mb-6 leading-relaxed flex-grow">
+                                Descubre el proceso desde el grano hasta la taza con una cata guiada de nuestros varietales más exclusivos.
                             </p>
-                            <div className="flex items-center justify-between">
-                                <span className="text-3xl font-bold text-primary-400">S/ 95</span>
-                                <Link href="#reservar" className="btn btn-primary px-8 py-3">Reservar</Link>
+                            <div className="flex items-center justify-between mt-auto">
+                                <span className="text-2xl font-bold text-primary-400">Consultar</span>
+                                <Link href="#reservar" className="btn btn-primary px-6 py-2">Reservar</Link>
+                            </div>
+                        </div>
+
+                        {/* Experiencia 3 */}
+                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-white/10 transition-all flex flex-col">
+                            <div className="text-6xl mb-6">🍸</div>
+                            <h3 className="text-2xl font-display font-bold mb-4">Licores Perlamayo</h3>
+                            <p className="text-white/80 text-lg mb-6 leading-relaxed flex-grow">
+                                Explora nuestra selección de destilados y macerados artesanales inspirados en los frutos exóticos de la selva.
+                            </p>
+                            <div className="flex items-center justify-between mt-auto">
+                                <span className="text-2xl font-bold text-primary-400">Consultar</span>
+                                <Link href="#reservar" className="btn btn-primary px-6 py-2">Reservar</Link>
                             </div>
                         </div>
                     </div>
