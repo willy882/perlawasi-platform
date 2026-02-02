@@ -72,7 +72,7 @@ export default function RestaurantePage() {
                         </div>
                         <div className="relative h-[500px] rounded-[3rem] overflow-hidden shadow-medium">
                             <Image
-                                src="/images/filosofia_restaurante.png"
+                                src="/images/filosofia_restaurante_v2.png"
                                 alt="Nuestra Filosofía - Kilómetro Cero"
                                 fill
                                 className="object-cover"
