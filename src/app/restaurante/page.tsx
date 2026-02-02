@@ -211,15 +211,28 @@ export default function RestaurantePage() {
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {/* Experiencia 1 */}
-                        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-white/10 transition-all flex flex-col">
-                            <div className="text-6xl mb-6">🍫</div>
-                            <h3 className="text-2xl font-display font-bold mb-4">Degustación de Chocolate</h3>
-                            <p className="text-white/80 text-lg mb-6 leading-relaxed flex-grow">
-                                Un viaje sensorial por los aromas y sabores del cacao amazónico en sus diferentes concentraciones y texturas.
-                            </p>
-                            <div className="flex items-center justify-between mt-auto">
-                                <span className="text-2xl font-bold text-primary-400">Consultar</span>
-                                <Link href="#reservar" className="btn btn-primary px-6 py-2">Reservar</Link>
+                        <div className="bg-brand-dark/40 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-brand-dark/60 transition-all flex flex-col relative overflow-hidden group">
+                            {/* Fondo de Imagen */}
+                            <div className="absolute inset-0 z-0">
+                                <Image
+                                    src="/images/exp_chocolate.png"
+                                    alt="Degustación de Chocolate"
+                                    fill
+                                    className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
+                                    quality={100}
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent" />
+                            </div>
+
+                            <div className="relative z-10 flex flex-col h-full">
+                                <h3 className="text-2xl font-display font-bold mb-4">Degustación de Chocolate</h3>
+                                <p className="text-white/80 text-lg mb-6 leading-relaxed flex-grow">
+                                    Un viaje sensorial por los aromas y sabores del cacao amazónico en sus diferentes concentraciones y texturas.
+                                </p>
+                                <div className="flex items-center justify-between mt-auto">
+                                    <span className="text-2xl font-bold text-primary-400">Consultar</span>
+                                    <Link href="#reservar" className="btn btn-primary px-6 py-2">Reservar</Link>
+                                </div>
                             </div>
                         </div>
 
