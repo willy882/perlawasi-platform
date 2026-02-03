@@ -267,7 +267,7 @@ export default function RestaurantePage() {
                             {/* Fondo de Imagen */}
                             <div className="absolute inset-0 z-0">
                                 <Image
-                                    src="/images/exp_licores_v3.png"
+                                    src="/images/exp_licores_v4.png"
                                     alt="Licores Perlamayo"
                                     fill
                                     className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
