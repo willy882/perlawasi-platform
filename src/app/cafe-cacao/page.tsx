@@ -18,11 +18,11 @@ export default function CafeCacaoPage() {
                         src="/images/hero_cafe_cacao.png"
                         alt="Café y Cacao Perlawasi"
                         fill
-                        className="object-cover opacity-60"
+                        className="object-cover opacity-85 contrast-[1.05] brightness-[0.95]"
                         quality={100}
                         priority
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/80 via-brand-dark/40 to-brand-dark" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
                 </div>
 
                 <div className="relative z-20 container-custom text-white">
