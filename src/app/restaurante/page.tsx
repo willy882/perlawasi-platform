@@ -324,8 +324,27 @@ export default function RestaurantePage() {
                                 </div>
                             </div>
                         </div>
-                        <div className="relative h-[500px] rounded-3xl overflow-hidden shadow-medium bg-green-50 flex items-center justify-center text-9xl">
-                            🗺️
+                        <div className="relative h-[550px] rounded-3xl overflow-hidden shadow-strong border border-gray-100 group">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3969.8519!2d-77.2345!3d-5.9658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91b38f84489a8b13%3A0x8f2d57d07e6027c0!2sPerlawasi%20Lodge%20%26%20Experiences!5e0!3m2!1ses-419!2spe!4v1700000000000!5m2!1ses-419!2spe"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 0 }}
+                                allowFullScreen
+                                loading="lazy"
+                                referrerPolicy="no-referrer-when-downgrade"
+                                className="grayscale-[0.2] contrast-[1.1]"
+                            ></iframe>
+                            <div className="absolute top-4 left-4 z-10">
+                                <a
+                                    href="https://maps.app.goo.gl/uX3L5q6Jq6Jq6Jq67"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="bg-white text-gray-900 px-4 py-2 rounded-xl shadow-lg border border-gray-100 text-sm font-bold flex items-center gap-2 hover:bg-gray-50 transition-colors"
+                                >
+                                    <span>📍</span> Ver en Google Maps
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

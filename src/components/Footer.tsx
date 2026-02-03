@@ -80,7 +80,7 @@ export default function Footer() {
 
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs tracking-widest uppercase">
-                    <p>© 2026 Perlawasi Lodge & Experiences. Todos los derechos reservados. <span className="opacity-30 ml-2">v4.3</span></p>
+                    <p>© 2026 Perlawasi Lodge & Experiences. Todos los derechos reservados. <span className="opacity-30 ml-2">v4.4</span></p>
                     <div className="flex gap-8">
                         <Link href="/privacidad" className="hover:text-white transition-colors">Privacidad</Link>
                         <Link href="/terminos" className="hover:text-white transition-colors">Términos</Link>
