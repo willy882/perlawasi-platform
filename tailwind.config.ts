@@ -11,16 +11,16 @@ const config: Config = {
             colors: {
                 // Brand Colors
                 primary: {
-                    50: '#e6ffe6',
-                    100: '#b3ffb3',
-                    200: '#80ff80',
-                    300: '#4dff4d',
-                    400: '#1aff1a',
-                    500: '#00D100', // Main brand green
-                    600: '#00a800',
-                    700: '#007f00',
-                    800: '#005500',
-                    900: '#002c00',
+                    50: '#fef9f3',
+                    100: '#fdf2e6',
+                    200: '#fae5cc',
+                    300: '#f6d7b3',
+                    400: '#f3ca99',
+                    500: '#D4A574', // Main brand amber/golden
+                    600: '#c89560',
+                    700: '#b07d4a',
+                    800: '#8f6539',
+                    900: '#6e4d2b',
                 },
 
                 // Category-specific colors
