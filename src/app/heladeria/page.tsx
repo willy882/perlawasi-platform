@@ -157,32 +157,6 @@ export default function HeladeriaPage() {
                 </div>
             </section>
 
-            {/* Toppings Section */}
-            <section className="section bg-white">
-                <div className="container-custom">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-gray-900">Personaliza tu Helado</h2>
-                        <p className="text-gray-600 text-lg">Elige tus toppings favoritos y crea tu combinación perfecta</p>
-                    </div>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                        {[
-                            { emoji: '🍫', name: 'Chispas de Chocolate', price: 3 },
-                            { emoji: '🥜', name: 'Maní Tostado', price: 2 },
-                            { emoji: '🍯', name: 'Miel de Abeja', price: 4 },
-                            { emoji: '🍓', name: 'Fresas Frescas', price: 5 },
-                            { emoji: '🥥', name: 'Coco Rallado', price: 3 },
-                            { emoji: '🍪', name: 'Galleta Triturada', price: 3 },
-                        ].map((topping, index) => (
-                            <div key={index} className="bg-pink-50 rounded-2xl p-6 text-center hover:bg-pink-100 transition-colors cursor-pointer">
-                                <div className="text-5xl mb-3">{topping.emoji}</div>
-                                <h4 className="font-bold text-sm mb-2 text-gray-900">{topping.name}</h4>
-                                <p className="text-pink-600 font-bold">+S/ {topping.price}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* Combos Especiales */}
             <section className="section bg-gradient-to-br from-pink-100 to-orange-50">
@@ -226,30 +200,30 @@ export default function HeladeriaPage() {
                 </div>
             </section>
 
-            {/* Arma tu Pedido Section */}
+            {/* Agregar a tu Reserva Section */}
             <section className="section bg-white">
                 <div className="container-custom">
                     <div className="bg-gradient-to-br from-pink-500 to-orange-400 rounded-[4rem] p-16 text-white text-center">
-                        <div className="text-8xl mb-8">🍦</div>
+                        <div className="text-8xl mb-8">🍽️</div>
                         <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-                            Arma tu Pedido
+                            Agrégalos a tu Reserva
                         </h2>
                         <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                            Crea tu combinación perfecta de helados y toppings. Ordena por WhatsApp o llámanos para tener tu pedido listo cuando llegues.
+                            Nuestros helados artesanales son el complemento perfecto para tu experiencia gastronómica. Al reservar tu mesa, puedes agregar helados a tu pedido y los serviremos junto con tu comida.
                         </p>
                         <div className="flex gap-4 justify-center flex-wrap">
-                            <a href="https://wa.me/51928141669?text=Hola,%20quiero%20armar%20mi%20pedido%20de%20helados"
+                            <a href="https://wa.me/51928141669?text=Hola,%20quiero%20reservar%20una%20mesa%20y%20agregar%20helados%20a%20mi%20pedido"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn bg-white text-pink-600 px-12 py-5 text-xl font-bold hover:bg-pink-50">
-                                Agregar al Pedido
+                                Reservar Mesa
                             </a>
                             <a href="tel:+51928141669" className="btn bg-white/10 backdrop-blur-md text-white border-2 border-white/30 hover:bg-white/20 px-12 py-5 text-xl font-bold">
                                 Llamar Ahora
                             </a>
                         </div>
                         <p className="text-white/70 mt-6 text-sm">
-                            Recoge tu pedido en 15 minutos • Abierto todos los días
+                            Helados servidos solo con crema • Sin toppings ni decoraciones adicionales
                         </p>
                     </div>
                 </div>
