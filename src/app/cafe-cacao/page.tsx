@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -12,16 +11,18 @@ export default function CafeCacaoPage() {
         <div className="min-h-screen bg-white">
             {/* Hero Section - Dark Premium */}
             <section className="relative h-[75vh] flex items-center overflow-hidden bg-brand-dark">
-                {/* Fondo de Imagen */}
+                {/* Fondo de Video */}
                 <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/hero_cafe_cacao.png"
-                        alt="Café y Cacao Perlawasi"
-                        fill
-                        className="object-cover opacity-85 contrast-[1.05] brightness-[0.95]"
-                        quality={100}
-                        priority
-                    />
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className="w-full h-full object-cover opacity-85 contrast-[1.05] brightness-[0.95]"
+                    >
+                        <source src="/videos/hero_cafe_cacao.mp4" type="video/mp4" />
+                    </video>
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
                 </div>
 
