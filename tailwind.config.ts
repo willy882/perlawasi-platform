@@ -9,18 +9,69 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                // Brand Colors
+                // Brand Colors - Corporate Green Palette
                 primary: {
-                    50: '#fef9f3',
-                    100: '#fdf2e6',
-                    200: '#fae5cc',
-                    300: '#f6d7b3',
-                    400: '#f3ca99',
-                    500: '#D4A574', // Main brand amber/golden
-                    600: '#c89560',
-                    700: '#b07d4a',
-                    800: '#8f6539',
-                    900: '#6e4d2b',
+                    50: '#f0fdf4',
+                    100: '#dcfce7',
+                    200: '#b9f8cf',
+                    300: '#7bf1a8',
+                    400: '#05df72',
+                    500: '#00c950', // Main brand green
+                    600: '#00a63e',
+                    700: '#008236',
+                    800: '#016630',
+                    900: '#0d542b',
+                    950: '#032e15',
+                },
+
+                // Alert & Status Colors (5% usage for forms/errors)
+                error: {
+                    50: '#fef2f2',
+                    100: '#fee2e2',
+                    200: '#fecaca',
+                    300: '#fca5a5',
+                    400: '#f87171',
+                    500: '#ef4444', // Main error red
+                    600: '#dc2626',
+                    700: '#b91c1c',
+                    800: '#991b1b',
+                    900: '#7f1d1d',
+                },
+                warning: {
+                    50: '#fffbeb',
+                    100: '#fef3c7',
+                    200: '#fde68a',
+                    300: '#fcd34d',
+                    400: '#fbbf24',
+                    500: '#f59e0b', // Main warning amber
+                    600: '#d97706',
+                    700: '#b45309',
+                    800: '#92400e',
+                    900: '#78350f',
+                },
+                success: {
+                    50: '#f0fdf4',
+                    100: '#dcfce7',
+                    200: '#bbf7d0',
+                    300: '#86efac',
+                    400: '#4ade80',
+                    500: '#22c55e', // Main success green
+                    600: '#16a34a',
+                    700: '#15803d',
+                    800: '#166534',
+                    900: '#14532d',
+                },
+                info: {
+                    50: '#eff6ff',
+                    100: '#dbeafe',
+                    200: '#bfdbfe',
+                    300: '#93c5fd',
+                    400: '#60a5fa',
+                    500: '#3b82f6', // Main info blue
+                    600: '#2563eb',
+                    700: '#1d4ed8',
+                    800: '#1e40af',
+                    900: '#1e3a8a',
                 },
 
                 // Category-specific colors
