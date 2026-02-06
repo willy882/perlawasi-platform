@@ -226,30 +226,30 @@ export default function HeladeriaPage() {
                 </div>
             </section>
 
-            {/* Delivery Section */}
+            {/* Arma tu Pedido Section */}
             <section className="section bg-white">
                 <div className="container-custom">
                     <div className="bg-gradient-to-br from-pink-500 to-orange-400 rounded-[4rem] p-16 text-white text-center">
-                        <div className="text-8xl mb-8">🛵</div>
+                        <div className="text-8xl mb-8">🍦</div>
                         <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-                            Delivery a Domicilio
+                            Arma tu Pedido
                         </h2>
                         <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                            Recibe tus helados favoritos en la comodidad de tu hogar. Empaque especial que mantiene la temperatura perfecta.
+                            Crea tu combinación perfecta de helados y toppings. Ordena por WhatsApp o llámanos para tener tu pedido listo cuando llegues.
                         </p>
                         <div className="flex gap-4 justify-center flex-wrap">
-                            <a href="https://wa.me/51928141669?text=Hola,%20quiero%20hacer%20un%20pedido%20de%20helados%20a%20domicilio"
+                            <a href="https://wa.me/51928141669?text=Hola,%20quiero%20armar%20mi%20pedido%20de%20helados"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn bg-white text-pink-600 px-12 py-5 text-xl font-bold hover:bg-pink-50">
-                                Pedir por WhatsApp
+                                Agregar al Pedido
                             </a>
                             <a href="tel:+51928141669" className="btn bg-white/10 backdrop-blur-md text-white border-2 border-white/30 hover:bg-white/20 px-12 py-5 text-xl font-bold">
                                 Llamar Ahora
                             </a>
                         </div>
                         <p className="text-white/70 mt-6 text-sm">
-                            Delivery gratis en pedidos mayores a S/ 40
+                            Recoge tu pedido en 15 minutos • Abierto todos los días
                         </p>
                     </div>
                 </div>
