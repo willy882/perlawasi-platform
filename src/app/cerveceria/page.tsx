@@ -32,9 +32,7 @@ export default function CerveceriaPage() {
                     </video>
                 </div>
                 <div className="absolute inset-0 bg-black/30 z-10" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-10 z-10">
-                    <span className="text-[30rem] font-bold text-white select-none">BEER</span>
-                </div>
+
 
                 <div className="relative z-20 container-custom text-white">
                     <div className="max-w-3xl">
