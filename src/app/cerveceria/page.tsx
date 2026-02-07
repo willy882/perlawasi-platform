@@ -16,10 +16,23 @@ export default function CerveceriaPage() {
 
     return (
         <div className="min-h-screen bg-white">
-            {/* Hero Section - Gold/Amber Theme */}
+            {/* Hero Section - Video Background */}
             <section className="relative h-[70vh] flex items-center overflow-hidden bg-[#FFB300]">
-                <div className="absolute inset-0 bg-black/20 z-10" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                {/* Fondo de Video */}
+                <div className="absolute inset-0 z-0">
+                    <video
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        preload="auto"
+                        className="w-full h-full object-cover"
+                    >
+                        <source src="/videos/hero_cerveceria.mp4" type="video/mp4" />
+                    </video>
+                </div>
+                <div className="absolute inset-0 bg-black/30 z-10" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-10 z-10">
                     <span className="text-[30rem] font-bold text-white select-none">BEER</span>
                 </div>
 
