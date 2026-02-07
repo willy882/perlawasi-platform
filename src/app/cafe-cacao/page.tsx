@@ -249,27 +249,17 @@ export default function CafeCacaoPage() {
                                     <div className="text-2xl">⏱️</div>
                                     <div>
                                         <p className="font-bold">Duración</p>
-                                        <p className="text-white/70">90 minutos</p>
+                                        <p className="text-white/70">5 a 10 minutos</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <div className="text-2xl">👥</div>
-                                    <div>
-                                        <p className="font-bold">Grupos</p>
-                                        <p className="text-white/70">Máximo 8 personas</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-4">
-                                    <div className="text-2xl">💰</div>
+                                    <div className="text-2xl">🎁</div>
                                     <div>
                                         <p className="font-bold">Inversión</p>
-                                        <p className="text-white/70">S/ 85 por persona</p>
+                                        <p className="text-white/70">¡Completamente Gratis!</p>
                                     </div>
                                 </div>
                             </div>
-                            <Link href="#reservar" className="btn btn-primary px-10 py-4 text-lg inline-block">
-                                Reservar Experiencia
-                            </Link>
                         </div>
                         <div className="relative h-[500px] rounded-3xl overflow-hidden bg-gradient-to-br from-amber-900 to-amber-700 flex items-center justify-center text-[12rem] shadow-2xl">
                             🫖
