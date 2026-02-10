@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -61,8 +62,13 @@ export default function CerveceriaPage() {
             <section className="section bg-white">
                 <div className="container-custom">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
-                        <div className="order-2 md:order-1 relative h-[500px] rounded-[3rem] overflow-hidden bg-gray-100 flex items-center justify-center text-9xl">
-                            🏭
+                        <div className="order-2 md:order-1 relative h-[500px] rounded-[3rem] overflow-hidden bg-gray-100">
+                            <Image
+                                src="/images/cerveceria_fermentacion.png"
+                                alt="Proceso de Fermentación"
+                                fill
+                                className="object-cover"
+                            />
                         </div>
                         <div className="order-1 md:order-2 space-y-6">
                             <span className="text-[#FFB300] font-bold uppercase tracking-widest text-xs">El Arte de Elaborar</span>
