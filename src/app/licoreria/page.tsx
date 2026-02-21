@@ -75,14 +75,14 @@ export default function LicoreriaPage() {
                         alt="Licores Perlamayo"
                         fill
                         className="object-cover blur-sm scale-105"
-                        style={{ opacity: 0.20 }}
+                        style={{ opacity: 0.55 }}
                         priority
                     />
                 </div>
                 {/* Overlay oscuro principal */}
-                <div className="absolute inset-0 bg-[#080808]/80 z-[1]" />
+                <div className="absolute inset-0 bg-[#080808]/45 z-[1]" />
                 {/* Overlay gradiente para profundidad */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-[#080808]/70 z-[2]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/20 to-[#080808]/40 z-[2]" />
                 {/* Brillo dorado central */}
                 <div className="absolute inset-0 flex items-center justify-center z-[3]">
                     <div className="w-[90vw] h-[90vw] max-w-4xl max-h-4xl bg-[#D4AF37] rounded-full blur-[180px] opacity-[0.08]" />
