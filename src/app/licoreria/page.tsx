@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -67,17 +68,30 @@ export default function LicoreriaPage() {
 
             {/* ═══ HERO CINEMATOGRÁFICO ═══ */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-                {/* Fondo con múltiples capas */}
-                <div className="absolute inset-0 bg-[#080808]" />
-                {/* Brillo dorado central */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[90vw] h-[90vw] max-w-4xl max-h-4xl bg-[#D4AF37] rounded-full blur-[180px] opacity-[0.06]" />
+                {/* Imagen de fondo difuminada */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/licoreria_hero_bg.png"
+                        alt="Licores Perlamayo"
+                        fill
+                        className="object-cover blur-sm scale-105"
+                        style={{ opacity: 0.20 }}
+                        priority
+                    />
                 </div>
-                {/* Brillo dorado esquina */}
-                <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-[#D4AF37] rounded-full blur-[140px] opacity-[0.04]" />
-                <div className="absolute bottom-0 left-0 w-[30vw] h-[30vw] bg-amber-700 rounded-full blur-[120px] opacity-[0.05]" />
+                {/* Overlay oscuro principal */}
+                <div className="absolute inset-0 bg-[#080808]/80 z-[1]" />
+                {/* Overlay gradiente para profundidad */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/40 to-[#080808]/70 z-[2]" />
+                {/* Brillo dorado central */}
+                <div className="absolute inset-0 flex items-center justify-center z-[3]">
+                    <div className="w-[90vw] h-[90vw] max-w-4xl max-h-4xl bg-[#D4AF37] rounded-full blur-[180px] opacity-[0.08]" />
+                </div>
+                {/* Brillo dorado esquinas */}
+                <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-[#D4AF37] rounded-full blur-[140px] opacity-[0.05] z-[3]" />
+                <div className="absolute bottom-0 left-0 w-[30vw] h-[30vw] bg-amber-700 rounded-full blur-[120px] opacity-[0.06] z-[3]" />
                 {/* Líneas decorativas */}
-                <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#D4AF37]/20 to-transparent hidden lg:block" />
+                <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#D4AF37]/20 to-transparent hidden lg:block z-[4]" />
                 <div className="absolute right-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#D4AF37]/20 to-transparent hidden lg:block" />
 
                 {/* Contenido Hero */}
