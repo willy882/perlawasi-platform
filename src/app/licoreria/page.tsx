@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Licorería Perlawasi - El Alma de los Andes en Destilados | San Martín',
-    description: 'Destilados premium y macerados artesanales únicos. Descubre la sofisticación de nuestros licores de autor inspirados en la biodiversidad peruana.',
+    title: 'Licores Perlamayo - Destilados Artesanales de la Selva Peruana | San Martín',
+    description: 'Licores Perlamayo: destilados premium y macerados artesanales únicos. El espíritu de la selva peruana encapsulado en cada botella.',
 }
 
 export default function LicoreriaPage() {
@@ -85,14 +85,14 @@ export default function LicoreriaPage() {
                     {/* Badge superior */}
                     <div className="inline-flex items-center gap-3 border border-[#D4AF37]/30 rounded-full px-6 py-2 mb-10 backdrop-blur-md bg-white/5">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
-                        <span className="text-[#D4AF37] text-xs font-bold uppercase tracking-[0.3em]">Premium Spirits · San Martín · Perú</span>
+                        <span className="text-[#D4AF37] font-bold uppercase tracking-[0.3em] text-xs mb-6 block">Licores Perlamayo · San Martín · Perú</span>
                     </div>
 
                     {/* Título enorme */}
-                    <h1 className="text-7xl md:text-[10rem] lg:text-[13rem] font-display font-black leading-none mb-6 tracking-tight">
-                        <span className="block text-white">El Alma</span>
-                        <span className="block bg-gradient-to-r from-[#B8960C] via-[#D4AF37] to-[#F5D26B] bg-clip-text text-transparent">
-                            de los Andes
+                    <h1 className="font-display font-black leading-none mb-6 tracking-tight">
+                        <span className="block text-5xl md:text-6xl text-gray-400 font-light italic mb-2">El espíritu de la selva</span>
+                        <span className="block text-6xl md:text-8xl lg:text-[9rem] bg-gradient-to-r from-[#B8960C] via-[#D4AF37] to-[#F5D26B] bg-clip-text text-transparent">
+                            Licores Perlamayo
                         </span>
                     </h1>
 
