@@ -9,44 +9,87 @@ export const metadata: Metadata = {
 
 export default function AlojamientoPage() {
     return (
-        <div className="min-h-screen bg-[#fcfcfc] text-[#1a2e1a] overflow-x-hidden">
-            {/* ═══ HERO IMAGEN ═══ */}
-            <section className="relative h-[75vh] w-full overflow-hidden bg-black">
-                <Image
-                    src="/images/alojamiento_hero_bg.png"
-                    alt="Hospedaje Perlawasi"
-                    fill
-                    className="object-contain"
-                    priority
-                    quality={100}
-                    unoptimized
-                />
-            </section>
+        <div className="min-h-screen bg-[#050805] text-[#f0f0f0] overflow-x-hidden pt-20 px-4 md:px-0">
+            {/* ═══ SUPER HERO HOSPEDAJE ═══ */}
+            <section className="relative min-h-[90vh] flex items-center pt-10 pb-20">
+                {/* Texturas de fondo sutiles */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.05)_0%,transparent_70%)]" />
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/40 to-transparent pointer-events-none" />
 
-            {/* ═══ SECCIÓN DE BIENVENIDA Y DESCRIPCIÓN ═══ */}
-            <section className="relative py-24 md:py-32 bg-[#0a1f0a] text-white">
-                <div className="container-custom">
-                    <div className="max-w-4xl mx-auto text-center">
-                        <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 border border-green-500/30 rounded-full bg-green-500/5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-400">Autenticidad Natural</span>
+                <div className="container-custom relative z-10">
+                    <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+                        {/* ── COLUMNA IZQUIERDA: TEXTO ── */}
+                        <div className="lg:col-span-5 space-y-10">
+                            <div className="space-y-4">
+                                <span className="text-[#86efac] font-bold uppercase tracking-[0.4em] text-sm block">Bienvenido</span>
+                                <h1 className="text-6xl md:text-8xl font-display font-black leading-none tracking-tight">
+                                    PERLAWASI <br />
+                                    <span className="text-[#86efac]">HOSPEDAJE</span>
+                                </h1>
+                            </div>
+
+                            <div className="space-y-8 max-w-xl">
+                                <p className="text-xl md:text-2xl text-white/50 font-light italic leading-snug">
+                                    "El espíritu de la selva en cada amanecer"
+                                </p>
+                                <p className="text-lg text-white/70 leading-relaxed font-light">
+                                    Vive una experiencia auténtica en medio de la naturaleza. Nuestro hospedaje rústico está diseñado para quienes buscan <span className="text-[#86efac] font-medium">desconectarse del ruido de la ciudad</span> y reconectarse con la tranquilidad del entorno natural.
+                                </p>
+
+                                <div className="pt-4">
+                                    <Link href="#habitaciones"
+                                        className="group inline-flex items-center gap-6 bg-[#1a2e1a] hover:bg-[#2d4a2d] text-[#86efac] border border-[#86efac]/30 px-10 py-5 rounded-2xl transition-all duration-500 hover:gap-10 shadow-xl">
+                                        <span className="text-xl font-bold uppercase tracking-widest">Ver Habitaciones</span>
+                                        <div className="w-12 h-12 rounded-full border border-[#86efac]/40 flex items-center justify-center group-hover:bg-[#86efac] group-hover:text-[#050805] transition-colors">
+                                            <span className="text-2xl">→</span>
+                                        </div>
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
 
-                        <p className="text-2xl md:text-3xl lg:text-4xl font-display font-light leading-relaxed mb-12">
-                            Vive una experiencia auténtica en medio de la naturaleza. Nuestro hospedaje rústico está diseñado para quienes buscan <span className="text-green-400 font-medium">desconectarse del ruido de la ciudad</span> y reconectarse con la tranquilidad del entorno natural.
-                        </p>
+                        {/* ── COLUMNA DERECHA: COMPOSICIÓN VISUAL ── */}
+                        <div className="lg:col-span-7 relative">
+                            <div className="flex gap-6 items-center">
+                                {/* Miniaturas verticales */}
+                                <div className="hidden md:flex flex-col gap-6 w-1/3 pt-20">
+                                    <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-700">
+                                        <Image src="/images/fondo_alojamiento.png" alt="Detalle Naturaleza" fill className="object-cover" />
+                                    </div>
+                                    <div className="relative aspect-[1/1] rounded-3xl overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-700">
+                                        <Image src="/images/fondo_buho.png" alt="Detalle Fauna" fill className="object-cover" />
+                                    </div>
+                                    <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-700">
+                                        <Image src="/images/fondo_buho1.png" alt="Detalle Selva" fill className="object-cover" />
+                                    </div>
+                                </div>
 
-                        <Link href="#habitaciones"
-                            className="inline-flex items-center gap-4 bg-[#8b5e34] hover:bg-[#a67142] text-white px-12 py-5 text-xl font-bold transition-all duration-300 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1">
-                            Ver Habitaciones
-                            <span className="text-2xl">↓</span>
-                        </Link>
+                                {/* Imagen principal destacada */}
+                                <div className="w-full md:w-2/3">
+                                    <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden border border-[#86efac]/20 shadow-[0_0_100px_rgba(34,197,94,0.1)]">
+                                        <Image
+                                            src="/images/alojamiento_hero_bg.png"
+                                            alt="Perlawasi Hospedaje"
+                                            fill
+                                            className="object-cover"
+                                            priority
+                                            quality={100}
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                                        <div className="absolute bottom-10 left-10">
+                                            <p className="text-[#86efac] text-xs font-bold uppercase tracking-[0.3em] mb-2">San Martín, Perú</p>
+                                            <h3 className="text-2xl font-bold">Refugio en el Paraíso</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Círculo decorativo flotante */}
+                            <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#86efac] rounded-full blur-[100px] opacity-10 animate-pulse" />
+                        </div>
                     </div>
                 </div>
-
-                {/* Decoración selva sutil */}
-                <div className="absolute top-0 right-0 w-[30%] h-full bg-[url('/images/pattern_leaf.png')] opacity-[0.03] pointer-events-none" />
-                <div className="absolute top-0 left-0 w-[30%] h-full bg-[url('/images/pattern_leaf.png')] opacity-[0.03] pointer-events-none -scale-x-100" />
             </section>
 
             {/* Habitaciones */}
