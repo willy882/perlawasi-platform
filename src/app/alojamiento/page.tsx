@@ -16,7 +16,7 @@ export default function AlojamientoPage() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,rgba(34,197,94,0.08)_0%,transparent_60%)]" />
 
                 <div className="container-custom relative z-10 w-full">
-                    <div className="grid lg:grid-cols-12 gap-10 md:gap-32 items-center">
+                    <div className="grid lg:grid-cols-12 gap-10 md:gap-12 items-center">
 
                         {/* ── COLUMNA IZQUIERDA: TEXTO (Espacio optimizado 5/12) ── */}
                         <div className="lg:col-span-5 space-y-8 md:space-y-12 order-2 lg:order-1">
@@ -48,7 +48,7 @@ export default function AlojamientoPage() {
 
                         {/* ── COLUMNA DERECHA: COMPOSICIÓN VISUAL (Espacio 7/12) ── */}
                         <div className="lg:col-span-7 relative order-1 lg:order-2">
-                            <div className="flex gap-4 md:gap-10 items-center justify-end md:pl-10">
+                            <div className="flex gap-4 md:gap-10 items-center justify-center">
                                 {/* Miniaturas verticales */}
                                 <div className="flex flex-col gap-4 md:gap-8 w-[28%]">
                                     <div className="relative aspect-[3/4] rounded-2xl md:rounded-[2rem] overflow-hidden border border-white/10 shadow-lg hover:scale-[1.03] transition-transform duration-500">
