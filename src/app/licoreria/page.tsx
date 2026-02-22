@@ -161,7 +161,7 @@ export default function LicoreriaPage() {
                         <span className="block text-lg md:text-xl text-[#86efac] font-light tracking-[0.5em] uppercase mb-3 opacity-80">
                             Licores
                         </span>
-                        <h1 className="text-8xl md:text-[12rem] lg:text-[15rem] font-display font-black leading-none tracking-tight"
+                        <h1 className="text-7xl md:text-[10rem] lg:text-[12rem] font-display font-black leading-none tracking-tighter"
                             style={{
                                 background: 'linear-gradient(135deg, #4ade80 0%, #86efac 30%, #D4AF37 60%, #4ade80 100%)',
                                 WebkitBackgroundClip: 'text',
