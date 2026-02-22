@@ -66,143 +66,64 @@ export default function LicoreriaPage() {
     return (
         <div className="min-h-screen bg-[#080808] text-white overflow-x-hidden">
 
-            {/* ═══ HERO JAGUAR ═══ */}
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+            {/* ═══ HERO PERSONALIZADO ═══ */}
+            <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-[#061a06]">
 
-                {/* ── Fondo base degradado verde selva ── */}
-                <div className="absolute inset-0 bg-[#061a06]" />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0a2e0a] via-[#071a07] to-[#020d02]" />
-
-                {/* ── Rayos de luz verde desde arriba ── */}
-                <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-[#2d7a2d]/30 via-[#2d7a2d]/5 to-transparent" />
-                <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-[#4ade80]/20 via-transparent to-transparent" />
-                <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-[#2d7a2d]/20 via-transparent to-transparent" />
-
-                {/* ── Brillo verde central ── */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[80vw] h-[80vw] max-w-3xl max-h-3xl bg-[#1a5c1a] rounded-full blur-[200px] opacity-25" />
-                </div>
-                <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-[#0d3d0d] rounded-full blur-[160px] opacity-30" />
-                <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-[#143d14] rounded-full blur-[140px] opacity-20" />
-
-                {/* ── Manchas de jaguar decorativas (rosetas) ── */}
-                {/* Roseta grande izquierda */}
-                <div className="absolute left-[5%] top-[15%] opacity-[0.07]">
-                    <div className="relative w-28 h-28">
-                        <div className="absolute inset-0 rounded-full border-[6px] border-[#5adf80]" />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#5adf80]" />
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#5adf80]" />
-                        <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-[#5adf80]" />
-                        <div className="absolute top-1/2 -left-3 -translate-y-1/2 w-5 h-5 rounded-full bg-[#5adf80]" />
-                        <div className="absolute top-1/2 -right-3 -translate-y-1/2 w-5 h-5 rounded-full bg-[#5adf80]" />
-                    </div>
-                </div>
-                {/* Roseta pequeña arriba derecha */}
-                <div className="absolute right-[8%] top-[10%] opacity-[0.06]">
-                    <div className="relative w-16 h-16">
-                        <div className="absolute inset-0 rounded-full border-[5px] border-[#4ade80]" />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-[#4ade80]" />
-                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#4ade80]" />
-                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-[#4ade80]" />
-                        <div className="absolute top-1/2 -left-2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#4ade80]" />
-                        <div className="absolute top-1/2 -right-2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#4ade80]" />
-                    </div>
-                </div>
-                {/* Roseta mediana abajo derecha */}
-                <div className="absolute right-[12%] bottom-[20%] opacity-[0.05]">
-                    <div className="relative w-20 h-20">
-                        <div className="absolute inset-0 rounded-full border-[5px] border-[#4ade80]" />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-[#4ade80]" />
-                        <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#4ade80]" />
-                        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#4ade80]" />
-                        <div className="absolute top-1/2 -left-2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#4ade80]" />
-                        <div className="absolute top-1/2 -right-2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#4ade80]" />
-                    </div>
-                </div>
-                {/* Puntos dispersos */}
-                <div className="absolute left-[18%] top-[60%] w-4 h-5 rounded-full bg-[#4ade80] opacity-[0.06]" />
-                <div className="absolute left-[22%] top-[55%] w-3 h-4 rounded-full bg-[#4ade80] opacity-[0.05]" />
-                <div className="absolute right-[20%] top-[40%] w-5 h-4 rounded-full bg-[#4ade80] opacity-[0.06]" />
-                <div className="absolute right-[25%] top-[45%] w-3 h-3 rounded-full bg-[#4ade80] opacity-[0.04]" />
-                <div className="absolute left-[40%] bottom-[15%] w-4 h-3 rounded-full bg-[#4ade80] opacity-[0.05]" />
-
-                {/* ── Jaguar enorme semitransparente de fondo ── */}
-                <div className="absolute inset-0 flex items-center justify-end pr-[5%] pointer-events-none select-none opacity-[0.07]">
-                    <span className="text-[22rem] md:text-[28rem] leading-none">🐆</span>
+                {/* Imagen de fondo bb.png */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="/images/licoreria_hero_bg.png"
+                        alt="Fondo Perlamayo"
+                        fill
+                        className="object-cover"
+                        priority
+                        quality={100}
+                    />
+                    {/* Overlay sutil para mejorar legibilidad si es necesario */}
+                    <div className="absolute inset-0 bg-black/20" />
                 </div>
 
-                {/* ── Hojas decorativas CSS ── */}
-                {/* Hoja superior izquierda */}
-                <div className="absolute -left-10 top-[5%] w-40 h-64 bg-[#1a5c1a] opacity-20 rounded-[100%_0_100%_0] rotate-[25deg] blur-sm" />
-                <div className="absolute -left-5 top-[2%] w-24 h-40 bg-[#2d7a2d] opacity-15 rounded-[80%_0_80%_0] rotate-[15deg]" />
-                {/* Hoja inferior derecha */}
-                <div className="absolute -right-10 bottom-[5%] w-48 h-72 bg-[#1a5c1a] opacity-20 rounded-[0_100%_0_100%] rotate-[-20deg] blur-sm" />
-                <div className="absolute -right-4 bottom-[3%] w-28 h-44 bg-[#2d7a2d] opacity-15 rounded-[0_80%_0_80%] rotate-[-12deg]" />
-                {/* Hoja superior derecha pequeña */}
-                <div className="absolute right-[15%] -top-4 w-20 h-32 bg-[#1a5c1a] opacity-15 rounded-[80%_0_80%_0] rotate-[40deg]" />
-
-                {/* ── Líneas de selva verticales ── */}
-                <div className="absolute left-[10%] top-0 bottom-0 w-px bg-gradient-to-b from-[#4ade80]/20 via-[#4ade80]/5 to-transparent" />
-                <div className="absolute left-[13%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#4ade80]/10 to-transparent" />
-                <div className="absolute right-[10%] top-0 bottom-0 w-px bg-gradient-to-b from-[#4ade80]/15 via-[#4ade80]/5 to-transparent" />
-
-                {/* ── Contenido principal ── */}
+                {/* Contenido principal */}
                 <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
-
-                    {/* Badge */}
-                    <div className="inline-flex items-center gap-3 border border-[#4ade80]/30 rounded-full px-5 py-2 mb-10 backdrop-blur-sm bg-[#4ade80]/5">
-                        <span className="text-[#4ade80] text-sm">🌿</span>
-                        <span className="text-[#4ade80] text-xs font-bold uppercase tracking-[0.3em]">Licores Artesanales · Selva Peruana</span>
-                        <span className="text-[#4ade80] text-sm">🌿</span>
-                    </div>
 
                     {/* Nombre de la marca */}
                     <div className="mb-4">
-                        <span className="block text-lg md:text-xl text-[#86efac] font-light tracking-[0.5em] uppercase mb-3 opacity-80">
+                        <span className="block text-sm md:text-base text-white/80 font-light tracking-[0.5em] uppercase mb-4">
                             Licores
                         </span>
-                        <h1 className="text-5xl md:text-8xl lg:text-[10rem] font-display font-black leading-none tracking-tighter"
+                        <h1 className="text-5xl md:text-7xl lg:text-[8rem] font-display font-black leading-none tracking-tight"
                             style={{
-                                background: 'linear-gradient(to bottom, #fde68a 0%, #d4af37 50%, #b45309 100%)',
+                                background: 'linear-gradient(to bottom, #ffffff 0%, #a7f3d0 40%, #D4AF37 100%)',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                                 backgroundClip: 'text',
-                                textShadow: 'none',
-                                filter: 'drop-shadow(0 0 40px rgba(212,175,55,0.15))',
+                                filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.3))',
                             }}>
                             PERLAMAYO
                         </h1>
                     </div>
 
-                    {/* Divisor con manchas de jaguar */}
-                    <div className="flex items-center justify-center gap-4 mb-8">
-                        <div className="h-px w-20 bg-gradient-to-r from-transparent to-[#4ade80]/50" />
-                        <span className="text-[#4ade80] text-xl">🐆</span>
-                        <div className="h-px w-20 bg-gradient-to-l from-transparent to-[#4ade80]/50" />
-                    </div>
-
-                    {/* Tagline */}
-                    <p className="text-lg md:text-xl text-[#86efac]/70 mb-12 max-w-xl mx-auto leading-relaxed font-light">
+                    {/* Tagline sutil */}
+                    <p className="text-base md:text-lg text-white/90 mb-10 max-w-xl mx-auto leading-relaxed font-light italic">
                         El espíritu de la selva encapsulado en cada botella
                     </p>
 
-                    {/* Botones */}
-                    <div className="flex gap-5 justify-center flex-wrap">
+                    {/* Botones compactos */}
+                    <div className="flex gap-4 justify-center flex-wrap">
                         <Link href="#coleccion"
-                            className="group inline-flex items-center gap-3 bg-[#4ade80] text-[#061a06] px-10 py-4 text-base font-black hover:bg-[#86efac] transition-all duration-300 rounded-full shadow-[0_0_40px_rgba(74,222,128,0.35)] hover:shadow-[0_0_60px_rgba(74,222,128,0.55)] uppercase tracking-wider">
-                            <span>Ver Colección</span>
-                            <span className="transition-transform group-hover:translate-x-1">→</span>
+                            className="inline-flex items-center gap-2 bg-[#4ade80] text-[#061a06] px-8 py-3 text-sm font-bold hover:bg-[#86efac] transition-all duration-300 rounded-full shadow-lg uppercase tracking-wider">
+                            Ver Colección
                         </Link>
                         <a href="https://wa.me/51928141669?text=Hola,%20quiero%20información%20sobre%20Licores%20Perlamayo"
                             target="_blank" rel="noopener noreferrer"
-                            className="inline-flex items-center gap-3 border-2 border-[#4ade80]/40 text-[#4ade80] px-10 py-4 text-base font-bold hover:bg-[#4ade80]/10 hover:border-[#4ade80]/70 transition-all duration-300 rounded-full uppercase tracking-wider">
-                            🌿 Consultar
+                            className="inline-flex items-center gap-2 border border-white/50 text-white px-8 py-3 text-sm font-bold hover:bg-white/10 transition-all duration-300 rounded-full uppercase tracking-wider backdrop-blur-sm">
+                            Consultar
                         </a>
                     </div>
                 </div>
 
-                {/* ── Gradiente de salida abajo ── */}
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#080808] to-transparent z-10" />
+                {/* Gradiente de salida abajo */}
+                <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#080808] to-transparent z-10" />
             </section>
 
             {/* ═══ BARRA DE ESTADÍSTICAS ═══ */}
