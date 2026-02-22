@@ -9,84 +9,81 @@ export const metadata: Metadata = {
 
 export default function AlojamientoPage() {
     return (
-        <div className="min-h-screen bg-[#050805] text-[#f0f0f0] overflow-x-hidden pt-20 px-4 md:px-0">
+        <div className="min-h-screen bg-[#050805] text-[#f0f0f0] overflow-x-hidden pt-10 md:pt-20 px-4 md:px-0">
             {/* ═══ SUPER HERO HOSPEDAJE ═══ */}
-            <section className="relative min-h-[90vh] flex items-center pt-10 pb-20">
+            <section className="relative min-h-screen flex items-center py-10 md:py-20">
                 {/* Texturas de fondo sutiles */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(34,197,94,0.05)_0%,transparent_70%)]" />
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-black/40 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,rgba(34,197,94,0.08)_0%,transparent_60%)]" />
 
-                <div className="container-custom relative z-10">
-                    <div className="grid lg:grid-cols-12 gap-12 items-center">
+                <div className="container-custom relative z-10 w-full">
+                    <div className="grid lg:grid-cols-12 gap-10 md:gap-16 items-center">
 
                         {/* ── COLUMNA IZQUIERDA: TEXTO ── */}
-                        <div className="lg:col-span-5 space-y-10">
+                        <div className="lg:col-span-5 space-y-8 md:space-y-12 order-2 lg:order-1">
                             <div className="space-y-4">
-                                <span className="text-[#86efac] font-bold uppercase tracking-[0.4em] text-sm block">Bienvenido</span>
-                                <h1 className="text-6xl md:text-8xl font-display font-black leading-none tracking-tight">
+                                <span className="text-[#86efac] font-bold uppercase tracking-[0.4em] text-xs md:text-sm block opacity-80">Bienvenido</span>
+                                <h1 className="text-5xl md:text-7xl lg:text-[6rem] xl:text-[7rem] font-display font-black leading-[0.9] tracking-tighter">
                                     PERLAWASI <br />
                                     <span className="text-[#86efac]">HOSPEDAJE</span>
                                 </h1>
                             </div>
 
-                            <div className="space-y-8 max-w-xl">
-                                <p className="text-xl md:text-2xl text-white/50 font-light italic leading-snug">
+                            <div className="space-y-6 md:space-y-10 max-w-xl">
+                                <p className="text-lg md:text-xl text-white/50 font-light italic leading-snug">
                                     "El espíritu de la selva en cada amanecer"
                                 </p>
-                                <p className="text-lg text-white/70 leading-relaxed font-light">
+                                <p className="text-base md:text-lg text-white/70 leading-relaxed font-light">
                                     Vive una experiencia auténtica en medio de la naturaleza. Nuestro hospedaje rústico está diseñado para quienes buscan <span className="text-[#86efac] font-medium">desconectarse del ruido de la ciudad</span> y reconectarse con la tranquilidad del entorno natural.
                                 </p>
 
-                                <div className="pt-4">
+                                <div className="pt-2 md:pt-4">
                                     <Link href="#habitaciones"
-                                        className="group inline-flex items-center gap-6 bg-[#1a2e1a] hover:bg-[#2d4a2d] text-[#86efac] border border-[#86efac]/30 px-10 py-5 rounded-2xl transition-all duration-500 hover:gap-10 shadow-xl">
-                                        <span className="text-xl font-bold uppercase tracking-widest">Ver Habitaciones</span>
-                                        <div className="w-12 h-12 rounded-full border border-[#86efac]/40 flex items-center justify-center group-hover:bg-[#86efac] group-hover:text-[#050805] transition-colors">
-                                            <span className="text-2xl">→</span>
-                                        </div>
+                                        className="group inline-flex items-center gap-5 border border-[#86efac]/30 bg-[#86efac]/5 hover:bg-[#86efac] text-[#86efac] hover:text-[#050805] px-10 py-5 rounded-2xl transition-all duration-500 shadow-xl">
+                                        <span className="text-lg font-bold uppercase tracking-widest">VER HABITACIONES</span>
+                                        <span className="text-2xl transition-transform group-hover:translate-x-2">→</span>
                                     </Link>
                                 </div>
                             </div>
                         </div>
 
                         {/* ── COLUMNA DERECHA: COMPOSICIÓN VISUAL ── */}
-                        <div className="lg:col-span-7 relative">
-                            <div className="flex gap-6 items-center">
+                        <div className="lg:col-span-7 relative order-1 lg:order-2">
+                            <div className="flex gap-4 md:gap-8 items-center">
                                 {/* Miniaturas verticales */}
-                                <div className="hidden md:flex flex-col gap-6 w-1/3 pt-20">
-                                    <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-700">
-                                        <Image src="/images/fondo_alojamiento.png" alt="Detalle Naturaleza" fill className="object-cover" />
+                                <div className="flex flex-col gap-4 md:gap-8 w-1/3">
+                                    <div className="relative aspect-[3/4] rounded-2xl md:rounded-[2rem] overflow-hidden border border-white/10 shadow-lg hover:scale-[1.03] transition-transform duration-500">
+                                        <Image src="/images/alojamiento_a.png" alt="Suite Interior" fill className="object-cover" />
                                     </div>
-                                    <div className="relative aspect-[1/1] rounded-3xl overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-700">
-                                        <Image src="/images/fondo_buho.png" alt="Detalle Fauna" fill className="object-cover" />
+                                    <div className="relative aspect-[1/1] rounded-2xl md:rounded-[2rem] overflow-hidden border border-white/10 shadow-lg hover:scale-[1.03] transition-transform duration-500">
+                                        <Image src="/images/alojamiento_b.png" alt="Exterior Selva" fill className="object-cover" />
                                     </div>
-                                    <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-white/10 grayscale hover:grayscale-0 transition-all duration-700">
-                                        <Image src="/images/fondo_buho1.png" alt="Detalle Selva" fill className="object-cover" />
+                                    <div className="relative aspect-[3/4] rounded-2xl md:rounded-[2rem] overflow-hidden border border-white/10 shadow-lg hover:scale-[1.03] transition-transform duration-500">
+                                        <Image src="/images/alojamiento_c.png" alt="Cabaña Árbol" fill className="object-cover" />
                                     </div>
                                 </div>
 
                                 {/* Imagen principal destacada */}
-                                <div className="w-full md:w-2/3">
-                                    <div className="relative aspect-[4/5] rounded-[3rem] overflow-hidden border border-[#86efac]/20 shadow-[0_0_100px_rgba(34,197,94,0.1)]">
+                                <div className="w-2/3">
+                                    <div className="relative aspect-[4/5] rounded-[3rem] md:rounded-[5rem] overflow-hidden border border-[#86efac]/20 shadow-[0_0_100px_rgba(34,197,94,0.15)]">
                                         <Image
-                                            src="/images/alojamiento_hero_bg.png"
-                                            alt="Perlawasi Hospedaje"
+                                            src="/images/alojamiento_d.png"
+                                            alt="Perlawasi Hospedaje Experience"
                                             fill
                                             className="object-cover"
                                             priority
                                             quality={100}
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                                        <div className="absolute bottom-10 left-10">
-                                            <p className="text-[#86efac] text-xs font-bold uppercase tracking-[0.3em] mb-2">San Martín, Perú</p>
-                                            <h3 className="text-2xl font-bold">Refugio en el Paraíso</h3>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                                        <div className="absolute bottom-8 md:bottom-16 left-8 md:left-16">
+                                            <p className="text-[#86efac] text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] mb-3">San Martín, Perú</p>
+                                            <h3 className="text-xl md:text-4xl font-display font-bold">Refugio en el Paraíso</h3>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Círculo decorativo flotante */}
-                            <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#86efac] rounded-full blur-[100px] opacity-10 animate-pulse" />
+                            <div className="absolute -top-10 -right-10 w-48 h-48 bg-[#86efac] rounded-full blur-[120px] opacity-[0.05] animate-pulse" />
                         </div>
                     </div>
                 </div>
