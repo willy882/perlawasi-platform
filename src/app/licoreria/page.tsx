@@ -66,80 +66,17 @@ export default function LicoreriaPage() {
     return (
         <div className="min-h-screen bg-[#080808] text-white overflow-x-hidden">
 
-            {/* ═══ HERO CINEMATOGRÁFICO ═══ */}
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-                {/* Imagen de fondo difuminada */}
-                <div className="absolute inset-0 z-0">
-                    <Image
-                        src="/images/licoreria_hero_bg.png"
-                        alt="Licores Perlamayo"
-                        fill
-                        className="object-cover blur-sm scale-105"
-                        style={{ opacity: 0.55 }}
-                        priority
-                    />
-                </div>
-                {/* Overlay oscuro principal */}
-                <div className="absolute inset-0 bg-[#080808]/45 z-[1]" />
-                {/* Overlay gradiente para profundidad */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#080808] via-[#080808]/20 to-[#080808]/40 z-[2]" />
-                {/* Brillo dorado central */}
-                <div className="absolute inset-0 flex items-center justify-center z-[3]">
-                    <div className="w-[90vw] h-[90vw] max-w-4xl max-h-4xl bg-[#D4AF37] rounded-full blur-[180px] opacity-[0.08]" />
-                </div>
-                {/* Brillo dorado esquinas */}
-                <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-[#D4AF37] rounded-full blur-[140px] opacity-[0.05] z-[3]" />
-                <div className="absolute bottom-0 left-0 w-[30vw] h-[30vw] bg-amber-700 rounded-full blur-[120px] opacity-[0.06] z-[3]" />
-                {/* Líneas decorativas */}
-                <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#D4AF37]/20 to-transparent hidden lg:block z-[4]" />
-                <div className="absolute right-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#D4AF37]/20 to-transparent hidden lg:block" />
-
-                {/* Contenido Hero */}
-                <div className="relative z-10 container-custom text-center px-4">
-                    {/* Badge superior */}
-                    <div className="inline-flex items-center gap-3 border border-[#D4AF37]/30 rounded-full px-6 py-2 mb-10 backdrop-blur-md bg-white/5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-pulse" />
-                        <span className="text-[#D4AF37] font-bold uppercase tracking-[0.3em] text-xs mb-6 block">Licores Perlamayo · San Martín · Perú</span>
-                    </div>
-
-                    {/* Título enorme */}
-                    <h1 className="font-display font-black leading-none mb-6 tracking-tight">
-                        <span className="block text-5xl md:text-6xl text-gray-400 font-light italic mb-2">El espíritu de la selva</span>
-                        <span className="block text-6xl md:text-8xl lg:text-[9rem] bg-gradient-to-r from-[#B8960C] via-[#D4AF37] to-[#F5D26B] bg-clip-text text-transparent">
-                            Licores Perlamayo
-                        </span>
-                    </h1>
-
-                    {/* Divider dorado */}
-                    <div className="flex items-center justify-center gap-4 mb-8">
-                        <div className="h-px w-24 bg-gradient-to-r from-transparent to-[#D4AF37]/60" />
-                        <span className="text-[#D4AF37] text-lg">✦</span>
-                        <div className="h-px w-24 bg-gradient-to-l from-transparent to-[#D4AF37]/60" />
-                    </div>
-
-                    <p className="text-xl md:text-2xl text-gray-400 mb-14 leading-relaxed max-w-2xl mx-auto font-light">
-                        Destilados de autor creados para elevar los sentidos. Una oda a la biodiversidad peruana encapsulada en botellas de lujo.
-                    </p>
-
-                    <div className="flex gap-5 justify-center flex-wrap">
-                        <Link href="#coleccion"
-                            className="group relative inline-flex items-center gap-3 bg-[#D4AF37] text-black px-12 py-5 text-lg font-bold hover:bg-[#E5C64A] transition-all duration-300 rounded-full shadow-[0_0_40px_rgba(212,175,55,0.3)] hover:shadow-[0_0_60px_rgba(212,175,55,0.5)]">
-                            <span>Ver Colección</span>
-                            <span className="transition-transform group-hover:translate-x-1">→</span>
-                        </Link>
-                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20información%20sobre%20la%20licorería%20premium"
-                            target="_blank" rel="noopener noreferrer"
-                            className="inline-flex items-center gap-3 border border-[#D4AF37]/40 text-[#D4AF37] px-12 py-5 text-lg font-bold hover:bg-[#D4AF37]/10 transition-all duration-300 rounded-full backdrop-blur-md">
-                            Consultar por WhatsApp
-                        </a>
-                    </div>
-                </div>
-
-                {/* Flecha scroll */}
-                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-                    <span className="text-[#D4AF37]/40 text-xs uppercase tracking-widest">Descubrir</span>
-                    <div className="w-px h-12 bg-gradient-to-b from-[#D4AF37]/40 to-transparent" />
-                </div>
+            {/* ═══ HERO - IMAGEN PURA ═══ */}
+            <section className="relative min-h-screen overflow-hidden">
+                <Image
+                    src="/images/licoreria_hero_bg.png"
+                    alt="Licores Perlamayo"
+                    fill
+                    className="object-cover"
+                    style={{ opacity: 1 }}
+                    priority
+                    quality={100}
+                />
             </section>
 
             {/* ═══ BARRA DE ESTADÍSTICAS ═══ */}
