@@ -161,14 +161,14 @@ export default function LicoreriaPage() {
                         <span className="block text-lg md:text-xl text-[#86efac] font-light tracking-[0.5em] uppercase mb-3 opacity-80">
                             Licores
                         </span>
-                        <h1 className="text-7xl md:text-[10rem] lg:text-[12rem] font-display font-black leading-none tracking-tighter"
+                        <h1 className="text-6xl md:text-[9rem] lg:text-[11rem] font-display font-black leading-none tracking-tighter"
                             style={{
-                                background: 'linear-gradient(135deg, #4ade80 0%, #86efac 30%, #D4AF37 60%, #4ade80 100%)',
+                                background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 40%, #D4AF37 70%, #f1f5f9 100%)',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                                 backgroundClip: 'text',
                                 textShadow: 'none',
-                                filter: 'drop-shadow(0 0 60px rgba(74,222,128,0.3))',
+                                filter: 'drop-shadow(0 0 50px rgba(212,175,55,0.2))',
                             }}>
                             PERLAMAYO
                         </h1>
