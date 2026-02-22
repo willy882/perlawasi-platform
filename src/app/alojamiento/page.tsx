@@ -11,17 +11,16 @@ export default function AlojamientoPage() {
     return (
         <div className="min-h-screen bg-[#fcfcfc] text-[#1a2e1a] overflow-x-hidden">
             {/* ═══ HERO IMAGEN ═══ */}
-            <section className="relative h-[75vh] w-full overflow-hidden">
+            <section className="relative h-[75vh] w-full overflow-hidden bg-black">
                 <Image
                     src="/images/alojamiento_hero_bg.png"
                     alt="Hospedaje Perlawasi"
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     priority
                     quality={100}
+                    unoptimized
                 />
-                {/* Overlay sutil para elegancia */}
-                <div className="absolute inset-0 bg-black/10" />
             </section>
 
             {/* ═══ SECCIÓN DE BIENVENIDA Y DESCRIPCIÓN ═══ */}
