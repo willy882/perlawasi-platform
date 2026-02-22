@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -9,25 +10,18 @@ export const metadata: Metadata = {
 export default function AlojamientoPage() {
     return (
         <div className="min-h-screen bg-[#fcfcfc] text-[#1a2e1a] overflow-x-hidden">
-            {/* ═══ HERO VIDEO PURO ═══ */}
-            <section className="relative h-screen w-full overflow-hidden">
-                <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    preload="auto"
-                    className="absolute inset-0 w-full h-full object-cover"
-                >
-                    <source src="/videos/hero_alojamiento.mp4" type="video/mp4" />
-                </video>
+            {/* ═══ HERO IMAGEN ═══ */}
+            <section className="relative h-[75vh] w-full overflow-hidden">
+                <Image
+                    src="/images/alojamiento_hero_bg.png"
+                    alt="Hospedaje Perlawasi"
+                    fill
+                    className="object-cover"
+                    priority
+                    quality={100}
+                />
                 {/* Overlay sutil para elegancia */}
                 <div className="absolute inset-0 bg-black/10" />
-
-                {/* Flecha indicadora de scroll */}
-                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce z-20">
-                    <div className="w-px h-16 bg-gradient-to-b from-white to-transparent" />
-                </div>
             </section>
 
             {/* ═══ SECCIÓN DE BIENVENIDA Y DESCRIPCIÓN ═══ */}
