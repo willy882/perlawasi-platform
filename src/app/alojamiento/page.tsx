@@ -8,30 +8,52 @@ export const metadata: Metadata = {
 
 export default function AlojamientoPage() {
     return (
-        <div className="min-h-screen bg-white">
-            {/* Hero Section */}
-            <section className="relative h-[75vh] flex items-center overflow-hidden">
-                <div className="absolute inset-0 bg-black/30 z-10" />
-                <div className="absolute inset-0 bg-gradient-to-br from-green-900 to-blue-900 flex items-center justify-center text-9xl">
-                    🏨
-                </div>
+        <div className="min-h-screen bg-[#fcfcfc] text-[#1a2e1a] overflow-x-hidden">
+            {/* ═══ HERO VIDEO PURO ═══ */}
+            <section className="relative h-screen w-full overflow-hidden">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    className="absolute inset-0 w-full h-full object-cover"
+                >
+                    <source src="/videos/hero_alojamiento.mp4" type="video/mp4" />
+                </video>
+                {/* Overlay sutil para elegancia */}
+                <div className="absolute inset-0 bg-black/10" />
 
-                <div className="relative z-20 container-custom text-white">
-                    <div className="max-w-3xl">
-                        <span className="inline-block px-4 py-2 bg-primary-500 text-white text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
-                            Descanso Profundo
-                        </span>
-                        <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
-                            Brisa Lodge
-                        </h1>
-                        <p className="text-xl text-white/90 mb-8 leading-relaxed">
-                            Suites diseñadas para la paz y el reencuentro con la naturaleza. Lujo sostenible en el corazón de San Martín.
+                {/* Flecha indicadora de scroll */}
+                <div className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce z-20">
+                    <div className="w-px h-16 bg-gradient-to-b from-white to-transparent" />
+                </div>
+            </section>
+
+            {/* ═══ SECCIÓN DE BIENVENIDA Y DESCRIPCIÓN ═══ */}
+            <section className="relative py-24 md:py-32 bg-[#0a1f0a] text-white">
+                <div className="container-custom">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <div className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 border border-green-500/30 rounded-full bg-green-500/5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                            <span className="text-xs font-bold uppercase tracking-[0.2em] text-green-400">Autenticidad Natural</span>
+                        </div>
+
+                        <p className="text-2xl md:text-3xl lg:text-4xl font-display font-light leading-relaxed mb-12">
+                            Vive una experiencia auténtica en medio de la naturaleza. Nuestro hospedaje rústico está diseñado para quienes buscan <span className="text-green-400 font-medium">desconectarse del ruido de la ciudad</span> y reconectarse con la tranquilidad del entorno natural.
                         </p>
-                        <Link href="#habitaciones" className="btn btn-primary px-10 py-4 text-lg">
+
+                        <Link href="#habitaciones"
+                            className="inline-flex items-center gap-4 bg-[#8b5e34] hover:bg-[#a67142] text-white px-12 py-5 text-xl font-bold transition-all duration-300 rounded-full shadow-xl hover:shadow-2xl hover:-translate-y-1">
                             Ver Habitaciones
+                            <span className="text-2xl">↓</span>
                         </Link>
                     </div>
                 </div>
+
+                {/* Decoración selva sutil */}
+                <div className="absolute top-0 right-0 w-[30%] h-full bg-[url('/images/pattern_leaf.png')] opacity-[0.03] pointer-events-none" />
+                <div className="absolute top-0 left-0 w-[30%] h-full bg-[url('/images/pattern_leaf.png')] opacity-[0.03] pointer-events-none -scale-x-100" />
             </section>
 
             {/* Habitaciones */}
