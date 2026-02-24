@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Category = 'interior' | 'exterior' | 'suculentas' | 'aromaticas'
 
@@ -69,38 +70,53 @@ export default function PlantasPage() {
         <div className="min-h-screen bg-[#FBFDFB] text-gray-900">
 
             {/* HERO */}
-            <section className="relative h-[65vh] flex items-center overflow-hidden" style={{ background: 'linear-gradient(135deg,#E8F5E9,#F1F8E9 50%,#E0F2F1)' }}>
-                <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-                    <div className="absolute -top-10 -right-10 text-[30rem] opacity-[0.06] rotate-12">🌿</div>
-                    <div className="absolute -bottom-20 left-0 text-[20rem] opacity-[0.04] -rotate-6">🌸</div>
+            <section className="relative h-[70vh] flex items-center overflow-hidden">
+                {/* Imagen de fondo — máxima calidad */}
+                <div className="absolute inset-0">
+                    <Image
+                        src="/images/plantas_hero_bg.png"
+                        alt="Vivero Perlawasi — Plantas de la Amazonía"
+                        fill
+                        priority
+                        quality={100}
+                        className="object-cover object-center"
+                        sizes="100vw"
+                    />
+                    {/* Overlay degradado para legibilidad del texto */}
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(110deg, rgba(0,0,0,0.62) 0%, rgba(10,40,15,0.45) 55%, rgba(0,0,0,0.15) 100%)' }} />
+                    {/* Tinte verde sutil en el borde derecho */}
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to left, rgba(46,125,50,0.18) 0%, transparent 60%)' }} />
                 </div>
+
                 <div className="relative z-10 container-custom w-full">
                     <div className="max-w-2xl px-4">
-                        <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-green-200 px-4 py-2 rounded-full mb-6">
-                            <span className="text-green-700 text-xs font-black uppercase tracking-widest">🌱 Vivero Perlawasi</span>
+                        <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md border border-white/30 px-4 py-2 rounded-full mb-6">
+                            <span className="text-green-300 text-xs font-black uppercase tracking-widest">🌱 Vivero Perlawasi</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-display font-black mb-6 leading-[1.05]">
+                        <h1 className="text-5xl md:text-7xl font-display font-black mb-6 leading-[1.05] text-white drop-shadow-lg">
                             Verdor<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E7D32] to-[#66BB6A]">Interior</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#81C784] to-[#A5D6A7]">Interior</span>
                         </h1>
-                        <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-xl">
+                        <p className="text-xl text-white/85 mb-10 leading-relaxed max-w-xl drop-shadow">
                             Plantas nativas y exóticas de la Amazonía Peruana. Cultivadas con amor en San Martín.
                         </p>
                         <div className="flex gap-4 flex-wrap">
-                            <a href="#vivero" className="btn bg-[#2E7D32] text-white px-10 py-4 text-base font-bold rounded-2xl hover:bg-[#1B5E20] shadow-lg transition-all hover:scale-105">
+                            <a href="#vivero" className="btn bg-[#2E7D32] text-white px-10 py-4 text-base font-bold rounded-2xl hover:bg-[#1B5E20] shadow-xl transition-all hover:scale-105">
                                 Explorar Vivero →
                             </a>
-                            <a href="#cuidados" className="btn bg-white/70 backdrop-blur-sm text-[#2E7D32] border border-green-200 px-10 py-4 text-base font-bold rounded-2xl hover:bg-white transition-all">
+                            <a href="#cuidados" className="btn bg-white/15 backdrop-blur-md text-white border border-white/30 px-10 py-4 text-base font-bold rounded-2xl hover:bg-white/25 transition-all">
                                 Guía de Cuidados
                             </a>
                         </div>
                     </div>
                 </div>
-                <div className="absolute bottom-8 right-8 hidden lg:flex gap-5">
+
+                {/* Stats flotantes */}
+                <div className="absolute bottom-8 right-8 hidden lg:flex gap-4">
                     {[{ v: '+80', l: 'Especies' }, { v: '100%', l: 'Orgánico' }, { v: '5★', l: 'Calidad' }].map((s, i) => (
-                        <div key={i} className="bg-white/70 backdrop-blur-md rounded-2xl px-5 py-3 text-center border border-white shadow-sm">
-                            <p className="text-2xl font-black text-[#2E7D32]">{s.v}</p>
-                            <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">{s.l}</p>
+                        <div key={i} className="bg-black/30 backdrop-blur-md rounded-2xl px-5 py-3 text-center border border-white/20 shadow-lg">
+                            <p className="text-2xl font-black text-green-300">{s.v}</p>
+                            <p className="text-xs text-white/70 uppercase tracking-widest font-bold">{s.l}</p>
                         </div>
                     ))}
                 </div>
