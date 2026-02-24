@@ -70,51 +70,72 @@ export default function PlantasPage() {
         <div className="min-h-screen bg-[#FBFDFB] text-gray-900">
 
             {/* HERO */}
-            <section className="relative h-[70vh] flex items-center overflow-hidden">
-                {/* Imagen de fondo — máxima calidad y luz total */}
+            <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
+                {/* Fondo Inmersivo */}
                 <div className="absolute inset-0">
                     <Image
                         src="/images/plantas_hero_bg.png"
-                        alt="Vivero Perlawasi — Plantas de la Amazonía"
+                        alt="Bosque Perlawasi"
                         fill
                         priority
                         quality={100}
-                        className="object-cover object-center brightness-[1.25] contrast-[1.05]"
+                        className="object-cover object-center brightness-[1.2] contrast-[1.1] scale-105"
                         sizes="100vw"
                     />
-                    {/* Brillo sutil para fundir */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/10" />
+                    {/* Efectos de luz focalizados */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white/30" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15)_0%,transparent_70%)]" />
                 </div>
 
-                <div className="relative z-10 container-custom w-full">
-                    <div className="max-w-2xl px-4">
-                        <div className="inline-flex items-center gap-2 bg-white/40 backdrop-blur-md border border-white/60 px-4 py-2 rounded-full mb-6">
-                            <span className="text-gray-800 text-xs font-black uppercase tracking-widest">🌱 Vivero Perlawasi</span>
+                <div className="relative z-10 container-custom w-full flex flex-col items-center text-center px-4">
+                    {/* El Búho Guardián - Emblema Central */}
+                    <div className="relative mb-10 group">
+                        <div className="absolute inset-0 bg-white/20 blur-3xl rounded-full scale-150 group-hover:bg-green-400/20 transition-all duration-700" />
+                        <div className="relative w-32 h-32 md:w-44 md:h-44 p-4 md:p-6 bg-white/30 backdrop-blur-xl rounded-[2.5rem] border border-white/50 shadow-2xl transform transition-transform duration-700 hover:rotate-3 hover:scale-105">
+                            <Image
+                                src="/images/logo_buho.png"
+                                alt="Buho Guardian"
+                                fill
+                                className="object-contain p-4 drop-shadow-2xl"
+                            />
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-display font-black mb-6 leading-[1.05] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
-                            Verdor<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-green-100">Interior</span>
+                        {/* Brillo orbitando el logo */}
+                        <div className="absolute -top-4 -right-4 w-12 h-12 bg-yellow-200/40 blur-2xl rounded-full animate-pulse" />
+                    </div>
+
+                    {/* Título Monumental */}
+                    <div className="max-w-4xl space-y-4">
+                        <span className="inline-block text-white text-xs md:text-sm font-black uppercase tracking-[0.4em] mb-2 drop-shadow-md">
+                            Guardiana de la Selva • Vivero Ancestral
+                        </span>
+                        <h1 className="text-6xl md:text-9xl font-display font-black text-white leading-[0.9] tracking-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
+                            Santuario<br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-green-100 to-white/80">Botánico</span>
                         </h1>
-                        <p className="text-xl text-white mb-10 leading-relaxed max-w-xl font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
-                            Plantas nativas y exóticas de la Amazonía Peruana. Cultivadas con amor en San Martín.
+                        <p className="text-lg md:text-2xl text-white max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)] pt-6">
+                            Bajo la mirada del búho, cultivamos la esencia más pura de la Amazonía.
+                            Plantas con alma para transformar tu espacio vital.
                         </p>
-                        <div className="flex gap-4 flex-wrap">
-                            <a href="#vivero" className="btn bg-[#2E7D32] text-white px-10 py-4 text-base font-bold rounded-2xl hover:bg-[#1B5E20] shadow-2xl transition-all hover:scale-105">
-                                Explorar Vivero →
-                            </a>
-                            <a href="#cuidados" className="btn bg-white/20 backdrop-blur-md text-white border border-white/40 px-10 py-4 text-base font-bold rounded-2xl hover:bg-white/40 transition-all">
-                                Guía de Cuidados
-                            </a>
-                        </div>
+                    </div>
+
+                    {/* CTAs Elegantes */}
+                    <div className="flex gap-6 mt-12 flex-wrap justify-center">
+                        <a href="#vivero" className="group relative px-12 py-5 bg-white text-green-900 font-bold text-lg rounded-full overflow-hidden transition-all hover:scale-105 shadow-[0_20px_40px_rgba(255,255,255,0.2)]">
+                            <span className="relative z-10">Explorar Catálogo</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-green-50 to-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
+                        <a href="#cuidados" className="px-12 py-5 bg-black/20 backdrop-blur-xl text-white border border-white/40 font-bold text-lg rounded-full hover:bg-white/10 transition-all">
+                            Guía del Guardián
+                        </a>
                     </div>
                 </div>
 
-                {/* Stats flotantes */}
-                <div className="absolute bottom-8 right-8 hidden lg:flex gap-4">
-                    {[{ v: '+80', l: 'Especies' }, { v: '100%', l: 'Orgánico' }, { v: '5★', l: 'Calidad' }].map((s, i) => (
-                        <div key={i} className="bg-white/40 backdrop-blur-lg rounded-2xl px-6 py-4 text-center border border-white/40 shadow-xl">
-                            <p className="text-2xl font-black text-[#2E7D32]">{s.v}</p>
-                            <p className="text-[10px] text-gray-700 uppercase tracking-widest font-black">{s.l}</p>
+                {/* Floating Meta Stats */}
+                <div className="absolute bottom-10 left-10 hidden xl:flex flex-col gap-4">
+                    {['Respeto Ancestral', '100% Nativo', 'Calidad Superior'].map((text, i) => (
+                        <div key={i} className="flex items-center gap-3 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 scale-90 origin-left">
+                            <div className="w-1.5 h-1.5 bg-green-300 rounded-full animate-pulse" />
+                            <span className="text-[10px] text-white font-black uppercase tracking-widest">{text}</span>
                         </div>
                     ))}
                 </div>
