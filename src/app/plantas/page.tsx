@@ -70,7 +70,7 @@ export default function PlantasPage() {
         <div className="min-h-screen bg-[#FBFDFB] text-gray-900">
 
             {/* HERO */}
-            <section className="relative h-screen flex items-center overflow-hidden">
+            <section className="relative h-[70vh] flex items-center overflow-hidden">
                 {/* Imagen de fondo — máxima calidad y luz total */}
                 <div className="absolute inset-0">
                     <Image
@@ -82,39 +82,39 @@ export default function PlantasPage() {
                         className="object-cover object-center brightness-[1.25] contrast-[1.05]"
                         sizes="100vw"
                     />
-                    {/* Eliminamos el overlay oscuro. Solo un brillo blanco muy sutil en la parte inferior para fundir */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/20" />
+                    {/* Brillo sutil para fundir */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/10" />
                 </div>
 
                 <div className="relative z-10 container-custom w-full">
                     <div className="max-w-2xl px-4">
-                        <div className="inline-flex items-center gap-2 bg-white/40 backdrop-blur-md border border-white/60 px-4 py-2 rounded-full mb-6 shadow-sm">
+                        <div className="inline-flex items-center gap-2 bg-white/40 backdrop-blur-md border border-white/60 px-4 py-2 rounded-full mb-6">
                             <span className="text-gray-800 text-xs font-black uppercase tracking-widest">🌱 Vivero Perlawasi</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl lg:text-9xl font-display font-black mb-6 leading-[0.95] text-white drop-shadow-[0_8px_16px_rgba(0,0,0,0.4)]">
+                        <h1 className="text-5xl md:text-7xl font-display font-black mb-6 leading-[1.05] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.4)]">
                             Verdor<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-green-100 drop-shadow-sm">Interior</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-green-100">Interior</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-white mb-10 leading-relaxed max-w-xl font-bold drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
+                        <p className="text-xl text-white mb-10 leading-relaxed max-w-xl font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]">
                             Plantas nativas y exóticas de la Amazonía Peruana. Cultivadas con amor en San Martín.
                         </p>
                         <div className="flex gap-4 flex-wrap">
-                            <a href="#vivero" className="btn bg-[#2E7D32] text-white px-10 py-5 text-lg font-bold rounded-2xl hover:bg-[#1B5E20] shadow-2xl transition-all hover:scale-105">
+                            <a href="#vivero" className="btn bg-[#2E7D32] text-white px-10 py-4 text-base font-bold rounded-2xl hover:bg-[#1B5E20] shadow-2xl transition-all hover:scale-105">
                                 Explorar Vivero →
                             </a>
-                            <a href="#cuidados" className="btn bg-white/30 backdrop-blur-md text-gray-900 border border-white/80 px-10 py-5 text-lg font-bold rounded-2xl hover:bg-white/50 transition-all">
+                            <a href="#cuidados" className="btn bg-white/20 backdrop-blur-md text-white border border-white/40 px-10 py-4 text-base font-bold rounded-2xl hover:bg-white/40 transition-all">
                                 Guía de Cuidados
                             </a>
                         </div>
                     </div>
                 </div>
 
-                {/* Stats flotantes - Ultra claros */}
-                <div className="absolute bottom-12 right-12 hidden lg:flex gap-4">
+                {/* Stats flotantes */}
+                <div className="absolute bottom-8 right-8 hidden lg:flex gap-4">
                     {[{ v: '+80', l: 'Especies' }, { v: '100%', l: 'Orgánico' }, { v: '5★', l: 'Calidad' }].map((s, i) => (
-                        <div key={i} className="bg-white/60 backdrop-blur-xl rounded-[2rem] px-8 py-6 text-center border border-white/80 shadow-2xl">
-                            <p className="text-3xl font-black text-[#2E7D32]">{s.v}</p>
-                            <p className="text-xs text-gray-700 uppercase tracking-widest font-black">{s.l}</p>
+                        <div key={i} className="bg-white/40 backdrop-blur-lg rounded-2xl px-6 py-4 text-center border border-white/40 shadow-xl">
+                            <p className="text-2xl font-black text-[#2E7D32]">{s.v}</p>
+                            <p className="text-[10px] text-gray-700 uppercase tracking-widest font-black">{s.l}</p>
                         </div>
                     ))}
                 </div>
