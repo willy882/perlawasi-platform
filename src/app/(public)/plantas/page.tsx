@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { supabase } from '@/lib/supabase'
 
 type Category = 'interior' | 'exterior' | 'suculentas' | 'aromaticas'
 
@@ -47,16 +48,56 @@ const HomeIcon = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor
 
 export default function PlantasPage() {
     const [activeCategory, setActiveCategory] = useState<Category>('interior')
+    const [dynamicPlants, setDynamicPlants] = useState<Plant[]>(ALL_PLANTS)
     const [selectedPlant, setSelectedPlant] = useState<Plant>(ALL_PLANTS[0])
     const [activeTab, setActiveTab] = useState<'info' | 'care'>('info')
     const [qty, setQty] = useState(1)
     const [added, setAdded] = useState(false)
 
-    const filtered = ALL_PLANTS.filter(p => p.category === activeCategory)
+    useEffect(() => {
+        async function fetchLivePlants() {
+            try {
+                const { data, error } = await supabase
+                    .from('plantas')
+                    .select('*')
+                
+                if (error) throw error
+                
+                if (data && data.length > 0) {
+                    // Mapear datos de la DB al formato de la interfaz si es necesario
+                    const formatted = data.map(p => ({
+                        id: p.id,
+                        name: p.name,
+                        scientific: p.scientific_name || '',
+                        price: Number(p.price),
+                        emoji: p.emoji || '🌿',
+                        bg: p.bg || '#F3F4F6', // Colores por defecto si no vienen en DB
+                        accent: p.accent || '#1a3c1a',
+                        difficulty: p.difficulty || 'Fácil',
+                        light: p.light || 'Luz indirecta',
+                        water: p.water || 'Moderado',
+                        env: p.category || 'Interior',
+                        petFriendly: p.pet_friendly || false,
+                        category: (p.category?.toLowerCase() as Category) || 'interior',
+                        info: p.description || '',
+                        care: p.care_instructions || 'Riego moderado y luz indirecta.',
+                        tags: p.tags || ['Nuevo']
+                    }))
+                    setDynamicPlants(formatted)
+                    setSelectedPlant(formatted[0])
+                }
+            } catch (e) {
+                console.error('Error fetching live plants:', e)
+            }
+        }
+        fetchLivePlants()
+    }, [])
+
+    const filtered = dynamicPlants.filter(p => p.category === activeCategory)
 
     const handleCategory = (cat: Category) => {
         setActiveCategory(cat)
-        const first = ALL_PLANTS.find(p => p.category === cat)
+        const first = dynamicPlants.find(p => p.category === cat)
         if (first) { setSelectedPlant(first); setQty(1); setAdded(false) }
     }
 
@@ -115,12 +156,12 @@ export default function PlantasPage() {
                                     <a href="#vivero" className="px-12 py-5 bg-[#1a3c1a] text-white font-bold text-sm uppercase tracking-widest rounded-full hover:bg-emerald-900 transition-all shadow-2xl hover:-translate-y-1">
                                         Comprar Ahora
                                     </a>
-                                    <div className="flex items-center gap-4 px-6">
-                                        <div className="w-10 h-10 rounded-full border border-emerald-200 flex items-center justify-center">
+                                    <a href="#vivero" className="flex items-center gap-4 px-6 group/cat">
+                                        <div className="w-10 h-10 rounded-full border border-emerald-200 flex items-center justify-center group-hover/cat:bg-emerald-50 transition-colors">
                                             <span className="text-emerald-500 animate-bounce">↓</span>
                                         </div>
-                                        <span className="text-xs font-bold uppercase tracking-widest text-emerald-900/50">Ver Catálogo</span>
-                                    </div>
+                                        <span className="text-xs font-bold uppercase tracking-widest text-emerald-900/50 group-hover/cat:text-emerald-900 transition-colors">Ver Catálogo</span>
+                                    </a>
                                 </div>
                             </div>
 

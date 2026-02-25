@@ -31,7 +31,7 @@ export default function HomePage() {
                             <Link href="/restaurante" className="btn btn-primary px-10 py-4 text-lg shadow-2xl transform hover:scale-105 transition-all outline-none">
                                 Reservar Mesa
                             </Link>
-                            <Link href="/menu" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg shadow-2xl transform hover:scale-105 transition-all outline-none">
+                            <Link href="/restaurante#menu" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg shadow-2xl transform hover:scale-105 transition-all outline-none">
                                 Ver Menú
                             </Link>
                         </div>
@@ -312,7 +312,7 @@ export default function HomePage() {
                         <div className="relative z-10 w-full">
                             <h2 className="text-4xl md:text-7xl font-display font-bold text-white mb-8 leading-tight tracking-tight">+50 Agencias<br />Eligen Perlawasi</h2>
                             <p className="text-white/80 text-xl mb-12 max-w-2xl mx-auto">Únete a nosotros en una experiencia que trasciende lo convencional. Perlawasi es tu hogar en la selva.</p>
-                            <Link href="/reservar" className="btn btn-primary px-16 py-6 text-2xl rounded-full font-bold shadow-strong transition-all hover:px-20">
+                            <Link href="https://wa.me/51928141669?text=Hola,%20quiero%20planear%20mi%20visita%20a%20Perlawasi" target="_blank" className="btn btn-primary px-16 py-6 text-2xl rounded-full font-bold shadow-strong transition-all hover:px-20">
                                 Planear tu Visita
                             </Link>
                         </div>

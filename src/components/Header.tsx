@@ -49,8 +49,8 @@ export default function Header() {
                                     key={cat.slug}
                                     href={`/${cat.slug}`}
                                     className={`text-[11px] font-bold transition-all uppercase tracking-widest relative pb-1 ${isActive
-                                            ? 'text-primary-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-600'
-                                            : 'text-gray-700 hover:text-primary-500'
+                                        ? 'text-primary-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-primary-600'
+                                        : 'text-gray-700 hover:text-primary-500'
                                         }`}
                                 >
                                     {cat.name}
@@ -70,18 +70,8 @@ export default function Header() {
                         </button>
 
                         <Link
-                            href="/cart"
-                            className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
-                            aria-label="Carrito"
-                        >
-                            <FiShoppingCart className="w-5 h-5 text-gray-700" />
-                            <span className="absolute -top-1 -right-1 bg-primary-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
-                                0
-                            </span>
-                        </Link>
-
-                        <Link
-                            href="/book"
+                            href="https://wa.me/51928141669?text=Hola,%20quiero%20hacer%20una%20reserva"
+                            target="_blank"
                             className="btn btn-primary px-6 py-2.5 rounded-full text-sm font-bold transition-all hover:px-8"
                         >
                             Reservar Ahora
@@ -138,8 +128,8 @@ export default function Header() {
                                     key={cat.slug}
                                     href={`/${cat.slug}`}
                                     className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${isActive
-                                            ? 'bg-primary-50 text-primary-700 font-semibold border-l-4 border-primary-600'
-                                            : 'hover:bg-gray-50'
+                                        ? 'bg-primary-50 text-primary-700 font-semibold border-l-4 border-primary-600'
+                                        : 'hover:bg-gray-50'
                                         }`}
                                     onClick={() => setMobileMenuOpen(false)}
                                 >

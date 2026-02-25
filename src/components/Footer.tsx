@@ -43,10 +43,10 @@ export default function Footer() {
                     <div>
                         <h3 className="text-white font-display font-bold mb-6 uppercase tracking-wider text-sm">Navegación</h3>
                         <ul className="space-y-4 text-sm">
-                            <li><Link href="/nosotros" className="hover:text-white transition-colors">Sobre Nosotros</Link></li>
-                            <li><Link href="/galeria" className="hover:text-white transition-colors">Galería</Link></li>
-                            <li><Link href="/blog" className="hover:text-white transition-colors">Blog de Viaje</Link></li>
-                            <li><Link href="/preguntas" className="hover:text-white transition-colors">Preguntas Frecuentes</Link></li>
+                            <li><Link href="/" className="hover:text-white transition-colors">Inicio</Link></li>
+                            <li><Link href="/restaurante#menu" className="hover:text-white transition-colors">Nuestro Menú</Link></li>
+                            <li><Link href="/alojamiento" className="hover:text-white transition-colors">Brisa Lodge</Link></li>
+                            <li><Link href="https://wa.me/51928141669?text=Hola,%20quiero%20más%20información" target="_blank" className="hover:text-white transition-colors">Contacto Directo</Link></li>
                         </ul>
                     </div>
 
@@ -59,6 +59,8 @@ export default function Footer() {
                             <li><Link href="/cafe-cacao" className="hover:text-white transition-colors">Café & Cacao</Link></li>
                             <li><Link href="/cerveceria" className="hover:text-white transition-colors">Cervecería</Link></li>
                             <li><Link href="/licoreria" className="hover:text-white transition-colors">Licorería</Link></li>
+                            <li><Link href="/ropa" className="hover:text-white transition-colors">Boutique Ropa</Link></li>
+                            <li><Link href="/plantas" className="hover:text-white transition-colors">Vivero Plantas</Link></li>
                         </ul>
                     </div>
 
@@ -82,9 +84,9 @@ export default function Footer() {
                 <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs tracking-widest uppercase">
                     <p>© 2026 Perlawasi Lodge & Experiences. Todos los derechos reservados. <span className="opacity-30 ml-2">v8.1</span></p>
                     <div className="flex gap-8">
-                        <Link href="/privacidad" className="hover:text-white transition-colors">Privacidad</Link>
-                        <Link href="/terminos" className="hover:text-white transition-colors">Términos</Link>
-                        <Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link>
+                        <Link href="/" className="hover:text-white transition-colors">Privacidad</Link>
+                        <Link href="/" className="hover:text-white transition-colors">Términos</Link>
+                        <Link href="/" className="hover:text-white transition-colors">Cookies</Link>
                     </div>
                 </div>
             </div>

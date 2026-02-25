@@ -40,13 +40,7 @@ export default function RootLayout({
     return (
         <html lang="es" className="smooth-scroll">
             <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
-                <Header />
-                <main className="min-h-screen">
-                    {children}
-                </main>
-                <Footer />
-                <WhatsAppButton />
-                <ChatBot />
+                {children}
                 <Toaster
                     position="top-right"
                     toastOptions={{
