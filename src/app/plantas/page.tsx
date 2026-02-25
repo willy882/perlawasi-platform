@@ -70,53 +70,76 @@ export default function PlantasPage() {
         <div className="min-h-screen bg-[#FBFDFB] text-gray-900">
 
             {/* HERO */}
-            <section className="relative h-[75vh] flex items-center overflow-hidden bg-white">
-                {/* Imagen de fondo optimizada para alta claridad */}
-                <div className="absolute inset-0">
-                    <Image
-                        src="/images/plantas_hero_bg.png"
-                        alt="Vivero Perlawasi"
-                        fill
-                        priority
-                        quality={100}
-                        className="object-cover object-center brightness-[1.1] contrast-[1.02]"
-                        sizes="100vw"
-                    />
-                    {/* Overlay sutil para legibilidad sin oscurecer la foto */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-transparent" />
+            <section className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-[#061a06]">
+                {/* Fondo Atmosférico de Autor */}
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(46,125,50,0.15)_0%,transparent_70%)]" />
+                    <div className="absolute top-0 left-0 w-full h-full opacity-30"
+                        style={{ backgroundImage: 'radial-gradient(#1a3c1a 1px, transparent 0)', backgroundSize: '40px 40px' }} />
+                    <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-green-900/40 rounded-full blur-[120px]" />
+                    <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-900/30 rounded-full blur-[120px]" />
                 </div>
 
-                <div className="relative z-10 container-custom w-full">
-                    <div className="max-w-2xl px-4">
-                        <div className="inline-flex items-center gap-2 bg-white/40 backdrop-blur-md border border-white/60 px-4 py-2 rounded-full mb-6 shadow-sm">
-                            <span className="text-gray-800 text-xs font-black uppercase tracking-widest">🌱 Vivero Perlawasi</span>
+                <div className="relative z-10 container-custom flex flex-col items-center text-center">
+                    {/* El Emblema Central */}
+                    <div className="mb-8 relative group">
+                        <div className="absolute inset-0 bg-emerald-400/20 blur-3xl rounded-full scale-150 animate-pulse" />
+                        <div className="relative w-28 h-28 md:w-36 md:h-36 bg-gradient-to-b from-white/10 to-transparent backdrop-blur-2xl rounded-full border border-white/20 p-6 shadow-2xl transition-transform duration-700 group-hover:scale-110">
+                            <Image
+                                src="/images/logo_buho.png"
+                                alt="Buhoo Logo"
+                                fill
+                                className="object-contain p-6 brightness-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                            />
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-display font-black mb-6 leading-[1.05] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
-                            Verdor<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-green-100">Interior</span>
+                    </div>
+
+                    {/* Branding Boutique */}
+                    <div className="space-y-4 max-w-4xl px-4">
+                        <span className="block text-emerald-400 text-xs md:text-sm font-black uppercase tracking-[0.5em] mb-4">
+                            Vivero Boutique de Autor
+                        </span>
+                        <h1 className="text-7xl md:text-9xl font-display font-black leading-[0.85] tracking-tighter text-white">
+                            BUHOO
                         </h1>
-                        <p className="text-xl text-white mb-10 leading-relaxed max-w-xl font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
-                            Plantas nativas y exóticas de la Amazonía Peruana. Cultivadas con amor en San Martín.
+                        <p className="text-xl md:text-3xl font-display font-light text-emerald-100/80 tracking-tight italic">
+                            "Curaduría botánica para espacios con alma"
                         </p>
-                        <div className="flex gap-4 flex-wrap">
-                            <a href="#vivero" className="btn bg-[#2E7D32] text-white px-10 py-4 text-base font-bold rounded-2xl hover:bg-[#1B5E20] shadow-xl transition-all hover:scale-105">
-                                Explorar Vivero →
-                            </a>
-                            <a href="#cuidados" className="btn bg-white/30 backdrop-blur-md text-gray-900 border border-white/60 px-10 py-4 text-base font-bold rounded-2xl hover:bg-white/50 transition-all">
-                                Guía de Cuidados
-                            </a>
-                        </div>
+
+                        <div className="h-px w-24 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent mx-auto my-8" />
+
+                        <p className="text-base md:text-lg text-emerald-50/60 max-w-xl mx-auto leading-relaxed font-light">
+                            Especialistas en la venta de ejemplares exóticos y diseño paisajista de interiores.
+                            Llevamos la majestuosidad de la selva a tu hogar con piezas vivas seleccionadas a mano.
+                        </p>
+                    </div>
+
+                    {/* CTAs de Alta Conversión */}
+                    <div className="flex gap-6 mt-12 flex-wrap justify-center">
+                        <a href="#vivero" className="px-10 py-5 bg-emerald-600 text-white font-bold text-sm uppercase tracking-widest rounded-full hover:bg-emerald-500 transition-all shadow-[0_15px_30px_rgba(5,150,105,0.3)] hover:-translate-y-1">
+                            Ver Catálogo de Ventas
+                        </a>
+                        <a href="https://wa.me/51928141669?text=Hola%20Buhoo,%20quiero%20asesoría%20para%20comprar%20una%20planta"
+                            target="_blank"
+                            className="px-10 py-5 bg-white/5 backdrop-blur-md text-white border border-white/10 font-bold text-sm uppercase tracking-widest rounded-full hover:bg-white/10 transition-all">
+                            Asesoría Personalizada
+                        </a>
+                    </div>
+
+                    {/* Etiquetas de Confianza */}
+                    <div className="mt-16 flex gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
+                        {['Exóticos', 'Nativos', 'Sustentables'].map((tag, i) => (
+                            <div key={i} className="flex items-center gap-2">
+                                <span className="text-emerald-500">✦</span>
+                                <span className="text-white text-[10px] font-black uppercase tracking-[0.2em]">{tag}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                <div className="absolute bottom-8 right-8 hidden lg:flex gap-5">
-                    {[{ v: '+80', l: 'Especies' }, { v: '100%', l: 'Orgánico' }, { v: '5★', l: 'Calidad' }].map((s, i) => (
-                        <div key={i} className="bg-white/50 backdrop-blur-lg rounded-2xl px-5 py-3 text-center border border-white/40 shadow-xl">
-                            <p className="text-2xl font-black text-[#2E7D32]">{s.v}</p>
-                            <p className="text-xs text-gray-700 uppercase tracking-widest font-black">{s.l}</p>
-                        </div>
-                    ))}
-                </div>
+                {/* Decoración Minimalista en Esquinas */}
+                <div className="absolute top-10 left-10 text-white/5 text-9xl select-none">🌿</div>
+                <div className="absolute bottom-10 right-10 text-emerald-500/5 text-9xl select-none rotate-12">🪴</div>
             </section>
 
             {/* SHOP SECTION */}
