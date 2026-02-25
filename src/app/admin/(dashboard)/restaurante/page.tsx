@@ -12,20 +12,50 @@ export default function AdminRestaurante() {
     const [searchTerm, setSearchTerm] = useState('')
     const [showModal, setShowModal] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [saving, setSaving] = useState(false)
     const [dishes, setDishes] = useState<any[]>([])
+    const [showNewCat, setShowNewCat] = useState(false)
 
-    // En un proyecto real, crearíamos una tabla 'platos'
-    // Por ahora, simularemos con un estado local pero con la estructura lista
-    useEffect(() => {
-        setTimeout(() => {
-            setDishes([
-                { id: 1, name: 'Paiche en Salsa de Cocona', category: 'Fondo', price: 45, status: 'Disponible' },
-                { id: 2, name: 'Juane Tradicional', category: 'Fondo', price: 35, status: 'Disponible' },
-                { id: 3, name: 'Tacacho con Cecina', category: 'Fondo', price: 38, status: 'Agotado' },
-            ])
-            setLoading(false)
-        }, 800)
-    }, [])
+    useEffect(() => { fetchDishes() }, [])
+
+    async function fetchDishes() {
+        try {
+            setLoading(true)
+            const { data, error } = await supabase
+                .from('restaurante_menu')
+                .select('*')
+                .order('created_at', { ascending: false })
+            if (error) throw error
+            setDishes(data || [])
+        } catch (error: any) {
+            toast.error('Error: ' + error.message)
+        } finally { setLoading(false) }
+    }
+
+    const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        setSaving(true)
+        const formData = new FormData(e.currentTarget)
+        try {
+            const category = formData.get('category') === 'NEW' ? formData.get('new_category') : formData.get('category')
+            const newDish = {
+                name: formData.get('name'),
+                category: category,
+                price: parseFloat(formData.get('price') as string),
+                available: true
+            }
+            const { error } = await supabase.from('restaurante_menu').insert([newDish])
+            if (error) throw error
+            toast.success('Plato añadido a la carta 🥘')
+            setShowModal(false)
+            fetchDishes()
+        } catch (error: any) {
+            toast.error('Error: ' + error.message)
+        } finally { setSaving(false) }
+    }
+
+    const filtered = dishes.filter(d => d.name?.toLowerCase().includes(searchTerm.toLowerCase()))
+    const categories = Array.from(new Set(dishes.map(d => d.category).filter(Boolean)))
 
     return (
         <div className="space-y-8 animate-fade-in">
@@ -62,25 +92,27 @@ export default function AdminRestaurante() {
                                 <th className="px-8 py-5">Categoría</th>
                                 <th className="px-8 py-5">Estado</th>
                                 <th className="px-8 py-5 text-right">Precio</th>
+                                <th className="px-8 py-5 text-right">Acciones</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-50">
                             {loading ? (
-                                <tr><td colSpan={4} className="px-8 py-20 text-center"><FiLoader className="inline-block animate-spin" /></td></tr>
-                            ) : (
-                                dishes.map((d) => (
-                                    <tr key={d.id} className="group hover:bg-emerald-50/30 transition-colors">
-                                        <td className="px-8 py-6 font-bold text-gray-900">{d.name}</td>
-                                        <td className="px-8 py-6 text-sm text-gray-500">{d.category}</td>
-                                        <td className="px-8 py-6">
-                                            <span className={`px-2 py-1 rounded-lg text-[10px] font-black uppercase ${d.status === 'Disponible' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
-                                                {d.status}
-                                            </span>
-                                        </td>
-                                        <td className="px-8 py-6 text-right font-black text-gray-900">S/ {d.price}</td>
-                                    </tr>
-                                ))
-                            )}
+                                <tr><td colSpan={5} className="px-8 py-20 text-center"><FiLoader className="inline-block animate-spin" /></td></tr>
+                            ) : filtered.map((d) => (
+                                <tr key={d.id} className="group hover:bg-emerald-50/30 transition-colors">
+                                    <td className="px-8 py-6 font-bold text-gray-900">{d.name}</td>
+                                    <td className="px-8 py-6 text-sm text-gray-500 font-bold">{d.category}</td>
+                                    <td className="px-8 py-6">
+                                        <span className={`px-2 py-1 rounded-lg text-[10px] font-black uppercase ${d.available ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
+                                            {d.available ? 'Disponible' : 'Agotado'}
+                                        </span>
+                                    </td>
+                                    <td className="px-8 py-6 text-right font-black text-gray-900">S/ {d.price}</td>
+                                    <td className="px-8 py-6 text-right">
+                                        <button onClick={async () => { if (confirm('¿Eliminar?')) { await supabase.from('restaurante_menu').delete().eq('id', d.id); fetchDishes(); } }} className="p-2.5 text-red-600 opacity-0 group-hover:opacity-100"><FiTrash2 /></button>
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
@@ -90,20 +122,21 @@ export default function AdminRestaurante() {
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm">
                     <div className="bg-white w-full max-w-lg rounded-[3rem] p-10 animate-slide-up">
                         <h3 className="text-2xl font-black mb-8 text-gray-900">Nuevo Plato en Carta</h3>
-                        <div className="space-y-4">
-                            <input type="text" placeholder="Nombre del plato" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-emerald-500 outline-none text-sm font-bold" />
-                            <select className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent outline-none text-sm font-bold appearance-none">
-                                <option>Entrada</option>
-                                <option>Plato de Fondo</option>
-                                <option>Postre</option>
-                                <option>Bebida</option>
-                            </select>
-                            <input type="number" placeholder="Precio S/" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-emerald-500 outline-none text-sm font-bold" />
-                            <div className="flex gap-4 pt-4">
-                                <button onClick={() => setShowModal(false)} className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase text-xs">Cancelar</button>
-                                <button onClick={() => { toast.success('Pronto: Conexión a Base de Datos de Menú'); setShowModal(false) }} className="flex-[2] py-4 bg-emerald-700 text-white rounded-2xl font-black uppercase text-xs">Guardar Plato</button>
+                        <form onSubmit={handleSave} className="space-y-6">
+                            <input name="name" required type="text" placeholder="Nombre del plato" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-emerald-500 outline-none text-sm font-bold" />
+                            <div className="space-y-2">
+                                <select name="category" onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent outline-none text-sm font-bold appearance-none">
+                                    {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                                    <option value="NEW" className="text-emerald-600">+ Nueva Categoría (Entrada, Fondo...)</option>
+                                </select>
+                                {showNewCat && <input name="new_category" required type="text" placeholder="Ej: Fondos, Postres, Amazonian Mix..." className="w-full px-5 py-3.5 bg-emerald-50 rounded-2xl outline-none font-bold" />}
                             </div>
-                        </div>
+                            <input name="price" required type="number" step="0.5" placeholder="Precio S/" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-emerald-500 outline-none text-sm font-bold" />
+                            <div className="flex gap-4 pt-4">
+                                <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase text-xs">Cancelar</button>
+                                <button type="submit" disabled={saving} className="flex-[2] py-4 bg-emerald-700 text-white rounded-2xl font-black uppercase text-xs">{saving ? 'Guardando...' : 'Guardar Plato🥘'}</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             )}

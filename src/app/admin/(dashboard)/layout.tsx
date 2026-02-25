@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import {
     FiHome, FiPackage, FiCalendar, FiSettings, FiBriefcase,
     FiUser, FiLogOut, FiMenu, FiX, FiPieChart, FiCoffee,
-    FiTag, FiCheckCircle
+    FiTag, FiCheckCircle, FiLoader, FiZap, FiTarget
 } from 'react-icons/fi'
 
 export default function AdminDashboardLayout({ children }: { children: React.ReactNode }) {
@@ -18,8 +18,11 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
         { name: 'Vivero (Plantas)', icon: <FiPackage />, path: '/admin/plantas' },
         { name: 'Restaurante', icon: <FiBriefcase />, path: '/admin/restaurante' },
         { name: 'Boutique (Ropa)', icon: <FiTag />, path: '/admin/ropa' },
-        { name: 'Lodge (Reservas)', icon: <FiCalendar />, path: '/admin/reservas' },
+        { name: 'Lodge (Alojamiento)', icon: <FiCalendar />, path: '/admin/reservas' },
         { name: 'Café & Cacao', icon: <FiCoffee />, path: '/admin/cafe-cacao' },
+        { name: 'Heladería', icon: <FiPieChart />, path: '/admin/heladeria' },
+        { name: 'Cervecería', icon: <FiLoader />, path: '/admin/cerveceria' },
+        { name: 'Licorería', icon: <FiCheckCircle />, path: '/admin/licoreria' },
         { name: 'Ajustes', icon: <FiSettings />, path: '/admin/ajustes' },
     ]
 
@@ -49,8 +52,8 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                                 key={item.path}
                                 href={item.path}
                                 className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all font-bold text-sm ${isActive
-                                        ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-900/40'
-                                        : 'text-white/60 hover:bg-white/5 hover:text-white'
+                                    ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-900/40'
+                                    : 'text-white/60 hover:bg-white/5 hover:text-white'
                                     }`}
                             >
                                 <span className="text-xl">{item.icon}</span>

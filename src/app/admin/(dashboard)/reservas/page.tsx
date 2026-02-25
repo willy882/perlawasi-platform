@@ -11,38 +11,29 @@ import { toast } from 'react-hot-toast'
 
 export default function AdminReservas() {
     const [searchTerm, setSearchTerm] = useState('')
+    const [bookings, setBookings] = useState<any[]>([])
     const [showModal, setShowModal] = useState(false)
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
-    const [bookings, setBookings] = useState<any[]>([])
+    const [showNewType, setShowNewType] = useState(false)
 
-    useEffect(() => {
-        fetchBookings()
-    }, [])
+    useEffect(() => { fetchBookings() }, [])
 
     async function fetchBookings() {
         try {
             setLoading(true)
-            const { data, error } = await supabase
-                .from('reservas')
-                .select('*')
-                .order('created_at', { ascending: false })
-
+            const { data, error } = await supabase.from('reservas').select('*').order('created_at', { ascending: false })
             if (error) throw error
             setBookings(data || [])
-        } catch (error: any) {
-            toast.error('Error al cargar reservas: ' + error.message)
-        } finally {
-            setLoading(false)
-        }
+        } finally { setLoading(false) }
     }
 
     const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setSaving(true)
         const formData = new FormData(e.currentTarget)
-
         try {
+            const roomType = formData.get('room_type') === 'NEW' ? formData.get('new_room_type') : formData.get('room_type')
             const newBooking = {
                 customer_name: formData.get('name'),
                 customer_email: formData.get('email'),
@@ -50,25 +41,24 @@ export default function AdminReservas() {
                 check_in: formData.get('check_in'),
                 check_out: formData.get('check_out'),
                 guests: parseInt(formData.get('guests') as string),
-                room_type: formData.get('room_type'),
+                room_type: roomType,
                 total_price: parseFloat(formData.get('price') as string),
                 status: 'Confirmado'
             }
-
             const { error } = await supabase.from('reservas').insert([newBooking])
             if (error) throw error
-
-            toast.success('Reserva confirmada correctamente 🏨')
+            toast.success('Reserva confirmada 🏨')
             setShowModal(false)
             fetchBookings()
         } catch (error: any) {
-            toast.error('Error al guardar: ' + error.message)
-        } finally {
-            setSaving(false)
-        }
+            toast.error('Error: ' + error.message)
+        } finally { setSaving(false) }
     }
 
-    const filteredBookings = bookings.filter(b =>
+    const roomTypes = Array.from(new Set(bookings.map((b: any) => b.room_type).filter(Boolean)))
+    if (roomTypes.length === 0) roomTypes.push('Suite Familiar', 'Bungalow Privado', 'Habitación Doble')
+
+    const filteredBookings = bookings.filter((b: any) =>
         b.customer_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         b.customer_email?.toLowerCase().includes(searchTerm.toLowerCase())
     )
@@ -216,12 +206,19 @@ export default function AdminReservas() {
                                 <div className="grid md:grid-cols-2 gap-6">
                                     <div className="space-y-2">
                                         <label className="text-xs font-black uppercase tracking-widest text-gray-400">Tipo de Habitación</label>
-                                        <select name="room_type" className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-emerald-500 outline-none transition-all text-sm font-bold appearance-none">
-                                            <option value="Suite Familiar">Suite Familiar</option>
-                                            <option value="Bungalow Privado">Bungalow Privado</option>
-                                            <option value="Habitación Doble">Habitación Doble</option>
-                                            <option value="Glamping Premium">Glamping Premium</option>
-                                        </select>
+                                        <div className="space-y-2">
+                                            <select
+                                                name="room_type"
+                                                onChange={(e) => setShowNewType(e.target.value === 'NEW')}
+                                                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-emerald-500 outline-none transition-all text-sm font-bold appearance-none"
+                                            >
+                                                {roomTypes.map(type => <option key={type} value={type}>{type}</option>)}
+                                                <option value="NEW" className="text-emerald-600 font-bold">+ Agregar Nuevo Tipo...</option>
+                                            </select>
+                                            {showNewType && (
+                                                <input name="new_room_type" type="text" required placeholder="Ej: Glamping Deluxe" className="w-full px-5 py-3.5 bg-emerald-50 border-emerald-100 rounded-2xl outline-none text-sm font-bold animate-fade-in" />
+                                            )}
+                                        </div>
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-xs font-black uppercase tracking-widest text-gray-400">Monto Total (S/)</label>

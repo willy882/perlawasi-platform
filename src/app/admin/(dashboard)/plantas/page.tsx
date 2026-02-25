@@ -15,6 +15,7 @@ export default function AdminPlantas() {
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
     const [plants, setPlants] = useState<any[]>([])
+    const [showNewCat, setShowNewCat] = useState(false)
 
     useEffect(() => {
         fetchPlants()
@@ -43,12 +44,16 @@ export default function AdminPlantas() {
         const formData = new FormData(e.currentTarget)
 
         try {
+            const category = formData.get('category') === 'NEW'
+                ? formData.get('new_category')
+                : formData.get('category')
+
             const newPlant = {
                 name: formData.get('name'),
                 scientific_name: formData.get('scientific'),
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
-                category: formData.get('category'),
+                category: category,
                 description: formData.get('description'),
                 status: parseInt(formData.get('stock') as string) > 0 ? 'In Stock' : 'Out of Stock'
             }
@@ -224,12 +229,31 @@ export default function AdminPlantas() {
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-xs font-black uppercase tracking-widest text-gray-400">Categoría</label>
-                                        <select name="category" className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-emerald-500 outline-none transition-all text-sm font-bold appearance-none">
-                                            <option value="Interior">Interior</option>
-                                            <option value="Exterior">Exterior</option>
-                                            <option value="Exóticas">Exóticas</option>
-                                            <option value="Cactus">Cactus</option>
-                                        </select>
+                                        <div className="space-y-2">
+                                            <select
+                                                name="category"
+                                                onChange={(e) => {
+                                                    if (e.target.value === 'NEW') setShowNewCat(true)
+                                                    else setShowNewCat(false)
+                                                }}
+                                                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-emerald-500 outline-none transition-all text-sm font-bold appearance-none"
+                                            >
+                                                {Array.from(new Set(plants.map(p => p.category))).map(cat => (
+                                                    <option key={cat} value={cat}>{cat}</option>
+                                                ))}
+                                                <option value="NEW" className="text-emerald-600 font-black">+ Agregar Nueva...</option>
+                                            </select>
+
+                                            {showNewCat && (
+                                                <input
+                                                    name="new_category"
+                                                    type="text"
+                                                    placeholder="Nombre de la nueva categoría"
+                                                    required
+                                                    className="w-full px-5 py-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl focus:bg-white focus:border-emerald-500 outline-none transition-all text-sm font-bold animate-fade-in"
+                                                />
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
 

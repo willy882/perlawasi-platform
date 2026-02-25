@@ -14,62 +14,49 @@ export default function AdminCafe() {
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
     const [products, setProducts] = useState<any[]>([])
+    const [showNewCat, setShowNewCat] = useState(false)
 
-    useEffect(() => {
-        fetchProducts()
-    }, [])
+    useEffect(() => { fetchProducts() }, [])
 
     async function fetchProducts() {
         try {
             setLoading(true)
-            // Reutilizamos la tabla de productos si fuera general, pero aquí asumo una gestión similar a plantas
-            // Si no existe tabla específica, usaremos 'plantas' con categoría 'Cafe' por ahora o crear una si fuera necesario.
-            // Pero según el esquema SQL inicial, solo creé 'plantas' y 'productos_ropa'.
-            // Vamos a usar 'plantas' filtrada por categoría para Café si el usuario no especificó otra tabla.
             const { data, error } = await supabase
-                .from('plantas')
+                .from('cafe_cacao')
                 .select('*')
-                .eq('category', 'Cafe & Cacao')
                 .order('created_at', { ascending: false })
-
             if (error) throw error
             setProducts(data || [])
         } catch (error: any) {
-            toast.error('Error al cargar productos de café: ' + error.message)
-        } finally {
-            setLoading(false)
-        }
+            toast.error('Error: ' + error.message)
+        } finally { setLoading(false) }
     }
 
     const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setSaving(true)
         const formData = new FormData(e.currentTarget)
-
         try {
+            const category = formData.get('category') === 'NEW' ? formData.get('new_category') : formData.get('category')
             const newProduct = {
                 name: formData.get('name'),
-                category: 'Cafe & Cacao',
+                category: category,
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
-                description: formData.get('description'),
-                status: 'In Stock'
+                description: formData.get('description')
             }
-
-            const { error } = await supabase.from('plantas').insert([newProduct])
+            const { error } = await supabase.from('cafe_cacao').insert([newProduct])
             if (error) throw error
-
-            toast.success('Producto de café guardado ☕')
+            toast.success('Producto guardado ☕')
             setShowModal(false)
             fetchProducts()
         } catch (error: any) {
-            toast.error('Error al guardar: ' + error.message)
-        } finally {
-            setSaving(false)
-        }
+            toast.error('Error: ' + error.message)
+        } finally { setSaving(false) }
     }
 
     const filtered = products.filter(p => p.name?.toLowerCase().includes(searchTerm.toLowerCase()))
+    const categories = Array.from(new Set(products.map(p => p.category).filter(Boolean)))
 
     return (
         <div className="space-y-8 animate-fade-in">
@@ -97,54 +84,46 @@ export default function AdminCafe() {
                 />
             </div>
 
-            <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left">
-                        <thead>
-                            <tr className="bg-gray-50/50 uppercase text-[10px] font-black text-gray-400 tracking-[0.2em]">
-                                <th className="px-8 py-5">Producto</th>
-                                <th className="px-8 py-5">Stock</th>
-                                <th className="px-8 py-5">Precio</th>
-                                <th className="px-8 py-5 text-right">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-50">
-                            {loading ? (
-                                <tr><td colSpan={4} className="px-8 py-20 text-center"><FiLoader className="inline-block animate-spin" /></td></tr>
-                            ) : filtered.length === 0 ? (
-                                <tr><td colSpan={4} className="px-8 py-20 text-center text-gray-400 italic">No hay productos.</td></tr>
-                            ) : (
-                                filtered.map((p) => (
-                                    <tr key={p.id} className="group hover:bg-orange-50/30 transition-colors">
-                                        <td className="px-8 py-6">
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center"><FiCoffee /></div>
-                                                <p className="font-bold text-gray-900">{p.name}</p>
-                                            </div>
-                                        </td>
-                                        <td className="px-8 py-6 text-sm font-bold text-gray-600">{p.stock} uds.</td>
-                                        <td className="px-8 py-6 font-black text-gray-900">S/ {p.price}</td>
-                                        <td className="px-8 py-6 text-right">
-                                            <button onClick={async () => {
-                                                if (confirm('¿Eliminar?')) {
-                                                    await supabase.from('plantas').delete().eq('id', p.id)
-                                                    fetchProducts()
-                                                }
-                                            }} className="p-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><FiTrash2 /></button>
-                                        </td>
-                                    </tr>
-                                ))
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+            <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden text-left">
+                <table className="w-full">
+                    <thead>
+                        <tr className="bg-gray-50 uppercase text-[10px] font-black text-gray-400 tracking-widest">
+                            <th className="px-8 py-5">Producto</th>
+                            <th className="px-8 py-5">Variedad</th>
+                            <th className="px-8 py-5">Stock</th>
+                            <th className="px-8 py-5">Precio</th>
+                            <th className="px-8 py-5 text-right">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-50">
+                        {loading ? (
+                            <tr><td colSpan={5} className="px-8 py-20 text-center"><FiLoader className="inline-block animate-spin" /></td></tr>
+                        ) : filtered.length === 0 ? (
+                            <tr><td colSpan={5} className="px-8 py-20 text-center text-gray-400 italic">No hay productos.</td></tr>
+                        ) : (
+                            filtered.map(p => (
+                                <tr key={p.id} className="group hover:bg-orange-50/30 transition-colors">
+                                    <td className="px-8 py-6 flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-xl bg-orange-50 text-orange-600 flex items-center justify-center font-bold text-xl"><FiCoffee /></div>
+                                        <p className="font-bold text-gray-900">{p.name}</p>
+                                    </td>
+                                    <td className="px-8 py-6 text-sm text-gray-500 font-bold uppercase">{p.category}</td>
+                                    <td className="px-8 py-6 text-sm font-bold text-gray-600">{p.stock} uds.</td>
+                                    <td className="px-8 py-6 font-black text-gray-900">S/ {p.price}</td>
+                                    <td className="px-8 py-6 text-right">
+                                        <button onClick={async () => { if (confirm('¿Eliminar?')) { await supabase.from('cafe_cacao').delete().eq('id', p.id); fetchProducts(); } }} className="p-2.5 text-red-600 opacity-0 group-hover:opacity-100 transition-all"><FiTrash2 /></button>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
+                    </tbody>
+                </table>
             </div>
 
-            {/* Modal */}
             {showModal && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm">
                     <div className="bg-white w-full max-w-xl rounded-[3rem] p-10 animate-slide-up">
-                        <h3 className="text-2xl font-black mb-8 text-gray-900">Agregar Producto Gourmet</h3>
+                        <h3 className="text-2xl font-black mb-8 text-gray-900">Nuevo Producto de Origen</h3>
                         <form onSubmit={handleSave} className="space-y-6">
                             <input name="name" type="text" required placeholder="Nombre (ej: Café Geisha 250g)" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-orange-500 outline-none text-sm font-bold" />
                             <div className="grid grid-cols-2 gap-4">
