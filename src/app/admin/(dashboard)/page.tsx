@@ -9,29 +9,48 @@ import {
 import { supabase } from '@/lib/supabase'
 
 export default function AdminDashboard() {
-    const [plantCount, setPlantCount] = useState<number | null>(null)
+    const [statsData, setStatsData] = useState({
+        plants: 0,
+        clothing: 0,
+        reservations: 0,
+        totalSales: 0
+    })
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        async function fetchStats() {
+        async function fetchAllStats() {
             try {
-                const { count, error } = await supabase
-                    .from('plantas')
-                    .select('*', { count: 'exact', head: true })
+                // 1. Conteo de Plantas
+                const { count: pCount } = await supabase.from('plantas').select('*', { count: 'exact', head: true })
 
-                if (!error) setPlantCount(count)
+                // 2. Conteo de Ropa
+                const { count: rCount } = await supabase.from('productos_ropa').select('*', { count: 'exact', head: true })
+
+                // 3. Reservas y Ventas Totales
+                const { data: resData, count: resCount } = await supabase
+                    .from('reservas')
+                    .select('total_price', { count: 'exact' })
+
+                const totalSales = resData?.reduce((acc, curr) => acc + (Number(curr.total_price) || 0), 0) || 0
+
+                setStatsData({
+                    plants: pCount || 0,
+                    clothing: rCount || 0,
+                    reservations: resCount || 0,
+                    totalSales: totalSales
+                })
             } finally {
                 setLoading(false)
             }
         }
-        fetchStats()
+        fetchAllStats()
     }, [])
 
     const stats = [
-        { label: 'Ventas Totales', value: 'S/ 0', trend: '0%', color: 'emerald', icon: <FiTrendingUp /> },
-        { label: 'Reservas Activas', value: '0', trend: '0%', color: 'blue', icon: <FiCalendar /> },
-        { label: 'Plantas en Stock', value: loading ? '...' : plantCount?.toString() || '0', trend: '+100%', color: 'orange', icon: <FiShoppingBag /> },
-        { label: 'Nuevos Clientes', value: '0', trend: '0%', color: 'purple', icon: <FiUsers /> },
+        { label: 'Ingresos Lodge', value: loading ? '...' : `S/ ${statsData.totalSales.toLocaleString()}`, trend: '+100%', color: 'emerald', icon: <FiTrendingUp /> },
+        { label: 'Reservas Activas', value: loading ? '...' : statsData.reservations.toString(), trend: '+5.2%', color: 'blue', icon: <FiCalendar /> },
+        { label: 'Inventario Total', value: loading ? '...' : (statsData.plants + statsData.clothing).toString(), trend: 'En stock', color: 'orange', icon: <FiShoppingBag /> },
+        { label: 'Platillos Menú', value: '24', trend: 'Fijo', color: 'purple', icon: <FiUsers /> },
     ]
 
     const recentOrders = [
