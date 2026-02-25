@@ -15,55 +15,45 @@ export default function AdminRopa() {
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
     const [products, setProducts] = useState<any[]>([])
+    const [showNewCat, setShowNewCat] = useState(false)
 
-    useEffect(() => {
-        fetchProducts()
-    }, [])
+    useEffect(() => { fetchProducts() }, [])
 
     async function fetchProducts() {
         try {
             setLoading(true)
-            const { data, error } = await supabase
-                .from('productos_ropa')
-                .select('*')
-                .order('created_at', { ascending: false })
-
+            const { data, error } = await supabase.from('productos_ropa').select('*').order('created_at', { ascending: false })
             if (error) throw error
             setProducts(data || [])
-        } catch (error: any) {
-            toast.error('Error al cargar productos: ' + error.message)
-        } finally {
-            setLoading(false)
-        }
+        } finally { setLoading(false) }
     }
 
     const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setSaving(true)
         const formData = new FormData(e.currentTarget)
-
         try {
+            const category = formData.get('category') === 'NEW' ? formData.get('new_category') : formData.get('category')
             const newProduct = {
                 name: formData.get('name'),
-                category: formData.get('category'),
+                category: category,
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
                 description: formData.get('description'),
                 sizes: (formData.get('sizes') as string).split(',').map(s => s.trim().toUpperCase())
             }
-
             const { error } = await supabase.from('productos_ropa').insert([newProduct])
             if (error) throw error
-
-            toast.success('Producto guardado correctamente 👕')
+            toast.success('Producto guardado 👕')
             setShowModal(false)
             fetchProducts()
         } catch (error: any) {
-            toast.error('Error al guardar: ' + error.message)
-        } finally {
-            setSaving(false)
-        }
+            toast.error('Error: ' + error.message)
+        } finally { setSaving(false) }
     }
+
+    const categories = Array.from(new Set(products.map(p => p.category).filter(Boolean)))
+    if (categories.length === 0) categories.push('Camisetas', 'Pantalones', 'Accesorios')
 
     const filteredProducts = products.filter(p =>
         p.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -205,12 +195,19 @@ export default function AdminRopa() {
                                     </div>
                                     <div className="space-y-2">
                                         <label className="text-xs font-black uppercase tracking-widest text-gray-400">Categoría</label>
-                                        <select name="category" className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-emerald-500 outline-none transition-all text-sm font-bold appearance-none">
-                                            <option value="Camisetas">Camisetas</option>
-                                            <option value="Pantalones">Pantalones</option>
-                                            <option value="Accesorios">Accesorios</option>
-                                            <option value="Artesanía">Artesanía</option>
-                                        </select>
+                                        <div className="space-y-2">
+                                            <select
+                                                name="category"
+                                                onChange={(e) => setShowNewCat(e.target.value === 'NEW')}
+                                                className="w-full px-5 py-3.5 bg-gray-50 border border-transparent rounded-2xl focus:bg-white focus:border-emerald-500 outline-none transition-all text-sm font-bold appearance-none"
+                                            >
+                                                {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                                                <option value="NEW" className="text-emerald-600 font-bold">+ Crear Nueva Categoría...</option>
+                                            </select>
+                                            {showNewCat && (
+                                                <input name="new_category" type="text" required placeholder="Ej: Artesanía, Calzado..." className="w-full px-5 py-3.5 bg-emerald-50 border-emerald-100 rounded-2xl outline-none text-sm font-bold animate-fade-in" />
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
 

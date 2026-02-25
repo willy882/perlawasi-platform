@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from 'react'
 import {
-    FiUsers, FiShoppingBag, FiTrendingUp, FiCalendar,
+    FiPackage, FiShoppingBag, FiUsers, FiCalendar, FiTrendingUp,
     FiArrowUpRight, FiArrowDownRight, FiActivity, FiStar,
-    FiLoader
+    FiDollarSign, FiZap
 } from 'react-icons/fi'
 import { supabase } from '@/lib/supabase'
 
@@ -13,32 +13,41 @@ export default function AdminDashboard() {
         plants: 0,
         clothing: 0,
         reservations: 0,
-        totalSales: 0
+        totalSales: 0,
+        businessItems: 0 // Added for new product categories
     })
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         async function fetchAllStats() {
             try {
-                // 1. Conteo de Plantas
-                const { count: pCount } = await supabase.from('plantas').select('*', { count: 'exact', head: true })
+                // Fetch counts in parallel
+                const [
+                    plants, clothing, reservations,
+                    helado, cafe, cerveza, licor, menu
+                ] = await Promise.all([
+                    supabase.from('plantas').select('*', { count: 'exact', head: true }),
+                    supabase.from('productos_ropa').select('*', { count: 'exact', head: true }),
+                    supabase.from('reservas').select('total_price'), // Select total_price to calculate total sales
+                    supabase.from('heladeria').select('*', { count: 'exact', head: true }),
+                    supabase.from('cafe_cacao').select('*', { count: 'exact', head: true }),
+                    supabase.from('cerveceria').select('*', { count: 'exact', head: true }),
+                    supabase.from('licoreria').select('*', { count: 'exact', head: true }),
+                    supabase.from('restaurante_menu').select('*', { count: 'exact', head: true })
+                ])
 
-                // 2. Conteo de Ropa
-                const { count: rCount } = await supabase.from('productos_ropa').select('*', { count: 'exact', head: true })
-
-                // 3. Reservas y Ventas Totales
-                const { data: resData, count: resCount } = await supabase
-                    .from('reservas')
-                    .select('total_price', { count: 'exact' })
-
-                const totalSales = resData?.reduce((acc, curr) => acc + (Number(curr.total_price) || 0), 0) || 0
+                const totalSales = (reservations.data || []).reduce((acc: number, curr: any) => acc + (Number(curr.total_price) || 0), 0)
+                const businessProducts = (helado.count || 0) + (cafe.count || 0) + (cerveza.count || 0) + (licor.count || 0) + (menu.count || 0)
 
                 setStatsData({
-                    plants: pCount || 0,
-                    clothing: rCount || 0,
-                    reservations: resCount || 0,
-                    totalSales: totalSales
+                    plants: plants.count || 0,
+                    clothing: clothing.count || 0,
+                    reservations: (reservations.data || []).length,
+                    totalSales: totalSales,
+                    businessItems: businessProducts
                 })
+            } catch (error) {
+                console.error('Error fetching stats:', error)
             } finally {
                 setLoading(false)
             }
@@ -47,10 +56,10 @@ export default function AdminDashboard() {
     }, [])
 
     const stats = [
-        { label: 'Ingresos Lodge', value: loading ? '...' : `S/ ${statsData.totalSales.toLocaleString()}`, trend: '+100%', color: 'emerald', icon: <FiTrendingUp /> },
-        { label: 'Reservas Activas', value: loading ? '...' : statsData.reservations.toString(), trend: '+5.2%', color: 'blue', icon: <FiCalendar /> },
-        { label: 'Inventario Total', value: loading ? '...' : (statsData.plants + statsData.clothing).toString(), trend: 'En stock', color: 'orange', icon: <FiShoppingBag /> },
-        { label: 'Platillos Menú', value: '24', trend: 'Fijo', color: 'purple', icon: <FiUsers /> },
+        { label: 'Ingresos Lodge', value: loading ? '...' : `S/ ${statsData.totalSales}`, trend: '+12.5%', color: 'emerald', icon: <FiDollarSign /> },
+        { label: 'Reservas Lodge', value: loading ? '...' : statsData.reservations.toString(), trend: '+5.2%', color: 'blue', icon: <FiCalendar /> },
+        { label: 'Vivero & Boutique', value: loading ? '...' : (statsData.plants + statsData.clothing).toString(), trend: 'En stock', color: 'orange', icon: <FiShoppingBag /> },
+        { label: 'Otros Productos', value: loading ? '...' : statsData.businessItems.toString(), trend: 'Consolidado', color: 'purple', icon: <FiZap /> },
     ]
 
     const recentOrders = [
