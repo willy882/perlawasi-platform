@@ -34,8 +34,8 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
             >
                 <div className="p-8 border-b border-white/10">
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-2xl">
-                            🦉
+                        <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 shadow-inner overflow-hidden">
+                            <img src="/images/logo.png" alt="Perlawasi Logo" className="w-full h-full object-contain" />
                         </div>
                         <div>
                             <h2 className="font-display font-black tracking-tighter text-xl text-white">PERLAWASI</h2>

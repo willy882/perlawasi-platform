@@ -42,8 +42,8 @@ export default function AdminLogin() {
             <div className="w-full max-w-[450px] relative z-10 transition-all">
                 {/* Logo Area */}
                 <div className="text-center mb-10">
-                    <div className="w-20 h-20 bg-[#1a3c1a] rounded-[2rem] flex items-center justify-center text-4xl mx-auto mb-6 shadow-2xl shadow-emerald-900/20 rotate-3">
-                        🦉
+                    <div className="w-24 h-24 bg-white rounded-[2rem] flex items-center justify-center p-2 mx-auto mb-6 shadow-2xl shadow-emerald-900/20 rotate-3 overflow-hidden">
+                        <img src="/images/logo.png" alt="Perlawasi Logo" className="w-full h-full object-contain" />
                     </div>
                     <h1 className="text-3xl font-display font-black text-gray-900 tracking-tight">Perlawasi HQ</h1>
                     <p className="text-gray-400 text-sm font-medium mt-2">Centro de Control de Experiencias</p>

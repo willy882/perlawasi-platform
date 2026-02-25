@@ -41,6 +41,19 @@ CREATE TABLE IF NOT EXISTS public.reservas (
     total_price DECIMAL(10,2)
 );
 
+-- HABILITAR SEGURIDAD (RLS)
+ALTER TABLE public.plantas ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Lectura pública plantas" ON public.plantas FOR SELECT USING (true);
+CREATE POLICY "Admin total plantas" ON public.plantas FOR ALL USING (auth.role() = 'authenticated');
+
+ALTER TABLE public.productos_ropa ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Lectura pública ropa" ON public.productos_ropa FOR SELECT USING (true);
+CREATE POLICY "Admin total ropa" ON public.productos_ropa FOR ALL USING (auth.role() = 'authenticated');
+
+ALTER TABLE public.reservas ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Lectura pública reservas" ON public.reservas FOR SELECT USING (true);
+CREATE POLICY "Admin total reservas" ON public.reservas FOR ALL USING (auth.role() = 'authenticated');
+
 -- TABLA DE HELADERIA
 CREATE TABLE IF NOT EXISTS public.heladeria (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -115,3 +128,16 @@ CREATE TABLE IF NOT EXISTS public.cafe_cacao (
 ALTER TABLE public.cafe_cacao ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Lectura pública cafe" ON public.cafe_cacao FOR SELECT USING (true);
 CREATE POLICY "Admin total cafe" ON public.cafe_cacao FOR ALL USING (auth.role() = 'authenticated');
+
+-- ÍNDICES PARA RENDIMIENTO
+CREATE INDEX IF NOT EXISTS idx_plantas_name ON public.plantas(name);
+CREATE INDEX IF NOT EXISTS idx_plantas_category ON public.plantas(category);
+CREATE INDEX IF NOT EXISTS idx_ropa_name ON public.productos_ropa(name);
+CREATE INDEX IF NOT EXISTS idx_ropa_category ON public.productos_ropa(category);
+CREATE INDEX IF NOT EXISTS idx_reservas_dates ON public.reservas(check_in, check_out);
+CREATE INDEX IF NOT EXISTS idx_reservas_customer ON public.reservas(customer_name);
+CREATE INDEX IF NOT EXISTS idx_heladeria_cat ON public.heladeria(category);
+CREATE INDEX IF NOT EXISTS idx_cerveceria_cat ON public.cerveceria(category);
+CREATE INDEX IF NOT EXISTS idx_licoreria_cat ON public.licoreria(category);
+CREATE INDEX IF NOT EXISTS idx_restaurante_cat ON public.restaurante_menu(category);
+CREATE INDEX IF NOT EXISTS idx_cafe_cat ON public.cafe_cacao(category);

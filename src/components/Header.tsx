@@ -31,7 +31,7 @@ export default function Header() {
                     <Link href="/" className="flex items-center gap-2 group">
                         <div className="relative w-16 h-16 transition-transform group-hover:scale-105">
                             <Image
-                                src="/images/logo-perlawasi.png"
+                                src="/images/logo.png"
                                 alt="Perlawasi"
                                 fill
                                 className="object-contain"
