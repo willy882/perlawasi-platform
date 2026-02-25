@@ -70,76 +70,95 @@ export default function PlantasPage() {
         <div className="min-h-screen bg-[#FBFDFB] text-gray-900">
 
             {/* HERO */}
-            <section className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-[#061a06]">
-                {/* Fondo Atmosférico de Autor */}
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(46,125,50,0.15)_0%,transparent_70%)]" />
-                    <div className="absolute top-0 left-0 w-full h-full opacity-30"
-                        style={{ backgroundImage: 'radial-gradient(#1a3c1a 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-                    <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-green-900/40 rounded-full blur-[120px]" />
-                    <div className="absolute -top-24 -right-24 w-96 h-96 bg-emerald-900/30 rounded-full blur-[120px]" />
-                </div>
+            <section className="relative min-h-[90vh] flex items-center bg-[#FDFDFB] overflow-hidden pt-20">
+                {/* Fondo Decorativo Orgánico */}
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-[#f4f7f4] z-0 hidden lg:block" />
+                <div className="absolute top-[-10%] left-[-5%] w-[40rem] h-[40rem] bg-green-50 rounded-full blur-[120px] opacity-60 z-0" />
 
-                <div className="relative z-10 container-custom flex flex-col items-center text-center">
-                    {/* El Emblema Central */}
-                    <div className="mb-8 relative group">
-                        <div className="absolute inset-0 bg-emerald-400/20 blur-3xl rounded-full scale-150 animate-pulse" />
-                        <div className="relative w-28 h-28 md:w-36 md:h-36 bg-gradient-to-b from-white/10 to-transparent backdrop-blur-2xl rounded-full border border-white/20 p-6 shadow-2xl transition-transform duration-700 group-hover:scale-110">
-                            <Image
-                                src="/images/logo_buho.png"
-                                alt="Buhoo Logo"
-                                fill
-                                className="object-contain p-6 brightness-110 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
-                            />
-                        </div>
-                    </div>
+                <div className="container-custom relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
-                    {/* Branding Boutique */}
-                    <div className="space-y-4 max-w-4xl px-4">
-                        <span className="block text-emerald-400 text-xs md:text-sm font-black uppercase tracking-[0.5em] mb-4">
-                            Vivero Boutique de Autor
-                        </span>
-                        <h1 className="text-7xl md:text-9xl font-display font-black leading-[0.85] tracking-tighter text-white">
-                            BUHOO
-                        </h1>
-                        <p className="text-xl md:text-3xl font-display font-light text-emerald-100/80 tracking-tight italic">
-                            "Curaduría botánica para espacios con alma"
-                        </p>
-
-                        <div className="h-px w-24 bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent mx-auto my-8" />
-
-                        <p className="text-base md:text-lg text-emerald-50/60 max-w-xl mx-auto leading-relaxed font-light">
-                            Especialistas en la venta de ejemplares exóticos y diseño paisajista de interiores.
-                            Llevamos la majestuosidad de la selva a tu hogar con piezas vivas seleccionadas a mano.
-                        </p>
-                    </div>
-
-                    {/* CTAs de Alta Conversión */}
-                    <div className="flex gap-6 mt-12 flex-wrap justify-center">
-                        <a href="#vivero" className="px-10 py-5 bg-emerald-600 text-white font-bold text-sm uppercase tracking-widest rounded-full hover:bg-emerald-500 transition-all shadow-[0_15px_30px_rgba(5,150,105,0.3)] hover:-translate-y-1">
-                            Ver Catálogo de Ventas
-                        </a>
-                        <a href="https://wa.me/51928141669?text=Hola%20Buhoo,%20quiero%20asesoría%20para%20comprar%20una%20planta"
-                            target="_blank"
-                            className="px-10 py-5 bg-white/5 backdrop-blur-md text-white border border-white/10 font-bold text-sm uppercase tracking-widest rounded-full hover:bg-white/10 transition-all">
-                            Asesoría Personalizada
-                        </a>
-                    </div>
-
-                    {/* Etiquetas de Confianza */}
-                    <div className="mt-16 flex gap-8 md:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
-                        {['Exóticos', 'Nativos', 'Sustentables'].map((tag, i) => (
-                            <div key={i} className="flex items-center gap-2">
-                                <span className="text-emerald-500">✦</span>
-                                <span className="text-white text-[10px] font-black uppercase tracking-[0.2em]">{tag}</span>
+                        {/* Columna de Texto - Estilo Boutique */}
+                        <div className="lg:col-span-5 space-y-8 text-center lg:text-left">
+                            <div className="inline-flex items-center gap-3 px-4 py-2 bg-emerald-50 rounded-full border border-emerald-100">
+                                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+                                <span className="text-emerald-800 text-[10px] font-black uppercase tracking-[0.3em]">Boutique de Plantas Reales</span>
                             </div>
-                        ))}
+
+                            <div className="space-y-4">
+                                <h1 className="text-8xl md:text-[10rem] font-display font-black leading-none tracking-tighter text-[#1a3c1a] drop-shadow-sm">
+                                    BUHOO
+                                </h1>
+                                <p className="text-2xl md:text-3xl font-display text-emerald-800/70 font-light italic leading-tight">
+                                    Naturaleza viva para<br />espacios extraordinarios.
+                                </p>
+                            </div>
+
+                            <p className="text-lg text-gray-600 max-w-md mx-auto lg:mx-0 leading-relaxed">
+                                Especialistas en la selección y venta de especies amazónicas y plantas de interior de alta gama.
+                                <span className="font-bold text-[#1a3c1a]"> Calidad real, vida real.</span>
+                            </p>
+
+                            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                                <a href="#vivero" className="px-10 py-5 bg-[#1a3c1a] text-white font-bold text-sm uppercase tracking-widest rounded-xl hover:bg-emerald-900 transition-all shadow-xl hover:-translate-y-1">
+                                    Explorar Catálogo de Ventas
+                                </a>
+                                <a href="https://wa.me/51928141669" className="px-10 py-5 bg-white text-[#1a3c1a] border-2 border-[#1a3c1a] font-bold text-sm uppercase tracking-widest rounded-xl hover:bg-gray-50 transition-all">
+                                    Asesoría Premium
+                                </a>
+                            </div>
+
+                            {/* Logo del Búho - Integrado Sutilmente */}
+                            <div className="pt-8 flex items-center justify-center lg:justify-start gap-4">
+                                <div className="relative w-16 h-16 bg-white rounded-2xl shadow-md p-3 border border-gray-100">
+                                    <Image
+                                        src="/images/logo_buho.png"
+                                        alt="Buhoo"
+                                        fill
+                                        className="object-contain p-2"
+                                    />
+                                </div>
+                                <div>
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-emerald-900">Guardianes de la Selva</p>
+                                    <p className="text-xs text-gray-500">San Martín, Perú</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Columna de Imagen - Protagonismo Total */}
+                        <div className="lg:col-span-7 relative group">
+                            <div className="absolute -inset-4 bg-emerald-100/50 rounded-[3rem] blur-2xl group-hover:bg-emerald-200/50 transition-colors duration-700" />
+                            <div className="relative aspect-[4/5] lg:aspect-[1.2/1] w-full bg-gray-100 rounded-[2.5rem] overflow-hidden shadow-2xl border-[12px] border-white">
+                                <Image
+                                    src="/images/plantas_hero_bg.png"
+                                    alt="Plantas Reales Buhoo"
+                                    fill
+                                    priority
+                                    quality={100}
+                                    className="object-cover object-center transition-transform duration-1000 group-hover:scale-105"
+                                    sizes="(max-w-768px) 100vw, 50vw"
+                                />
+                                {/* Overlay sutil de luz natural */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                            </div>
+
+                            {/* Floating Badge - "Vida Real" */}
+                            <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-2xl border border-gray-50 hidden md:block animate-bounce-slow">
+                                <div className="flex items-center gap-4">
+                                    <div className="bg-emerald-500 w-12 h-12 rounded-2xl flex items-center justify-center text-2xl">🌱</div>
+                                    <div>
+                                        <p className="text-sm font-black text-[#1a3c1a] uppercase tracking-tighter">Plantas 100% Reales</p>
+                                        <p className="text-[10px] text-gray-500">Seleccionadas a mano</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                {/* Decoración Minimalista en Esquinas */}
-                <div className="absolute top-10 left-10 text-white/5 text-9xl select-none">🌿</div>
-                <div className="absolute bottom-10 right-10 text-emerald-500/5 text-9xl select-none rotate-12">🪴</div>
+                {/* Elementos Flotantes de Diseño */}
+                <div className="absolute top-[20%] right-[3%] text-emerald-200/20 text-[15rem] font-black select-none z-0 rotate-12">LIVE</div>
             </section>
 
             {/* SHOP SECTION */}
