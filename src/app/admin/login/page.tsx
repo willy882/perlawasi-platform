@@ -19,6 +19,9 @@ export default function AdminLogin() {
         // Validación de credenciales solicitadas por el usuario
         setTimeout(() => {
             if (email === 'perlawasi_1@gmail.com' && password === 'willydev') {
+                // Establecer cookie de autenticación (sesión simple para este demo)
+                document.cookie = "admin_auth=true; path=/; max-age=86400; SameSite=Strict"
+
                 toast.success('Acceso permitido. ¡Bienvenido, Willy!')
                 router.push('/admin')
             } else {
