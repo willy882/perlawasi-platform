@@ -70,38 +70,50 @@ export default function PlantasPage() {
         <div className="min-h-screen bg-[#FBFDFB] text-gray-900">
 
             {/* HERO */}
-            <section className="relative h-[65vh] flex items-center overflow-hidden" style={{ background: 'linear-gradient(135deg,#E8F5E9,#F1F8E9 50%,#E0F2F1)' }}>
-                <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-                    <div className="absolute -top-10 -right-10 text-[30rem] opacity-[0.06] rotate-12">🌿</div>
-                    <div className="absolute -bottom-20 left-0 text-[18rem] opacity-[0.04] -rotate-6">🌸</div>
+            <section className="relative h-[75vh] flex items-center overflow-hidden bg-white">
+                {/* Imagen de fondo optimizada para alta claridad */}
+                <div className="absolute inset-0">
+                    <Image
+                        src="/images/plantas_hero_bg.png"
+                        alt="Vivero Perlawasi"
+                        fill
+                        priority
+                        quality={100}
+                        className="object-cover object-center brightness-[1.1] contrast-[1.02]"
+                        sizes="100vw"
+                    />
+                    {/* Overlay sutil para legibilidad sin oscurecer la foto */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-transparent" />
                 </div>
+
                 <div className="relative z-10 container-custom w-full">
                     <div className="max-w-2xl px-4">
-                        <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-green-200 px-4 py-2 rounded-full mb-6">
-                            <span className="text-green-700 text-xs font-black uppercase tracking-widest font-bold">🌱 Vivero Perlawasi</span>
+                        <div className="inline-flex items-center gap-2 bg-white/40 backdrop-blur-md border border-white/60 px-4 py-2 rounded-full mb-6 shadow-sm">
+                            <span className="text-gray-800 text-xs font-black uppercase tracking-widest">🌱 Vivero Perlawasi</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-display font-black mb-6 leading-[1.05] text-gray-900">
+                        <h1 className="text-5xl md:text-7xl font-display font-black mb-6 leading-[1.05] text-white drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
                             Verdor<br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E7D32] to-[#66BB6A]">Interior</span>
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-green-100">Interior</span>
                         </h1>
-                        <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-xl">
+                        <p className="text-xl text-white mb-10 leading-relaxed max-w-xl font-bold drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
                             Plantas nativas y exóticas de la Amazonía Peruana. Cultivadas con amor en San Martín.
                         </p>
                         <div className="flex gap-4 flex-wrap">
-                            <a href="#vivero" className="btn bg-[#2E7D32] text-white px-10 py-4 text-base font-bold rounded-2xl hover:bg-[#1B5E20] shadow-lg transition-all hover:scale-105">
+                            <a href="#vivero" className="btn bg-[#2E7D32] text-white px-10 py-4 text-base font-bold rounded-2xl hover:bg-[#1B5E20] shadow-xl transition-all hover:scale-105">
                                 Explorar Vivero →
                             </a>
-                            <a href="#cuidados" className="btn bg-white/70 backdrop-blur-sm text-[#2E7D32] border border-green-200 px-10 py-4 text-base font-bold rounded-2xl hover:bg-white transition-all">
+                            <a href="#cuidados" className="btn bg-white/30 backdrop-blur-md text-gray-900 border border-white/60 px-10 py-4 text-base font-bold rounded-2xl hover:bg-white/50 transition-all">
                                 Guía de Cuidados
                             </a>
                         </div>
                     </div>
                 </div>
+
                 <div className="absolute bottom-8 right-8 hidden lg:flex gap-5">
                     {[{ v: '+80', l: 'Especies' }, { v: '100%', l: 'Orgánico' }, { v: '5★', l: 'Calidad' }].map((s, i) => (
-                        <div key={i} className="bg-white/70 backdrop-blur-md rounded-2xl px-5 py-3 text-center border border-white shadow-sm">
+                        <div key={i} className="bg-white/50 backdrop-blur-lg rounded-2xl px-5 py-3 text-center border border-white/40 shadow-xl">
                             <p className="text-2xl font-black text-[#2E7D32]">{s.v}</p>
-                            <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">{s.l}</p>
+                            <p className="text-xs text-gray-700 uppercase tracking-widest font-black">{s.l}</p>
                         </div>
                     ))}
                 </div>
