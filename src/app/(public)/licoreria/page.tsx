@@ -1,322 +1,259 @@
+'use client'
+
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-    title: 'Licores Perlamayo - Destilados Artesanales de la Selva Peruana | San Martín',
-    description: 'Licores Perlamayo: destilados premium y macerados artesanales únicos. El espíritu de la selva peruana encapsulado en cada botella.',
-}
+import { supabase } from '@/lib/supabase'
+import { FiLoader, FiChevronRight, FiCheckCircle } from 'react-icons/fi'
 
 export default function LicoreriaPage() {
-    const products = [
-        {
-            name: 'Cacao Spirit',
-            type: 'Destilado de Cacao',
-            notes: 'Frutos secos · Chocolate amargo · Tierra húmeda',
-            abv: '42%',
-            ml: '500 ml',
-            badge: 'Signature',
-            gradient: 'from-amber-950 via-stone-900 to-black',
-            accentColor: '#D4AF37',
-            emoji: '🥃',
-        },
-        {
-            name: 'Andean Botanical',
-            type: 'Gin de Montaña',
-            notes: 'Enebro · Hierba luisa · Cítricos andinos',
-            abv: '40%',
-            ml: '750 ml',
-            badge: 'Edición Limitada',
-            gradient: 'from-slate-900 via-blue-950 to-black',
-            accentColor: '#7dd3fc',
-            emoji: '🍸',
-        },
-        {
-            name: 'Mistify Rum',
-            type: 'Ron Añejo Selva',
-            notes: 'Melaza · Roble americano · Vainilla',
-            abv: '45%',
-            ml: '750 ml',
-            badge: 'Reserva',
-            gradient: 'from-orange-950 via-red-950 to-black',
-            accentColor: '#fb923c',
-            emoji: '🥃',
-        },
-        {
-            name: 'Floral Mist',
-            type: 'Licor de Flores',
-            notes: 'Pétalos de rosa · Flor de saúco · Miel',
-            abv: '28%',
-            ml: '500 ml',
-            badge: 'Artesanal',
-            gradient: 'from-rose-950 via-pink-950 to-black',
-            accentColor: '#f9a8d4',
-            emoji: '🍶',
-        },
-    ]
+    const [products, setProducts] = useState<any[]>([])
+    const [loading, setLoading] = useState(true)
+    const [activeCategory, setActiveCategory] = useState('Todos')
 
-    const proceso = [
-        { num: '01', title: 'Selección', desc: 'Botánicos recolectados a mano en los alrededores de Perlawasi al amanecer.', icon: '🌿' },
-        { num: '02', title: 'Maceración', desc: 'Reposo de 72 horas en alcohol neutro para extraer los aceites esenciales.', icon: '🫙' },
-        { num: '03', title: 'Destilación', desc: 'Triple destilación en alambiques de cobre artesanales a baja temperatura.', icon: '⚗️' },
-        { num: '04', title: 'Reposo', desc: 'Mínimo 6 meses en barricas de roble para los destilados añejados.', icon: '🪵' },
-        { num: '05', title: 'Embotellado', desc: 'En lotes de no más de 250 botellas numeradas a mano.', icon: '🍾' },
-    ]
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+
+    async function fetchProducts() {
+        try {
+            setLoading(true)
+            const { data, error } = await supabase
+                .from('licoreria')
+                .select('*')
+                .order('name', { ascending: true })
+            if (error) throw error
+            setProducts(data || [])
+        } catch (err) {
+            console.error('Error fetching spirits:', err)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const categories = ['Todos', ...Array.from(new Set(products.map(i => i.category).filter(Boolean)))] as string[]
+    const filteredProducts = activeCategory === 'Todos'
+        ? products
+        : products.filter(i => i.category === activeCategory)
+
+    const getGradient = (cat: string) => {
+        const lower = cat.toLowerCase()
+        if (lower.includes('cacao') || lower.includes('macerado')) return 'from-amber-950 via-stone-900 to-black'
+        if (lower.includes('destilado') || lower.includes('gin')) return 'from-slate-900 via-blue-950 to-black'
+        if (lower.includes('ron') || lower.includes('caña')) return 'from-orange-950 via-red-950 to-black'
+        return 'from-stone-900 via-zinc-950 to-black'
+    }
+
+    const getAccent = (cat: string) => {
+        const lower = cat.toLowerCase()
+        if (lower.includes('cacao') || lower.includes('macerado')) return '#D4AF37'
+        if (lower.includes('destilado') || lower.includes('gin')) return '#7dd3fc'
+        if (lower.includes('ron') || lower.includes('caña')) return '#fb923c'
+        return '#D4AF37'
+    }
 
     return (
         <div className="min-h-screen bg-[#080808] text-white overflow-x-hidden">
-
-            {/* ═══ HERO PERSONALIZADO ═══ */}
-            <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-[#061a06]">
-
-                {/* Imagen de fondo bb.png */}
+            {/* HER HERO PERSONALIZADO */}
+            <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-[#061a06]">
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/images/licoreria_hero_bg.png"
                         alt="Fondo Perlamayo"
                         fill
-                        className="object-cover"
+                        className="object-cover opacity-60 scale-105"
                         priority
                         quality={100}
                     />
-                    {/* Overlay sutil para mejorar legibilidad si es necesario */}
-                    <div className="absolute inset-0 bg-black/20" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#080808]" />
                 </div>
 
-                {/* Contenido principal */}
-                <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
-
-                    {/* Nombre de la marca */}
-                    <div className="mb-4">
-                        <span className="block text-sm md:text-base text-white/80 font-light tracking-[0.5em] uppercase mb-4">
-                            Licores
+                <div className="relative z-20 text-center px-6 max-w-5xl mx-auto animate-fade-in">
+                    <div className="mb-6">
+                        <span className="block text-sm md:text-base text-white/50 font-black tracking-[0.5em] uppercase mb-6">
+                            Licores de la Selva
                         </span>
-                        <h1 className="text-5xl md:text-7xl lg:text-[8rem] font-display font-black leading-none tracking-tight"
+                        <h1 className="text-6xl md:text-8xl lg:text-[9rem] font-display font-black leading-none tracking-tighter uppercase italic"
                             style={{
-                                background: 'linear-gradient(to bottom, #ffffff 0%, #a7f3d0 40%, #D4AF37 100%)',
+                                background: 'linear-gradient(to bottom, #ffffff 0%, #D4AF37 100%)',
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                                 backgroundClip: 'text',
-                                filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.3))',
+                                filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))',
                             }}>
                             PERLAMAYO
                         </h1>
                     </div>
 
-                    {/* Tagline sutil */}
-                    <p className="text-base md:text-lg text-white/90 mb-10 max-w-xl mx-auto leading-relaxed font-light italic">
-                        El espíritu de la selva encapsulado en cada botella
+                    <p className="text-lg md:text-2xl text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed font-medium italic">
+                        "El espíritu indomable de la Amazonía, capturado en gotas de oro líquido."
                     </p>
 
-                    {/* Botones compactos */}
-                    <div className="flex gap-4 justify-center flex-wrap">
+                    <div className="flex gap-6 justify-center flex-wrap">
                         <Link href="#coleccion"
-                            className="inline-flex items-center gap-2 bg-[#4ade80] text-[#061a06] px-8 py-3 text-sm font-bold hover:bg-[#86efac] transition-all duration-300 rounded-full shadow-lg uppercase tracking-wider">
-                            Ver Colección
+                            className="inline-flex items-center gap-3 bg-[#D4AF37] text-black px-12 py-5 text-sm font-black hover:bg-white transition-all duration-500 rounded-full shadow-[0_10px_40px_rgba(212,175,55,0.3)] uppercase tracking-widest">
+                            Explorar Reserva
                         </Link>
-                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20información%20sobre%20Licores%20Perlamayo"
-                            target="_blank" rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 border border-white/50 text-white px-8 py-3 text-sm font-bold hover:bg-white/10 transition-all duration-300 rounded-full uppercase tracking-wider backdrop-blur-sm">
-                            Consultar
+                        <a href="https://wa.me/51928141669"
+                            className="inline-flex items-center gap-3 border-2 border-white/20 text-white px-12 py-5 text-sm font-black hover:bg-white/10 transition-all rounded-full uppercase tracking-widest backdrop-blur-md">
+                            Consultar Sommelier
                         </a>
                     </div>
                 </div>
-
-                {/* Gradiente de salida abajo */}
-                <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#080808] to-transparent z-10" />
             </section>
 
-            {/* ═══ BARRA DE ESTADÍSTICAS ═══ */}
-            <section className="border-y border-[#D4AF37]/15 bg-[#0d0d0d]">
+            {/* BARRA DE ESTADÍSTICAS */}
+            <section className="border-y border-white/5 bg-[#0a0a0a] relative z-30">
                 <div className="container-custom">
-                    <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#D4AF37]/10">
+                    <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/5">
                         {[
-                            { num: '4', label: 'Destilados Únicos' },
+                            { num: '06', label: 'Meses de Reposo' },
                             { num: '250', label: 'Botellas por Lote' },
-                            { num: '72h', label: 'Maceración Mínima' },
-                            { num: '6+', label: 'Meses de Reposo' },
+                            { num: '100%', label: 'Botánicos Nativos' },
+                            { num: '72h', label: 'Maceración Fría' },
                         ].map((stat, i) => (
-                            <div key={i} className="py-10 px-8 text-center group hover:bg-[#D4AF37]/5 transition-colors">
-                                <div className="text-4xl md:text-5xl font-display font-black text-[#D4AF37] mb-2">{stat.num}</div>
-                                <div className="text-gray-500 text-sm uppercase tracking-widest">{stat.label}</div>
+                            <div key={i} className="py-12 px-8 text-center group hover:bg-white/[0.02] transition-colors">
+                                <div className="text-4xl md:text-6xl font-display font-black text-[#D4AF37] mb-2 tracking-tighter italic">{stat.num}</div>
+                                <div className="text-white/30 text-[10px] font-black uppercase tracking-[0.2em]">{stat.label}</div>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* ═══ COLECCIÓN DE AUTOR ═══ */}
-            <section id="coleccion" className="py-32 bg-[#080808]">
+            {/* COLECCIÓN DE AUTOR */}
+            <section id="coleccion" className="py-32 bg-[#080808] scroll-mt-20">
                 <div className="container-custom">
-                    <div className="text-center mb-20">
-                        <span className="text-[#D4AF37] font-bold uppercase tracking-[0.25em] text-xs mb-4 block">Nuestra Selección</span>
-                        <h2 className="text-5xl md:text-7xl font-display font-bold mb-6">Colección de Autor</h2>
-                        <div className="flex items-center justify-center gap-3">
-                            <div className="h-px w-16 bg-[#D4AF37]/40" />
-                            <span className="text-[#D4AF37]">✦</span>
-                            <div className="h-px w-16 bg-[#D4AF37]/40" />
+                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-10">
+                        <div className="max-w-2xl">
+                            <span className="text-[#D4AF37] font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Tesoro Regional</span>
+                            <h2 className="text-5xl md:text-8xl font-display font-black italic tracking-tighter uppercase leading-none">Colección <br /> de Autor</h2>
                         </div>
-                    </div>
 
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {products.map((item, i) => (
-                            <div key={i} className="group relative cursor-pointer">
-                                {/* Badge */}
-                                <div className="absolute top-4 left-4 z-10">
-                                    <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border"
-                                        style={{ borderColor: item.accentColor + '50', color: item.accentColor, backgroundColor: item.accentColor + '15' }}>
-                                        {item.badge}
-                                    </span>
-                                </div>
-
-                                {/* Botella / Tarjeta */}
-                                <div className={`relative aspect-[2/3] bg-gradient-to-b ${item.gradient} rounded-3xl border border-white/5 overflow-hidden transition-all duration-500 group-hover:-translate-y-3 group-hover:shadow-2xl`}
-                                    style={{ '--tw-shadow-color': item.accentColor + '30' } as React.CSSProperties}>
-                                    {/* Brillo interior */}
-                                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                                        style={{ background: `radial-gradient(circle at 50% 100%, ${item.accentColor}15 0%, transparent 60%)` }} />
-                                    {/* Emoji centrado */}
-                                    <div className="absolute inset-0 flex items-center justify-center text-8xl transition-transform duration-500 group-hover:scale-110">
-                                        {item.emoji}
-                                    </div>
-                                    {/* Línea inferior */}
-                                    <div className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                                        style={{ backgroundColor: item.accentColor + '60' }} />
-                                </div>
-
-                                {/* Info inferior */}
-                                <div className="mt-5 px-1">
-                                    <div className="flex items-start justify-between mb-1">
-                                        <h3 className="text-xl font-display font-bold text-white">{item.name}</h3>
-                                        <span className="text-sm font-bold mt-0.5" style={{ color: item.accentColor }}>{item.abv}</span>
-                                    </div>
-                                    <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: item.accentColor + 'bb' }}>{item.type}</p>
-                                    <p className="text-gray-600 text-xs leading-relaxed">{item.notes}</p>
-                                    <p className="text-gray-700 text-xs mt-2">{item.ml}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* ═══ PROCESO DE DESTILACIÓN ═══ */}
-            <section className="py-32 bg-[#0c0c0c] border-t border-[#D4AF37]/10">
-                <div className="container-custom">
-                    <div className="text-center mb-20">
-                        <span className="text-[#D4AF37] font-bold uppercase tracking-[0.25em] text-xs mb-4 block">De la Naturaleza a la Botella</span>
-                        <h2 className="text-5xl md:text-6xl font-display font-bold">Nuestro Proceso</h2>
-                    </div>
-
-                    <div className="relative">
-                        {/* Línea conectora */}
-                        <div className="hidden lg:block absolute top-[3.5rem] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-                            {proceso.map((step, i) => (
-                                <div key={i} className="relative text-center group">
-                                    {/* Círculo con número */}
-                                    <div className="relative w-28 h-28 mx-auto mb-6 rounded-full border border-[#D4AF37]/30 bg-[#0a0a0a] flex items-center justify-center transition-all duration-400 group-hover:border-[#D4AF37]/70 group-hover:bg-[#D4AF37]/5">
-                                        <span className="text-4xl">{step.icon}</span>
-                                        <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#D4AF37] text-black text-xs font-black flex items-center justify-center">
-                                            {step.num}
-                                        </span>
-                                    </div>
-                                    <h3 className="text-lg font-bold mb-3 text-white">{step.title}</h3>
-                                    <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
-                                </div>
+                        <div className="flex flex-wrap gap-2">
+                            {categories.map((cat) => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setActiveCategory(cat)}
+                                    className={`px-8 py-3 rounded-full text-[10px] font-black transition-all uppercase tracking-widest border ${activeCategory === cat
+                                            ? 'bg-[#D4AF37] text-black border-[#D4AF37] shadow-xl shadow-amber-500/10'
+                                            : 'bg-transparent text-white/40 border-white/10 hover:border-[#D4AF37] hover:text-[#D4AF37]'
+                                        }`}
+                                >
+                                    {cat}
+                                </button>
                             ))}
                         </div>
                     </div>
+
+                    {loading ? (
+                        <div className="flex flex-col items-center justify-center py-40 animate-pulse">
+                            <FiLoader className="text-6xl text-[#D4AF37] animate-spin mb-6" />
+                            <p className="text-white/30 font-black uppercase tracking-[0.5em] text-[10px]">Destilando excelencia...</p>
+                        </div>
+                    ) : (
+                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+                            {filteredProducts.map((item) => (
+                                <div key={item.id} className="group relative">
+                                    <div className="absolute -top-4 -left-4 z-10">
+                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full border border-white/10 bg-black shadow-2xl backdrop-blur-md text-[#D4AF37]">
+                                            {item.category}
+                                        </span>
+                                    </div>
+
+                                    <div className={`relative aspect-[2/3] bg-gradient-to-b ${getGradient(item.category || '')} rounded-[3rem] border border-white/5 overflow-hidden transition-all duration-700 group-hover:-translate-y-4 group-hover:border-[#D4AF37]/30 shadow-2xl`}>
+                                        {item.image_url ? (
+                                            <img src={item.image_url} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 opacity-80 group-hover:opacity-100" />
+                                        ) : (
+                                            <div className="absolute inset-0 flex items-center justify-center text-9xl group-hover:rotate-12 transition-transform duration-700">
+                                                🥃
+                                            </div>
+                                        )}
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                                        <div className="absolute bottom-8 left-8 right-8 text-center">
+                                            <span className="text-2xl font-black italic text-white/90">S/ {item.price}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="mt-8 text-center space-y-2">
+                                        <h3 className="text-3xl font-display font-black text-white group-hover:text-[#D4AF37] transition-colors tracking-tighter italic">{item.name}</h3>
+                                        <p className="text-[10px] font-black uppercase tracking-[0.3em]" style={{ color: getAccent(item.category || '') }}>40% ABV • 500ML</p>
+                                        <p className="text-gray-500 text-xs font-medium leading-relaxed max-w-[200px] mx-auto line-clamp-2">
+                                            {item.description || "Un destilado excepcional con notas profundas de la selva alta."}
+                                        </p>
+                                        <div className="pt-6">
+                                            <a href={`https://wa.me/51928141669?text=Hola,%20quiero%20consultar%20por%20el%20licor%20${encodeURIComponent(item.name)}`} className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37] hover:text-white transition-colors border-b border-[#D4AF37]/20 pb-1">
+                                                Consultar Reserva <FiChevronRight />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    {!loading && filteredProducts.length === 0 && (
+                        <div className="text-center py-40 border-2 border-dashed border-white/5 rounded-[4rem]">
+                            <p className="text-white/20 font-black uppercase tracking-[0.5em] text-[10px]">Cava temporalmente agotada.</p>
+                        </div>
+                    )}
                 </div>
             </section>
 
-            {/* ═══ FILOSOFÍA ═══ */}
-            <section id="historia" className="py-32 bg-[#080808] border-t border-[#D4AF37]/10">
+            {/* SECCIÓN MÍSTICA (HISTORIA) */}
+            <section className="py-24 relative overflow-hidden bg-black">
                 <div className="container-custom">
-                    <div className="grid lg:grid-cols-2 gap-20 items-center">
-                        {/* Texto */}
-                        <div className="space-y-8">
-                            <div>
-                                <span className="text-[#D4AF37] font-bold uppercase tracking-[0.25em] text-xs block mb-4">Legado & Pureza</span>
-                                <h2 className="text-5xl md:text-6xl font-display font-bold leading-tight">
-                                    La Destilería<br />
-                                    <span className="bg-gradient-to-r from-[#D4AF37] to-[#F5D26B] bg-clip-text text-transparent">del Bosque</span>
-                                </h2>
-                            </div>
-                            <p className="text-gray-400 text-lg leading-relaxed">
-                                Nuestros alambiques de cobre son testigos de un proceso lento y cuidadoso. Destilamos en pequeños lotes utilizando botánicos recolectados de manera sostenible en los alrededores de Perlawasi.
-                            </p>
-                            <p className="text-gray-500 text-base leading-relaxed">
-                                Cada botella lleva un número de lote y la firma del maestro destilador — una garantía de que lo que estás sosteniendo es algo verdaderamente excepcional y único en el mundo.
-                            </p>
+                    <div className="bg-zinc-900/50 rounded-[4rem] p-16 md:p-24 border border-white/5 relative overflow-hidden group">
+                        <div className="absolute -right-20 -bottom-20 text-[30rem] opacity-[0.02] -rotate-12 group-hover:scale-110 transition-transform duration-[3s]">🏺</div>
 
-                            <div className="grid grid-cols-2 gap-4 pt-4">
-                                {[
-                                    { icon: '🍯', title: 'Macerado Ancestral', desc: 'Técnicas heredadas de comunidades locales.' },
-                                    { icon: '⚗️', title: 'Triple Destilación', desc: 'Pureza sin comprometer el carácter.' },
-                                    { icon: '🌿', title: 'Botánicos Nativos', desc: 'Flora endémica de San Martín.' },
-                                    { icon: '🏷️', title: 'Lotes Numerados', desc: 'Máximo 250 botellas por producción.' },
-                                ].map((item, i) => (
-                                    <div key={i} className="p-5 bg-white/3 border border-white/5 rounded-2xl hover:border-[#D4AF37]/20 hover:bg-[#D4AF37]/5 transition-all duration-300">
-                                        <span className="text-2xl block mb-2">{item.icon}</span>
-                                        <h4 className="font-bold text-sm mb-1 text-white">{item.title}</h4>
-                                        <p className="text-gray-600 text-xs">{item.desc}</p>
+                        <div className="grid lg:grid-cols-2 gap-20 items-center relative z-10">
+                            <div className="space-y-10">
+                                <div>
+                                    <span className="text-[#D4AF37] font-black uppercase tracking-[0.4em] text-[10px] block mb-6">El Secreto de la Amazonía</span>
+                                    <h2 className="text-6xl md:text-[5.5rem] font-display font-black leading-[0.85] italic tracking-tighter uppercase">Maceración <br /> Ancestral</h2>
+                                </div>
+                                <p className="text-gray-400 text-xl leading-relaxed italic font-medium">
+                                    En Perlamayo, no solo destilamos alcohol; extraemos la esencia de las montañas. Cada baya, cada raíz y cada pétalo es procesado bajo la luna para preservar su energía vital.
+                                </p>
+                                <div className="grid grid-cols-2 gap-8">
+                                    <div className="space-y-4">
+                                        <h4 className="text-[#D4AF37] font-black uppercase tracking-widest text-xs">Triple Filtro</h4>
+                                        <p className="text-gray-500 text-sm font-bold">Pureza cristalina en cada gota.</p>
                                     </div>
-                                ))}
+                                    <div className="space-y-4">
+                                        <h4 className="text-[#D4AF37] font-black uppercase tracking-widest text-xs">Roble Selva</h4>
+                                        <p className="text-gray-500 text-sm font-bold">Añejado bajo temperaturas tropicales.</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Visual grande */}
-                        <div className="relative">
-                            <div className="relative h-[600px] rounded-[3rem] overflow-hidden border border-[#D4AF37]/20 bg-gradient-to-br from-amber-950 via-stone-950 to-black flex items-center justify-center shadow-[0_0_80px_rgba(212,175,55,0.1)]">
-                                {/* Decoración interna */}
-                                <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                                    <div className="w-64 h-64 rounded-full border-2 border-[#D4AF37]" />
-                                </div>
-                                <div className="absolute inset-8 rounded-[2.5rem] border border-[#D4AF37]/10" />
-                                <div className="text-center z-10">
-                                    <div className="text-9xl mb-4">🏺</div>
-                                    <p className="text-[#D4AF37]/60 text-sm uppercase tracking-widest">Alambique de Cobre</p>
-                                </div>
-                                {/* Brillo esquina */}
-                                <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4AF37] rounded-full blur-[80px] opacity-10" />
-                                <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-700 rounded-full blur-[60px] opacity-10" />
+                            <div className="relative aspect-[4/5] rounded-[3.5rem] overflow-hidden rotate-2 group-hover:rotate-0 transition-transform duration-700">
+                                <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop" className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-[2s]" alt="Alambique" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ═══ CATA PRIVADA ═══ */}
-            <section className="py-32 relative overflow-hidden border-t border-[#D4AF37]/10">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1a1200] via-[#0a0a0a] to-[#0a0a0a]" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-[0.07]">
-                    <div className="w-[70vw] h-[70vw] bg-[#D4AF37] rounded-full blur-[200px]" />
-                </div>
-                <div className="relative z-10 container-custom text-center">
-                    <span className="text-[#D4AF37] font-bold uppercase tracking-[0.3em] text-xs mb-6 block">Experiencia Exclusiva</span>
-                    <h2 className="text-5xl md:text-8xl font-display font-bold mb-6 leading-tight">
-                        Noche de<br />
-                        <span className="bg-gradient-to-r from-[#D4AF37] to-[#F5D26B] bg-clip-text text-transparent">Selección</span>
+            {/* CTA FINAL */}
+            <section className="py-40 relative">
+                <div className="container-custom text-center">
+                    <h2 className="text-7xl md:text-[11rem] font-display font-black mb-16 italic tracking-tighter uppercase leading-[0.8] drop-shadow-2xl">
+                        Noche de <br /> <span className="bg-[#D4AF37] px-8 text-black inline-block -rotate-2">Selección</span>
                     </h2>
-                    <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-                        Una cata exclusiva guiada por nuestro maestro destilador. Aprende a identificar cada nota, aroma y textura de nuestra colección completa.
-                    </p>
-                    <div className="flex gap-5 justify-center flex-wrap">
-                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20reservar%20una%20cata%20privada%20de%20licores"
-                            target="_blank" rel="noopener noreferrer"
-                            className="inline-flex items-center gap-3 bg-[#D4AF37] text-black px-12 py-5 text-xl font-bold hover:bg-[#E5C64A] transition-all duration-300 rounded-full shadow-[0_0_40px_rgba(212,175,55,0.4)]">
+                    <div className="flex gap-8 justify-center flex-wrap">
+                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20reservar%20una%20cata%20de%20licores"
+                            className="px-16 py-7 bg-white text-black rounded-full text-xl font-black uppercase tracking-[0.2em] hover:bg-[#D4AF37] transition-all shadow-[0_20px_60px_rgba(255,255,255,0.1)]">
                             Reservar Cata Privada ✦
                         </a>
                         <Link href="/"
-                            className="inline-flex items-center gap-3 border border-[#D4AF37]/30 text-[#D4AF37] px-12 py-5 text-xl font-bold hover:bg-[#D4AF37]/10 transition-all duration-300 rounded-full">
+                            className="px-16 py-7 border-2 border-white/10 text-white rounded-full text-xl font-black uppercase tracking-[0.2em] hover:bg-white/10 transition-all">
                             Volver al Inicio
                         </Link>
                     </div>
                 </div>
             </section>
-
         </div>
     )
 }

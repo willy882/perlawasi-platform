@@ -52,7 +52,8 @@ export default function AdminHeladeria() {
                 category: category,
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
-                description: formData.get('description')
+                description: formData.get('description'),
+                image_url: formData.get('image_url')
             }
 
             const { error } = await supabase.from('heladeria').insert([newProduct])
@@ -68,8 +69,12 @@ export default function AdminHeladeria() {
         }
     }
 
-    const filtered = products.filter(p => p.name?.toLowerCase().includes(searchTerm.toLowerCase()))
+    const filtered = products.filter(p =>
+        p.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.category?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     const categories = Array.from(new Set(products.map(p => p.category).filter(Boolean)))
+    if (categories.length === 0) categories.push('Copas', 'Barquillos', 'Paletas', 'Postres')
 
     return (
         <div className="space-y-8 animate-fade-in">
@@ -80,7 +85,7 @@ export default function AdminHeladeria() {
                 </div>
                 <button
                     onClick={() => setShowModal(true)}
-                    className="flex items-center gap-2 px-6 py-3.5 bg-pink-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-pink-900/20 hover:bg-pink-700 transition-all"
+                    className="flex items-center gap-2 px-6 py-3.5 bg-pink-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-pink-900/20 hover:bg-black transition-all"
                 >
                     <FiPlus /> Nuevo Helado
                 </button>
@@ -90,7 +95,7 @@ export default function AdminHeladeria() {
                 <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
                 <input
                     type="text"
-                    placeholder="Buscar sabor..."
+                    placeholder="Buscar sabor o producto..."
                     className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-100 rounded-2xl text-sm outline-none shadow-sm"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -119,11 +124,15 @@ export default function AdminHeladeria() {
                                     <tr key={p.id} className="group hover:bg-pink-50/30 transition-colors">
                                         <td className="px-8 py-6">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center font-bold">🍦</div>
+                                                {p.image_url ? (
+                                                    <img src={p.image_url} alt={p.name} className="w-10 h-10 rounded-xl object-cover" />
+                                                ) : (
+                                                    <div className="w-10 h-10 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center font-bold">🍦</div>
+                                                )}
                                                 <p className="font-bold text-gray-900">{p.name}</p>
                                             </div>
                                         </td>
-                                        <td className="px-8 py-6 text-sm font-medium text-gray-500">{p.category}</td>
+                                        <td className="px-8 py-6 text-sm font-bold text-gray-500">{p.category}</td>
                                         <td className="px-8 py-6 text-sm font-bold text-gray-600">{p.stock} uds.</td>
                                         <td className="px-8 py-6 font-black text-gray-900">S/ {p.price}</td>
                                         <td className="px-8 py-6 text-right">
@@ -132,7 +141,7 @@ export default function AdminHeladeria() {
                                                     await supabase.from('heladeria').delete().eq('id', p.id)
                                                     fetchProducts()
                                                 }
-                                            }} className="p-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><FiTrash2 /></button>
+                                            }} className="p-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100 transition-opacity"><FiTrash2 /></button>
                                         </td>
                                     </tr>
                                 ))
@@ -144,34 +153,52 @@ export default function AdminHeladeria() {
 
             {showModal && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm">
-                    <div className="bg-white w-full max-w-xl rounded-[3rem] p-10 animate-slide-up">
-                        <h3 className="text-2xl font-black mb-8 text-gray-900">Agregar Nuevo Helado</h3>
-                        <form onSubmit={handleSave} className="space-y-6">
-                            <input name="name" type="text" required placeholder="Nombre (ej: Helado de Camu Camu)" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-pink-500 outline-none text-sm font-bold" />
+                    <div className="bg-white w-full max-w-xl rounded-[3rem] p-10 animate-slide-up max-h-[90vh] overflow-y-auto">
+                        <h3 className="text-2xl font-black mb-8 text-gray-900">Nuevo Producto Heladería</h3>
+                        <form onSubmit={handleSave} className="space-y-4">
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Nombre del Helado</label>
+                                <input name="name" type="text" required placeholder="Ej: Copa Selva Mágica" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-pink-500 outline-none text-sm font-bold" />
+                            </div>
 
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black uppercase text-gray-400 ml-2">Categoría</label>
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Categoría</label>
                                 <select
                                     name="category"
                                     onChange={(e) => setShowNewCat(e.target.value === 'NEW')}
                                     className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold appearance-none"
                                 >
                                     {categories.map(c => <option key={c} value={c}>{c}</option>)}
-                                    <option value="NEW" className="text-pink-600">+ Nueva Categoría...</option>
+                                    <option value="NEW" className="text-pink-600 font-bold">+ Nueva Categoría...</option>
                                 </select>
                                 {showNewCat && (
                                     <input name="new_category" required type="text" placeholder="Nombre de categoría" className="w-full px-5 py-3.5 bg-pink-50 border-pink-100 rounded-2xl outline-none text-sm font-bold animate-fade-in" />
                                 )}
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
-                                <input name="price" type="number" step="0.5" required placeholder="Precio S/" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold" />
-                                <input name="stock" type="number" required placeholder="Stock" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold" />
+                            <div className="grid grid-cols-3 gap-4">
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Precio S/</label>
+                                    <input name="price" type="number" step="0.5" required placeholder="0.00" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold" />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Stock</label>
+                                    <input name="stock" type="number" required placeholder="0" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold" />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">URL Imagen</label>
+                                    <input name="image_url" type="text" placeholder="https://..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold" />
+                                </div>
                             </div>
 
-                            <div className="flex gap-4">
-                                <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase text-xs">Cancelar</button>
-                                <button type="submit" disabled={saving} className="flex-[2] py-4 bg-pink-600 text-white rounded-2xl font-black uppercase text-xs shadow-lg shadow-pink-900/20">{saving ? 'Guardando...' : 'Guardar Helado 🍦'}</button>
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Descripción / Sabores</label>
+                                <textarea name="description" rows={3} placeholder="Detalla los sabores o ingredientes..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-pink-500 outline-none text-sm font-bold resize-none" />
+                            </div>
+
+                            <div className="flex gap-4 pt-6">
+                                <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase text-[10px] tracking-widest">Cancelar</button>
+                                <button type="submit" disabled={saving} className="flex-[2] py-4 bg-pink-600 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-pink-900/20">{saving ? 'Guardando...' : 'Guardar Helado 🍦'}</button>
                             </div>
                         </form>
                     </div>

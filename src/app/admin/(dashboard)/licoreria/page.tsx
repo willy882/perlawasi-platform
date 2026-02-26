@@ -43,7 +43,8 @@ export default function AdminLicoreria() {
                 category: category,
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
-                description: formData.get('description')
+                description: formData.get('description'),
+                image_url: formData.get('image_url')
             }
             const { error } = await supabase.from('licoreria').insert([newProduct])
             if (error) throw error
@@ -55,8 +56,12 @@ export default function AdminLicoreria() {
         } finally { setSaving(false) }
     }
 
-    const filtered = products.filter(p => p.name?.toLowerCase().includes(searchTerm.toLowerCase()))
+    const filtered = products.filter(p =>
+        p.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.category?.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     const categories = Array.from(new Set(products.map(p => p.category).filter(Boolean)))
+    if (categories.length === 0) categories.push('Macerados', 'Destilados', 'Vinos Regionales', 'Mieles')
 
     return (
         <div className="space-y-8 animate-fade-in">
@@ -72,7 +77,7 @@ export default function AdminLicoreria() {
 
             <div className="max-w-md relative">
                 <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input type="text" placeholder="Buscar producto..." className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-100 rounded-2xl text-sm outline-none shadow-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                <input type="text" placeholder="Buscar licor..." className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-100 rounded-2xl text-sm outline-none shadow-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
             </div>
 
             <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden text-left">
@@ -89,44 +94,76 @@ export default function AdminLicoreria() {
                     <tbody className="divide-y divide-gray-50">
                         {loading ? (
                             <tr><td colSpan={5} className="py-20 text-center"><FiLoader className="inline-block animate-spin" /></td></tr>
-                        ) : filtered.map(p => (
-                            <tr key={p.id} className="group hover:bg-indigo-50/30">
-                                <td className="px-8 py-6 flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-900 flex items-center justify-center font-bold text-xl">🥂</div>
-                                    <p className="font-bold text-gray-900">{p.name}</p>
-                                </td>
-                                <td className="px-8 py-6 text-sm text-gray-500 font-bold">{p.category}</td>
-                                <td className="px-8 py-6 text-sm font-bold">{p.stock} uds</td>
-                                <td className="px-8 py-6 font-black text-gray-900">S/ {p.price}</td>
-                                <td className="px-8 py-6 text-right">
-                                    <button onClick={async () => { if (confirm('¿Eliminar?')) { await supabase.from('licoreria').delete().eq('id', p.id); fetchProducts(); } }} className="p-2.5 text-red-600 opacity-0 group-hover:opacity-100"><FiTrash2 /></button>
-                                </td>
-                            </tr>
-                        ))}
+                        ) : filtered.length === 0 ? (
+                            <tr><td colSpan={5} className="px-8 py-20 text-center text-gray-400 italic">No hay productos.</td></tr>
+                        ) : (
+                            filtered.map(p => (
+                                <tr key={p.id} className="group hover:bg-indigo-50/30 transition-colors">
+                                    <td className="px-8 py-6">
+                                        <div className="flex items-center gap-3">
+                                            {p.image_url ? (
+                                                <img src={p.image_url} alt={p.name} className="w-10 h-10 rounded-xl object-cover" />
+                                            ) : (
+                                                <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-900 flex items-center justify-center font-bold text-xl">🥂</div>
+                                            )}
+                                            <p className="font-bold text-gray-900">{p.name}</p>
+                                        </div>
+                                    </td>
+                                    <td className="px-8 py-6 text-sm text-gray-500 font-bold uppercase tracking-widest">{p.category}</td>
+                                    <td className="px-8 py-6 text-sm font-bold text-gray-600">{p.stock} uds</td>
+                                    <td className="px-8 py-6 font-black text-gray-900">S/ {p.price}</td>
+                                    <td className="px-8 py-6 text-right">
+                                        <button onClick={async () => { if (confirm('¿Eliminar?')) { await supabase.from('licoreria').delete().eq('id', p.id); fetchProducts(); } }} className="p-2.5 text-red-600 opacity-0 group-hover:opacity-100 transition-opacity"><FiTrash2 /></button>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>
 
             {showModal && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm">
-                    <div className="bg-white w-full max-w-xl rounded-[3rem] p-10">
-                        <h3 className="text-2xl font-black mb-8 text-gray-900">Agregar Nuevo Licor</h3>
-                        <form onSubmit={handleSave} className="space-y-6">
-                            <input name="name" type="text" required placeholder="Nombre del licor" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
-                            <div className="space-y-2">
+                    <div className="bg-white w-full max-w-xl rounded-[3rem] p-10 animate-slide-up max-h-[90vh] overflow-y-auto">
+                        <h3 className="text-2xl font-black mb-8 text-gray-900">Nuevo Licor Regional</h3>
+                        <form onSubmit={handleSave} className="space-y-4">
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Nombre del Licor</label>
+                                <input name="name" type="text" required placeholder="Ej: Macerado de Uvachado" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none border-transparent focus:border-indigo-500 font-bold" />
+                            </div>
+
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Tipo de Licor</label>
                                 <select name="category" onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold appearance-none">
                                     {categories.map(c => <option key={c} value={c}>{c}</option>)}
-                                    <option value="NEW" className="text-indigo-600 font-black">+ Nueva Selección...</option>
+                                    <option value="NEW" className="text-indigo-600 font-black">+ Nueva Categoría...</option>
                                 </select>
-                                {showNewCat && <input name="new_category" required type="text" placeholder="Ej: Macerado, Destilado, Vino..." className="w-full px-5 py-3.5 bg-indigo-50 border-indigo-200 rounded-2xl outline-none font-bold" />}
+                                {showNewCat && <input name="new_category" required type="text" placeholder="Ej: Macerado, Destilado, Vino..." className="w-full px-5 py-3.5 bg-indigo-50 border-indigo-200 rounded-2xl outline-none font-bold animate-fade-in" />}
                             </div>
-                            <div className="grid grid-cols-2 gap-4">
-                                <input name="price" type="number" required placeholder="Precio S/" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
-                                <input name="stock" type="number" required placeholder="Stock" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
+
+                            <div className="grid grid-cols-3 gap-4">
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Precio S/</label>
+                                    <input name="price" type="number" required placeholder="0.00" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Stock</label>
+                                    <input name="stock" type="number" required placeholder="0" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
+                                </div>
+                                <div className="space-y-1">
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">URL Imagen</label>
+                                    <input name="image_url" type="text" placeholder="https://..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
+                                </div>
                             </div>
-                            <div className="flex gap-4">
-                                <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 bg-gray-100 rounded-2xl font-black uppercase text-xs">Cancelar</button>
-                                <button type="submit" disabled={saving} className="flex-[2] py-4 bg-indigo-950 text-white rounded-2xl font-black uppercase text-xs">Guardar Licor 🥂</button>
+
+                            <div className="space-y-1">
+                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Descripción / Notas de Sabor</label>
+                                <textarea name="description" rows={3} placeholder="Detalla el proceso o ingredientes regionales..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-indigo-500 outline-none text-sm font-bold resize-none" />
+                            </div>
+
+                            <div className="flex gap-4 pt-6">
+                                <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase text-[10px] tracking-widest">Cancelar</button>
+                                <button type="submit" disabled={saving} className="flex-[2] py-4 bg-indigo-950 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-indigo-900/20">{saving ? 'Guardando...' : 'Guardar Licor 🥂'}</button>
                             </div>
                         </form>
                     </div>

@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS public.heladeria (
     category TEXT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     stock INTEGER DEFAULT 0,
-    description TEXT
+    description TEXT,
+    image_url TEXT
 );
 
 -- TABLA DE CERVECERIA
@@ -73,7 +74,8 @@ CREATE TABLE IF NOT EXISTS public.cerveceria (
     category TEXT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     stock INTEGER DEFAULT 0,
-    description TEXT
+    description TEXT,
+    image_url TEXT
 );
 
 -- TABLA DE LICORERIA
@@ -84,7 +86,8 @@ CREATE TABLE IF NOT EXISTS public.licoreria (
     category TEXT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     stock INTEGER DEFAULT 0,
-    description TEXT
+    description TEXT,
+    image_url TEXT
 );
 
 -- TABLA DE MENU RESTAURANTE
@@ -95,7 +98,8 @@ CREATE TABLE IF NOT EXISTS public.restaurante_menu (
     category TEXT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     description TEXT,
-    available BOOLEAN DEFAULT true
+    available BOOLEAN DEFAULT true,
+    image_url TEXT
 );
 
 -- HABILITAR SEGURIDAD (RLS) para nuevas tablas
@@ -123,7 +127,8 @@ CREATE TABLE IF NOT EXISTS public.cafe_cacao (
     category TEXT NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     stock INTEGER DEFAULT 0,
-    description TEXT
+    description TEXT,
+    image_url TEXT
 );
 ALTER TABLE public.cafe_cacao ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Lectura pública cafe" ON public.cafe_cacao FOR SELECT USING (true);
