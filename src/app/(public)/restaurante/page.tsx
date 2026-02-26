@@ -6,6 +6,9 @@ import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 import { FiLoader, FiChevronRight, FiShoppingBag } from 'react-icons/fi'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export default function RestaurantePage() {
     const [menu, setMenu] = useState<any[]>([])
     const [loading, setLoading] = useState(true)
@@ -88,29 +91,31 @@ export default function RestaurantePage() {
                 </div>
             </section>
 
-            {/* Menú Dinámico */}
+            {/* Menú Dinámico con Slide de Categorías */}
             <section id="menu" className="section bg-white scroll-mt-20">
                 <div className="container-custom">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 px-4">
-                        <div>
+                        <div className="shrink-0">
                             <span className="text-[#1a3c1a] font-black uppercase tracking-[0.3em] text-[10px]">Experiencia Culinaria</span>
                             <h2 className="text-5xl md:text-7xl font-display font-black mt-4 leading-none tracking-tighter">Nuestra <span className="text-gray-300">Carta</span></h2>
                         </div>
 
-                        {/* Categories Filter */}
-                        <div className="flex flex-wrap gap-2">
-                            {categories.map((cat) => (
-                                <button
-                                    key={cat}
-                                    onClick={() => setActiveCategory(cat)}
-                                    className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${activeCategory === cat
-                                        ? 'bg-[#1a3c1a] text-white shadow-xl shadow-emerald-900/20'
-                                        : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
-                                        }`}
-                                >
-                                    {cat}
-                                </button>
-                            ))}
+                        {/* DESLIZADOR DE CATEGORÍAS (Slide) */}
+                        <div className="w-full overflow-x-auto no-scrollbar pb-2">
+                            <div className="flex flex-nowrap gap-3">
+                                {categories.map((cat) => (
+                                    <button
+                                        key={cat}
+                                        onClick={() => setActiveCategory(cat)}
+                                        className={`px-8 py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap shrink-0 ${activeCategory === cat
+                                            ? 'bg-[#1a3c1a] text-white shadow-xl shadow-emerald-900/20'
+                                            : 'bg-gray-50 text-gray-400 hover:bg-gray-100'
+                                            }`}
+                                    >
+                                        {cat}
+                                    </button>
+                                ))}
+                            </div>
                         </div>
                     </div>
 
@@ -129,6 +134,7 @@ export default function RestaurantePage() {
                                                 src={item.image_url}
                                                 alt={item.name}
                                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
+                                                onError={(e) => { (e.target as any).src = "https://via.placeholder.com/400x300?text=Imagen+No+Disponible"; }}
                                             />
                                         ) : (
                                             <div className="text-8xl group-hover:scale-125 transition-transform duration-700 select-none grayscale group-hover:grayscale-0">
@@ -171,32 +177,6 @@ export default function RestaurantePage() {
                             <p className="text-gray-300 text-sm mt-4 font-medium italic">Estamos preparando algo especial para ti.</p>
                         </div>
                     )}
-                </div>
-            </section>
-
-            {/* Reserva CTA */}
-            <section id="reservar" className="py-24 bg-[#1a3c1a] relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
-                    <Image src="/images/hero_restaurante_v2.png" alt="pattern" fill className="object-cover" />
-                </div>
-                <div className="container-custom text-center text-white relative z-10 px-4">
-                    <h2 className="text-5xl md:text-8xl font-display font-black mb-6 tracking-tighter leading-none">
-                        Vive la Experiencia <br /><span className="text-[#d4af37]">Perlawasi</span>
-                    </h2>
-                    <p className="text-xl text-white/70 mb-12 max-w-2xl mx-auto font-medium">
-                        Asegura tu mesa y vive una experiencia culinaria única que celebra la biodiversidad de nuestra tierra.
-                    </p>
-                    <div className="flex gap-6 justify-center flex-wrap">
-                        <a href="tel:+51928141669" className="px-12 py-6 bg-white text-emerald-900 rounded-full font-black uppercase tracking-widest text-xs hover:bg-[#d4af37] hover:text-white transition-all shadow-2xl">
-                            Llamar Ahora
-                        </a>
-                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20reservar%20una%20mesa%20en%20el%20restaurante"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-12 py-6 bg-transparent border-2 border-white/20 text-white rounded-full font-black uppercase tracking-widest text-xs hover:bg-white/10 transition-all backdrop-blur-md">
-                            WhatsApp
-                        </a>
-                    </div>
                 </div>
             </section>
         </div>
