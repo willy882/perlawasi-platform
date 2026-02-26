@@ -28,10 +28,10 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
 
     return (
         <div className="min-h-screen bg-[#F8FAFB] flex font-sans">
-            {/* SIDEBAR FIJO */}
+            {/* SIDEBAR TOTALMENTE FIJO (FIXED) */}
             <aside
-                className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#1a3c1a] text-white transition-all duration-300 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:-translate-x-full lg:w-0'
-                    } overflow-hidden flex flex-col shadow-2xl h-screen sticky top-0`}
+                className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#1a3c1a] text-white transition-all duration-300 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+                    } flex flex-col shadow-2xl`}
             >
                 <div className="p-8 border-b border-white/10 shrink-0">
                     <div className="flex items-center gap-3">
@@ -45,7 +45,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                     </div>
                 </div>
 
-                <nav className="flex-1 px-4 py-8 space-y-2 overflow-y-auto custom-scrollbar">
+                <nav className="flex-1 px-4 py-8 space-y-2 overflow-y-auto no-scrollbar">
                     {menuItems.map((item) => {
                         const isActive = pathname === item.path
                         return (
@@ -53,8 +53,8 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                                 key={item.path}
                                 href={item.path}
                                 className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all font-bold text-sm ${isActive
-                                    ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-900/40'
-                                    : 'text-white/60 hover:bg-white/5 hover:text-white'
+                                        ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-900/40'
+                                        : 'text-white/60 hover:bg-white/5 hover:text-white'
                                     }`}
                             >
                                 <span className="text-xl">{item.icon}</span>
@@ -81,7 +81,8 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                 </div>
             </aside>
 
-            <main className="flex-1 flex flex-col min-w-0">
+            {/* CONTENIDO PRINCIPAL CON MARGEN PARA EL SIDEBAR */}
+            <main className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${isSidebarOpen ? 'lg:ml-72' : 'ml-0'}`}>
                 <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-8 sticky top-0 z-40">
                     <div className="flex items-center gap-4">
                         <button
@@ -94,18 +95,11 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                             <h1 className="text-xl font-bold text-gray-800 leading-none">
                                 {menuItems.find(i => i.path === pathname)?.name || 'Dashboard'}
                             </h1>
-                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Ecosistema Perlawasi</p>
+                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Sistema Integrado</p>
                         </div>
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <div className="hidden md:flex flex-col text-right">
-                            <span className="text-xs font-bold text-emerald-600 uppercase tracking-widest leading-none">Sistema</span>
-                            <span className="text-[10px] text-gray-400 flex items-center justify-end gap-1.5 mt-1">
-                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Operativo
-                            </span>
-                        </div>
-                        <div className="w-px h-8 bg-gray-100 mx-2" />
                         <Link href="/" className="px-5 py-2.5 bg-gray-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition-all">
                             Ver Sitio Público
                         </Link>
