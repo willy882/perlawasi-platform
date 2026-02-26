@@ -6,8 +6,6 @@ import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
 import { FiLoader, FiChevronRight, FiShoppingBag } from 'react-icons/fi'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
 
 export default function RestaurantePage() {
     const [menu, setMenu] = useState<any[]>([])

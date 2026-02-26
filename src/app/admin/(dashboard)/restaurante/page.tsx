@@ -8,7 +8,6 @@ import {
 import { supabase, uploadImage } from '@/lib/supabase'
 import { toast } from 'react-hot-toast'
 
-export const dynamic = 'force-dynamic'
 
 export default function AdminRestaurante() {
     const [searchTerm, setSearchTerm] = useState('')
