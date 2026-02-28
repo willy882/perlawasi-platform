@@ -16,7 +16,7 @@ Antes de comenzar, **DEBES instalar Node.js** en tu computadora.
 2. **Instalar Node.js**
    - Ejecuta el archivo descargado
    - Sigue el asistente de instalación
-   - **IMPORTANTE**: Marca la opción "Automatically install the necessary tools"
+   - **IMPORTANTE**: Marca la opción para instalar automáticamente las herramientas necesarias
    - Haz clic en "Next" hasta completar la instalación
 
 3. **Verificar la Instalación**

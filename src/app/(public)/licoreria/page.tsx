@@ -18,55 +18,55 @@ export default function LicoreriaPage() {
             badge: 'Signature',
             gradient: 'from-amber-950 via-stone-900 to-black',
             accentColor: '#D4AF37',
-            emoji: '­ƒÑâ',
+            emoji: '🥃',
         },
         {
             name: 'Andean Botanical',
-            type: 'Gin de Monta├▒a',
-            notes: 'Enebro ┬À Hierba luisa ┬À C├¡tricos andinos',
+            type: 'Gin de Montaña',
+            notes: 'Enebro · Hierba luisa · Cítricos andinos',
             abv: '40%',
             ml: '750 ml',
-            badge: 'Edici├│n Limitada',
+            badge: 'Edición Limitada',
             gradient: 'from-slate-900 via-blue-950 to-black',
             accentColor: '#7dd3fc',
-            emoji: '­ƒì©',
+            emoji: '🍸',
         },
         {
             name: 'Mistify Rum',
-            type: 'Ron A├▒ejo Selva',
-            notes: 'Melaza ┬À Roble americano ┬À Vainilla',
+            type: 'Ron Añejo Selva',
+            notes: 'Melaza · Roble americano · Vainilla',
             abv: '45%',
             ml: '750 ml',
             badge: 'Reserva',
             gradient: 'from-orange-950 via-red-950 to-black',
             accentColor: '#fb923c',
-            emoji: '­ƒÑâ',
+            emoji: '🥃',
         },
         {
             name: 'Floral Mist',
             type: 'Licor de Flores',
-            notes: 'P├®talos de rosa ┬À Flor de sa├║co ┬À Miel',
+            notes: 'Pétalos de rosa · Flor de sauco · Miel',
             abv: '28%',
             ml: '500 ml',
             badge: 'Artesanal',
             gradient: 'from-rose-950 via-pink-950 to-black',
             accentColor: '#f9a8d4',
-            emoji: '­ƒìÂ',
+            emoji: '🍷',
         },
     ]
 
     const proceso = [
-        { num: '01', title: 'Selecci├│n', desc: 'Bot├ínicos recolectados a mano en los alrededores de Perlawasi al amanecer.', icon: '­ƒî┐' },
-        { num: '02', title: 'Maceraci├│n', desc: 'Reposo de 72 horas en alcohol neutro para extraer los aceites esenciales.', icon: '­ƒ½Ö' },
-        { num: '03', title: 'Destilaci├│n', desc: 'Triple destilaci├│n en alambiques de cobre artesanales a baja temperatura.', icon: 'ÔÜù´©Å' },
-        { num: '04', title: 'Reposo', desc: 'M├¡nimo 6 meses en barricas de roble para los destilados a├▒ejados.', icon: '­ƒ¬Á' },
-        { num: '05', title: 'Embotellado', desc: 'En lotes de no m├ís de 250 botellas numeradas a mano.', icon: '­ƒì¥' },
+        { num: '01', title: 'Selección', desc: 'Botánicos recolectados a mano en los alrededores de Perlawasi al amanecer.', icon: '🌿' },
+        { num: '02', title: 'Maceración', desc: 'Reposo de 72 horas en alcohol neutro para extraer los aceites esenciales.', icon: '🧪' },
+        { num: '03', title: 'Destilación', desc: 'Triple destilación en alambiques de cobre artesanales a baja temperatura.', icon: '🔥' },
+        { num: '04', title: 'Reposo', desc: 'Mínimo 6 meses en barricas de roble para los destilados añejados.', icon: '⏳' },
+        { num: '05', title: 'Embotellado', desc: 'En lotes de no más de 250 botellas numeradas a mano.', icon: '🍾' },
     ]
 
     return (
         <div className="min-h-screen bg-[#080808] text-white overflow-x-hidden">
 
-            {/* ÔòÉÔòÉÔòÉ HERO PERSONALIZADO ÔòÉÔòÉÔòÉ */}
+            {/* ────────── HERO PERSONALIZADO ────────── */}
             <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-[#061a06]">
 
                 {/* Imagen de fondo bb.png */}
@@ -105,16 +105,16 @@ export default function LicoreriaPage() {
 
                     {/* Tagline sutil */}
                     <p className="text-base md:text-lg text-white/90 mb-10 max-w-xl mx-auto leading-relaxed font-light italic">
-                        El esp├¡ritu de la selva encapsulado en cada botella
+                        El espíritu de la selva encapsulado en cada botella
                     </p>
 
                     {/* Botones compactos */}
                     <div className="flex gap-4 justify-center flex-wrap">
                         <Link href="#coleccion"
                             className="inline-flex items-center gap-2 bg-[#4ade80] text-[#061a06] px-8 py-3 text-sm font-bold hover:bg-[#86efac] transition-all duration-300 rounded-full shadow-lg uppercase tracking-wider">
-                            Ver Colecci├│n
+                            Ver Colección
                         </Link>
-                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20informaci├│n%20sobre%20Licores%20Perlamayo"
+                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20información%20sobre%20Licores%20Perlamayo"
                             target="_blank" rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 border border-white/50 text-white px-8 py-3 text-sm font-bold hover:bg-white/10 transition-all duration-300 rounded-full uppercase tracking-wider backdrop-blur-sm">
                             Consultar
@@ -126,14 +126,14 @@ export default function LicoreriaPage() {
                 <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#080808] to-transparent z-10" />
             </section>
 
-            {/* ÔòÉÔòÉÔòÉ BARRA DE ESTAD├ìSTICAS ÔòÉÔòÉÔòÉ */}
+            {/* ────────── BARRA DE ESTADÍSTICAS ────────── */}
             <section className="border-y border-[#D4AF37]/15 bg-[#0d0d0d]">
                 <div className="container-custom">
                     <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#D4AF37]/10">
                         {[
-                            { num: '4', label: 'Destilados ├Ünicos' },
+                            { num: '4', label: 'Destilados Únicos' },
                             { num: '250', label: 'Botellas por Lote' },
-                            { num: '72h', label: 'Maceraci├│n M├¡nima' },
+                            { num: '72h', label: 'Maceración Mínima' },
                             { num: '6+', label: 'Meses de Reposo' },
                         ].map((stat, i) => (
                             <div key={i} className="py-10 px-8 text-center group hover:bg-[#D4AF37]/5 transition-colors">
@@ -145,15 +145,15 @@ export default function LicoreriaPage() {
                 </div>
             </section>
 
-            {/* ÔòÉÔòÉÔòÉ COLECCI├ôN DE AUTOR ÔòÉÔòÉÔòÉ */}
+            {/* ────────── COLECCIÓN DE AUTOR ────────── */}
             <section id="coleccion" className="py-32 bg-[#080808]">
                 <div className="container-custom">
                     <div className="text-center mb-20">
-                        <span className="text-[#D4AF37] font-bold uppercase tracking-[0.25em] text-xs mb-4 block">Nuestra Selecci├│n</span>
-                        <h2 className="text-5xl md:text-7xl font-display font-bold mb-6">Colecci├│n de Autor</h2>
+                        <span className="text-[#D4AF37] font-bold uppercase tracking-[0.25em] text-xs mb-4 block">Nuestra Selección</span>
+                        <h2 className="text-5xl md:text-7xl font-display font-bold mb-6">Colección de Autor</h2>
                         <div className="flex items-center justify-center gap-3">
                             <div className="h-px w-16 bg-[#D4AF37]/40" />
-                            <span className="text-[#D4AF37]">Ô£ª</span>
+                            <span className="text-[#D4AF37]">✦</span>
                             <div className="h-px w-16 bg-[#D4AF37]/40" />
                         </div>
                     </div>
@@ -200,7 +200,7 @@ export default function LicoreriaPage() {
                 </div>
             </section>
 
-            {/* ÔòÉÔòÉÔòÉ PROCESO DE DESTILACI├ôN ÔòÉÔòÉÔòÉ */}
+            {/* ────────── PROCESO DE DESTILACIÓN ────────── */}
             <section className="py-32 bg-[#0c0c0c] border-t border-[#D4AF37]/10">
                 <div className="container-custom">
                     <div className="text-center mb-20">
@@ -209,13 +209,13 @@ export default function LicoreriaPage() {
                     </div>
 
                     <div className="relative">
-                        {/* L├¡nea conectora */}
+                        {/* Línea conectora */}
                         <div className="hidden lg:block absolute top-[3.5rem] left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
 
                         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
                             {proceso.map((step, i) => (
                                 <div key={i} className="relative text-center group">
-                                    {/* C├¡rculo con n├║mero */}
+                                    {/* Círculo con número */}
                                     <div className="relative w-28 h-28 mx-auto mb-6 rounded-full border border-[#D4AF37]/30 bg-[#0a0a0a] flex items-center justify-center transition-all duration-400 group-hover:border-[#D4AF37]/70 group-hover:bg-[#D4AF37]/5">
                                         <span className="text-4xl">{step.icon}</span>
                                         <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-[#D4AF37] text-black text-xs font-black flex items-center justify-center">
@@ -231,7 +231,7 @@ export default function LicoreriaPage() {
                 </div>
             </section>
 
-            {/* ÔòÉÔòÉÔòÉ FILOSOF├ìA ÔòÉÔòÉÔòÉ */}
+            {/* ────────── FILOSOFÍA ────────── */}
             <section id="historia" className="py-32 bg-[#080808] border-t border-[#D4AF37]/10">
                 <div className="container-custom">
                     <div className="grid lg:grid-cols-2 gap-20 items-center">
@@ -253,10 +253,10 @@ export default function LicoreriaPage() {
 
                             <div className="grid grid-cols-2 gap-4 pt-4">
                                 {[
-                                    { icon: '­ƒì»', title: 'Macerado Ancestral', desc: 'T├®cnicas heredadas de comunidades locales.' },
-                                    { icon: 'ÔÜù´©Å', title: 'Triple Destilaci├│n', desc: 'Pureza sin comprometer el car├ícter.' },
-                                    { icon: '­ƒî┐', title: 'Bot├ínicos Nativos', desc: 'Flora end├®mica de San Mart├¡n.' },
-                                    { icon: '­ƒÅÀ´©Å', title: 'Lotes Numerados', desc: 'M├íximo 250 botellas por producci├│n.' },
+                                    { icon: '🏺', title: 'Macerado Ancestral', desc: 'Técnicas heredadas de comunidades locales.' },
+                                    { icon: '⚗️', title: 'Triple Destilación', desc: 'Pureza sin comprometer el carácter.' },
+                                    { icon: '🌿', title: 'Botánicos Nativos', desc: 'Flora endémica de San Martín.' },
+                                    { icon: '🏷️', title: 'Lotes Numerados', desc: 'Máximo 250 botellas por producción.' },
                                 ].map((item, i) => (
                                     <div key={i} className="p-5 bg-white/3 border border-white/5 rounded-2xl hover:border-[#D4AF37]/20 hover:bg-[#D4AF37]/5 transition-all duration-300">
                                         <span className="text-2xl block mb-2">{item.icon}</span>
@@ -270,13 +270,13 @@ export default function LicoreriaPage() {
                         {/* Visual grande */}
                         <div className="relative">
                             <div className="relative h-[600px] rounded-[3rem] overflow-hidden border border-[#D4AF37]/20 bg-gradient-to-br from-amber-950 via-stone-950 to-black flex items-center justify-center shadow-[0_0_80px_rgba(212,175,55,0.1)]">
-                                {/* Decoraci├│n interna */}
+                                {/* Decoración interna */}
                                 <div className="absolute inset-0 flex items-center justify-center opacity-10">
                                     <div className="w-64 h-64 rounded-full border-2 border-[#D4AF37]" />
                                 </div>
                                 <div className="absolute inset-8 rounded-[2.5rem] border border-[#D4AF37]/10" />
                                 <div className="text-center z-10">
-                                    <div className="text-9xl mb-4">­ƒÅ║</div>
+                                    <div className="text-9xl mb-4">⚗️</div>
                                     <p className="text-[#D4AF37]/60 text-sm uppercase tracking-widest">Alambique de Cobre</p>
                                 </div>
                                 {/* Brillo esquina */}
@@ -288,7 +288,7 @@ export default function LicoreriaPage() {
                 </div>
             </section>
 
-            {/* ÔòÉÔòÉÔòÉ CATA PRIVADA ÔòÉÔòÉÔòÉ */}
+            {/* ────────── CATA PRIVADA ────────── */}
             <section className="py-32 relative overflow-hidden border-t border-[#D4AF37]/10">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1a1200] via-[#0a0a0a] to-[#0a0a0a]" />
                 <div className="absolute inset-0 flex items-center justify-center opacity-[0.07]">
@@ -298,16 +298,16 @@ export default function LicoreriaPage() {
                     <span className="text-[#D4AF37] font-bold uppercase tracking-[0.3em] text-xs mb-6 block">Experiencia Exclusiva</span>
                     <h2 className="text-5xl md:text-8xl font-display font-bold mb-6 leading-tight">
                         Noche de<br />
-                        <span className="bg-gradient-to-r from-[#D4AF37] to-[#F5D26B] bg-clip-text text-transparent">Selecci├│n</span>
+                        <span className="bg-gradient-to-r from-[#D4AF37] to-[#F5D26B] bg-clip-text text-transparent">Selección</span>
                     </h2>
                     <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
-                        Una cata exclusiva guiada por nuestro maestro destilador. Aprende a identificar cada nota, aroma y textura de nuestra colecci├│n completa.
+                        Una cata exclusiva guiada por nuestro maestro destilador. Aprende a identificar cada nota, aroma y textura de nuestra colección completa.
                     </p>
                     <div className="flex gap-5 justify-center flex-wrap">
                         <a href="https://wa.me/51928141669?text=Hola,%20quiero%20reservar%20una%20cata%20privada%20de%20licores"
                             target="_blank" rel="noopener noreferrer"
                             className="inline-flex items-center gap-3 bg-[#D4AF37] text-black px-12 py-5 text-xl font-bold hover:bg-[#E5C64A] transition-all duration-300 rounded-full shadow-[0_0_40px_rgba(212,175,55,0.4)]">
-                            Reservar Cata Privada Ô£ª
+                            Reservar Cata Privada ✦
                         </a>
                         <Link href="/"
                             className="inline-flex items-center gap-3 border border-[#D4AF37]/30 text-[#D4AF37] px-12 py-5 text-xl font-bold hover:bg-[#D4AF37]/10 transition-all duration-300 rounded-full">

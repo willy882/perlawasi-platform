@@ -23,7 +23,7 @@ export default function AdminAjustes() {
             title: 'Perfil y Cuenta',
             icon: <FiUser />,
             items: [
-                { label: 'Nombre de Administrador', value: 'Willy (Perlawasi Admin)' },
+                { label: 'Nombre de Administrador', value: 'Willy (Administrador Perlawasi)' },
                 { label: 'Email', value: 'perlawasi_1@gmail.com' },
                 { label: 'Rol', value: 'Súper Administrador' },
             ]
@@ -77,7 +77,7 @@ export default function AdminAjustes() {
                         <div>
                             <div className="flex items-center gap-2 mb-4">
                                 <FiShield className="text-emerald-400" />
-                                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">Seguridad HQ</span>
+                                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">Seguridad</span>
                             </div>
                             <h3 className="text-2xl font-black mb-2">Tu panel está protegido</h3>
                             <p className="text-white/60 text-sm max-w-sm leading-relaxed italic">

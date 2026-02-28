@@ -76,7 +76,7 @@ export default function HomePage() {
             </section>
 
             {/* Café & Cacao - Sección Fusionada (Dark) */}
-            < section className="py-24 bg-brand-dark text-white relative overflow-hidden" >
+            <section className="py-24 bg-brand-dark text-white relative overflow-hidden">
                 <div className="container-custom relative z-10">
                     <div className="grid md:grid-cols-2 gap-20 items-center">
                         <div className="order-2 md:order-1 space-y-8">
@@ -143,10 +143,10 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Alojamiento - Sección Santuario */}
-            < section className="section bg-brand-light" >
+            <section className="section bg-brand-light">
                 <div className="container-custom">
                     <div className="text-center mb-16">
                         <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-xs">Descanso Profundo</span>
@@ -172,10 +172,10 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Cervecería - Sección Artesanal */}
-            < section className="section bg-white overflow-hidden" >
+            <section className="section bg-white overflow-hidden">
                 <div className="container-custom">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div className="space-y-8">
@@ -212,10 +212,10 @@ export default function HomePage() {
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Licorería - Sección Destilados */}
-            < section className="section bg-[#F9F6F2] overflow-hidden" >
+            <section className="section bg-[#F9F6F2] overflow-hidden">
                 <div className="container-custom">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div className="order-2 md:order-1 relative h-[500px] rounded-[3rem] overflow-hidden group shadow-soft">
@@ -231,21 +231,21 @@ export default function HomePage() {
                         <div className="order-1 md:order-2 space-y-8">
                             <div>
                                 <span className="text-gray-500 font-bold uppercase tracking-widest text-xs">Con Sabor a Selva</span>
-                                <h2 className="text-4xl md:text-5xl font-display font-bold mt-2">Licoreres Perlamayo</h2>
+                                <h2 className="text-4xl md:text-5xl font-display font-bold mt-2">Licores Perlamayo</h2>
                                 <p className="text-gray-600 text-lg mt-6 leading-relaxed">
                                     Destilados premium, cocteles y macerados artesanales que capturan la esencia de nuestra biodiversidad. Una curaduría de licores diseñados para los momentos más especiales.
                                 </p>
                             </div>
                             <Link href="/licoreria" className="btn bg-gray-900 text-white px-10 py-4 rounded-full inline-block font-bold hover:bg-gray-800 transition-all">
-                                Explorar Lircores →
+                                Explorar Licores →
                             </Link>
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Bento Grid - Ropa & Plantas */}
-            < section className="section bg-white" >
+            <section className="section bg-white">
                 <div className="container-custom">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Boutique Section */}
@@ -253,7 +253,7 @@ export default function HomePage() {
                             <div className="z-10 relative">
                                 <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-4">Conscious Wear</span>
                                 <h3 className="text-4xl font-display font-bold text-gray-900">Ropa Esencial con Boutique Perlamayo</h3>
-                                <p className="text-gray-500 mt-4 max-w-xs text-lg">Básicos sostenibles diseñados para tu ritual diario en armonía con el entorno, desde zandalias, ropa interior y mucho más.</p>
+                                <p className="text-gray-500 mt-4 max-w-xs text-lg">Básicos sostenibles diseñados para tu ritual diario en armonía con el entorno, desde sandalias, ropa interior y mucho más.</p>
                             </div>
                             <div className="mt-12 z-10">
                                 <span className="btn bg-black text-white px-8 py-3 rounded-full text-sm font-bold inline-block">Explorar Colección</span>
@@ -293,10 +293,10 @@ export default function HomePage() {
                         </Link>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* CTA Final */}
-            < section className="py-32 relative overflow-hidden bg-white" >
+            <section className="py-32 relative overflow-hidden bg-white">
                 <div className="container-custom">
                     <div className="bg-brand-dark rounded-[4rem] p-16 md:p-24 text-center relative overflow-hidden group shadow-2xl min-h-[500px] flex items-center justify-center">
                         <div className="absolute inset-0">

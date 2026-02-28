@@ -7,8 +7,8 @@ const FashionConfigurator = dynamic(
 )
 
 export const metadata: Metadata = {
-    title: 'Ropa & Boutique Perlawasi - Moda Consciente | San Mart├¡n, Per├║',
-    description: 'Boutique Perlamayo en Perlawasi. Ropa artesanal con materiales org├ínicos: camisetas de lino, pantalones algod├│n pima, vestidos bamb├║ y m├ís. Configura tu look en 3D.',
+    title: 'Ropa & Boutique Perlawasi - Moda Consciente | San Martín, Perú',
+    description: 'Boutique Perlamayo en Perlawasi. Ropa artesanal con materiales orgánicos: camisetas de lino, pantalones algodón pima, vestidos bambú y más. Configura tu look en 3D.',
 }
 
 export default function RopaPage() {

@@ -53,17 +53,17 @@ export default function CafeCacaoPage() {
             <section className="section bg-white">
                 <div className="container-custom">
                     <div className="grid md:grid-cols-2 gap-16">
-                        {/* Caf├® */}
+                        {/* Café */}
                         <div className="space-y-6">
-                            <div className="text-6xl mb-4">Ôÿò</div>
-                            <h2 className="text-4xl font-display font-bold">Caf├® de las Alturas</h2>
+                            <div className="text-6xl mb-4">☕</div>
+                            <h2 className="text-4xl font-display font-bold">Café de las Alturas</h2>
                             <p className="text-gray-600 text-lg leading-relaxed">
-                                Granos cultivados a m├ís de 1,500 metros sobre el nivel del mar en las monta├▒as andinas. Cada taza cuenta la historia de agricultores que dedican su vida al cultivo perfecto.
+                                Granos cultivados a más de 1,500 metros sobre el nivel del mar en las montañas andinas. Cada taza cuenta la historia de agricultores que dedican su vida al cultivo perfecto.
                             </p>
                             <div className="space-y-3">
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-primary-500"></div>
-                                    <span className="text-gray-700">Tostado artesanal en peque├▒os lotes</span>
+                                    <span className="text-gray-700">Tostado artesanal en pequeños lotes</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 rounded-full bg-primary-500"></div>
@@ -78,10 +78,10 @@ export default function CafeCacaoPage() {
 
                         {/* Cacao */}
                         <div className="space-y-6">
-                            <div className="text-6xl mb-4">­ƒì½</div>
+                            <div className="text-6xl mb-4">🍫</div>
                             <h2 className="text-4xl font-display font-bold">Cacao Ancestral</h2>
                             <p className="text-gray-600 text-lg leading-relaxed">
-                                Cacao fino de aroma de San Mart├¡n, cultivado con t├®cnicas que honran la tradici├│n de nuestros ancestros. Transformado en chocolates que preservan la pureza del origen.
+                                Cacao fino de aroma de San Martín, cultivado con técnicas que honran la tradición de nuestros ancestros. Transformado en chocolates que preservan la pureza del origen.
                             </p>
                             <div className="space-y-3">
                                 <div className="flex items-center gap-3">
@@ -109,7 +109,7 @@ export default function CafeCacaoPage() {
                         <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Experiencias Curadas</span>
                         <h2 className="text-4xl md:text-6xl font-display font-bold mt-4 mb-6">Cajas de Ritual</h2>
                         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                            Colecciones dise├▒adas para transformar tus momentos en ceremonias sensoriales
+                            Colecciones diseñadas para transformar tus momentos en ceremonias sensoriales
                         </p>
                     </div>
 
@@ -117,13 +117,13 @@ export default function CafeCacaoPage() {
                         {/* Caja 1 */}
                         <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
                             <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                Ôÿò
+                                ☕
                             </div>
                             <div className="p-8">
                                 <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">Ritual Matutino</span>
                                 <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja del Despertar</h3>
                                 <p className="text-gray-600 mb-6 leading-relaxed">
-                                    3 variedades de caf├® de especialidad + prensa francesa artesanal + taza de cer├ímica local
+                                    3 variedades de café de especialidad + prensa francesa artesanal + taza de cerámica local
                                 </p>
                                 <div className="flex items-center justify-between">
                                     <span className="text-2xl font-bold text-gray-900">S/ 145</span>
@@ -135,13 +135,13 @@ export default function CafeCacaoPage() {
                         {/* Caja 2 */}
                         <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
                             <div className="aspect-square bg-gradient-to-br from-amber-900 to-amber-700 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                ­ƒì½
+                                🍫
                             </div>
                             <div className="p-8">
                                 <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">Ritual Nocturno</span>
                                 <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja del Cacao</h3>
                                 <p className="text-gray-600 mb-6 leading-relaxed">
-                                    5 barras de chocolate artesanal (70%, 80%, 90%) + nibs de cacao + infusi├│n de c├íscara
+                                    5 barras de chocolate artesanal (70%, 80%, 90%) + nibs de cacao + infusión de cáscara
                                 </p>
                                 <div className="flex items-center justify-between">
                                     <span className="text-2xl font-bold text-gray-900">S/ 165</span>
@@ -153,13 +153,13 @@ export default function CafeCacaoPage() {
                         {/* Caja 3 */}
                         <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
                             <div className="aspect-square bg-gradient-to-br from-yellow-100 via-amber-100 to-orange-100 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                ­ƒñÄ
+                                🥨
                             </div>
                             <div className="p-8">
                                 <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">Ritual Completo</span>
-                                <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja Fusi├│n</h3>
+                                <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja Fusión</h3>
                                 <p className="text-gray-600 mb-6 leading-relaxed">
-                                    Caf├® + Chocolate + Bombones rellenos + Molinillo tradicional + Gu├¡a de maridaje
+                                    Café + Chocolate + Bombones rellenos + Molinillo tradicional + Guía de maridaje
                                 </p>
                                 <div className="flex items-center justify-between">
                                     <span className="text-2xl font-bold text-gray-900">S/ 220</span>
@@ -180,9 +180,9 @@ export default function CafeCacaoPage() {
                         {/* Producto 1 */}
                         <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
                             <div className="aspect-square bg-gradient-to-br from-amber-200 to-amber-100 rounded-xl flex items-center justify-center text-6xl mb-4">
-                                Ôÿò
+                                ☕
                             </div>
-                            <h4 className="font-bold text-lg mb-2">Caf├® Altura Premium</h4>
+                            <h4 className="font-bold text-lg mb-2">Café Altura Premium</h4>
                             <p className="text-sm text-gray-600 mb-3">250g - Grano entero</p>
                             <div className="flex items-center justify-between">
                                 <span className="font-bold text-lg">S/ 45</span>
@@ -193,9 +193,9 @@ export default function CafeCacaoPage() {
                         {/* Producto 2 */}
                         <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
                             <div className="aspect-square bg-gradient-to-br from-orange-200 to-orange-100 rounded-xl flex items-center justify-center text-6xl mb-4">
-                                Ôÿò
+                                ☕
                             </div>
-                            <h4 className="font-bold text-lg mb-2">Caf├® Org├ínico</h4>
+                            <h4 className="font-bold text-lg mb-2">Café Orgánico</h4>
                             <p className="text-sm text-gray-600 mb-3">250g - Molido</p>
                             <div className="flex items-center justify-between">
                                 <span className="font-bold text-lg">S/ 38</span>
@@ -206,7 +206,7 @@ export default function CafeCacaoPage() {
                         {/* Producto 3 */}
                         <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
                             <div className="aspect-square bg-gradient-to-br from-amber-800 to-amber-600 rounded-xl flex items-center justify-center text-6xl mb-4">
-                                ­ƒì½
+                                🍫
                             </div>
                             <h4 className="font-bold text-lg mb-2">Chocolate 70%</h4>
                             <p className="text-sm text-gray-600 mb-3">100g - Barra</p>
@@ -219,7 +219,7 @@ export default function CafeCacaoPage() {
                         {/* Producto 4 */}
                         <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
                             <div className="aspect-square bg-gradient-to-br from-amber-900 to-black rounded-xl flex items-center justify-center text-6xl mb-4">
-                                ­ƒì½
+                                🍫
                             </div>
                             <h4 className="font-bold text-lg mb-2">Chocolate 90%</h4>
                             <p className="text-sm text-gray-600 mb-3">100g - Barra</p>
@@ -232,37 +232,37 @@ export default function CafeCacaoPage() {
                 </div>
             </section>
 
-            {/* Experiencia de Degustaci├│n */}
+            {/* Experiencia de Degustación */}
             <section id="degustacion" className="section bg-brand-dark text-white">
                 <div className="container-custom">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div className="space-y-8">
                             <span className="text-primary-400 font-bold uppercase tracking-widest text-xs">Experiencia Sensorial</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold">
-                                Degustaci├│n Guiada
+                                Degustación Guiada
                             </h2>
                             <p className="text-white/80 text-lg leading-relaxed">
-                                Sum├®rgete en un viaje sensorial donde aprender├ís a identificar notas, aromas y texturas. Nuestro sommelier te guiar├í a trav├®s de 6 variedades de caf├® y 5 tipos de chocolate.
+                                Sumérgete en un viaje sensorial donde aprenderás a identificar notas, aromas y texturas. Nuestro sommelier te guiará a través de 6 variedades de café y 5 tipos de chocolate.
                             </p>
                             <div className="space-y-4">
                                 <div className="flex items-start gap-4">
-                                    <div className="text-2xl">ÔÅ▒´©Å</div>
+                                    <div className="text-2xl">⌛</div>
                                     <div>
-                                        <p className="font-bold">Duraci├│n</p>
+                                        <p className="font-bold">Duración</p>
                                         <p className="text-white/70">5 a 10 minutos</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <div className="text-2xl">­ƒÄü</div>
+                                    <div className="text-2xl">🎁</div>
                                     <div>
-                                        <p className="font-bold">Inversi├│n</p>
-                                        <p className="text-white/70">┬íCompletamente Gratis!</p>
+                                        <p className="font-bold">Inversión</p>
+                                        <p className="text-white/70">¡Completamente Gratis!</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="relative h-[500px] rounded-3xl overflow-hidden bg-gradient-to-br from-amber-900 to-amber-700 flex items-center justify-center text-[12rem] shadow-2xl">
-                            ­ƒ½û
+                            🫘
                         </div>
                     </div>
                 </div>
@@ -272,13 +272,13 @@ export default function CafeCacaoPage() {
             <section id="reservar" className="py-24 bg-gradient-to-br from-[#4A2C2A] to-[#2A1A18]">
                 <div className="container-custom text-center text-white">
                     <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">
-                        Descubre Nuestra Colecci├│n
+                        Descubre Nuestra Colección
                     </h2>
                     <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
-                        Visita nuestra tienda o cont├íctanos para pedidos personalizados y env├¡os a todo el Per├║
+                        Visita nuestra tienda o contáctanos para pedidos personalizados y envíos a todo el Perú
                     </p>
                     <div className="flex gap-4 justify-center flex-wrap">
-                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20informaci├│n%20sobre%20Caf├®%20y%20Cacao"
+                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20información%20sobre%20Café%20y%20Cacao"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn btn-primary px-12 py-5 text-xl font-bold">

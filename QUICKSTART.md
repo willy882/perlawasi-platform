@@ -27,7 +27,7 @@ Se ha creado una plataforma completa de e-commerce y reservaciones para Perlawas
 - ✅ **Header**: Navegación responsive con menú de categorías
 - ✅ **Footer**: Enlaces, redes sociales, newsletter
 - ✅ **Homepage**: Hero section, estadísticas, categorías, productos destacados, testimonios
-- ✅ **WhatsApp Button**: Botón flotante con enlace directo al número 928141669
+- ✅ **WhatsApp Button**: Botón flotante con enlace directo al número +51 928 141 669
 - ✅ **ChatBot**: Asistente virtual con conocimiento sobre Perlawasi
 - ✅ **Componentes**: CategoryShowcase, FeaturedProducts
 
@@ -150,7 +150,7 @@ El seed crea:
 - ~25 productos de ejemplo distribuidos en todas las categorías
 
 ### WhatsApp
-- Número configurado: **928141669**
+- Número configurado: **+51 928 141 669**
 - El botón flotante redirige automáticamente a WhatsApp
 
 ### Chatbot

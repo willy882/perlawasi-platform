@@ -163,7 +163,7 @@ https://perlawasi-platform-xxx.vercel.app
 ## 📞 Soporte
 
 - **Ubicación**: Segunda Jerusalén - Rioja, San Martín
-- **WhatsApp**: +51 928141669
+- **WhatsApp**: +51 928 141 669
 - **Operadores Turísticos**: +60 alianzas
 
 ## 📄 Licencia

@@ -1,11 +1,7 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-    title: 'Restaurante Perlawasi - Del Campo a la Mesa | Gastronomía Peruana',
-    description: 'Experiencia gastronómica única con ingredientes de kilómetro cero. Platos signature que celebran la biodiversidad de San Martín.',
-}
 
 export default function RestaurantePage() {
     return (
@@ -26,7 +22,7 @@ export default function RestaurantePage() {
 
                 <div className="relative z-20 container-custom text-white">
                     <div className="max-w-3xl">
-                        <span className="inline-block px-4 py-2 bg-primary-500 text-white text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
+                        <span className="inline-block px-4 py-2 bg-emerald-500 text-white text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
                             Kilómetro Cero
                         </span>
                         <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
@@ -36,7 +32,7 @@ export default function RestaurantePage() {
                             Celebramos la biodiversidad de San Martín con ingredientes frescos de nuestra huerta. Cada plato cuenta la historia de nuestra tierra.
                         </p>
                         <div className="flex gap-4 flex-wrap">
-                            <Link href="#menu" className="btn btn-primary px-10 py-4 text-lg">
+                            <Link href="#menu" className="btn bg-emerald-600 text-white px-10 py-4 text-lg hover:bg-emerald-700">
                                 Ver Menú
                             </Link>
                             <Link href="#reservar" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg">
@@ -52,7 +48,7 @@ export default function RestaurantePage() {
                 <div className="container-custom">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div className="space-y-6">
-                            <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Nuestra Filosofía</span>
+                            <span className="text-emerald-500 font-bold uppercase tracking-widest text-xs">Nuestra Filosofía</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900">
                                 Ingredientes que Viajan Metros, No Kilómetros
                             </h2>
@@ -61,11 +57,11 @@ export default function RestaurantePage() {
                             </p>
                             <div className="grid grid-cols-2 gap-6 pt-4">
                                 <div className="space-y-2">
-                                    <div className="text-4xl font-bold text-primary-500">100%</div>
+                                    <div className="text-4xl font-bold text-emerald-500">100%</div>
                                     <p className="text-sm text-gray-600 font-medium">Ingredientes Locales</p>
                                 </div>
                                 <div className="space-y-2">
-                                    <div className="text-4xl font-bold text-primary-500">0km</div>
+                                    <div className="text-4xl font-bold text-emerald-500">0km</div>
                                     <p className="text-sm text-gray-600 font-medium">De la Huerta a la Cocina</p>
                                 </div>
                             </div>
@@ -88,7 +84,7 @@ export default function RestaurantePage() {
             <section id="menu" className="section bg-white">
                 <div className="container-custom">
                     <div className="text-center mb-16">
-                        <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Nuestros Clásicos</span>
+                        <span className="text-emerald-500 font-bold uppercase tracking-widest text-xs">Nuestros Clásicos</span>
                         <h2 className="text-4xl md:text-6xl font-display font-bold mt-4 mb-6">Platos Signature</h2>
                         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
                             Creaciones culinarias que fusionan técnicas ancestrales con innovación contemporánea
@@ -99,16 +95,16 @@ export default function RestaurantePage() {
                         {/* Plato 1 */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
                             <div className="aspect-square bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                ­ƒÑù
+                                🥗
                             </div>
                             <div className="p-8">
                                 <h3 className="text-2xl font-display font-bold mb-3">Ensalada de la Huerta</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Vegetales frescos de nuestra huerta con vinagreta de maracuy├í y hierbas arom├íticas.
+                                    Vegetales frescos de nuestra huerta con vinagreta de maracuyá y hierbas aromáticas.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-primary-500">S/ 28</span>
-                                    <button className="btn btn-primary px-6 py-2 text-sm">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 28</span>
+                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
                                 </div>
                             </div>
                         </div>
@@ -116,16 +112,16 @@ export default function RestaurantePage() {
                         {/* Plato 2 */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
                             <div className="aspect-square bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                ­ƒì▓
+                                🍲
                             </div>
                             <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3">Inchicapi Amaz├│nico</h3>
+                                <h3 className="text-2xl font-display font-bold mb-3">Inchicapi Amazónico</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Sopa tradicional de gallina criolla con man├¡, cilantro y yuca de la regi├│n.
+                                    Sopa tradicional de gallina criolla con maní, cilantro y yuca de la región.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-primary-500">S/ 35</span>
-                                    <button className="btn btn-primary px-6 py-2 text-sm">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 35</span>
+                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +129,7 @@ export default function RestaurantePage() {
                         {/* Plato 3 */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
                             <div className="aspect-square bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                ­ƒÉƒ
+                                🐟
                             </div>
                             <div className="p-8">
                                 <h3 className="text-2xl font-display font-bold mb-3">Paiche a la Parrilla</h3>
@@ -141,8 +137,8 @@ export default function RestaurantePage() {
                                     Filete de paiche amazónico con salsa de aguaje y plátano caramelizado.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-primary-500">S/ 48</span>
-                                    <button className="btn btn-primary px-6 py-2 text-sm">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 48</span>
+                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
                                 </div>
                             </div>
                         </div>
@@ -150,16 +146,16 @@ export default function RestaurantePage() {
                         {/* Plato 4 */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
                             <div className="aspect-square bg-gradient-to-br from-yellow-100 to-yellow-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                ­ƒìû
+                                🍖
                             </div>
                             <div className="p-8">
                                 <h3 className="text-2xl font-display font-bold mb-3">Cecina con Tacacho</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Cerdo ahumado artesanalmente con bolas de pl├ítano verde y chorizo regional.
+                                    Cerdo ahumado artesanalmente con bolas de plátano verde y chorizo regional.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-primary-500">S/ 42</span>
-                                    <button className="btn btn-primary px-6 py-2 text-sm">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 42</span>
+                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
                                 </div>
                             </div>
                         </div>
@@ -167,16 +163,16 @@ export default function RestaurantePage() {
                         {/* Plato 5 */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
                             <div className="aspect-square bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                ­ƒìç
+                                🍛
                             </div>
                             <div className="p-8">
                                 <h3 className="text-2xl font-display font-bold mb-3">Juane Gourmet</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Arroz con pollo envuelto en hojas de bijao, versi├│n premium con especias secretas.
+                                    Arroz con pollo envuelto en hojas de bijao, versión premium con especias secretas.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-primary-500">S/ 38</span>
-                                    <button className="btn btn-primary px-6 py-2 text-sm">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 38</span>
+                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
                                 </div>
                             </div>
                         </div>
@@ -184,16 +180,16 @@ export default function RestaurantePage() {
                         {/* Plato 6 */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
                             <div className="aspect-square bg-gradient-to-br from-pink-100 to-pink-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                ­ƒì░
+                                🍧
                             </div>
                             <div className="p-8">
                                 <h3 className="text-2xl font-display font-bold mb-3">Postre de Camu Camu</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Mousse de camu camu con crumble de cacao y frutas amaz├│nicas frescas.
+                                    Mousse de camu camu con crumble de cacao y frutas amazónicas frescas.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-primary-500">S/ 22</span>
-                                    <button className="btn btn-primary px-6 py-2 text-sm">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 22</span>
+                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
                                 </div>
                             </div>
                         </div>
@@ -202,68 +198,68 @@ export default function RestaurantePage() {
             </section>
 
             {/* Experiencias Exclusivas */}
-            <section className="section bg-brand-dark text-white">
+            <section className="section bg-[#1a3c1a] text-white">
                 <div className="container-custom">
                     <div className="text-center mb-16">
-                        <span className="text-primary-400 font-bold uppercase tracking-widest text-xs">Solo en Perlawasi</span>
+                        <span className="text-emerald-400 font-bold uppercase tracking-widest text-xs">Solo en Perlawasi</span>
                         <h2 className="text-4xl md:text-6xl font-display font-bold mt-4">Experiencias Exclusivas</h2>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {/* Experiencia 1 */}
-                        <div className="bg-brand-dark/40 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-brand-dark/60 transition-all flex flex-col relative overflow-hidden group">
+                        <div className="bg-[#1a3c1a]/40 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-[#1a3c1a]/60 transition-all flex flex-col relative overflow-hidden group">
                             {/* Fondo de Imagen */}
                             <div className="absolute inset-0 z-0">
                                 <Image
                                     src="/images/exp_chocolate.png"
-                                    alt="Degustaci├│n de Chocolate"
+                                    alt="Degustación de Chocolate"
                                     fill
                                     className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
                                     quality={100}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c1a] via-[#1a3c1a]/40 to-transparent" />
                             </div>
 
                             <div className="relative z-10 flex flex-col h-full">
-                                <h3 className="text-2xl font-display font-bold mb-4">Degustaci├│n de Chocolate</h3>
+                                <h3 className="text-2xl font-display font-bold mb-4">Degustación de Chocolate</h3>
                                 <p className="text-white/80 text-lg mb-6 leading-relaxed flex-grow">
-                                    Un viaje sensorial por los aromas y sabores del cacao amaz├│nico en sus diferentes concentraciones y texturas.
+                                    Un viaje sensorial por los aromas y sabores del cacao amazónico en sus diferentes concentraciones y texturas.
                                 </p>
                                 <div className="flex items-center justify-between mt-auto">
-                                    <span className="text-2xl font-bold text-primary-400">Consultar</span>
-                                    <Link href="#reservar" className="btn btn-primary px-6 py-2">Reservar</Link>
+                                    <span className="text-2xl font-bold text-emerald-400">Consultar</span>
+                                    <Link href="#reservar" className="btn bg-emerald-600 text-white px-6 py-2 hover:bg-emerald-700">Reservar</Link>
                                 </div>
                             </div>
                         </div>
 
                         {/* Experiencia 2 */}
-                        <div className="bg-brand-dark/40 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-brand-dark/60 transition-all flex flex-col relative overflow-hidden group">
+                        <div className="bg-[#1a3c1a]/40 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-[#1a3c1a]/60 transition-all flex flex-col relative overflow-hidden group">
                             {/* Fondo de Imagen */}
                             <div className="absolute inset-0 z-0">
                                 <Image
                                     src="/images/exp_cafe.png"
-                                    alt="Tour del Caf├®"
+                                    alt="Tour del Café"
                                     fill
                                     className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
                                     quality={100}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c1a] via-[#1a3c1a]/40 to-transparent" />
                             </div>
 
                             <div className="relative z-10 flex flex-col h-full">
-                                <h3 className="text-2xl font-display font-bold mb-4">Tour del Caf├®</h3>
+                                <h3 className="text-2xl font-display font-bold mb-4">Tour del Café</h3>
                                 <p className="text-white/80 text-lg mb-6 leading-relaxed flex-grow">
-                                    Descubre el proceso desde el grano hasta la taza con una cata guiada de nuestros varietales m├ís exclusivos.
+                                    Descubre el proceso desde el grano hasta la taza con una cata guiada de nuestros varietales más exclusivos.
                                 </p>
                                 <div className="flex items-center justify-between mt-auto">
-                                    <span className="text-2xl font-bold text-primary-400">Consultar</span>
-                                    <Link href="#reservar" className="btn btn-primary px-6 py-2">Reservar</Link>
+                                    <span className="text-2xl font-bold text-emerald-400">Consultar</span>
+                                    <Link href="#reservar" className="btn bg-emerald-600 text-white px-6 py-2 hover:bg-emerald-700">Reservar</Link>
                                 </div>
                             </div>
                         </div>
 
                         {/* Experiencia 3 */}
-                        <div className="bg-brand-dark/40 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-brand-dark/60 transition-all flex flex-col relative overflow-hidden group">
+                        <div className="bg-[#1a3c1a]/40 backdrop-blur-sm border border-white/10 rounded-3xl p-10 hover:bg-[#1a3c1a]/60 transition-all flex flex-col relative overflow-hidden group">
                             {/* Fondo de Imagen */}
                             <div className="absolute inset-0 z-0">
                                 <Image
@@ -273,17 +269,17 @@ export default function RestaurantePage() {
                                     className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
                                     quality={100}
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c1a] via-[#1a3c1a]/40 to-transparent" />
                             </div>
 
                             <div className="relative z-10 flex flex-col h-full">
                                 <h3 className="text-2xl font-display font-bold mb-4">Licores Perlamayo</h3>
                                 <p className="text-white/80 text-lg mb-6 leading-relaxed flex-grow">
-                                    Explora nuestra selecci├│n de destilados y macerados artesanales inspirados en los frutos ex├│ticos de la selva.
+                                    Explora nuestra selección de destilados y macerados artesanales inspirados en los frutos exóticos de la selva.
                                 </p>
                                 <div className="flex items-center justify-between mt-auto">
-                                    <span className="text-2xl font-bold text-primary-400">Consultar</span>
-                                    <Link href="#reservar" className="btn btn-primary px-6 py-2">Reservar</Link>
+                                    <span className="text-2xl font-bold text-emerald-400">Consultar</span>
+                                    <Link href="#reservar" className="btn bg-emerald-600 text-white px-6 py-2 hover:bg-emerald-700">Reservar</Link>
                                 </div>
                             </div>
                         </div>
@@ -291,32 +287,32 @@ export default function RestaurantePage() {
                 </div>
             </section>
 
-            {/* Ubicaci├│n */}
+            {/* Ubicación */}
             <section className="section bg-white">
                 <div className="container-custom">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div className="space-y-6">
-                            <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Encu├®ntranos</span>
+                            <span className="text-emerald-500 font-bold uppercase tracking-widest text-xs">Encuéntranos</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold">
-                                En el Coraz├│n de San Mart├¡n
+                                En el Corazón de San Martín
                             </h2>
                             <div className="space-y-4 text-gray-600">
                                 <div className="flex items-start gap-4">
-                                    <div className="text-2xl">­ƒôì</div>
+                                    <div className="text-2xl">📍</div>
                                     <div>
-                                        <p className="font-bold text-gray-900">Direcci├│n</p>
-                                        <p>Segunda Jerusal├®n - Rioja, San Mart├¡n, Per├║</p>
+                                        <p className="font-bold text-gray-900">Dirección</p>
+                                        <p>Segunda Jerusalén - Rioja, San Martín, Perú</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <div className="text-2xl">­ƒòÉ</div>
+                                    <div className="text-2xl">🕒</div>
                                     <div>
                                         <p className="font-bold text-gray-900">Horario</p>
                                         <p>Lunes a Domingo: 8:00 AM - 10:00 PM</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <div className="text-2xl">­ƒô×</div>
+                                    <div className="text-2xl">📱</div>
                                     <div>
                                         <p className="font-bold text-gray-900">Contacto</p>
                                         <p>+51 928 141 669</p>
@@ -342,15 +338,15 @@ export default function RestaurantePage() {
                                     rel="noopener noreferrer"
                                     className="bg-white text-gray-900 px-4 py-2 rounded-xl shadow-lg border border-gray-100 text-sm font-bold flex items-center gap-2 hover:bg-gray-50 transition-colors"
                                 >
-                                    <span>­ƒÜù</span> C├│mo llegar
+                                    <span>🚗</span> Cómo llegar
                                 </a>
                                 <a
                                     href="https://www.google.com/maps/search/?api=1&query=Perlawasi+Lodge+%26+Experiences+Rioja+San+Martin"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="bg-brand-dark/80 backdrop-blur-md text-white px-4 py-2 rounded-xl shadow-lg border border-white/10 text-sm font-bold flex items-center gap-2 hover:bg-brand-dark transition-colors"
+                                    className="bg-emerald-950/80 backdrop-blur-md text-white px-4 py-2 rounded-xl shadow-lg border border-white/10 text-sm font-bold flex items-center gap-2 hover:bg-emerald-950 transition-colors"
                                 >
-                                    <span>­ƒù║´©Å</span> Pantalla Completa
+                                    <span>🗺️</span> Pantalla Completa
                                 </a>
                             </div>
                         </div>
@@ -359,16 +355,16 @@ export default function RestaurantePage() {
             </section>
 
             {/* Reserva CTA */}
-            <section id="reservar" className="py-24 bg-gradient-to-br from-primary-500 to-primary-600">
+            <section id="reservar" className="py-24 bg-gradient-to-br from-emerald-500 to-emerald-600">
                 <div className="container-custom text-center text-white">
                     <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">
-                        Reserva tu Experiencia Gastron├│mica
+                        Reserva tu Experiencia Gastronómica
                     </h2>
                     <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
                         Asegura tu mesa y vive una experiencia culinaria que celebra lo mejor de nuestra tierra
                     </p>
                     <div className="flex gap-4 justify-center flex-wrap">
-                        <a href="tel:+51928141669" className="btn bg-white text-primary-600 px-12 py-5 text-xl font-bold hover:bg-gray-100">
+                        <a href="tel:+51928141669" className="btn bg-white text-emerald-600 px-12 py-5 text-xl font-bold hover:bg-gray-100">
                             Llamar Ahora
                         </a>
                         <a href="https://wa.me/51928141669?text=Hola,%20quiero%20reservar%20una%20mesa%20en%20el%20restaurante"
@@ -383,3 +379,4 @@ export default function RestaurantePage() {
         </div>
     )
 }
+

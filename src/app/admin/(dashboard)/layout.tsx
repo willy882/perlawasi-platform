@@ -40,7 +40,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                         </div>
                         <div>
                             <h2 className="font-display font-black tracking-tighter text-xl text-white leading-none">PERLAWASI</h2>
-                            <p className="text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-bold mt-1">Admin Panel</p>
+                            <p className="text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-bold mt-1">Panel de Administración</p>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                         </button>
                         <div>
                             <h1 className="text-xl font-bold text-gray-800 leading-none">
-                                {menuItems.find(i => i.path === pathname)?.name || 'Dashboard'}
+                                {menuItems.find(i => i.path === pathname)?.name || 'Panel de Control'}
                             </h1>
                             <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Sistema Integrado</p>
                         </div>

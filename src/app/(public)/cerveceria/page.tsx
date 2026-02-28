@@ -3,16 +3,16 @@ import Image from 'next/image'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Cervecer├¡a Perlawasi - Cerveza Artesanal con Alma de Monta├▒a | San Mart├¡n',
-    description: 'Descubre nuestras variedades de cerveza artesanal elaboradas con agua de manantial y l├║pulos seleccionados. Visita nuestro taproom gourmet.',
+    title: 'Cervecería Perlawasi - Cerveza Artesanal con Alma de Montaña | San Martín',
+    description: 'Descubre nuestras variedades de cerveza artesanal elaboradas con agua de manantial y lúpulos seleccionados. Visita nuestro taproom gourmet.',
 }
 
 export default function CerveceriaPage() {
     const beers = [
-        { name: 'Andina Gold', type: 'Golden Ale', abv: '5.2%', emoji: '­ƒì║', color: 'from-yellow-400 to-yellow-200' },
-        { name: 'Selva Roja', type: 'Red Ale', abv: '6.0%', emoji: '­ƒì║', color: 'from-red-600 to-red-400' },
-        { name: 'Mystic IPA', type: 'India Pale Ale', abv: '6.5%', emoji: '­ƒì║', color: 'from-amber-600 to-amber-400' },
-        { name: 'Dark Amazon', type: 'Stout', abv: '7.2%', emoji: '­ƒì║', color: 'from-gray-900 to-gray-700' },
+        { name: 'Andina Gold', type: 'Golden Ale', abv: '5.2%', emoji: '🍺', color: 'from-yellow-400 to-yellow-200' },
+        { name: 'Selva Roja', type: 'Red Ale', abv: '6.0%', emoji: '🍺', color: 'from-red-600 to-red-400' },
+        { name: 'Mystic IPA', type: 'India Pale Ale', abv: '6.5%', emoji: '🍺', color: 'from-amber-600 to-amber-400' },
+        { name: 'Dark Amazon', type: 'Stout', abv: '7.2%', emoji: '🍺', color: 'from-gray-900 to-gray-700' },
     ]
 
     return (
@@ -41,10 +41,10 @@ export default function CerveceriaPage() {
                             Artesana & Natural
                         </span>
                         <h1 className="text-6xl md:text-8xl font-display font-bold mb-6 leading-tight">
-                            Maestr├¡a en <br />Cada Malta
+                            Maestría en <br />Cada Malta
                         </h1>
                         <p className="text-2xl text-white/95 mb-10 leading-relaxed max-w-2xl">
-                            Cervezas ├║nicas con sabores inspirados en las monta├▒as. Elaboradas con agua pura de manantial y pasi├│n inquebrantable.
+                            Cervezas únicas con sabores inspirados en las montañas. Elaboradas con agua pura de manantial y pasión inquebrantable.
                         </p>
                         <div className="flex gap-4 flex-wrap">
                             <Link href="#variedades" className="btn bg-black text-white px-10 py-4 text-lg hover:bg-gray-900">
@@ -65,7 +65,7 @@ export default function CerveceriaPage() {
                         <div className="order-2 md:order-1 relative h-[500px] rounded-[3rem] overflow-hidden bg-gray-100">
                             <Image
                                 src="/images/cerveceria_fermentacion.png"
-                                alt="Proceso de Fermentaci├│n"
+                                alt="Proceso de Fermentación"
                                 fill
                                 className="object-cover"
                             />
@@ -73,16 +73,16 @@ export default function CerveceriaPage() {
                         <div className="order-1 md:order-2 space-y-6">
                             <span className="text-[#FFB300] font-bold uppercase tracking-widest text-xs">El Arte de Elaborar</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900">
-                                Ritual de Fermentaci├│n
+                                Ritual de Fermentación
                             </h2>
                             <p className="text-gray-600 text-lg leading-relaxed">
-                                Nuestro proceso combina tecnolog├¡a moderna con t├®cnicas tradicionales de fermentaci├│n. Desde la selecci├│n manual de los granos hasta el embotellado final, cada paso es supervisado por nuestros maestros cerveceros.
+                                Nuestro proceso combina tecnología moderna con técnicas tradicionales de fermentación. Desde la selección manual de los granos hasta el embotellado final, cada paso es supervisado por nuestros maestros cerveceros.
                             </p>
                             <ul className="space-y-4 pt-4">
                                 {[
                                     { title: 'Agua de Manantial', desc: 'Pureza absoluta desde la fuente natural.' },
-                                    { title: 'L├║pulos Seleccionados', desc: 'Aromas y amargores equilibrados a la perfecci├│n.' },
-                                    { title: 'Maduraci├│n Lenta', desc: 'El tiempo necesario para desarrollar el car├ícter real.' }
+                                    { title: 'Lúpulos Seleccionados', desc: 'Aromas y amargores equilibrados a la perfección.' },
+                                    { title: 'Maduración Lenta', desc: 'El tiempo necesario para desarrollar el carácter real.' }
                                 ].map((item, i) => (
                                     <li key={i} className="flex gap-4">
                                         <div className="w-6 h-6 rounded-full bg-[#FFB300] flex-shrink-0" />
@@ -102,7 +102,7 @@ export default function CerveceriaPage() {
             <section id="variedades" className="section bg-brand-dark text-white">
                 <div className="container-custom">
                     <div className="text-center mb-16">
-                        <span className="text-[#FFB300] font-bold uppercase tracking-widest text-xs">Nuestra Selecci├│n</span>
+                        <span className="text-[#FFB300] font-bold uppercase tracking-widest text-xs">Nuestra Selección</span>
                         <h2 className="text-4xl md:text-6xl font-display font-bold mt-4">Variedades de Autor</h2>
                     </div>
 
@@ -116,7 +116,7 @@ export default function CerveceriaPage() {
                                 <p className="text-[#FFB300] font-bold text-sm mb-4 uppercase tracking-widest">{beer.type}</p>
                                 <div className="flex justify-between items-center text-gray-400 text-sm">
                                     <span>ABV: {beer.abv}</span>
-                                    <button className="text-white hover:text-[#FFB300] transition-colors">Ver Ficha ÔåÆ</button>
+                                    <button className="text-white hover:text-[#FFB300] transition-colors">Ver Ficha →</button>
                                 </div>
                             </div>
                         ))}
@@ -133,17 +133,17 @@ export default function CerveceriaPage() {
                                 <span className="text-[#FFB300] font-bold uppercase tracking-widest text-xs">Vive la Experiencia</span>
                                 <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mt-2">Visita Nuestro Taproom</h2>
                                 <p className="text-gray-600 text-lg mt-6 leading-relaxed">
-                                    Ven y disfruta de nuestras cervezas reci├®n salidas del barril. Un ambiente ├║nico donde la cultura cervecera se encuentra con la alta cocina en un maridaje perfecto.
+                                    Ven y disfruta de nuestras cervezas recién salidas del barril. Un ambiente único donde la cultura cervecera se encuentra con la alta cocina en un maridaje perfecto.
                                 </p>
                             </div>
                             <div className="grid grid-cols-2 gap-8">
                                 <div className="p-6 bg-white rounded-2xl shadow-soft">
                                     <h4 className="font-bold mb-2">Catas Guiadas</h4>
-                                    <p className="text-xs text-gray-500">Prueba todas nuestras variedades con un gu├¡a experto.</p>
+                                    <p className="text-xs text-gray-500">Prueba todas nuestras variedades con un guía experto.</p>
                                 </div>
                                 <div className="p-6 bg-white rounded-2xl shadow-soft">
                                     <h4 className="font-bold mb-2">Maridaje</h4>
-                                    <p className="text-xs text-gray-500">Snacks especiales dise├▒ados para cada tipo de cerveza.</p>
+                                    <p className="text-xs text-gray-500">Snacks especiales diseñados para cada tipo de cerveza.</p>
                                 </div>
                             </div>
                             <Link href="/reservar" className="btn bg-black text-white px-10 py-4 rounded-full text-lg inline-block">
@@ -151,7 +151,7 @@ export default function CerveceriaPage() {
                             </Link>
                         </div>
                         <div className="relative h-[600px] rounded-[4rem] overflow-hidden bg-amber-100 flex items-center justify-center text-[10rem] shadow-medium">
-                            ­ƒÑ¿
+                            🥨
                         </div>
                     </div>
                 </div>
@@ -160,13 +160,13 @@ export default function CerveceriaPage() {
             {/* CTA Final */}
             <section className="py-24 bg-[#FFB300]">
                 <div className="container-custom text-center">
-                    <h2 className="text-4xl md:text-6xl font-display font-bold mb-8 text-black">┬┐Sed de algo real?</h2>
+                    <h2 className="text-4xl md:text-6xl font-display font-bold mb-8 text-black">¿Sed de algo real?</h2>
                     <div className="flex gap-4 justify-center flex-wrap">
                         <a href="https://wa.me/51928141669?text=Hola,%20quiero%20hacer%20un%20pedido%20de%20cervezas"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="btn bg-black text-white px-12 py-5 text-xl font-bold">
-                            Pedir Pack de Degustaci├│n
+                            Pedir Pack de Degustación
                         </a>
                         <Link href="/" className="btn bg-white text-black px-12 py-5 text-xl font-bold hover:bg-gray-100">
                             Volver al Inicio

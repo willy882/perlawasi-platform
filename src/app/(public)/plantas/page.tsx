@@ -4,30 +4,29 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-// ÔöÇÔöÇÔöÇ TIPOS ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
-interface Plant {
-    id: string
-    name: string
-    scientific: string
-    price: number
-    emoji: string
-    bgColor: string
-    accentColor: string
-    difficulty: 'Muy Fácil' | 'Fácil' | 'Medio' | 'Difícil'
-    light: string
-    water: string
-    environment: string
-    petFriendly: boolean
-    tabs: {
-        info: string
-        care: string
-        more: string
-    }
-    thumbnails: string[]
-    tags: string[]
+// ────────────────── TIPOS ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────interface Plant {
+id: string
+name: string
+scientific: string
+price: number
+emoji: string
+bgColor: string
+accentColor: string
+difficulty: 'Muy Fácil' | 'Fácil' | 'Medio' | 'Difícil'
+light: string
+water: string
+environment: string
+petFriendly: boolean
+tabs: {
+    info: string
+    care: string
+    more: string
+}
+thumbnails: string[]
+tags: string[]
 }
 
-// ÔöÇÔöÇÔöÇ DATOS ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ────────────────── DATOS ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 const plants: Plant[] = [
     {
         id: 'monstera',
@@ -157,7 +156,7 @@ const plants: Plant[] = [
     },
 ]
 
-// ÔöÇÔöÇÔöÇ ICONOS SVG DE CUIDADO ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ────────────────── ICONOS SVG DE CUIDADO ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 const SunIcon = () => (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <circle cx="12" cy="12" r="4" />
@@ -180,7 +179,7 @@ const PawIcon = () => (
     </svg>
 )
 
-// ÔöÇÔöÇÔöÇ COMPONENTE VISOR PLANTA ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ────────────────── COMPONENTE VISOR PLANTA ───────────────────────────────────────────────────────────────────────────────────────────────────────────
 function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty: (n: number) => void }) {
     const [activeTab, setActiveTab] = useState<'info' | 'care' | 'more'>('info')
     const [activeThumbnail, setActiveThumbnail] = useState(0)
@@ -225,7 +224,7 @@ function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty
                     className="lg:col-span-4 relative flex items-center justify-center p-8 lg:p-12 order-1 lg:order-2 min-h-[300px] lg:min-h-[500px] transition-colors duration-700"
                     style={{ backgroundColor: plant.bgColor }}
                 >
-                    {/* Decoraci├│n circular de fondo */}
+                    {/* Decoración circular de fondo */}
                     <div
                         className="absolute inset-0 m-8 lg:m-12 rounded-[2rem] opacity-20"
                         style={{ background: `radial-gradient(circle at 60% 40%, ${plant.accentColor}55, transparent 70%)` }}
@@ -239,7 +238,7 @@ function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty
                     {/* Badge pet friendly */}
                     {plant.petFriendly && (
                         <div className="absolute top-5 right-5 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-green-700 border border-green-200 flex items-center gap-1">
-                            ­ƒÉ¥ Pet Safe
+                            🐾 Pet Safe
                         </div>
                     )}
 
@@ -284,7 +283,7 @@ function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty
                             { icon: <SunIcon />, label: plant.light, title: 'Luz' },
                             { icon: <WaterIcon />, label: plant.water, title: 'Riego' },
                             { icon: <HomeIcon />, label: plant.environment, title: 'Ambiente' },
-                            { icon: <PawIcon />, label: plant.petFriendly ? 'Segura' : 'T├│xica', title: 'Mascotas' },
+                            { icon: <PawIcon />, label: plant.petFriendly ? 'Segura' : 'Tóxica', title: 'Mascotas' },
                         ].map((badge, i) => (
                             <div
                                 key={i}
@@ -300,7 +299,7 @@ function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty
                     {/* Divisor */}
                     <div className="border-t border-gray-100" />
 
-                    {/* Tabs de informaci├│n */}
+                    {/* Tabs de información */}
                     <div>
                         <div className="flex gap-0 border-b border-gray-100 mb-5">
                             {(['info', 'care', 'more'] as const).map((tab) => {
@@ -315,7 +314,7 @@ function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty
                                             }`}
                                         style={activeTab === tab ? { color: plant.accentColor, borderColor: plant.accentColor } : {}}
                                     >
-                                        {labels[tab]}
+                                        {tab === 'info' ? 'Información' : tab === 'care' ? 'Cuidados' : 'Más detalles'}
                                     </button>
                                 )
                             })}
@@ -344,7 +343,7 @@ function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty
                             <button
                                 onClick={() => setQty(Math.max(1, qty - 1))}
                                 className="w-11 h-11 flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors text-lg font-bold"
-                            >ÔêÆ</button>
+                            >−</button>
                             <span className="w-10 text-center text-sm font-bold">{qty}</span>
                             <button
                                 onClick={() => setQty(qty + 1)}
@@ -361,7 +360,7 @@ function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty
                                 transform: added ? 'scale(0.97)' : 'scale(1)',
                             }}
                         >
-                            {added ? 'Ô£ô ┬íAgregado!' : `A├▒adir al Carrito ┬À S/ ${plant.price * qty}`}
+                            {added ? '✓ ¡Agregado!' : `Añadir al Carrito · S/ ${plant.price * qty}`}
                         </button>
 
                         <a
@@ -382,7 +381,7 @@ function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty
     )
 }
 
-// ÔöÇÔöÇÔöÇ P├üGINA PRINCIPAL ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+// ────────────────── PÁGINA PRINCIPAL ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 export default function PlantasPage() {
     const [selectedPlant, setSelectedPlant] = useState<Plant>(plants[0])
     const [qty, setQty] = useState(1)
@@ -397,11 +396,11 @@ export default function PlantasPage() {
 
             {/* ÔòÉÔòÉ HERO ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ */}
             <section className="relative h-[65vh] flex items-center overflow-hidden" style={{ background: 'linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 50%, #E0F2F1 100%)' }}>
-                {/* Decoraciones bot├ínicas de fondo */}
+                {/* Decoraciones botánicas de fondo */}
                 <div className="absolute inset-0 select-none pointer-events-none overflow-hidden">
-                    <div className="absolute top-[-5%] right-[-5%] text-[30rem] opacity-[0.06] rotate-12">­ƒî┐</div>
-                    <div className="absolute bottom-[-10%] left-[5%] text-[20rem] opacity-[0.05] -rotate-12">­ƒî©</div>
-                    <div className="absolute top-[20%] left-[40%] text-[8rem] opacity-[0.04]">­ƒìâ</div>
+                    <div className="absolute top-[-5%] right-[-5%] text-[30rem] opacity-[0.06] rotate-12">🌿</div>
+                    <div className="absolute bottom-[-10%] left-[5%] text-[20rem] opacity-[0.05] -rotate-12">🍂</div>
+                    <div className="absolute top-[20%] left-[40%] text-[8rem] opacity-[0.04]">🍃</div>
                 </div>
 
                 {/* Subtle grid */}
@@ -415,7 +414,7 @@ export default function PlantasPage() {
                 <div className="relative z-10 container-custom w-full">
                     <div className="max-w-3xl px-4">
                         <div className="inline-flex items-center gap-2 bg-white/60 backdrop-blur-sm border border-green-200 px-4 py-2 rounded-full mb-6">
-                            <span className="text-green-600 text-xs font-black uppercase tracking-widest">­ƒî▒ Vivero Perlawasi</span>
+                            <span className="text-green-600 text-xs font-black uppercase tracking-widest">🌱 Vivero Perlawasi</span>
                         </div>
                         <h1 className="text-5xl md:text-7xl font-display font-black mb-6 leading-[1.05] tracking-tight text-gray-900">
                             Verdor<br />
@@ -424,14 +423,14 @@ export default function PlantasPage() {
                             </span>
                         </h1>
                         <p className="text-xl text-gray-600 mb-10 leading-relaxed max-w-xl">
-                            Plantas nativas y ex├│ticas de la Amazon├¡a Peruana. Cultivadas con amor en el coraz├│n de San Mart├¡n.
+                            Plantas nativas y exóticas de la Amazonía Peruana. Cultivadas con amor en el corazón de San Martín.
                         </p>
                         <div className="flex gap-4 flex-wrap">
                             <Link href="#vivero" className="btn bg-[#2E7D32] text-white px-10 py-4 text-base font-bold rounded-2xl hover:bg-[#1B5E20] shadow-lg transition-all hover:scale-105">
-                                Explorar Vivero ÔåÆ
+                                Explorar Vivero →
                             </Link>
                             <Link href="#cuidados" className="btn bg-white/70 backdrop-blur-sm text-[#2E7D32] border border-green-200 px-10 py-4 text-base font-bold rounded-2xl hover:bg-white transition-all">
-                                Gu├¡a de Cuidados
+                                Guía de Cuidados
                             </Link>
                         </div>
                     </div>
@@ -441,8 +440,8 @@ export default function PlantasPage() {
                 <div className="absolute bottom-8 right-8 hidden lg:flex gap-6">
                     {[
                         { value: '+80', label: 'Especies' },
-                        { value: '100%', label: 'Org├ínico' },
-                        { value: '5Ôÿà', label: 'Calidad' },
+                        { value: '100%', label: 'Orgánico' },
+                        { value: '5★', label: 'Calidad' },
                     ].map((stat, i) => (
                         <div key={i} className="bg-white/70 backdrop-blur-md rounded-2xl px-5 py-3 text-center border border-white/80 shadow-sm">
                             <p className="text-2xl font-black text-[#2E7D32]">{stat.value}</p>
@@ -458,10 +457,10 @@ export default function PlantasPage() {
                     {/* T├¡tulo secci├│n */}
                     <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
                         <div>
-                            <span className="text-green-600 text-xs font-black uppercase tracking-[0.3em] block mb-2">Selecci├│n Curada</span>
+                            <span className="text-green-600 text-xs font-black uppercase tracking-[0.3em] block mb-2">Selección Curada</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold">Nuestras Plantas</h2>
                         </div>
-                        <p className="text-gray-500 max-w-sm text-sm">Selecciona cualquier planta para ver sus detalles, gu├¡a de cuidados y a├▒adirla a tu carrito.</p>
+                        <p className="text-gray-500 max-w-sm text-sm">Selecciona cualquier planta para ver sus detalles, guía de cuidados y añadirla a tu carrito.</p>
                     </div>
 
                     <div className="grid lg:grid-cols-12 gap-8 items-start">
@@ -529,25 +528,25 @@ export default function PlantasPage() {
                     <div className="grid md:grid-cols-3 gap-6">
                         {[
                             {
-                                icon: 'ÔÿÇ´©Å',
+                                icon: '☀️',
                                 title: 'Luz perfecta',
                                 subtitle: 'El secreto del crecimiento',
-                                desc: 'La mayor├¡a de plantas de interior prosperan en luz brillante indirecta a 1-2 metros de una ventana. La luz directa quema; la oscuridad detiene el crecimiento. El punto medio es la clave.',
-                                wave: 'ÒÇ░´©Å',
+                                desc: 'La mayoría de plantas de interior prosperan en luz brillante indirecta a 1-2 metros de una ventana. La luz directa quema; la oscuridad detiene el crecimiento. El punto medio es la clave.',
+                                wave: '〰️',
                             },
                             {
-                                icon: '­ƒÆº',
+                                icon: '💧',
                                 title: 'El riego ideal',
-                                subtitle: 'El error m├ís com├║n',
-                                desc: 'El exceso de agua mata m├ís plantas que la sequ├¡a. Introduce el dedo 2-3 cm en el sustrato: si est├í h├║medo, espera. El riego profundo e infrecuente es siempre mejor que el superficial y diario.',
-                                wave: 'ÒÇ░´©Å',
+                                subtitle: 'El error más común',
+                                desc: 'El exceso de agua mata más plantas que la sequía. Introduce el dedo 2-3 cm en el sustrato: si está húmedo, espera. El riego profundo e infrecuente es siempre mejor que el superficial y diario.',
+                                wave: '〰️',
                             },
                             {
-                                icon: '­ƒº¬',
-                                title: 'Nutrici├│n natural',
-                                subtitle: 'Fertilizaci├│n consciente',
-                                desc: 'En Perlawasi usamos compost artesanal y abonos naturales locales. Fertiliza solo en primavera y verano (etapa de crecimiento). En oto├▒o e invierno, las plantas descansan y neocsitan menos nutrientes.',
-                                wave: 'ÒÇ░´©Å',
+                                icon: '🧪',
+                                title: 'Nutrición natural',
+                                subtitle: 'Fertilización consciente',
+                                desc: 'En Perlawasi usamos compost artesanal y abonos naturales locales. Fertiliza solo en primavera y verano (etapa de crecimiento). En otoño e invierno, las plantas descansan y necesitan menos nutrientes.',
+                                wave: '〰️',
                             },
                         ].map((card, i) => (
                             <div
@@ -564,17 +563,17 @@ export default function PlantasPage() {
                                 {/* Icono */}
                                 <div className="text-5xl mb-4">{card.icon}</div>
 
-                                {/* T├¡tulo */}
+                                {/* Título */}
                                 <h3 className="text-2xl font-display font-bold text-white mb-1">{card.title}</h3>
                                 <p className="text-green-300 text-xs font-bold uppercase tracking-widest mb-5">{card.subtitle}</p>
 
                                 {/* Divisor ondulado */}
                                 <div className="border-t border-white/10 mb-5" />
 
-                                {/* Descripci├│n */}
+                                {/* Descripción */}
                                 <p className="text-white/70 text-sm leading-relaxed">{card.desc}</p>
 
-                                {/* Decoraci├│n esquina */}
+                                {/* Decoración esquina */}
                                 <div className="absolute bottom-0 right-0 text-[8rem] opacity-[0.04] leading-none select-none">
                                     {card.icon}
                                 </div>
@@ -590,10 +589,10 @@ export default function PlantasPage() {
                     <h3 className="text-2xl font-display font-bold mb-8 text-center">Explora por Tipo</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {[
-                            { name: 'Interior', emoji: '­ƒ¬┤', color: '#E8F5E9', accent: '#2E7D32', desc: 'Para el hogar y oficina' },
-                            { name: 'Exterior', emoji: '­ƒî│', color: '#E0F2F1', accent: '#00695C', desc: 'Jardines y terrazas' },
-                            { name: 'Suculentas', emoji: '­ƒîÁ', color: '#FFF8E1', accent: '#F57F17', desc: 'Bajo mantenimiento' },
-                            { name: 'Arom├íticas', emoji: '­ƒî┐', color: '#F1F8E9', accent: '#558B2F', desc: 'Hierbas y medicinales' },
+                            { name: 'Interior', emoji: '🪴', color: '#E8F5E9', accent: '#2E7D32', desc: 'Para el hogar y oficina' },
+                            { name: 'Exterior', emoji: '🌳', color: '#E0F2F1', accent: '#00695C', desc: 'Jardines y terrazas' },
+                            { name: 'Suculentas', emoji: '🌵', color: '#FFF8E1', accent: '#F57F17', desc: 'Bajo mantenimiento' },
+                            { name: 'Aromáticas', emoji: '🌿', color: '#F1F8E9', accent: '#558B2F', desc: 'Hierbas y medicinales' },
                         ].map((cat, i) => (
                             <div
                                 key={i}
@@ -617,25 +616,25 @@ export default function PlantasPage() {
                         style={{ background: 'linear-gradient(135deg, #E8F5E9, #E0F7FA)' }}
                     >
                         <div className="absolute inset-0 select-none pointer-events-none">
-                            <div className="absolute -top-10 -left-10 text-[18rem] opacity-[0.05]">­ƒî┐</div>
-                            <div className="absolute -bottom-10 -right-10 text-[14rem] opacity-[0.05]">­ƒî©</div>
+                            <div className="absolute -top-10 -left-10 text-[18rem] opacity-[0.05]">🌿</div>
+                            <div className="absolute -bottom-10 -right-10 text-[14rem] opacity-[0.05]">🍂</div>
                         </div>
                         <div className="relative z-10">
-                            <span className="text-green-600 text-xs font-black uppercase tracking-[0.3em] block mb-4">Asesor├¡a personalizada</span>
+                            <span className="text-green-600 text-xs font-black uppercase tracking-[0.3em] block mb-4">Asesoría personalizada</span>
                             <h2 className="text-4xl md:text-6xl font-display font-bold mb-6 text-gray-900">
-                                ┬┐Necesitas ayuda<br />para elegir?
+                                ¿Necesitas ayuda<br />para elegir?
                             </h2>
                             <p className="text-gray-600 text-lg mb-10 max-w-xl mx-auto">
-                                Nuestros bot├ínicos te gu├¡an para encontrar la planta perfecta seg├║n tu espacio, luz disponible y nivel de experiencia.
+                                Nuestros botánicos te guían para encontrar la planta perfecta según tu espacio, luz disponible y nivel de experiencia.
                             </p>
                             <div className="flex gap-4 justify-center flex-wrap">
                                 <a
-                                    href="https://wa.me/51928141669?text=Hola,%20necesito%20asesor├¡a%20bot├ínica%20para%20elegir%20una%20planta"
+                                    href="https://wa.me/51928141669?text=Hola,%20necesito%20asesoría%20botánica%20para%20elegir%20una%20planta"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="btn bg-[#2E7D32] text-white px-12 py-5 text-lg rounded-2xl font-bold hover:bg-[#1B5E20] shadow-lg hover:scale-105 transition-all"
                                 >
-                                    Hablar con un Bot├ínico ­ƒî▒
+                                    Hablar con un Botánico 🌱
                                 </a>
                                 <Link
                                     href="/"

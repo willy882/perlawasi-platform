@@ -20,13 +20,13 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-    title: 'Perlawasi - Refugio de Lujo en el Coraz├│n de la Naturaleza',
-    description: 'Descubre Perlawasi: restaurante, helader├¡a, cafeter├¡a, chocolates, boutique, alojamiento, cervecer├¡a, vivero y licorer├¡a. Ubicados en Segunda Jerusal├®n, Rioja, San Mart├¡n. Trabajamos con m├ís de 60 operadores tur├¡sticos.',
-    keywords: ['Perlawasi', 'restaurante', 'helader├¡a', 'cafeter├¡a', 'alojamiento', 'Rioja', 'San Mart├¡n', 'turismo', 'Per├║'],
+    title: 'Perlawasi - Refugio de Lujo en el Corazón de la Naturaleza',
+    description: 'Descubre Perlawasi: restaurante, heladería, cafetería, chocolates, boutique, alojamiento, cervecería, vivero y licorería. Ubicados en Segunda Jerusalén, Rioja, San Martín. Trabajamos con más de 60 operadores turísticos.',
+    keywords: ['Perlawasi', 'restaurante', 'heladería', 'cafetería', 'alojamiento', 'Rioja', 'San Martín', 'turismo', 'Perú'],
     authors: [{ name: 'Perlawasi' }],
     openGraph: {
-        title: 'Perlawasi - Experiencia ├Ünica en la Naturaleza',
-        description: 'Restaurante, alojamiento y m├ís en el coraz├│n de San Mart├¡n',
+        title: 'Perlawasi - Experiencia Única en la Naturaleza',
+        description: 'Restaurante, alojamiento y más en el corazón de San Martín',
         type: 'website',
         locale: 'es_PE',
     },
