@@ -7,7 +7,7 @@ import { FiLoader, FiShoppingBag, FiInfo, FiChevronRight, FiImage } from 'react-
 
 const ClothingViewer3D = dynamic(() => import('./ClothingViewer3D'), { ssr: false })
 
-// ─── TIPOS ────────────────────────────────────────────────────────────────────
+// ÔöÇÔöÇÔöÇ TIPOS ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 interface ColorOption {
     name: string
     hex: string
@@ -31,7 +31,7 @@ interface ClothingItem {
     image_url?: string
 }
 
-// ─── COMPONENTE PRINCIPAL ─────────────────────────────────────────────────────
+// ÔöÇÔöÇÔöÇ COMPONENTE PRINCIPAL ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
 export default function FashionConfigurator() {
     const [allProducts, setAllProducts] = useState<ClothingItem[]>([])
     const [categories, setCategories] = useState<{ id: string, label: string, icon: string }[]>([])
@@ -62,7 +62,7 @@ export default function FashionConfigurator() {
                     // Procesar tallas
                     const sizesObj = Array.isArray(p.sizes)
                         ? p.sizes.map((s: string) => ({ label: s, available: true }))
-                        : [{ label: 'Única', available: true }]
+                        : [{ label: '├Ünica', available: true }]
 
                     // Procesar colores
                     let colorsObj = [{ name: 'Por defecto', hex: '#D4AF37' }]
@@ -82,9 +82,9 @@ export default function FashionConfigurator() {
                         name: p.name,
                         category: p.category || 'Varios',
                         price: p.price,
-                        emoji: p.emoji || '👕',
+                        emoji: p.emoji || '­ƒæò',
                         description: p.description || '',
-                        material: p.material || 'Lino & Algodón',
+                        material: p.material || 'Lino & Algod├│n',
                         colors: colorsObj,
                         sizes: sizesObj,
                         image_url: p.image_url
@@ -95,8 +95,8 @@ export default function FashionConfigurator() {
 
                 const uniqueCats = Array.from(new Set(formatted.map(p => p.category)))
                 setCategories([
-                    { id: 'Todos', label: 'Todos', icon: '✨' },
-                    ...uniqueCats.map(cat => ({ id: cat, label: cat, icon: '🏷️' }))
+                    { id: 'Todos', label: 'Todos', icon: 'Ô£¿' },
+                    ...uniqueCats.map(cat => ({ id: cat, label: cat, icon: '­ƒÅÀ´©Å' }))
                 ])
 
                 if (formatted.length > 0) {
@@ -138,14 +138,14 @@ export default function FashionConfigurator() {
                     Colección Exclusiva Perlawasi
                 </span>
                 <h1 className="text-6xl md:text-[10rem] font-display font-black tracking-tighter leading-[0.85] uppercase">
-                    MODA <br /> <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#D4AF37] to-[#8B7355]">CONSCIENTE</span>
+                    BOUTIQUE <br /> <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#D4AF37] to-[#8B7355]">PERLAWASI</span>
                 </h1>
                 <p className="text-white/40 mt-10 text-xl max-w-2xl mx-auto font-light leading-relaxed italic">
                     Piezas limitadas en lino orgánico y fibras naturales. La sostenibilidad convertida en alta costura amazónica.
                 </p>
             </div>
 
-            {/* CATEGORÍAS */}
+            {/* CATEGOR├ìAS */}
             <div className="flex justify-center gap-2 flex-wrap px-6 mb-20">
                 {categories.map((cat) => (
                     <button
@@ -191,12 +191,10 @@ export default function FashionConfigurator() {
                         ))}
                     </div>
 
-                    {/* VISOR PRINCIPAL */}
+                    {/* VISOR PRINCIPAL - PRIORIDAD 3D */}
                     <div className="lg:col-span-6">
                         <div className="relative aspect-[4/5] md:aspect-square bg-gradient-to-b from-[#111] to-black rounded-[4rem] border border-white/5 overflow-hidden group shadow-2xl flex items-center justify-center">
-                            {selectedProduct?.image_url ? (
-                                <img src={selectedProduct.image_url} alt={selectedProduct.name} className="w-full h-full object-cover animate-fade-in transition-transform duration-[2s] group-hover:scale-110" />
-                            ) : selectedProduct ? (
+                            {selectedProduct ? (
                                 <ClothingViewer3D
                                     emoji={selectedProduct.emoji}
                                     color={selectedColor?.hex || '#D4AF37'}
@@ -217,7 +215,7 @@ export default function FashionConfigurator() {
                             </div>
 
                             <div className="absolute bottom-10 left-10">
-                                <p className="text-[10px] font-black uppercase tracking-[0.5em] text-[#D4AF37] mb-2">Precio de Colección</p>
+                                <p className="text-[10px] font-black uppercase tracking-[0.5em] text-[#D4AF37] mb-2">Precio de Colecci├│n</p>
                                 <h3 className="text-5xl font-black tracking-tighter">S/ {selectedProduct?.price}</h3>
                             </div>
                         </div>

@@ -1,53 +1,16 @@
-'use client'
-
-import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { supabase } from '@/lib/supabase'
-import { FiLoader, FiChevronRight, FiCheckCircle } from 'react-icons/fi'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+    title: 'Caf├® & Cacao Perlawasi - Herencia Andina en Cada Taza | San Mart├¡n',
+    description: 'Caf├® de especialidad y chocolates artesanales elaborados con cacao ancestral. Experiencia premium de degustaci├│n en el coraz├│n de la selva.',
+}
 
 export default function CafeCacaoPage() {
-    const [products, setProducts] = useState<any[]>([])
-    const [loading, setLoading] = useState(true)
-    const [activeCategory, setActiveCategory] = useState('Todos')
-
-    useEffect(() => {
-        fetchProducts()
-    }, [])
-
-    async function fetchProducts() {
-        try {
-            setLoading(true)
-            const { data, error } = await supabase
-                .from('cafe_cacao')
-                .select('*')
-                .order('name', { ascending: true })
-            if (error) throw error
-            setProducts(data || [])
-        } catch (err) {
-            console.error('Error fetching coffee & cacao:', err)
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    const categories = ['Todos', ...Array.from(new Set(products.map(i => i.category).filter(Boolean)))] as string[]
-    const filteredProducts = activeCategory === 'Todos'
-        ? products
-        : products.filter(i => i.category === activeCategory)
-
-    const getEmoji = (cat: string) => {
-        const lower = cat.toLowerCase()
-        if (lower.includes('cafe') || lower.includes('café')) return '☕'
-        if (lower.includes('cacao') || lower.includes('chocolate')) return '🍫'
-        if (lower.includes('ritual') || lower.includes('caja')) return '🎁'
-        return '🤎'
-    }
-
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Section - Dark Premium */}
-            <section className="relative h-[80vh] flex items-center overflow-hidden bg-[#2A1A18]">
+            <section className="relative h-[75vh] flex items-center overflow-hidden bg-brand-dark">
                 {/* Fondo de Video */}
                 <div className="absolute inset-0 z-0">
                     <video
@@ -56,30 +19,30 @@ export default function CafeCacaoPage() {
                         muted
                         playsInline
                         preload="auto"
-                        className="w-full h-full object-cover opacity-60 contrast-[1.1] brightness-[0.8]"
+                        className="w-full h-full object-cover opacity-85 contrast-[1.05] brightness-[0.95]"
                     >
                         <source src="/videos/hero_cafe_cacao.mp4" type="video/mp4" />
                     </video>
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a100f] via-transparent to-black/40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
                 </div>
 
                 <div className="relative z-20 container-custom text-white">
-                    <div className="max-w-4xl mx-auto text-center animate-fade-in">
-                        <span className="inline-block px-6 py-2 bg-[#8B4513] text-white text-[10px] font-black rounded-full mb-8 uppercase tracking-[0.3em] shadow-xl">
+                    <div className="max-w-3xl mx-auto text-center">
+                        <span className="inline-block px-4 py-2 bg-primary-500 text-white text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
                             Herencia & Aroma
                         </span>
-                        <h1 className="text-7xl md:text-9xl font-display font-black mb-8 leading-none italic uppercase tracking-tighter">
-                            Café & <span className="text-[#D2691E]">Cacao</span>
+                        <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
+                            Caf├® & Cacao
                         </h1>
-                        <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-2xl mx-auto font-medium italic">
-                            "Dos tesoros peruanos unidos en una experiencia sensorial que honra la tierra y el tiempo."
+                        <p className="text-xl text-white/80 mb-10 leading-relaxed">
+                            Dos tesoros peruanos unidos en una experiencia sensorial ├║nica. Del grano a la taza, del cacao al chocolate m├ís fino.
                         </p>
-                        <div className="flex gap-6 justify-center flex-wrap">
-                            <Link href="#productos" className="px-12 py-5 bg-white text-black rounded-2xl text-lg font-black uppercase tracking-widest hover:bg-[#D2691E] hover:text-white transition-all shadow-2xl">
-                                Explorar Colección
+                        <div className="flex gap-4 justify-center flex-wrap">
+                            <Link href="#productos" className="btn btn-primary px-10 py-4 text-lg">
+                                Explorar Colecci├│n
                             </Link>
-                            <Link href="#degustacion" className="px-12 py-5 bg-white/10 backdrop-blur-md text-white border border-white/30 rounded-2xl text-lg font-black uppercase tracking-widest hover:bg-white/20 transition-all">
-                                Reservar Degustación
+                            <Link href="#degustacion" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg">
+                                Reservar Degustaci├│n
                             </Link>
                         </div>
                     </div>
@@ -87,183 +50,241 @@ export default function CafeCacaoPage() {
             </section>
 
             {/* Dual Origin Story */}
-            <section className="section bg-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#D2691E]/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
-                <div className="container-custom relative z-10">
-                    <div className="grid md:grid-cols-2 gap-20">
-                        {/* Café */}
-                        <div className="space-y-8 group">
-                            <div className="text-8xl mb-6 group-hover:scale-110 transition-transform duration-500">☕</div>
-                            <h2 className="text-5xl font-display font-black italic uppercase tracking-tighter decoration-[#8B4513] underline underline-offset-8">Café de Altura</h2>
-                            <p className="text-gray-600 text-xl leading-relaxed font-medium">
-                                Granos cultivados a más de 1,500 metros en las montañas de San Martín. Cada taza cuenta la historia de un suelo volcánico y un clima místico.
+            <section className="section bg-white">
+                <div className="container-custom">
+                    <div className="grid md:grid-cols-2 gap-16">
+                        {/* Caf├® */}
+                        <div className="space-y-6">
+                            <div className="text-6xl mb-4">Ôÿò</div>
+                            <h2 className="text-4xl font-display font-bold">Caf├® de las Alturas</h2>
+                            <p className="text-gray-600 text-lg leading-relaxed">
+                                Granos cultivados a m├ís de 1,500 metros sobre el nivel del mar en las monta├▒as andinas. Cada taza cuenta la historia de agricultores que dedican su vida al cultivo perfecto.
                             </p>
-                            <div className="space-y-4 pt-4">
-                                {['Tostado artesanal lento', 'Notas frutales y achocolatadas', 'Comercio justo directo'].map((item, i) => (
-                                    <div key={i} className="flex items-center gap-4">
-                                        <FiCheckCircle className="text-[#8B4513] text-xl" />
-                                        <span className="text-gray-800 font-bold uppercase tracking-widest text-xs">{item}</span>
-                                    </div>
-                                ))}
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-primary-500"></div>
+                                    <span className="text-gray-700">Tostado artesanal en peque├▒os lotes</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-primary-500"></div>
+                                    <span className="text-gray-700">Notas de chocolate, caramelo y frutas</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-primary-500"></div>
+                                    <span className="text-gray-700">Comercio justo certificado</span>
+                                </div>
                             </div>
                         </div>
 
                         {/* Cacao */}
-                        <div className="space-y-8 group">
-                            <div className="text-8xl mb-6 group-hover:scale-110 transition-transform duration-500">🍫</div>
-                            <h2 className="text-5xl font-display font-black italic uppercase tracking-tighter decoration-[#D2691E] underline underline-offset-8">Cacao Ancestral</h2>
-                            <p className="text-gray-600 text-xl leading-relaxed font-medium">
-                                Cacao fino de aroma transformado bajo la filosofía "Bean-to-Bar". Preservamos la pureza del grano para ofrecer un chocolate verdaderamente medicinal.
+                        <div className="space-y-6">
+                            <div className="text-6xl mb-4">­ƒì½</div>
+                            <h2 className="text-4xl font-display font-bold">Cacao Ancestral</h2>
+                            <p className="text-gray-600 text-lg leading-relaxed">
+                                Cacao fino de aroma de San Mart├¡n, cultivado con t├®cnicas que honran la tradici├│n de nuestros ancestros. Transformado en chocolates que preservan la pureza del origen.
                             </p>
-                            <div className="space-y-4 pt-4">
-                                {['100% Origen San Martín', 'Procesado a baja temperatura', 'Sin conservantes químicos'].map((item, i) => (
-                                    <div key={i} className="flex items-center gap-4">
-                                        <FiCheckCircle className="text-[#D2691E] text-xl" />
-                                        <span className="text-gray-800 font-bold uppercase tracking-widest text-xs">{item}</span>
-                                    </div>
-                                ))}
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-primary-500"></div>
+                                    <span className="text-gray-700">100% cacao peruano de origen</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-primary-500"></div>
+                                    <span className="text-gray-700">Sin aditivos ni conservantes</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-primary-500"></div>
+                                    <span className="text-gray-700">Proceso bean-to-bar artesanal</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Dynamic Products Grid */}
-            <section id="productos" className="section bg-[#F9F6F2] scroll-mt-20">
+            {/* Cajas de Ritual Premium */}
+            <section id="productos" className="section bg-[#F9F6F2]">
                 <div className="container-custom">
-                    <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-                        <div className="max-w-2xl">
-                            <span className="text-[#8B4513] font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">Tesoria de la Tierra</span>
-                            <h2 className="text-5xl md:text-7xl font-display font-black italic tracking-tighter uppercase leading-none">Nuestra Selección</h2>
-                        </div>
-
-                        {/* Categories Filter */}
-                        <div className="flex flex-wrap gap-2">
-                            {categories.map((cat) => (
-                                <button
-                                    key={cat}
-                                    onClick={() => setActiveCategory(cat)}
-                                    className={`px-8 py-3 rounded-2xl text-[10px] font-black transition-all uppercase tracking-widest border ${activeCategory === cat
-                                            ? 'bg-[#8B4513] text-white border-[#8B4513] shadow-xl shadow-amber-900/20'
-                                            : 'bg-transparent text-gray-500 border-gray-200 hover:border-[#8B4513] hover:text-[#8B4513]'
-                                        }`}
-                                >
-                                    {cat}
-                                </button>
-                            ))}
-                        </div>
+                    <div className="text-center mb-16">
+                        <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Experiencias Curadas</span>
+                        <h2 className="text-4xl md:text-6xl font-display font-bold mt-4 mb-6">Cajas de Ritual</h2>
+                        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                            Colecciones dise├▒adas para transformar tus momentos en ceremonias sensoriales
+                        </p>
                     </div>
 
-                    {loading ? (
-                        <div className="flex flex-col items-center justify-center py-40 space-y-6">
-                            <FiLoader className="text-6xl text-[#8B4513] animate-spin" />
-                            <p className="text-gray-400 font-black uppercase tracking-[0.3em] text-[10px] animate-pulse">Tostando los granos...</p>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {/* Caja 1 */}
+                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
+                            <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
+                                Ôÿò
+                            </div>
+                            <div className="p-8">
+                                <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">Ritual Matutino</span>
+                                <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja del Despertar</h3>
+                                <p className="text-gray-600 mb-6 leading-relaxed">
+                                    3 variedades de caf├® de especialidad + prensa francesa artesanal + taza de cer├ímica local
+                                </p>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-2xl font-bold text-gray-900">S/ 145</span>
+                                    <button className="btn btn-primary px-6 py-2 text-sm">Agregar</button>
+                                </div>
+                            </div>
                         </div>
-                    ) : (
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-                            {filteredProducts.map((item) => (
-                                <div key={item.id} className="group bg-white rounded-[3.5rem] overflow-hidden shadow-soft hover:shadow-strong transition-all duration-700 flex flex-col h-full border border-gray-50">
-                                    <div className="relative aspect-[4/3] overflow-hidden flex items-center justify-center bg-gray-50">
-                                        {item.image_url ? (
-                                            <img
-                                                src={item.image_url}
-                                                alt={item.name}
-                                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                                            />
-                                        ) : (
-                                            <div className="text-[10rem] transition-transform group-hover:scale-110 duration-700 select-none">
-                                                {getEmoji(item.category || '')}
-                                            </div>
-                                        )}
-                                        <div className="absolute top-8 right-8">
-                                            <span className="px-5 py-2 bg-[#8B4513]/90 backdrop-blur-md text-white rounded-full text-[10px] font-black uppercase tracking-widest shadow-2xl">
-                                                {item.category}
-                                            </span>
-                                        </div>
-                                    </div>
 
-                                    <div className="p-12 flex-1 flex flex-col">
-                                        <div className="flex-1">
-                                            <h3 className="text-3xl font-display font-black group-hover:text-[#D2691E] transition-colors mb-4 italic tracking-tighter uppercase">{item.name}</h3>
-                                            <p className="text-gray-500 mb-8 text-sm leading-relaxed font-medium line-clamp-3">
-                                                {item.description || "Un producto premium que refleja la esencia del territorio, procesado artesanalmente para preservar cada matiz de sabor."}
-                                            </p>
-                                        </div>
+                        {/* Caja 2 */}
+                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
+                            <div className="aspect-square bg-gradient-to-br from-amber-900 to-amber-700 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
+                                ­ƒì½
+                            </div>
+                            <div className="p-8">
+                                <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">Ritual Nocturno</span>
+                                <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja del Cacao</h3>
+                                <p className="text-gray-600 mb-6 leading-relaxed">
+                                    5 barras de chocolate artesanal (70%, 80%, 90%) + nibs de cacao + infusi├│n de c├íscara
+                                </p>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-2xl font-bold text-gray-900">S/ 165</span>
+                                    <button className="btn btn-primary px-6 py-2 text-sm">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
 
-                                        <div className="flex items-center justify-between pt-8 border-t border-gray-100">
-                                            <div className="flex flex-col">
-                                                <span className="text-[10px] uppercase font-black text-gray-400 tracking-[0.2em] mb-1">Precio</span>
-                                                <span className="text-3xl font-black text-[#8B4513] italic tracking-tighter">S/ {item.price}</span>
-                                            </div>
-                                            <a
-                                                href={`https://wa.me/51928141669?text=Hola,%20quiero%20ordenar%20el%20producto%20${encodeURIComponent(item.name)}`}
-                                                target="_blank"
-                                                className="w-16 h-16 bg-[#8B4513] rounded-3xl flex items-center justify-center text-white hover:bg-black transition-all transform hover:rotate-6 shadow-xl"
-                                            >
-                                                <FiChevronRight className="text-2xl" />
-                                            </a>
-                                        </div>
+                        {/* Caja 3 */}
+                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
+                            <div className="aspect-square bg-gradient-to-br from-yellow-100 via-amber-100 to-orange-100 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
+                                ­ƒñÄ
+                            </div>
+                            <div className="p-8">
+                                <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">Ritual Completo</span>
+                                <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja Fusi├│n</h3>
+                                <p className="text-gray-600 mb-6 leading-relaxed">
+                                    Caf├® + Chocolate + Bombones rellenos + Molinillo tradicional + Gu├¡a de maridaje
+                                </p>
+                                <div className="flex items-center justify-between">
+                                    <span className="text-2xl font-bold text-gray-900">S/ 220</span>
+                                    <button className="btn btn-primary px-6 py-2 text-sm">Agregar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Productos Individuales */}
+            <section className="section bg-white">
+                <div className="container-custom">
+                    <h2 className="text-4xl md:text-5xl font-display font-bold mb-12 text-center">Productos Individuales</h2>
+
+                    <div className="grid md:grid-cols-4 gap-6">
+                        {/* Producto 1 */}
+                        <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
+                            <div className="aspect-square bg-gradient-to-br from-amber-200 to-amber-100 rounded-xl flex items-center justify-center text-6xl mb-4">
+                                Ôÿò
+                            </div>
+                            <h4 className="font-bold text-lg mb-2">Caf├® Altura Premium</h4>
+                            <p className="text-sm text-gray-600 mb-3">250g - Grano entero</p>
+                            <div className="flex items-center justify-between">
+                                <span className="font-bold text-lg">S/ 45</span>
+                                <button className="text-primary-500 font-bold text-sm">+</button>
+                            </div>
+                        </div>
+
+                        {/* Producto 2 */}
+                        <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
+                            <div className="aspect-square bg-gradient-to-br from-orange-200 to-orange-100 rounded-xl flex items-center justify-center text-6xl mb-4">
+                                Ôÿò
+                            </div>
+                            <h4 className="font-bold text-lg mb-2">Caf├® Org├ínico</h4>
+                            <p className="text-sm text-gray-600 mb-3">250g - Molido</p>
+                            <div className="flex items-center justify-between">
+                                <span className="font-bold text-lg">S/ 38</span>
+                                <button className="text-primary-500 font-bold text-sm">+</button>
+                            </div>
+                        </div>
+
+                        {/* Producto 3 */}
+                        <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
+                            <div className="aspect-square bg-gradient-to-br from-amber-800 to-amber-600 rounded-xl flex items-center justify-center text-6xl mb-4">
+                                ­ƒì½
+                            </div>
+                            <h4 className="font-bold text-lg mb-2">Chocolate 70%</h4>
+                            <p className="text-sm text-gray-600 mb-3">100g - Barra</p>
+                            <div className="flex items-center justify-between">
+                                <span className="font-bold text-lg">S/ 28</span>
+                                <button className="text-primary-500 font-bold text-sm">+</button>
+                            </div>
+                        </div>
+
+                        {/* Producto 4 */}
+                        <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
+                            <div className="aspect-square bg-gradient-to-br from-amber-900 to-black rounded-xl flex items-center justify-center text-6xl mb-4">
+                                ­ƒì½
+                            </div>
+                            <h4 className="font-bold text-lg mb-2">Chocolate 90%</h4>
+                            <p className="text-sm text-gray-600 mb-3">100g - Barra</p>
+                            <div className="flex items-center justify-between">
+                                <span className="font-bold text-lg">S/ 32</span>
+                                <button className="text-primary-500 font-bold text-sm">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Experiencia de Degustaci├│n */}
+            <section id="degustacion" className="section bg-brand-dark text-white">
+                <div className="container-custom">
+                    <div className="grid md:grid-cols-2 gap-16 items-center">
+                        <div className="space-y-8">
+                            <span className="text-primary-400 font-bold uppercase tracking-widest text-xs">Experiencia Sensorial</span>
+                            <h2 className="text-4xl md:text-5xl font-display font-bold">
+                                Degustaci├│n Guiada
+                            </h2>
+                            <p className="text-white/80 text-lg leading-relaxed">
+                                Sum├®rgete en un viaje sensorial donde aprender├ís a identificar notas, aromas y texturas. Nuestro sommelier te guiar├í a trav├®s de 6 variedades de caf├® y 5 tipos de chocolate.
+                            </p>
+                            <div className="space-y-4">
+                                <div className="flex items-start gap-4">
+                                    <div className="text-2xl">ÔÅ▒´©Å</div>
+                                    <div>
+                                        <p className="font-bold">Duraci├│n</p>
+                                        <p className="text-white/70">5 a 10 minutos</p>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                    )}
-
-                    {!loading && filteredProducts.length === 0 && (
-                        <div className="text-center py-40 bg-white rounded-[4rem] border-2 border-dashed border-gray-200">
-                            <p className="text-gray-400 font-black uppercase tracking-[0.5em] text-xs">Agotado temporalmente en esta categoría.</p>
-                        </div>
-                    )}
-                </div>
-            </section>
-
-            {/* Degustación Guiada */}
-            <section id="degustacion" className="section bg-[#1a0f0e] text-white">
-                <div className="container-custom">
-                    <div className="grid md:grid-cols-2 gap-20 items-center">
-                        <div className="space-y-10">
-                            <div>
-                                <span className="text-[#D2691E] font-black uppercase tracking-[0.3em] text-[10px]">Cultura & Sabor</span>
-                                <h2 className="text-5xl md:text-7xl font-display font-black mt-4 italic tracking-tighter uppercase font-outline-2 leading-none">El Despertar <br /> de los Sentidos</h2>
-                                <p className="text-white/70 text-xl mt-8 leading-relaxed font-medium italic">
-                                    No solo servimos café; educamos paladares. Nuestra degustación gratuita es un viaje que te lleva desde la semilla hasta el alma del producto.
-                                </p>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-6">
-                                {[
-                                    { title: "Maridaje", desc: "Café + Chocolate", icon: "💎" },
-                                    { title: "Técnica", desc: "Métodos de extracción", icon: "⚗️" }
-                                ].map((item, i) => (
-                                    <div key={i} className="p-8 bg-white/5 backdrop-blur-md rounded-[2.5rem] border border-white/10 group hover:bg-white/10 transition-all">
-                                        <div className="text-4xl mb-4 opacity-50">{item.icon}</div>
-                                        <h4 className="font-black text-xs uppercase tracking-widest text-[#D2691E] mb-2">{item.title}</h4>
-                                        <p className="text-xs text-white/50 font-bold">{item.desc}</p>
+                                <div className="flex items-start gap-4">
+                                    <div className="text-2xl">­ƒÄü</div>
+                                    <div>
+                                        <p className="font-bold">Inversi├│n</p>
+                                        <p className="text-white/70">┬íCompletamente Gratis!</p>
                                     </div>
-                                ))}
+                                </div>
                             </div>
                         </div>
-
-                        <div className="relative h-[600px] rounded-[5rem] overflow-hidden group shadow-[0_0_100px_rgba(210,105,30,0.1)]">
-                            <img src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?q=80&w=2064&auto=format&fit=crop" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[3s]" alt="Tostado" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#1a0f0e] via-transparent to-transparent opacity-60" />
+                        <div className="relative h-[500px] rounded-3xl overflow-hidden bg-gradient-to-br from-amber-900 to-amber-700 flex items-center justify-center text-[12rem] shadow-2xl">
+                            ­ƒ½û
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* CTA Final */}
-            <section className="py-24 bg-[#D2691E]">
+            <section id="reservar" className="py-24 bg-gradient-to-br from-[#4A2C2A] to-[#2A1A18]">
                 <div className="container-custom text-center text-white">
-                    <h2 className="text-5xl md:text-9xl font-display font-black mb-12 italic tracking-tighter uppercase leading-none text-shadow">Descubre la <br /> Herencia</h2>
-                    <div className="flex gap-6 justify-center flex-wrap">
-                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20hacer%20un%20pedido%20de%20café%20y%20cacao"
+                    <h2 className="text-4xl md:text-6xl font-display font-bold mb-6">
+                        Descubre Nuestra Colecci├│n
+                    </h2>
+                    <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
+                        Visita nuestra tienda o cont├íctanos para pedidos personalizados y env├¡os a todo el Per├║
+                    </p>
+                    <div className="flex gap-4 justify-center flex-wrap">
+                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20informaci├│n%20sobre%20Caf├®%20y%20Cacao"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-16 py-6 bg-black text-white rounded-2xl text-xl font-black uppercase tracking-widest hover:scale-105 transition-all shadow-2xl">
+                            className="btn btn-primary px-12 py-5 text-xl font-bold">
                             Contactar por WhatsApp
                         </a>
-                        <Link href="/" className="px-16 py-6 bg-white text-black rounded-2xl text-xl font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+                        <Link href="/" className="btn bg-white/10 backdrop-blur-md text-white border-2 border-white/30 hover:bg-white/20 px-12 py-5 text-xl font-bold">
                             Volver al Inicio
                         </Link>
                     </div>
