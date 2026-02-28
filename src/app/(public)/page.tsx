@@ -31,7 +31,7 @@ export default function HomePage() {
                             <Link href="/restaurante" className="btn btn-primary px-10 py-4 text-lg shadow-2xl transform hover:scale-105 transition-all outline-none">
                                 Reservar Mesa
                             </Link>
-                            <Link href="/restaurante#menu" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg shadow-2xl transform hover:scale-105 transition-all outline-none">
+                            <Link href="/restaurante/carta" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg shadow-2xl transform hover:scale-105 transition-all outline-none">
                                 Ver Menú
                             </Link>
                         </div>

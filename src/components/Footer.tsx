@@ -44,7 +44,7 @@ export default function Footer() {
                         <h3 className="text-white font-display font-bold mb-6 uppercase tracking-wider text-sm">Navegación</h3>
                         <ul className="space-y-4 text-sm">
                             <li><Link href="/" className="hover:text-white transition-colors">Inicio</Link></li>
-                            <li><Link href="/restaurante#menu" className="hover:text-white transition-colors">Nuestro Menú</Link></li>
+                            <li><Link href="/restaurante/carta" className="hover:text-white transition-colors">Nuestro Menú</Link></li>
                             <li><Link href="/alojamiento" className="hover:text-white transition-colors">Brisa Lodge</Link></li>
                             <li><Link href="https://wa.me/51928141669?text=Hola,%20quiero%20más%20información" target="_blank" className="hover:text-white transition-colors">Contacto Directo</Link></li>
                         </ul>

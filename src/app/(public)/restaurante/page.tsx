@@ -32,7 +32,7 @@ export default function RestaurantePage() {
                             Celebramos la biodiversidad de San Martín con ingredientes frescos de nuestra huerta. Cada plato cuenta la historia de nuestra tierra.
                         </p>
                         <div className="flex gap-4 flex-wrap">
-                            <Link href="#menu" className="btn bg-emerald-600 text-white px-10 py-4 text-lg hover:bg-emerald-700">
+                            <Link href="/restaurante/carta" className="btn bg-emerald-600 text-white px-10 py-4 text-lg hover:bg-emerald-700">
                                 Ver Menú
                             </Link>
                             <Link href="#reservar" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg">
