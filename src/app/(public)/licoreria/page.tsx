@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Licorería Perlawasi - El Alma de los Andes en Destilados | San Martín',
-    description: 'Destilados premium y macerados artesanales únicos. Descubre la sofisticación de nuestros licores de autor inspirados en la biodiversidad peruana.',
+    title: 'Licorería Perlawasi - El Alma de los Andes | San Martín',
+    description: 'Licorería Perlawasi: destilados premium y macerados artesanales únicos. El espíritu de la selva peruana encapsulado en cada botella.',
 }
 
 export default function LicoreriaPage() {
@@ -12,7 +12,7 @@ export default function LicoreriaPage() {
         {
             name: 'Cacao Spirit',
             type: 'Destilado de Cacao',
-            notes: 'Frutos secos ┬À Chocolate amargo ┬À Tierra h├║meda',
+            notes: 'Frutos secos · Chocolate amargo · Tierra húmeda',
             abv: '42%',
             ml: '500 ml',
             badge: 'Signature',
@@ -89,19 +89,23 @@ export default function LicoreriaPage() {
                     {/* Nombre de la marca */}
                     <div className="mb-4">
                         <span className="block text-sm md:text-base text-white/80 font-light tracking-[0.5em] uppercase mb-4">
-                            Licorería Perlawasi
+                            Licores
                         </span>
-                        <h1 className="text-7xl md:text-[10rem] lg:text-[13rem] font-display font-black leading-none mb-6 tracking-tight">
-                            <span className="block text-white">El Alma</span>
-                            <span className="block bg-gradient-to-r from-[#B8960C] via-[#D4AF37] to-[#F5D26B] bg-clip-text text-transparent">
-                                de los Andes
-                            </span>
+                        <h1 className="text-5xl md:text-7xl lg:text-[8rem] font-display font-black leading-none tracking-tight"
+                            style={{
+                                background: 'linear-gradient(to bottom, #ffffff 0%, #a7f3d0 40%, #8B7355 100%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                                filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.3))',
+                            }}>
+                            PERLAWASI
                         </h1>
                     </div>
 
                     {/* Tagline sutil */}
                     <p className="text-base md:text-lg text-white/90 mb-10 max-w-xl mx-auto leading-relaxed font-light italic">
-                        Destilados de autor creados para elevar los sentidos. Una oda a la biodiversidad peruana encapsulada en botellas de lujo.
+                        El esp├¡ritu de la selva encapsulado en cada botella
                     </p>
 
                     {/* Botones compactos */}
@@ -110,7 +114,7 @@ export default function LicoreriaPage() {
                             className="inline-flex items-center gap-2 bg-[#4ade80] text-[#061a06] px-8 py-3 text-sm font-bold hover:bg-[#86efac] transition-all duration-300 rounded-full shadow-lg uppercase tracking-wider">
                             Ver Colecci├│n
                         </Link>
-                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20información%20sobre%20la%20licorería%20Perlawasi"
+                        <a href="https://wa.me/51928141669?text=Hola,%20quiero%20informaci├│n%20sobre%20Licores%20Perlamayo"
                             target="_blank" rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 border border-white/50 text-white px-8 py-3 text-sm font-bold hover:bg-white/10 transition-all duration-300 rounded-full uppercase tracking-wider backdrop-blur-sm">
                             Consultar
@@ -236,15 +240,15 @@ export default function LicoreriaPage() {
                             <div>
                                 <span className="text-[#D4AF37] font-bold uppercase tracking-[0.25em] text-xs block mb-4">Legado & Pureza</span>
                                 <h2 className="text-5xl md:text-6xl font-display font-bold leading-tight">
-                                    La Destiler├¡a<br />
+                                    La Destilería<br />
                                     <span className="bg-gradient-to-r from-[#D4AF37] to-[#F5D26B] bg-clip-text text-transparent">del Bosque</span>
                                 </h2>
                             </div>
                             <p className="text-gray-400 text-lg leading-relaxed">
-                                Nuestros alambiques de cobre son testigos de un proceso lento y cuidadoso. Destilamos en peque├▒os lotes utilizando bot├ínicos recolectados de manera sostenible en los alrededores de Perlawasi.
+                                Nuestros alambiques de cobre son testigos de un proceso lento y cuidadoso. Destilamos en pequeños lotes utilizando botánicos recolectados de manera sostenible en los alrededores de Perlawasi.
                             </p>
                             <p className="text-gray-500 text-base leading-relaxed">
-                                Cada botella lleva un n├║mero de lote y la firma del maestro destilador ÔÇö una garant├¡a de que lo que est├ís sosteniendo es algo verdaderamente excepcional y ├║nico en el mundo.
+                                Cada botella lleva un número de lote y la firma del maestro destilador — una garantía de que lo que estás sosteniendo es algo verdaderamente excepcional y único en el mundo.
                             </p>
 
                             <div className="grid grid-cols-2 gap-4 pt-4">
