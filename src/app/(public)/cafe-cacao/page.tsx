@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-    title: 'Caf├® & Cacao Perlawasi - Herencia Andina en Cada Taza | San Mart├¡n',
-    description: 'Caf├® de especialidad y chocolates artesanales elaborados con cacao ancestral. Experiencia premium de degustaci├│n en el coraz├│n de la selva.',
+    title: 'Café & Cacao Perlawasi - Herencia Andina en Cada Taza | San Martín',
+    description: 'Café de especialidad y chocolates artesanales elaborados con cacao ancestral. Experiencia premium de degustación en el corazón de la selva.',
 }
 
 export default function CafeCacaoPage() {
@@ -32,17 +32,17 @@ export default function CafeCacaoPage() {
                             Herencia & Aroma
                         </span>
                         <h1 className="text-5xl md:text-7xl font-display font-bold mb-6 leading-tight">
-                            Caf├® & Cacao
+                            Café & Cacao
                         </h1>
                         <p className="text-xl text-white/80 mb-10 leading-relaxed">
-                            Dos tesoros peruanos unidos en una experiencia sensorial ├║nica. Del grano a la taza, del cacao al chocolate m├ís fino.
+                            Dos tesoros peruanos unidos en una experiencia sensorial única. Del grano a la taza, del cacao al chocolate más fino.
                         </p>
                         <div className="flex gap-4 justify-center flex-wrap">
                             <Link href="#productos" className="btn btn-primary px-10 py-4 text-lg">
-                                Explorar Colecci├│n
+                                Explorar Colección
                             </Link>
                             <Link href="#degustacion" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg">
-                                Reservar Degustaci├│n
+                                Reservar Degustación
                             </Link>
                         </div>
                     </div>

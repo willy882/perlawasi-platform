@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function AlojamientoPage() {
     return (
         <div className="min-h-screen bg-[#050805] text-[#f0f0f0] overflow-x-hidden pt-10 md:pt-20 px-4 md:px-0">
-            {/* ÔòÉÔòÉÔòÉ SUPER HERO HOSPEDAJE ÔòÉÔòÉÔòÉ */}
+            {/* SUPER HERO HOSPEDAJE */}
             <section className="relative min-h-screen flex items-center py-10 md:py-20">
                 {/* Texturas de fondo sutiles */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_40%,rgba(34,197,94,0.08)_0%,transparent_60%)]" />
@@ -40,7 +40,7 @@ export default function AlojamientoPage() {
                                     <Link href="#habitaciones"
                                         className="group inline-flex items-center gap-5 border border-[#86efac]/30 bg-[#86efac]/5 hover:bg-[#86efac] text-[#86efac] hover:text-[#050805] px-8 py-4 rounded-xl transition-all duration-500 shadow-xl">
                                         <span className="text-sm font-bold uppercase tracking-widest">VER HABITACIONES</span>
-                                        <span className="text-2xl transition-transform group-hover:translate-x-2">ÔåÆ</span>
+                                        <span className="text-2xl transition-transform group-hover:translate-x-2">→</span>
                                     </Link>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@ export default function AlojamientoPage() {
                 <div className="container-custom relative z-10">
                     <div className="text-center mb-20">
                         <span className="text-[#86efac] font-bold uppercase tracking-[0.4em] text-xs opacity-80">Nuestras Suites</span>
-                        <h2 className="text-4xl md:text-6xl font-display font-bold mt-4 text-white">Espacios de <span className="text-[#86efac]">Ensue├▒o</span></h2>
+                        <h2 className="text-4xl md:text-6xl font-display font-bold mt-4 text-white">Espacios de <span className="text-[#86efac]">Ensueño</span></h2>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-12 lg:gap-16">

@@ -34,7 +34,7 @@ const plants: Plant[] = [
         name: 'Monstera Deliciosa',
         scientific: 'Monstera deliciosa',
         price: 45,
-        emoji: '­ƒî┐',
+        emoji: '🌿',
         bgColor: '#E8F5E9',
         accentColor: '#2E7D32',
         difficulty: 'Fácil',

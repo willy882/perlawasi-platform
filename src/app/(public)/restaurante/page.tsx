@@ -33,7 +33,7 @@ export default function RestaurantePage() {
                             Del Campo a tu Mesa
                         </h1>
                         <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl">
-                            Celebramos la biodiversidad de San Mart├¡n con ingredientes frescos de nuestra huerta. Cada plato cuenta la historia de nuestra tierra.
+                            Celebramos la biodiversidad de San Martín con ingredientes frescos de nuestra huerta. Cada plato cuenta la historia de nuestra tierra.
                         </p>
                         <div className="flex gap-4 flex-wrap">
                             <Link href="#menu" className="btn btn-primary px-10 py-4 text-lg">
@@ -47,14 +47,14 @@ export default function RestaurantePage() {
                 </div>
             </section>
 
-            {/* Filosof├¡a Kil├│metro Cero */}
+            {/* Filosofía Kilómetro Cero */}
             <section className="section bg-[#F9F6F2]">
                 <div className="container-custom">
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div className="space-y-6">
-                            <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Nuestra Filosof├¡a</span>
+                            <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Nuestra Filosofía</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900">
-                                Ingredientes que Viajan Metros, No Kil├│metros
+                                Ingredientes que Viajan Metros, No Kilómetros
                             </h2>
                             <p className="text-gray-600 text-lg leading-relaxed">
                                 Trabajamos directamente con agricultores locales y nuestra propia huerta orgánica. Cada ingrediente es seleccionado en su punto óptimo de maduración, garantizando frescura y sabor incomparables.
@@ -73,7 +73,7 @@ export default function RestaurantePage() {
                         <div className="relative h-[500px] rounded-[3rem] overflow-hidden shadow-medium">
                             <Image
                                 src="/images/filosofia_restaurante_v2.png"
-                                alt="Nuestra Filosof├¡a - Kil├│metro Cero"
+                                alt="Nuestra Filosofía - Kilómetro Cero"
                                 fill
                                 className="object-cover"
                                 quality={100}
@@ -88,7 +88,7 @@ export default function RestaurantePage() {
             <section id="menu" className="section bg-white">
                 <div className="container-custom">
                     <div className="text-center mb-16">
-                        <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Nuestros Cl├ísicos</span>
+                        <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Nuestros Clásicos</span>
                         <h2 className="text-4xl md:text-6xl font-display font-bold mt-4 mb-6">Platos Signature</h2>
                         <p className="text-gray-600 text-lg max-w-2xl mx-auto">
                             Creaciones culinarias que fusionan técnicas ancestrales con innovación contemporánea
