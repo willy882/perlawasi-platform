@@ -151,6 +151,7 @@ export default function RestaurantePage() {
                             <div className="p-8">
                                 <h3 className="text-2xl font-display font-bold mb-3">Cecina con Tacacho</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
+                                    {/* Ingrediente principal */}
                                     Cerdo ahumado artesanalmente con bolas de plátano verde y chorizo regional.
                                 </p>
                                 <div className="flex items-center justify-between">
@@ -168,6 +169,7 @@ export default function RestaurantePage() {
                             <div className="p-8">
                                 <h3 className="text-2xl font-display font-bold mb-3">Juane Gourmet</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
+                                    {/* Clásico */}
                                     Arroz con pollo envuelto en hojas de bijao, versión premium con especias secretas.
                                 </p>
                                 <div className="flex items-center justify-between">
@@ -185,6 +187,7 @@ export default function RestaurantePage() {
                             <div className="p-8">
                                 <h3 className="text-2xl font-display font-bold mb-3">Postre de Camu Camu</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
+                                    {/* Frescura amazónica */}
                                     Mousse de camu camu con crumble de cacao y frutas amazónicas frescas.
                                 </p>
                                 <div className="flex items-center justify-between">

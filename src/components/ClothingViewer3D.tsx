@@ -35,7 +35,7 @@ export default function ClothingViewer3D({ emoji, color, isSpinning, onSpinCompl
         }
     }, [isSpinning])
 
-    // Efecto de spin al cambiar prenda (720┬░ r├ípido)
+    // Efecto de spin al cambiar prenda (720° rápido)
     useEffect(() => {
         if (!isSpinning) return
         let start: number | null = null
@@ -173,7 +173,7 @@ export default function ClothingViewer3D({ emoji, color, isSpinning, onSpinCompl
                 </div>
             </div>
 
-            {/* Indicador de interacci├│n */}
+            {/* Indicador de interacción */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 text-white/40 text-xs font-medium tracking-widest uppercase">
                 <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="animate-pulse">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2M8 4v4h8V4M8 4h8" />

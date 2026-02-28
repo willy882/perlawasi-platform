@@ -4,26 +4,27 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-// ────────────────── TIPOS ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────interface Plant {
-id: string
-name: string
-scientific: string
-price: number
-emoji: string
-bgColor: string
-accentColor: string
-difficulty: 'Muy Fácil' | 'Fácil' | 'Medio' | 'Difícil'
-light: string
-water: string
-environment: string
-petFriendly: boolean
-tabs: {
-    info: string
-    care: string
-    more: string
-}
-thumbnails: string[]
-tags: string[]
+// ────────────────── TIPOS ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+interface Plant {
+    id: string
+    name: string
+    scientific: string
+    price: number
+    emoji: string
+    bgColor: string
+    accentColor: string
+    difficulty: 'Muy Fácil' | 'Fácil' | 'Medio' | 'Difícil'
+    light: string
+    water: string
+    environment: string
+    petFriendly: boolean
+    tabs: {
+        info: string
+        care: string
+        more: string
+    }
+    thumbnails: string[]
+    tags: string[]
 }
 
 // ────────────────── DATOS ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -303,7 +304,7 @@ function PlantViewer({ plant, qty, setQty }: { plant: Plant; qty: number; setQty
                     <div>
                         <div className="flex gap-0 border-b border-gray-100 mb-5">
                             {(['info', 'care', 'more'] as const).map((tab) => {
-                                const labels = { info: 'Informaci├│n', care: 'Cuidados', more: 'M├ís detalles' }
+                                const labels = { info: 'Información', care: 'Cuidados', more: 'Más detalles' }
                                 return (
                                     <button
                                         key={tab}
@@ -454,7 +455,7 @@ export default function PlantasPage() {
             {/* ÔòÉÔòÉ PLANT VIEWER SHOP ÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉÔòÉ */}
             <section id="vivero" className="py-20 bg-white">
                 <div className="container-custom">
-                    {/* T├¡tulo secci├│n */}
+                    {/* Título sección */}
                     <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
                         <div>
                             <span className="text-green-600 text-xs font-black uppercase tracking-[0.3em] block mb-2">Selección Curada</span>

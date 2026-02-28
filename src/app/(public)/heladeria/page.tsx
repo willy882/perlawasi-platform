@@ -22,9 +22,11 @@ export default function HeladeriaPage() {
                                 Felicidad en Cada Bocado
                             </span>
                             <h1 className="text-6xl md:text-8xl font-display font-bold mb-6 leading-tight">
+                                {/* Título de heladería */}
                                 Heladería Vibrante
                             </h1>
                             <p className="text-2xl text-white/95 mb-10 leading-relaxed">
+                                {/* Descripción principal */}
                                 Sabores artesanales que celebran las frutas amazónicas. Frescura natural en cada cucharada.
                             </p>
                             <Link href="#sabores" className="btn bg-white text-pink-600 px-12 py-5 text-xl font-bold hover:bg-pink-50">
