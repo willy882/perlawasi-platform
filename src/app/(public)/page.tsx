@@ -32,7 +32,7 @@ export default function HomePage() {
                                 Reservar Mesa
                             </Link>
                             <Link href="/restaurante/carta" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg shadow-2xl transform hover:scale-105 transition-all outline-none">
-                                Ver Menú
+                                Ver La Carta
                             </Link>
                         </div>
                     </div>

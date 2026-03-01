@@ -33,7 +33,7 @@ export default function RestaurantePage() {
                         </p>
                         <div className="flex gap-4 flex-wrap">
                             <Link href="/restaurante/carta" className="btn bg-emerald-600 text-white px-10 py-4 text-lg hover:bg-emerald-700">
-                                Ver Menú
+                                Ver La Carta
                             </Link>
                             <Link href="#reservar" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg">
                                 Reservar Mesa
@@ -92,107 +92,140 @@ export default function RestaurantePage() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        {/* Plato 1 */}
+                        {/* Plato 1 - La Buchizapa */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
-                            <div className="aspect-square bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                🥗
+                            <div className="aspect-square relative overflow-hidden">
+                                <Image
+                                    src="/images/carta/buchizapa.jpg"
+                                    alt="La Buchizapa"
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                    quality={90}
+                                />
                             </div>
                             <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3">Ensalada de la Huerta</h3>
+                                <h3 className="text-2xl font-display font-bold mb-3">La Buchizapa</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Vegetales frescos de nuestra huerta con vinagreta de maracuyá y hierbas aromáticas.
+                                    Juane Avispa + Ceviche de Paiche + Chicharrón de Paiche + Chaufa Regional + Corona. Para 3 personas.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-emerald-500">S/ 28</span>
-                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 99</span>
+                                    <Link href="/restaurante/carta" className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</Link>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Plato 2 */}
+                        {/* Plato 2 - Paiche en Salsa Amazónica */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
-                            <div className="aspect-square bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                🍲
+                            <div className="aspect-square relative overflow-hidden">
+                                <Image
+                                    src="/images/carta/paiche-salsa-amazonica.jpg"
+                                    alt="Paiche en Salsa Amazónica"
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                    quality={90}
+                                />
                             </div>
                             <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3">Inchicapi Amazónico</h3>
+                                <h3 className="text-2xl font-display font-bold mb-3">Paiche en Salsa Amazónica</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Sopa tradicional de gallina criolla con maní, cilantro y yuca de la región.
+                                    Preparado a la parrilla, mariscos en salsa de huacatay + yuca frita.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-emerald-500">S/ 35</span>
-                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 45</span>
+                                    <Link href="/restaurante/carta" className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</Link>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Plato 3 */}
+                        {/* Plato 3 - Ronda Amazónica */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
-                            <div className="aspect-square bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                🐟
+                            <div className="aspect-square relative overflow-hidden">
+                                <Image
+                                    src="/images/carta/ronda-amazonica.jpg"
+                                    alt="Ronda Amazónica"
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                    quality={90}
+                                />
                             </div>
                             <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3">Paiche a la Parrilla</h3>
+                                <h3 className="text-2xl font-display font-bold mb-3">Ronda Amazónica</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Filete de paiche amazónico con salsa de aguaje y plátano caramelizado.
+                                    Juane Avispa + Cecina + Chorizo + Chaufa Regional. Para 2 personas.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-emerald-500">S/ 48</span>
-                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 79</span>
+                                    <Link href="/restaurante/carta" className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</Link>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Plato 4 */}
+                        {/* Plato 4 - Trío de Ceviche Selvático */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
-                            <div className="aspect-square bg-gradient-to-br from-yellow-100 to-yellow-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                🍖
+                            <div className="aspect-square relative overflow-hidden">
+                                <Image
+                                    src="/images/carta/trio-ceviche-selvatico.jpg"
+                                    alt="Trío de Ceviche Selvático"
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                    quality={90}
+                                />
                             </div>
                             <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3">Cecina con Tacacho</h3>
+                                <h3 className="text-2xl font-display font-bold mb-3">Trío de Ceviche Selvático</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    {/* Ingrediente principal */}
-                                    Cerdo ahumado artesanalmente con bolas de plátano verde y chorizo regional.
+                                    Tres ceviches en uno: Toyo + Paiche + Cecina. Frescura amazónica pura.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-emerald-500">S/ 42</span>
-                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 65</span>
+                                    <Link href="/restaurante/carta" className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</Link>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Plato 5 */}
+                        {/* Plato 5 - Ceviche de Paiche */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
-                            <div className="aspect-square bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                🍛
+                            <div className="aspect-square relative overflow-hidden">
+                                <Image
+                                    src="/images/carta/ceviche-paiche.jpg"
+                                    alt="Ceviche de Paiche"
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                    quality={90}
+                                />
                             </div>
                             <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3">Juane Gourmet</h3>
+                                <h3 className="text-2xl font-display font-bold mb-3">Ceviche de Paiche</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    {/* Clásico */}
-                                    Arroz con pollo envuelto en hojas de bijao, versión premium con especias secretas.
+                                    Ceviche premium de paiche amazónico. El rey de los ríos en su máxima expresión.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-emerald-500">S/ 38</span>
-                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 40</span>
+                                    <Link href="/restaurante/carta" className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</Link>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Plato 6 */}
+                        {/* Plato 6 - Chancho a la Caja China */}
                         <div className="group bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all duration-300">
-                            <div className="aspect-square bg-gradient-to-br from-pink-100 to-pink-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                🍧
+                            <div className="aspect-square relative overflow-hidden">
+                                <Image
+                                    src="/images/carta/caja-china.jpg"
+                                    alt="Chancho a la Caja China"
+                                    fill
+                                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                    quality={90}
+                                />
                             </div>
                             <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3">Postre de Camu Camu</h3>
+                                <h3 className="text-2xl font-display font-bold mb-3">Chancho a la Caja China</h3>
                                 <p className="text-gray-600 mb-4 leading-relaxed">
-                                    {/* Frescura amazónica */}
-                                    Mousse de camu camu con crumble de cacao y frutas amazónicas frescas.
+                                    Cerdo crocante preparado en caja china. Piel dorada y carne jugosa.
                                 </p>
                                 <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-emerald-500">S/ 22</span>
-                                    <button className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</button>
+                                    <span className="text-2xl font-bold text-emerald-500">S/ 30</span>
+                                    <Link href="/restaurante/carta" className="btn bg-emerald-600 text-white px-6 py-2 text-sm hover:bg-emerald-700">Ordenar</Link>
                                 </div>
                             </div>
                         </div>
