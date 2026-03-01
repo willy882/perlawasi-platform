@@ -23,6 +23,7 @@ interface ClothingItem {
     category: string
     price: number
     emoji: string
+    image?: string
     description: string
     material: string
     colors: ColorOption[]
@@ -42,12 +43,13 @@ const categories = [
 const allProducts: ClothingItem[] = [
     {
         id: 'polo-lino',
-        name: 'Polo Essential Lino',
+        name: 'Polo Perlamayo',
         category: 'camisetas',
         price: 85,
         emoji: '👕',
-        description: 'Básico perfecto en lino orgánico de primera. Silueta relaxed que se adapta a cualquier momento del día.',
-        material: 'Lino Orgánico 100%',
+        image: '/images/ropa/polo-perlamayo.png',
+        description: 'Polo exclusivo Perlamayo en algodón premium. Diseño minimalista con el sello de la selva amazónica.',
+        material: 'Algodón Premium 100%',
         colors: [
             { name: 'Blanco Natural', hex: '#F5F0E8' },
             { name: 'Crema', hex: '#DED4B4' },
@@ -218,6 +220,7 @@ export default function FashionConfigurator() {
                                 <ClothingViewer3D
                                     emoji={selectedProduct.emoji}
                                     color={selectedColor.hex}
+                                    image={selectedProduct.image}
                                     isSpinning={isSpinning}
                                     onSpinComplete={() => setIsSpinning(false)}
                                 />

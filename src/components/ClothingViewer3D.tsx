@@ -1,19 +1,20 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
 interface ClothingViewerProps {
     emoji: string
     color: string
+    image?: string
     isSpinning: boolean
     onSpinComplete?: () => void
 }
 
-export default function ClothingViewer3D({ emoji, color, isSpinning, onSpinComplete }: ClothingViewerProps) {
+export default function ClothingViewer3D({ emoji, color, image, isSpinning, onSpinComplete }: ClothingViewerProps) {
     const [rotation, setRotation] = useState(0)
     const [autoAngle, setAutoAngle] = useState(0)
     const animFrameRef = useRef<number | null>(null)
-    const spinStartRef = useRef<number | null>(null)
     const isDragging = useRef(false)
     const lastX = useRef(0)
     const viewerRef = useRef<HTMLDivElement>(null)
@@ -39,14 +40,13 @@ export default function ClothingViewer3D({ emoji, color, isSpinning, onSpinCompl
     useEffect(() => {
         if (!isSpinning) return
         let start: number | null = null
-        const duration = 700 // ms
+        const duration = 700
         const startAngle = autoAngle
 
         const spin = (timestamp: number) => {
             if (!start) start = timestamp
             const elapsed = timestamp - start
             const progress = Math.min(elapsed / duration, 1)
-            // Easing out cubic
             const eased = 1 - Math.pow(1 - progress, 3)
             setAutoAngle(startAngle + eased * 720)
             if (progress < 1) {
@@ -84,9 +84,11 @@ export default function ClothingViewer3D({ emoji, color, isSpinning, onSpinCompl
     const handleTouchEnd = () => { isDragging.current = false }
 
     const totalAngle = rotation + autoAngle
-
-    // Perspectiva 3D: usamos rotateY y un ligero oscilado en X para simular volumen
     const wobble = Math.sin((totalAngle * Math.PI) / 180) * 5
+
+    // Calculamos la escala basada en la rotación para efecto de profundidad
+    const normalizedAngle = ((totalAngle % 360) + 360) % 360
+    const scaleEffect = 1 - Math.abs(Math.sin((normalizedAngle * Math.PI) / 180)) * 0.15
 
     return (
         <div
@@ -112,7 +114,6 @@ export default function ClothingViewer3D({ emoji, color, isSpinning, onSpinCompl
                 style={{
                     transform: `rotateY(${totalAngle}deg) rotateX(${wobble}deg)`,
                     transformStyle: 'preserve-3d',
-                    transition: isDragging.current ? 'none' : 'none',
                     willChange: 'transform',
                 }}
             >
@@ -125,38 +126,66 @@ export default function ClothingViewer3D({ emoji, color, isSpinning, onSpinCompl
                         transformStyle: 'preserve-3d',
                     }}
                 >
-                    {/* Cuerpo de la prenda con color */}
+                    {/* Fondo con color seleccionado */}
                     <div
                         className="absolute inset-0 rounded-3xl transition-colors duration-700"
                         style={{
-                            background: `radial-gradient(ellipse at 30% 30%, ${color}dd, ${color}99 60%, ${color}44)`,
+                            background: image
+                                ? `radial-gradient(ellipse at 30% 30%, ${color}22, ${color}11 60%, transparent)`
+                                : `radial-gradient(ellipse at 30% 30%, ${color}dd, ${color}99 60%, ${color}44)`,
                             boxShadow: `0 20px 80px ${color}44, inset 0 1px 0 rgba(255,255,255,0.3)`,
-                            border: `1px solid ${color}33`,
+                            border: `1px solid ${color}22`,
                         }}
                     />
 
-                    {/* Brillo de luz en la tela */}
+                    {/* Brillo de luz */}
                     <div
-                        className="absolute top-0 left-0 w-1/2 h-2/3 rounded-3xl opacity-20"
+                        className="absolute top-0 left-0 w-1/2 h-2/3 rounded-3xl opacity-15"
                         style={{
                             background: 'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, transparent 70%)',
                         }}
                     />
 
-                    {/* Emoji de la prenda */}
-                    <div
-                        className="relative z-10 transition-all duration-500"
-                        style={{
-                            fontSize: 120,
-                            filter: `drop-shadow(0 10px 20px ${color}88)`,
-                            transform: 'translateZ(20px)',
-                        }}
-                    >
-                        {emoji}
-                    </div>
+                    {/* Imagen real o emoji */}
+                    {image ? (
+                        <div
+                            className="relative z-10 w-full h-full flex items-center justify-center p-4"
+                            style={{
+                                transform: 'translateZ(20px)',
+                                filter: `drop-shadow(0 10px 30px ${color}66)`,
+                            }}
+                        >
+                            <Image
+                                src={image}
+                                alt="Producto"
+                                fill
+                                className="object-contain p-4"
+                                style={{
+                                    mixBlendMode: 'multiply',
+                                }}
+                                quality={90}
+                            />
+                            {/* Overlay de color sutil */}
+                            <div
+                                className="absolute inset-0 rounded-3xl transition-colors duration-700 mix-blend-color opacity-40"
+                                style={{ backgroundColor: color }}
+                            />
+                        </div>
+                    ) : (
+                        <div
+                            className="relative z-10 transition-all duration-500"
+                            style={{
+                                fontSize: 120,
+                                filter: `drop-shadow(0 10px 20px ${color}88)`,
+                                transform: 'translateZ(20px)',
+                            }}
+                        >
+                            {emoji}
+                        </div>
+                    )}
                 </div>
 
-                {/* Cara posterior (visible cuando rota 180┬░) */}
+                {/* Cara posterior */}
                 <div
                     className="absolute inset-0 flex items-center justify-center"
                     style={{
@@ -164,12 +193,34 @@ export default function ClothingViewer3D({ emoji, color, isSpinning, onSpinCompl
                         height: 320,
                         backfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg)',
-                        background: `radial-gradient(ellipse at 70% 30%, ${color}bb, ${color}66 60%, ${color}22)`,
+                        background: image
+                            ? `radial-gradient(ellipse at 70% 30%, ${color}22, ${color}11 60%, transparent)`
+                            : `radial-gradient(ellipse at 70% 30%, ${color}bb, ${color}66 60%, ${color}22)`,
                         borderRadius: '1.5rem',
-                        border: `1px solid ${color}33`,
+                        border: `1px solid ${color}22`,
                     }}
                 >
-                    <span style={{ fontSize: 80, opacity: 0.5, filter: 'blur(1px)' }}>Ô£ª</span>
+                    {image ? (
+                        <div className="relative w-full h-full p-4">
+                            <Image
+                                src={image}
+                                alt="Producto - vista posterior"
+                                fill
+                                className="object-contain p-4 opacity-60"
+                                style={{
+                                    mixBlendMode: 'multiply',
+                                    transform: 'scaleX(-1)',
+                                }}
+                                quality={90}
+                            />
+                            <div
+                                className="absolute inset-0 rounded-3xl transition-colors duration-700 mix-blend-color opacity-30"
+                                style={{ backgroundColor: color }}
+                            />
+                        </div>
+                    ) : (
+                        <span style={{ fontSize: 80, opacity: 0.5, filter: 'blur(1px)' }}>✦</span>
+                    )}
                 </div>
             </div>
 
