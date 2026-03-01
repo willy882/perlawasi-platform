@@ -107,6 +107,46 @@ const allProducts: ClothingItem[] = [
             { label: 'M', available: true },
             { label: 'L', available: true },
         ],
+    },
+    {
+        id: 'bikini-selva',
+        name: 'Bikini Selva Chic',
+        category: 'vestidos',
+        price: 120,
+        emoji: '👙',
+        image: '/images/ropa/bikini.png',
+        description: 'Diseño exclusivo para el sol amazónico. Comodidad y estilo en cada detalle.',
+        material: 'Lycra Premium',
+        colors: [
+            { name: 'Negro', hex: '#000000' },
+            { name: 'Blanco', hex: '#FFFFFF' },
+            { name: 'Azul', hex: '#0000FF' },
+            { name: 'Amarillo', hex: '#FFFF00' },
+        ],
+        sizes: [
+            { label: 'S', available: true },
+            { label: 'M', available: true },
+            { label: 'L', available: true },
+        ],
+    },
+    {
+        id: 'ropa-interior-perla',
+        name: 'Lencería Perla',
+        category: 'vestidos',
+        price: 95,
+        emoji: '🎀',
+        image: '/images/ropa/ropainteriror.png',
+        description: 'Suavidad y elegancia en fibras naturales. Diseñado para la mujer que valora el confort.',
+        material: 'Algodón y Encaje',
+        colors: [
+            { name: 'Azul Celeste', hex: '#ADD8E6' },
+            { name: 'Blanco', hex: '#FFFFFF' },
+        ],
+        sizes: [
+            { label: 'S', available: true },
+            { label: 'M', available: true },
+            { label: 'L', available: true },
+        ],
     }
 ]
 
