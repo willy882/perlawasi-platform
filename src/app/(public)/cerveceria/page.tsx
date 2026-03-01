@@ -1,19 +1,28 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Metadata } from 'next'
+import { supabase } from '@/lib/supabase'
 
 export const metadata: Metadata = {
     title: 'Cervecería Perlawasi - Cerveza Artesanal con Alma de Montaña | San Martín',
     description: 'Descubre nuestras variedades de cerveza artesanal elaboradas con agua de manantial y lúpulos seleccionados. Visita nuestro taproom gourmet.',
 }
 
-export default function CerveceriaPage() {
-    const beers = [
-        { name: 'Andina Gold', type: 'Golden Ale', abv: '5.2%', emoji: '🍺', color: 'from-yellow-400 to-yellow-200' },
-        { name: 'Selva Roja', type: 'Red Ale', abv: '6.0%', emoji: '🍺', color: 'from-red-600 to-red-400' },
-        { name: 'Mystic IPA', type: 'India Pale Ale', abv: '6.5%', emoji: '🍺', color: 'from-amber-600 to-amber-400' },
-        { name: 'Dark Amazon', type: 'Stout', abv: '7.2%', emoji: '🍺', color: 'from-gray-900 to-gray-700' },
-    ]
+export default async function CerveceriaPage() {
+    // Fetch beers from Supabase
+    const { data: dbBeers } = await supabase
+        .from('cerveceria')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+    const beers = dbBeers?.map(b => ({
+        ...b,
+        emoji: '🍺',
+        color: b.category?.toLowerCase().includes('ipa') ? 'from-amber-600 to-amber-400' :
+            (b.category?.toLowerCase().includes('porter') || b.category?.toLowerCase().includes('stout') ? 'from-gray-900 to-gray-700' :
+                (b.category?.toLowerCase().includes('red') ? 'from-red-600 to-red-400' : 'from-yellow-400 to-yellow-200')),
+        type: b.category || 'Artesanal'
+    })) || []
 
     return (
         <div className="min-h-screen bg-white">
@@ -109,13 +118,17 @@ export default function CerveceriaPage() {
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                         {beers.map((beer, i) => (
                             <div key={i} className="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 hover:bg-white/10 transition-all group">
-                                <div className={`aspect-square rounded-2xl bg-gradient-to-br ${beer.color} flex items-center justify-center text-7xl mb-6 transition-transform group-hover:scale-110`}>
-                                    {beer.emoji}
+                                <div className={`aspect-square relative rounded-2xl bg-gradient-to-br ${beer.color} flex items-center justify-center text-7xl mb-6 transition-transform group-hover:scale-110 overflow-hidden`}>
+                                    {beer.image_url ? (
+                                        <img src={beer.image_url} alt={beer.name} className="w-full h-full object-cover" />
+                                    ) : (
+                                        beer.emoji
+                                    )}
                                 </div>
                                 <h3 className="text-2xl font-bold mb-1">{beer.name}</h3>
                                 <p className="text-[#FFB300] font-bold text-sm mb-4 uppercase tracking-widest">{beer.type}</p>
                                 <div className="flex justify-between items-center text-gray-400 text-sm">
-                                    <span>ABV: {beer.abv}</span>
+                                    <span>Stock: {beer.stock} • S/ {beer.price}</span>
                                     <button className="text-white hover:text-[#FFB300] transition-colors">Ver Ficha →</button>
                                 </div>
                             </div>

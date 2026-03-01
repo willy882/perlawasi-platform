@@ -1,12 +1,23 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
+import { supabase } from '@/lib/supabase'
 
 export const metadata: Metadata = {
     title: 'Café & Cacao Perlawasi - Herencia Andina en Cada Taza | San Martín',
     description: 'Café de especialidad y chocolates artesanales elaborados con cacao ancestral. Experiencia premium de degustación en el corazón de la selva.',
 }
 
-export default function CafeCacaoPage() {
+export default async function CafeCacaoPage() {
+    // Fetch products from Supabase
+    const { data: products } = await supabase
+        .from('cafe_cacao')
+        .select('*')
+        .order('category', { ascending: true })
+
+    // Separate by type or handle categories
+    const ritualBoxes = products?.filter(p => p.category?.toLowerCase().includes('ritual') || p.category?.toLowerCase().includes('caja')) || []
+    const individualProducts = products?.filter(p => !p.category?.toLowerCase().includes('ritual') && !p.category?.toLowerCase().includes('caja')) || []
+
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Section - Dark Premium */}
@@ -114,59 +125,32 @@ export default function CafeCacaoPage() {
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {/* Caja 1 */}
-                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
-                            <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                ☕
-                            </div>
-                            <div className="p-8">
-                                <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">Ritual Matutino</span>
-                                <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja del Despertar</h3>
-                                <p className="text-gray-600 mb-6 leading-relaxed">
-                                    3 variedades de café de especialidad + prensa francesa artesanal + taza de cerámica local
-                                </p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-gray-900">S/ 145</span>
-                                    <button className="btn btn-primary px-6 py-2 text-sm">Agregar</button>
+                        {ritualBoxes.length > 0 ? (
+                            ritualBoxes.map((p, i) => (
+                                <div key={p.id} className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
+                                    <div className="aspect-square relative bg-gradient-to-br from-amber-100 to-orange-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
+                                        {p.image_url ? (
+                                            <img src={p.image_url} alt={p.name} className="w-full h-full object-cover" />
+                                        ) : (
+                                            i % 2 === 0 ? '☕' : '🍫'
+                                        )}
+                                    </div>
+                                    <div className="p-8">
+                                        <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">{p.category}</span>
+                                        <h3 className="text-2xl font-display font-bold mt-2 mb-3">{p.name}</h3>
+                                        <p className="text-gray-600 mb-6 leading-relaxed">
+                                            {p.description}
+                                        </p>
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-2xl font-bold text-gray-900">S/ {p.price}</span>
+                                            <button className="btn btn-primary px-6 py-2 text-sm">Agregar</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Caja 2 */}
-                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
-                            <div className="aspect-square bg-gradient-to-br from-amber-900 to-amber-700 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                🍫
-                            </div>
-                            <div className="p-8">
-                                <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">Ritual Nocturno</span>
-                                <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja del Cacao</h3>
-                                <p className="text-gray-600 mb-6 leading-relaxed">
-                                    5 barras de chocolate artesanal (70%, 80%, 90%) + nibs de cacao + infusión de cáscara
-                                </p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-gray-900">S/ 165</span>
-                                    <button className="btn btn-primary px-6 py-2 text-sm">Agregar</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Caja 3 */}
-                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
-                            <div className="aspect-square bg-gradient-to-br from-yellow-100 via-amber-100 to-orange-100 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
-                                🥨
-                            </div>
-                            <div className="p-8">
-                                <span className="text-xs font-bold text-primary-500 uppercase tracking-wider">Ritual Completo</span>
-                                <h3 className="text-2xl font-display font-bold mt-2 mb-3">Caja Fusión</h3>
-                                <p className="text-gray-600 mb-6 leading-relaxed">
-                                    Café + Chocolate + Bombones rellenos + Molinillo tradicional + Guía de maridaje
-                                </p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-gray-900">S/ 220</span>
-                                    <button className="btn btn-primary px-6 py-2 text-sm">Agregar</button>
-                                </div>
-                            </div>
-                        </div>
+                            ))
+                        ) : (
+                            <p className="col-span-full text-center text-gray-400 italic">No hay cajas de ritual disponibles.</p>
+                        )}
                     </div>
                 </div>
             </section>
@@ -176,58 +160,28 @@ export default function CafeCacaoPage() {
                 <div className="container-custom">
                     <h2 className="text-4xl md:text-5xl font-display font-bold mb-12 text-center">Productos Individuales</h2>
 
-                    <div className="grid md:grid-cols-4 gap-6">
-                        {/* Producto 1 */}
-                        <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
-                            <div className="aspect-square bg-gradient-to-br from-amber-200 to-amber-100 rounded-xl flex items-center justify-center text-6xl mb-4">
-                                ☕
-                            </div>
-                            <h4 className="font-bold text-lg mb-2">Café Altura Premium</h4>
-                            <p className="text-sm text-gray-600 mb-3">250g - Grano entero</p>
-                            <div className="flex items-center justify-between">
-                                <span className="font-bold text-lg">S/ 45</span>
-                                <button className="text-primary-500 font-bold text-sm">+</button>
-                            </div>
-                        </div>
-
-                        {/* Producto 2 */}
-                        <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
-                            <div className="aspect-square bg-gradient-to-br from-orange-200 to-orange-100 rounded-xl flex items-center justify-center text-6xl mb-4">
-                                ☕
-                            </div>
-                            <h4 className="font-bold text-lg mb-2">Café Orgánico</h4>
-                            <p className="text-sm text-gray-600 mb-3">250g - Molido</p>
-                            <div className="flex items-center justify-between">
-                                <span className="font-bold text-lg">S/ 38</span>
-                                <button className="text-primary-500 font-bold text-sm">+</button>
-                            </div>
-                        </div>
-
-                        {/* Producto 3 */}
-                        <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
-                            <div className="aspect-square bg-gradient-to-br from-amber-800 to-amber-600 rounded-xl flex items-center justify-center text-6xl mb-4">
-                                🍫
-                            </div>
-                            <h4 className="font-bold text-lg mb-2">Chocolate 70%</h4>
-                            <p className="text-sm text-gray-600 mb-3">100g - Barra</p>
-                            <div className="flex items-center justify-between">
-                                <span className="font-bold text-lg">S/ 28</span>
-                                <button className="text-primary-500 font-bold text-sm">+</button>
-                            </div>
-                        </div>
-
-                        {/* Producto 4 */}
-                        <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
-                            <div className="aspect-square bg-gradient-to-br from-amber-900 to-black rounded-xl flex items-center justify-center text-6xl mb-4">
-                                🍫
-                            </div>
-                            <h4 className="font-bold text-lg mb-2">Chocolate 90%</h4>
-                            <p className="text-sm text-gray-600 mb-3">100g - Barra</p>
-                            <div className="flex items-center justify-between">
-                                <span className="font-bold text-lg">S/ 32</span>
-                                <button className="text-primary-500 font-bold text-sm">+</button>
-                            </div>
-                        </div>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {individualProducts.length > 0 ? (
+                            individualProducts.map((p, i) => (
+                                <div key={p.id} className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
+                                    <div className="aspect-square relative bg-gradient-to-br from-amber-200 to-amber-100 rounded-xl flex items-center justify-center text-6xl mb-4 overflow-hidden">
+                                        {p.image_url ? (
+                                            <img src={p.image_url} alt={p.name} className="w-full h-full object-cover" />
+                                        ) : (
+                                            p.category?.toLowerCase().includes('cafe') ? '☕' : '🍫'
+                                        )}
+                                    </div>
+                                    <h4 className="font-bold text-lg mb-2">{p.name}</h4>
+                                    <p className="text-sm text-gray-600 mb-3">{p.description?.substring(0, 50)}...</p>
+                                    <div className="flex items-center justify-between">
+                                        <span className="font-bold text-lg">S/ {p.price}</span>
+                                        <button className="text-primary-500 font-bold text-sm">+</button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="col-span-full text-center text-gray-400 italic">No hay productos individuales disponibles.</p>
+                        )}
                     </div>
                 </div>
             </section>

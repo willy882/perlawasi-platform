@@ -1,9 +1,17 @@
-'use client'
-
 import Link from 'next/link'
 import AnimatedIceCreamCharacter from '@/components/AnimatedIceCreamCharacter'
+import { supabase } from '@/lib/supabase'
 
-export default function HeladeriaPage() {
+export default async function HeladeriaPage() {
+    // Fetch products from Supabase
+    const { data: dbProducts } = await supabase
+        .from('heladeria')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+    const flavors = dbProducts?.filter(p => !p.category?.toLowerCase().includes('combo')) || []
+    const combos = dbProducts?.filter(p => p.category?.toLowerCase().includes('combo')) || []
+
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Section - Pink/Red Vibrant */}
@@ -54,107 +62,31 @@ export default function HeladeriaPage() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        {/* Sabor 1 */}
-                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-strong transition-all group">
-                            <div className="aspect-square bg-gradient-to-br from-yellow-200 to-yellow-100 flex items-center justify-center text-9xl group-hover:scale-110 transition-transform duration-500">
-                                🥭
-                            </div>
-                            <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3 text-gray-900">Mango Amazónico</h3>
-                                <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Cremoso helado de mango fresco con trozos de fruta. Dulzura natural y tropical.
-                                </p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-pink-600">S/ 12</span>
-                                    <button className="btn bg-pink-600 text-white px-6 py-2 text-sm hover:bg-pink-700">Pedir</button>
+                        {flavors.length > 0 ? (
+                            flavors.map((p, i) => (
+                                <div key={p.id} className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-strong transition-all group">
+                                    <div className="aspect-square relative bg-gradient-to-br from-pink-100 to-orange-100 flex items-center justify-center text-9xl group-hover:scale-110 transition-transform duration-500 overflow-hidden">
+                                        {p.image_url ? (
+                                            <img src={p.image_url} alt={p.name} className="w-full h-full object-cover" />
+                                        ) : (
+                                            i % 2 === 0 ? '🥭' : '🍨'
+                                        )}
+                                    </div>
+                                    <div className="p-8">
+                                        <h3 className="text-2xl font-display font-bold mb-3 text-gray-900">{p.name}</h3>
+                                        <p className="text-gray-600 mb-4 leading-relaxed">
+                                            {p.description}
+                                        </p>
+                                        <div className="flex items-center justify-between">
+                                            <span className="text-2xl font-bold text-pink-600">S/ {p.price}</span>
+                                            <button className="btn bg-pink-600 text-white px-6 py-2 text-sm hover:bg-pink-700">Pedir</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Sabor 2 */}
-                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-strong transition-all group">
-                            <div className="aspect-square bg-gradient-to-br from-purple-300 to-purple-200 flex items-center justify-center text-9xl group-hover:scale-110 transition-transform duration-500">
-                                🥥
-                            </div>
-                            <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3 text-gray-900">Aguaje Silvestre</h3>
-                                <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Exótico sabor de aguaje, fruta emblemática de la Amazonía. Rico en vitaminas.
-                                </p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-pink-600">S/ 14</span>
-                                    <button className="btn bg-pink-600 text-white px-6 py-2 text-sm hover:bg-pink-700">Pedir</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Sabor 3 */}
-                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-strong transition-all group">
-                            <div className="aspect-square bg-gradient-to-br from-green-200 to-green-100 flex items-center justify-center text-9xl group-hover:scale-110 transition-transform duration-500">
-                                🥥
-                            </div>
-                            <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3 text-gray-900">Coco Cremoso</h3>
-                                <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Helado de coco natural con trozos de coco rallado. Refrescante y tropical.
-                                </p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-pink-600">S/ 13</span>
-                                    <button className="btn bg-pink-600 text-white px-6 py-2 text-sm hover:bg-pink-700">Pedir</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Sabor 4 */}
-                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-strong transition-all group">
-                            <div className="aspect-square bg-gradient-to-br from-pink-300 to-pink-200 flex items-center justify-center text-9xl group-hover:scale-110 transition-transform duration-500">
-                                🍓
-                            </div>
-                            <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3 text-gray-900">Fresa Andina</h3>
-                                <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Fresas frescas de las alturas convertidas en un helado suave y aromático.
-                                </p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-pink-600">S/ 12</span>
-                                    <button className="btn bg-pink-600 text-white px-6 py-2 text-sm hover:bg-pink-700">Pedir</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Sabor 5 */}
-                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-strong transition-all group">
-                            <div className="aspect-square bg-gradient-to-br from-amber-800 to-amber-600 flex items-center justify-center text-9xl group-hover:scale-110 transition-transform duration-500">
-                                🍫
-                            </div>
-                            <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3 text-gray-900">Chocolate Perlawasi</h3>
-                                <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Helado de chocolate elaborado con nuestro cacao artesanal. Intenso y cremoso.
-                                </p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-pink-600">S/ 13</span>
-                                    <button className="btn bg-pink-600 text-white px-6 py-2 text-sm hover:bg-pink-700">Pedir</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Sabor 6 */}
-                        <div className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-strong transition-all group">
-                            <div className="aspect-square bg-gradient-to-br from-orange-300 to-orange-200 flex items-center justify-center text-9xl group-hover:scale-110 transition-transform duration-500">
-                                🍋
-                            </div>
-                            <div className="p-8">
-                                <h3 className="text-2xl font-display font-bold mb-3 text-gray-900">Camu Camu Cítrico</h3>
-                                <p className="text-gray-600 mb-4 leading-relaxed">
-                                    Superfood amazónico en helado. Alto en vitamina C, sabor único y refrescante.
-                                </p>
-                                <div className="flex items-center justify-between">
-                                    <span className="text-2xl font-bold text-pink-600">S/ 15</span>
-                                    <button className="btn bg-pink-600 text-white px-6 py-2 text-sm hover:bg-pink-700">Pedir</button>
-                                </div>
-                            </div>
-                        </div>
+                            ))
+                        ) : (
+                            <p className="col-span-full text-center text-gray-400 italic">No hay sabores registrados todavía.</p>
+                        )}
                     </div>
                 </div>
             </section>
@@ -169,35 +101,25 @@ export default function HeladeriaPage() {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        {/* Combo 1 */}
-                        <div className="bg-white rounded-3xl p-10 shadow-medium">
-                            <div className="text-6xl mb-6 text-center">🍪🍪🍪</div>
-                            <h3 className="text-3xl font-display font-bold mb-4 text-center text-gray-900">Combo Familiar</h3>
-                            <p className="text-gray-600 text-center mb-6">
-                                3 bolas de helado + 3 toppings a elección + 3 conos premium
-                            </p>
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-pink-600 mb-4">S/ 35</div>
-                                <button className="btn bg-pink-600 text-white px-10 py-3 text-lg hover:bg-pink-700">
-                                    Ordenar Combo
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Combo 2 */}
-                        <div className="bg-white rounded-3xl p-10 shadow-medium">
-                            <div className="text-6xl mb-6 text-center">🍨🍨</div>
-                            <h3 className="text-3xl font-display font-bold mb-4 text-center text-gray-900">Combo Pareja</h3>
-                            <p className="text-gray-600 text-center mb-6">
-                                2 copas grandes + 4 toppings + 2 salsas especiales
-                            </p>
-                            <div className="text-center">
-                                <div className="text-4xl font-bold text-pink-600 mb-4">S/ 28</div>
-                                <button className="btn bg-pink-600 text-white px-10 py-3 text-lg hover:bg-pink-700">
-                                    Ordenar Combo
-                                </button>
-                            </div>
-                        </div>
+                        {combos.length > 0 ? (
+                            combos.map((p, i) => (
+                                <div key={p.id} className="bg-white rounded-3xl p-10 shadow-medium">
+                                    <div className="text-6xl mb-6 text-center">{i % 2 === 0 ? '🍪🍪🍪' : '🍨🍨'}</div>
+                                    <h3 className="text-3xl font-display font-bold mb-4 text-center text-gray-900">{p.name}</h3>
+                                    <p className="text-gray-600 text-center mb-6">
+                                        {p.description}
+                                    </p>
+                                    <div className="text-center">
+                                        <div className="text-4xl font-bold text-pink-600 mb-4">S/ {p.price}</div>
+                                        <button className="btn bg-pink-600 text-white px-10 py-3 text-lg hover:bg-pink-700">
+                                            Ordenar Combo
+                                        </button>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="col-span-full text-center text-gray-400 italic">No hay combos familiares registrados.</p>
+                        )}
                     </div>
                 </div>
             </section>

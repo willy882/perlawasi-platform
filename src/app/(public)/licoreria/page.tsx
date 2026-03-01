@@ -1,59 +1,29 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { Metadata } from 'next'
+import { supabase } from '@/lib/supabase'
 
 export const metadata: Metadata = {
     title: 'Licorería Perlawasi - El Alma de los Andes | San Martín',
     description: 'Licorería Perlawasi: destilados premium y macerados artesanales únicos. El espíritu de la selva peruana encapsulado en cada botella.',
 }
 
-export default function LicoreriaPage() {
-    const products = [
-        {
-            name: 'Cacao Spirit',
-            type: 'Destilado de Cacao',
-            notes: 'Frutos secos · Chocolate amargo · Tierra húmeda',
-            abv: '42%',
-            ml: '500 ml',
-            badge: 'Signature',
-            gradient: 'from-amber-950 via-stone-900 to-black',
-            accentColor: '#D4AF37',
-            emoji: '🥃',
-        },
-        {
-            name: 'Andean Botanical',
-            type: 'Gin de Montaña',
-            notes: 'Enebro · Hierba luisa · Cítricos andinos',
-            abv: '40%',
-            ml: '750 ml',
-            badge: 'Edición Limitada',
-            gradient: 'from-slate-900 via-blue-950 to-black',
-            accentColor: '#7dd3fc',
-            emoji: '🍸',
-        },
-        {
-            name: 'Mistify Rum',
-            type: 'Ron Añejo Selva',
-            notes: 'Melaza · Roble americano · Vainilla',
-            abv: '45%',
-            ml: '750 ml',
-            badge: 'Reserva',
-            gradient: 'from-orange-950 via-red-950 to-black',
-            accentColor: '#fb923c',
-            emoji: '🥃',
-        },
-        {
-            name: 'Floral Mist',
-            type: 'Licor de Flores',
-            notes: 'Pétalos de rosa · Flor de sauco · Miel',
-            abv: '28%',
-            ml: '500 ml',
-            badge: 'Artesanal',
-            gradient: 'from-rose-950 via-pink-950 to-black',
-            accentColor: '#f9a8d4',
-            emoji: '🍷',
-        },
-    ]
+export default async function LicoreriaPage() {
+    // Fetch products from Supabase
+    const { data: dbProducts } = await supabase
+        .from('licoreria')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+    const products = dbProducts?.map(p => ({
+        ...p,
+        badge: p.category === 'Destilados' ? 'Signature' : (p.category === 'Macerados' ? 'Artesanal' : 'Premium'),
+        gradient: p.category === 'Destilados' ? 'from-amber-950 via-stone-900 to-black' :
+            (p.category === 'Macerados' ? 'from-orange-950 via-red-950 to-black' : 'from-slate-900 via-blue-950 to-black'),
+        accentColor: p.category === 'Destilados' ? '#D4AF37' : (p.category === 'Macerados' ? '#fb923c' : '#7dd3fc'),
+        emoji: p.category === 'Destilados' ? '🥃' : (p.category === 'Vinos' ? '🍷' : '🍸'),
+        notes: p.description || 'Sabor único de la selva'
+    })) || []
 
     const proceso = [
         { num: '01', title: 'Selección', desc: 'Botánicos recolectados a mano en los alrededores de Perlawasi al amanecer.', icon: '🌿' },
@@ -177,7 +147,11 @@ export default function LicoreriaPage() {
                                         style={{ background: `radial-gradient(circle at 50% 100%, ${item.accentColor}15 0%, transparent 60%)` }} />
                                     {/* Emoji centrado */}
                                     <div className="absolute inset-0 flex items-center justify-center text-8xl transition-transform duration-500 group-hover:scale-110">
-                                        {item.emoji}
+                                        {item.image_url ? (
+                                            <img src={item.image_url} alt={item.name} className="w-full h-full object-cover" />
+                                        ) : (
+                                            item.emoji
+                                        )}
                                     </div>
                                     {/* L├¡nea inferior */}
                                     <div className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -188,11 +162,11 @@ export default function LicoreriaPage() {
                                 <div className="mt-5 px-1">
                                     <div className="flex items-start justify-between mb-1">
                                         <h3 className="text-xl font-display font-bold text-white">{item.name}</h3>
-                                        <span className="text-sm font-bold mt-0.5" style={{ color: item.accentColor }}>{item.abv}</span>
+                                        <span className="text-sm font-bold mt-0.5" style={{ color: item.accentColor }}>{item.abv || 'S/ ' + item.price}</span>
                                     </div>
-                                    <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: item.accentColor + 'bb' }}>{item.type}</p>
+                                    <p className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: item.accentColor + 'bb' }}>{item.category}</p>
                                     <p className="text-gray-600 text-xs leading-relaxed">{item.notes}</p>
-                                    <p className="text-gray-700 text-xs mt-2">{item.ml}</p>
+                                    <p className="text-gray-700 text-xs mt-2">{item.ml || 'Stock: ' + item.stock}</p>
                                 </div>
                             </div>
                         ))}
