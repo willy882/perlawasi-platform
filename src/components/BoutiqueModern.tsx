@@ -70,18 +70,12 @@ export default function BoutiqueModern() {
     }
 
     return (
-        <div ref={containerRef} className="relative min-h-[300vh] transition-colors duration-1000" style={{ backgroundColor: SECTIONS[activeSection].color }}>
+        <div ref={containerRef} className="relative transition-colors duration-1000" style={{ backgroundColor: SECTIONS[activeSection].color }}>
 
-            {/* --- FIXED HEADER --- */}
-            <header className="fixed top-0 left-0 w-full z-50 mix-blend-difference p-10 flex justify-between items-center text-white">
-                <span className="text-[10px] font-black tracking-[0.4em] uppercase">Boutique Perla · 24</span>
-                <nav className="hidden md:flex gap-12 text-[10px] font-bold uppercase tracking-widest">
-                    {SECTIONS.map((s, i) => (
-                        <button key={s.id} onClick={() => window.scrollTo({ top: window.innerHeight * i * 1, behavior: 'smooth' })} className={activeSection === i ? 'opacity-100' : 'opacity-30'}>
-                            {s.id}
-                        </button>
-                    ))}
-                </nav>
+            {/* --- FIXED HEADER (minimal) --- */}
+            <header className="fixed top-0 left-0 w-full z-50 p-10 flex justify-between items-center pointer-events-none">
+                <span className="text-[10px] font-black tracking-[0.4em] uppercase text-white mix-blend-difference">Boutique Perla · 24</span>
+                {/* Removido el nav interno que causaba superposición */}
             </header>
 
             {/* --- SECTIONS CONTENT --- */}
@@ -105,10 +99,9 @@ export default function BoutiqueModern() {
                     <section
                         key={section.id}
                         ref={sectionRef}
-                        className="sticky top-0 h-screen flex items-center overflow-hidden z-[10]"
+                        className="relative min-h-screen flex items-center overflow-hidden py-24"
                         style={{
                             backgroundColor: section.color,
-                            zIndex: 10 + idx
                         }}
                     >
                         <motion.div
