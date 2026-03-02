@@ -73,8 +73,8 @@ export default function BoutiqueModern() {
         <div ref={containerRef} className="relative transition-colors duration-1000" style={{ backgroundColor: SECTIONS[activeSection].color }}>
 
             {/* --- FIXED HEADER (minimal) --- */}
-            <header className="fixed top-0 left-0 w-full z-50 p-10 flex justify-between items-center pointer-events-none">
-                <span className="text-[10px] font-black tracking-[0.4em] uppercase text-white mix-blend-difference">Boutique Perla · 24</span>
+            <header className="fixed top-0 left-0 w-full z-50 p-6 md:p-10 flex justify-between items-center pointer-events-none">
+                <span className="text-[9px] md:text-[10px] font-black tracking-[0.4em] uppercase text-white mix-blend-difference">Boutique Perla · 24</span>
                 {/* Removido el nav interno que causaba superposición */}
             </header>
 
@@ -99,7 +99,7 @@ export default function BoutiqueModern() {
                     <section
                         key={section.id}
                         ref={sectionRef}
-                        className="relative min-h-screen flex items-center overflow-hidden py-24"
+                        className="relative min-h-screen flex items-center overflow-hidden py-20 px-6"
                         style={{
                             backgroundColor: section.color,
                         }}
@@ -109,7 +109,7 @@ export default function BoutiqueModern() {
                                 opacity: contentOpacity,
                                 scale: contentScale,
                             }}
-                            className="container-custom grid lg:grid-cols-2 gap-24 items-center w-full"
+                            className="container-custom grid lg:grid-cols-2 gap-12 md:gap-24 items-center w-full"
                         >
                             {/* TEXT CONTENT */}
                             <motion.div
@@ -118,15 +118,15 @@ export default function BoutiqueModern() {
                                 transition={{ duration: 1, ease: "circOut" }}
                                 className="space-y-12"
                             >
-                                <div className="space-y-2">
+                                <div className="space-y-4">
                                     <span className="text-[10px] font-black uppercase tracking-[0.6em] opacity-40" style={{ color: section.accent }}>{section.subtitle}</span>
-                                    <h1 className="text-8xl md:text-[12rem] font-serif leading-[0.8] tracking-tighter" style={{ color: section.accent }}>
+                                    <h1 className="text-6xl sm:text-8xl md:text-[12rem] font-serif leading-[0.85] tracking-tighter" style={{ color: section.accent }}>
                                         {section.title.split(' ')[0]} <br />
                                         <span className="italic">{section.title.split(' ')[1] || ''}</span>
                                     </h1>
                                 </div>
 
-                                <p className="text-xl font-light max-w-md leading-relaxed" style={{ color: section.accent + '99' }}>
+                                <p className="text-lg md:text-xl font-light max-w-md leading-relaxed" style={{ color: section.accent + '99' }}>
                                     Una oda a la artesanía local. Cada hilo cuenta una historia de respeto y equilibrio con el corazón de la Amazonía.
                                 </p>
 
@@ -175,7 +175,7 @@ export default function BoutiqueModern() {
                         {/* DECORATIVE NUMBERS */}
                         <motion.span
                             style={{ opacity: contentOpacity, color: section.accent }}
-                            className="absolute bottom-10 right-10 text-[20vw] font-serif opacity-[0.03] select-none"
+                            className="absolute bottom-4 right-4 md:bottom-10 md:right-10 text-[30vw] md:text-[20vw] font-serif opacity-[0.03] select-none"
                         >
                             0{idx + 1}
                         </motion.span>

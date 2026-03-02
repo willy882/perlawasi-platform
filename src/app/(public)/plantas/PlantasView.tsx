@@ -97,7 +97,7 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/90">Curaduría Amazónica de Autor</span>
                         </div>
 
-                        <h1 className="text-7xl md:text-[10rem] font-black leading-[0.85] tracking-tighter mb-10 drop-shadow-2xl">
+                        <h1 className="text-5xl sm:text-7xl md:text-[10rem] font-black leading-[0.85] tracking-tighter mb-10 drop-shadow-2xl">
                             EL ALMA <br />
                             <span className="italic font-serif font-light text-green-300">Botánica</span>
                         </h1>
@@ -190,7 +190,7 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                                 <div className="grid md:grid-cols-2 gap-16 relative z-10">
                                     {/* Imagen Focus */}
                                     <div className="flex flex-col gap-6">
-                                        <div className="aspect-[3/4] rounded-[3rem] overflow-hidden bg-gray-50 shadow-inner flex items-center justify-center text-[12rem] relative group"
+                                        <div className="aspect-[3/4] rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-gray-50 shadow-inner flex items-center justify-center text-[8rem] md:text-[12rem] relative group"
                                             style={{ backgroundColor: selectedPlant.bgColor }}>
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
                                             <span className="group-hover:scale-110 transition-transform duration-1000 transform-gpu">
@@ -259,16 +259,16 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                                         </div>
 
                                         {/* Checkout Row */}
-                                        <div className="mt-auto pt-8 border-t border-gray-50 flex items-center gap-6">
-                                            <div className="flex items-center gap-6 bg-gray-50 px-6 py-4 rounded-3xl border border-gray-100">
-                                                <button onClick={() => setQty(q => Math.max(1, q - 1))} className="text-gray-400 hover:text-black"><FiMinus /></button>
+                                        <div className="mt-auto pt-8 border-t border-gray-50 flex flex-col sm:flex-row items-center gap-4 md:gap-6">
+                                            <div className="flex items-center gap-6 bg-gray-50 px-6 py-4 rounded-3xl border border-gray-100 w-full sm:w-auto justify-between sm:justify-center">
+                                                <button onClick={() => setQty(q => Math.max(1, q - 1))} className="text-gray-400 hover:text-black p-2"><FiMinus /></button>
                                                 <span className="font-bold text-lg w-4 text-center">{qty}</span>
-                                                <button onClick={() => setQty(q => q + 1)} className="text-gray-400 hover:text-black"><FiPlus /></button>
+                                                <button onClick={() => setQty(q => q + 1)} className="text-gray-400 hover:text-black p-2"><FiPlus /></button>
                                             </div>
 
                                             <button
                                                 onClick={handleAddToCart}
-                                                className={`flex-1 py-5 rounded-3xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 transition-all duration-500 shadow-xl ${added ? 'bg-green-500 text-white animate-bounce' : 'bg-green-900 text-white hover:bg-black shadow-green-900/10'}`}
+                                                className={`w-full sm:flex-1 py-5 rounded-3xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 transition-all duration-500 shadow-xl ${added ? 'bg-green-500 text-white animate-bounce' : 'bg-green-900 text-white hover:bg-black shadow-green-900/10'}`}
                                             >
                                                 <FiShoppingBag /> {added ? 'Done' : `Añadir · S/ ${selectedPlant.price * qty}`}
                                             </button>
@@ -287,8 +287,8 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                 <div className="container px-6 mx-auto relative z-10">
                     <div className="max-w-xl mb-24">
                         <span className="text-green-400 text-[10px] font-black uppercase tracking-[0.5em] mb-6 block">Care & Philosophy</span>
-                        <h2 className="text-5xl md:text-7xl font-display font-black text-white mb-8 leading-[0.9]">EL RITMO DE LA NATURALEZA</h2>
-                        <p className="text-white/50 text-xl font-light leading-relaxed">No solo vendemos plantas, entregamos compañeros de vida adaptados a tu entorno.</p>
+                        <h2 className="text-4xl md:text-7xl font-display font-black text-white mb-8 leading-[0.9]">EL RITMO DE LA NATURALEZA</h2>
+                        <p className="text-white/50 text-base md:text-xl font-light leading-relaxed">No solo vendemos plantas, entregamos compañeros de vida adaptados a tu entorno.</p>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
@@ -315,10 +315,10 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                     <div className="bg-gradient-to-br from-[#f0fdf4] to-white rounded-[4rem] p-12 lg:p-32 text-center border border-green-50 relative overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_120%,#dcfce7,transparent)] opacity-50" />
                         <div className="relative z-10">
-                            <h2 className="text-5xl md:text-[6rem] font-display font-black tracking-tighter leading-none mb-12">¿BUSCAS UNA <br /> <span className="text-green-600">ESPECIE RARA?</span></h2>
-                            <p className="text-xl text-gray-500 max-w-2xl mx-auto mb-12 font-light">Nuestro equipo de botánicos te ayudará a encontrar esa pieza única que falta en tu colección personal.</p>
+                            <h2 className="text-4xl md:text-[6rem] font-display font-black tracking-tighter leading-none mb-12">¿BUSCAS UNA <br /> <span className="text-green-600 uppercase">ESPECIE RARA?</span></h2>
+                            <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto mb-12 font-light px-4">Nuestro equipo de botánicos te ayudará a encontrar esa pieza única que falta en tu colección personal.</p>
                             <a href="https://wa.me/51928141669?text=Hola,%20busco%20asesoría%20botánica%20especializada"
-                                className="inline-flex items-center gap-4 bg-green-900 text-white px-16 py-6 rounded-3xl font-black uppercase tracking-widest text-xs hover:bg-black transition-all hover:scale-105">
+                                className="inline-flex items-center gap-4 bg-green-900 text-white px-10 py-5 md:px-16 md:py-6 rounded-3xl font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-black transition-all hover:scale-105">
                                 Hablar con un Botánico <span className="text-xl">🪴</span>
                             </a>
                         </div>
