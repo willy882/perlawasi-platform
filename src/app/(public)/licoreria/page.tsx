@@ -37,20 +37,20 @@ export default async function LicoreriaPage() {
         <div className="min-h-screen bg-[#080808] text-white overflow-x-hidden">
 
             {/* ────────── HERO PERSONALIZADO ────────── */}
-            <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden bg-[#061a06]">
+            <section className="relative min-h-[60vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-black">
 
-                {/* Imagen de fondo bb.png */}
+                {/* Imagen de fondo / Jaguar y Botella */}
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/images/licoreria_hero_bg.png"
                         alt="Fondo Perlamayo"
                         fill
-                        className="object-cover"
+                        className="object-contain md:object-cover md:object-center"
                         priority
                         quality={100}
                     />
-                    {/* Overlay sutil para mejorar legibilidad si es necesario */}
-                    <div className="absolute inset-0 bg-black/20" />
+                    {/* Overlay gradiente lateral para móvil para no tapar el jaguar/botella */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20 md:bg-black/20" />
                 </div>
 
                 {/* Contenido principal */}
@@ -67,7 +67,8 @@ export default async function LicoreriaPage() {
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                                 backgroundClip: 'text',
-                                filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.3))',
+                                // En móvil reducimos la sombra para que no ensucie la imagen
+                                filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.5))',
                             }}>
                             PERLAWASI
                         </h1>
