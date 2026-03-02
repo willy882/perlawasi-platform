@@ -95,19 +95,27 @@ export default function BoutiqueModern() {
                 });
 
                 // Al subir (progress de 0 a 1 dentro de la sección), la opacidad baja de 1 a 0
+                // Hacemos el desvanecimiento más agresivo para evitar que se vea el fondo amontonado
                 // eslint-disable-next-line react-hooks/rules-of-hooks
-                const contentOpacity = useTransform(sectionScroll, [0.4, 0.8], [1, 0]);
+                const contentOpacity = useTransform(sectionScroll, [0.1, 0.4], [1, 0]);
                 // eslint-disable-next-line react-hooks/rules-of-hooks
-                const contentScale = useTransform(sectionScroll, [0, 1], [1, 0.95]);
+                const contentScale = useTransform(sectionScroll, [0, 0.5], [1, 0.9]);
 
                 return (
                     <section
                         key={section.id}
                         ref={sectionRef}
-                        className="sticky top-0 h-screen flex items-center overflow-hidden"
+                        className="sticky top-0 h-screen flex items-center overflow-hidden z-[10]"
+                        style={{
+                            backgroundColor: section.color,
+                            zIndex: 10 + idx
+                        }}
                     >
                         <motion.div
-                            style={{ opacity: contentOpacity, scale: contentScale }}
+                            style={{
+                                opacity: contentOpacity,
+                                scale: contentScale,
+                            }}
                             className="container-custom grid lg:grid-cols-2 gap-24 items-center w-full"
                         >
                             {/* TEXT CONTENT */}
