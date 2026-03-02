@@ -85,77 +85,102 @@ export default function BoutiqueModern() {
             </header>
 
             {/* --- SECTIONS CONTENT --- */}
-            {SECTIONS.map((section, idx) => (
-                <section key={section.id} className="sticky top-0 h-screen flex items-center overflow-hidden">
-                    <div className="container-custom grid lg:grid-cols-2 gap-24 items-center">
+            {SECTIONS.map((section, idx) => {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                const sectionRef = useRef(null);
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                const { scrollYProgress: sectionScroll } = useScroll({
+                    target: sectionRef,
+                    offset: ["start start", "end start"]
+                });
 
-                        {/* TEXT CONTENT */}
+                // Al subir (progress de 0 a 1 dentro de la sección), la opacidad baja de 1 a 0
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                const contentOpacity = useTransform(sectionScroll, [0.4, 0.8], [1, 0]);
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                const contentScale = useTransform(sectionScroll, [0, 1], [1, 0.95]);
+
+                return (
+                    <section
+                        key={section.id}
+                        ref={sectionRef}
+                        className="sticky top-0 h-screen flex items-center overflow-hidden"
+                    >
                         <motion.div
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 1, ease: "circOut" }}
-                            className="space-y-12"
+                            style={{ opacity: contentOpacity, scale: contentScale }}
+                            className="container-custom grid lg:grid-cols-2 gap-24 items-center w-full"
                         >
-                            <div className="space-y-2">
-                                <span className="text-[10px] font-black uppercase tracking-[0.6em] opacity-40" style={{ color: section.accent }}>{section.subtitle}</span>
-                                <h1 className="text-8xl md:text-[12rem] font-serif leading-[0.8] tracking-tighter" style={{ color: section.accent }}>
-                                    {section.title.split(' ')[0]} <br />
-                                    <span className="italic">{section.title.split(' ')[1] || ''}</span>
-                                </h1>
-                            </div>
+                            {/* TEXT CONTENT */}
+                            <motion.div
+                                initial={{ opacity: 0, x: -50 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 1, ease: "circOut" }}
+                                className="space-y-12"
+                            >
+                                <div className="space-y-2">
+                                    <span className="text-[10px] font-black uppercase tracking-[0.6em] opacity-40" style={{ color: section.accent }}>{section.subtitle}</span>
+                                    <h1 className="text-8xl md:text-[12rem] font-serif leading-[0.8] tracking-tighter" style={{ color: section.accent }}>
+                                        {section.title.split(' ')[0]} <br />
+                                        <span className="italic">{section.title.split(' ')[1] || ''}</span>
+                                    </h1>
+                                </div>
 
-                            <p className="text-xl font-light max-w-md leading-relaxed" style={{ color: section.accent + '99' }}>
-                                Una oda a la artesanía local. Cada hilo cuenta una historia de respeto y equilibrio con el corazón de la Amazonía.
-                            </p>
+                                <p className="text-xl font-light max-w-md leading-relaxed" style={{ color: section.accent + '99' }}>
+                                    Una oda a la artesanía local. Cada hilo cuenta una historia de respeto y equilibrio con el corazón de la Amazonía.
+                                </p>
 
-                            <div className="flex gap-4">
-                                <button className="px-12 py-5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:px-16"
-                                    style={{ backgroundColor: section.accent, color: section.color }}>
-                                    Descubrir Colección
-                                </button>
+                                <div className="flex gap-4">
+                                    <button className="px-12 py-5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:px-16"
+                                        style={{ backgroundColor: section.accent, color: section.color }}>
+                                        Descubrir Colección
+                                    </button>
+                                </div>
+                            </motion.div>
+
+                            {/* PRODUCT GALLERY FOCUS */}
+                            <div className="grid grid-cols-2 gap-10">
+                                {section.products.map((p, pIdx) => (
+                                    <motion.div
+                                        key={p.id}
+                                        initial={{ opacity: 0, y: 100 }}
+                                        whileInView={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 1, delay: pIdx * 0.2 }}
+                                        className="group cursor-pointer"
+                                        onClick={() => { setSelectedProduct(p); setIsProductOpen(true); }}
+                                    >
+                                        <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] shadow-2xl transition-transform duration-700 group-hover:scale-[0.98]">
+                                            <Image src={p.img} alt={p.name} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
+                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
+                                            <div className="absolute bottom-8 left-8 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all">
+                                                <span className="text-white text-[10px] font-black uppercase tracking-widest bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20">
+                                                    Ver Pieza
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="mt-6 flex justify-between items-end">
+                                            <div>
+                                                <h3 className="text-xs font-black uppercase tracking-widest" style={{ color: section.accent }}>{p.name}</h3>
+                                                <p className="text-[10px] mt-1 opacity-50" style={{ color: section.accent }}>S/ {p.price}</p>
+                                            </div>
+                                            <div className="w-8 h-8 rounded-full border flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity" style={{ borderColor: section.accent }}>
+                                                <FiArrowRight style={{ color: section.accent }} />
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
                             </div>
                         </motion.div>
 
-                        {/* PRODUCT GALLERY FOCUS */}
-                        <div className="grid grid-cols-2 gap-10">
-                            {section.products.map((p, pIdx) => (
-                                <motion.div
-                                    key={p.id}
-                                    initial={{ opacity: 0, y: 100 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 1, delay: pIdx * 0.2 }}
-                                    className="group cursor-pointer"
-                                    onClick={() => { setSelectedProduct(p); setIsProductOpen(true); }}
-                                >
-                                    <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] shadow-2xl transition-transform duration-700 group-hover:scale-[0.98]">
-                                        <Image src={p.img} alt={p.name} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
-                                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-                                        <div className="absolute bottom-8 left-8 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all">
-                                            <span className="text-white text-[10px] font-black uppercase tracking-widest bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20">
-                                                Ver Pieza
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="mt-6 flex justify-between items-end">
-                                        <div>
-                                            <h3 className="text-xs font-black uppercase tracking-widest" style={{ color: section.accent }}>{p.name}</h3>
-                                            <p className="text-[10px] mt-1 opacity-50" style={{ color: section.accent }}>S/ {p.price}</p>
-                                        </div>
-                                        <div className="w-8 h-8 rounded-full border flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity" style={{ borderColor: section.accent }}>
-                                            <FiArrowRight style={{ color: section.accent }} />
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-
-                    {/* DECORATIVE NUMBERS */}
-                    <span className="absolute bottom-10 right-10 text-[20vw] font-serif opacity-[0.03] select-none" style={{ color: section.accent }}>
-                        0{idx + 1}
-                    </span>
-                </section>
-            ))}
+                        {/* DECORATIVE NUMBERS */}
+                        <motion.span
+                            style={{ opacity: contentOpacity, color: section.accent }}
+                            className="absolute bottom-10 right-10 text-[20vw] font-serif opacity-[0.03] select-none"
+                        >
+                            0{idx + 1}
+                        </motion.span>
+                    </section>
+                )
+            })}
 
             {/* --- MODAL DE PRODUCTO (FLOW DRAWER) --- */}
             <AnimatePresence>

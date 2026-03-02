@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { FiMinus, FiPlus, FiShoppingBag, FiInfo, FiDroplet, FiSun, FiMapPin, FiHeart } from 'react-icons/fi'
 
 interface Plant {
@@ -54,36 +56,89 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
 
     return (
         <div className="min-h-screen bg-[#FBFDFB] text-gray-900 font-sans selection:bg-green-100 italic-none">
-            {/* HERO SELECTO */}
-            <section className="relative h-[70vh] flex items-center overflow-hidden bg-gradient-to-br from-[#f0fdf4] via-[#fdfaf1] to-[#eff6ff]">
-                <div className="absolute inset-0 opacity-[0.4] mix-blend-multiply pointer-events-none">
-                    <div className="absolute top-[-10%] right-[-10%] text-[40rem] rotate-12 filter blur-3xl opacity-20">🌿</div>
-                    <div className="absolute bottom-[-10%] left-[-10%] text-[30rem] -rotate-12 filter blur-3xl opacity-10">🍃</div>
+            {/* HERO PREMIUM BOTÁNICO */}
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#FBFDFB]">
+                {/* Capa de video o imagen de fondo con parallax suave */}
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
+                        alt="Naturaleza Amazónica"
+                        fill
+                        className="object-cover brightness-[0.7] contrast-[1.1]"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#FBFDFB]" />
                 </div>
 
-                <div className="container px-6 mx-auto relative z-10">
-                    <div className="max-w-4xl">
-                        <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md border border-green-100 px-6 py-2.5 rounded-full mb-8 shadow-sm">
-                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-green-800">Vivero Boutique Perlawasi</span>
+                {/* Elementos botánicos flotantes (Decorativos) */}
+                <motion.div
+                    animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
+                    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-20 right-[10%] text-[20rem] opacity-20 filter blur-sm pointer-events-none hidden lg:block"
+                >
+                    🌿
+                </motion.div>
+                <motion.div
+                    animate={{ y: [0, 30, 0], rotate: [0, -10, 0] }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-40 left-[5%] text-[15rem] opacity-15 filter blur-md pointer-events-none hidden lg:block"
+                >
+                    🍃
+                </motion.div>
+
+                <div className="container-custom relative z-10 text-center text-white">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                    >
+                        <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-xl border border-white/20 px-8 py-3 rounded-full mb-12 shadow-2xl">
+                            <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse shadow-[0_0_15px_rgba(74,222,128,0.5)]" />
+                            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-white/90">Curaduría Amazónica de Autor</span>
                         </div>
-                        <h1 className="text-6xl md:text-[8rem] font-display font-black leading-[0.9] tracking-tighter mb-8 text-gray-900">
+
+                        <h1 className="text-7xl md:text-[10rem] font-black leading-[0.85] tracking-tighter mb-10 drop-shadow-2xl">
                             EL ALMA <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-800 to-emerald-500">BOTÁNICA</span>
+                            <span className="italic font-serif font-light text-green-300">Botánica</span>
                         </h1>
-                        <p className="text-xl text-gray-600/80 max-w-xl leading-relaxed font-light mb-12">
-                            Curaduría exclusiva de especies amazónicas cultivadas bajo los ritmos naturales de la selva de San Martín. Pureza, diseño y vida para tu espacio.
+
+                        <p className="text-xl md:text-2xl text-white/80 max-w-2xl mx-auto font-light leading-relaxed mb-16 drop-shadow-lg">
+                            Transformamos espacios en oasis vibrantes con especies nativas cultivadas bajo los latidos de la selva virgen.
                         </p>
-                        <div className="flex gap-6 flex-wrap">
-                            <Link href="#coleccion" className="bg-green-900 text-white px-12 py-5 rounded-2xl font-bold hover:bg-black transition-all shadow-2xl hover:scale-105 active:scale-95">
-                                Ver Colección
+
+                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                            <Link
+                                href="#coleccion"
+                                className="group relative bg-green-500 text-white px-16 py-6 rounded-2xl font-black uppercase tracking-widest text-[11px] overflow-hidden transition-all hover:bg-green-400 hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(34,197,94,0.3)]"
+                            >
+                                <span className="relative z-10 flex items-center gap-3">
+                                    Explorar Reserva <FiShoppingBag className="text-lg" />
+                                </span>
                             </Link>
-                            <Link href="#guias" className="bg-white/50 backdrop-blur-md border border-green-100 text-green-900 px-12 py-5 rounded-2xl font-bold hover:bg-white transition-all">
+                            <Link
+                                href="#guias"
+                                className="px-16 py-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-black uppercase tracking-widest text-[11px] hover:bg-white/20 transition-all"
+                            >
                                 Guía de Estilo
                             </Link>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
+
+                {/* SCROLL INDICATOR */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2 }}
+                    className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+                >
+                    <span className="text-[9px] font-black uppercase tracking-[0.5em] text-black/40">Desliza para sentir</span>
+                    <motion.div
+                        animate={{ y: [0, 12, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="w-[1px] h-12 bg-gradient-to-b from-black/0 via-black/40 to-black/0"
+                    />
+                </motion.div>
             </section>
 
             {/* CATALOGO INTERACTIVO */}
