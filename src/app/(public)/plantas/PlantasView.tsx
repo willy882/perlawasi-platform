@@ -27,7 +27,7 @@ interface Plant {
     }
 }
 
-export default function PlantasClient({ initialPlants }: { initialPlants: any[] }) {
+export default function PlantasView({ initialPlants }: { initialPlants: any[] }) {
     const [selectedPlant, setSelectedPlant] = useState<Plant>(initialPlants[0] || {} as Plant)
     const [qty, setQty] = useState(1)
     const [activeTab, setActiveTab] = useState<'info' | 'care' | 'more'>('info')
