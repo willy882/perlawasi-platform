@@ -125,8 +125,8 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                     transition={{ duration: 0.8 }}
                     className="absolute top-6 left-8 z-20"
                 >
-                    <div className="relative w-24 h-24 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-xl border border-white/20">
-                        <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain p-1" />
+                    <div className="relative w-40 h-40 md:w-56 md:h-56 drop-shadow-2xl">
+                        <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain" priority />
                     </div>
                 </motion.div>
 
@@ -324,9 +324,9 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                 </div>
                 <div className="container px-6 mx-auto relative z-10 text-center">
                     {/* Perlamayo logo */}
-                    <div className="flex justify-center mb-8">
-                        <div className="relative w-32 h-32 bg-white/95 rounded-full p-4 shadow-2xl">
-                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain p-2" />
+                    <div className="flex justify-center mb-10">
+                        <div className="relative w-48 h-48 md:w-64 md:h-64 drop-shadow-2xl">
+                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain" />
                         </div>
                     </div>
 
