@@ -8,9 +8,9 @@ import Image from 'next/image'
 // --- DATA ---
 const SECTIONS = [
     {
-        id: 'basics',
-        title: 'SILK & LAND',
-        subtitle: 'The Essentials Capsule',
+        id: 'basicos',
+        title: 'SEDA & TIERRA',
+        subtitle: 'Cápsula de Esenciales',
         color: '#F9F7F2',
         accent: '#8B7355',
         products: [
@@ -19,9 +19,9 @@ const SECTIONS = [
         ]
     },
     {
-        id: 'couture',
-        title: 'AMAZON CHIC',
-        subtitle: 'The Couture Selection',
+        id: 'alta-costura',
+        title: 'CHIC AMAZÓNICO',
+        subtitle: 'Selección de Autor',
         color: '#0A0A0A',
         accent: '#D4AF37',
         products: [
@@ -30,9 +30,9 @@ const SECTIONS = [
         ]
     },
     {
-        id: 'objects',
-        title: 'ANCESTRAL OBJECTS',
-        subtitle: 'Objects of Desire',
+        id: 'objetos',
+        title: 'OBJETOS ANCESTRALES',
+        subtitle: 'Objetos de Deseo',
         color: '#E2D1B3',
         accent: '#1A1A1A',
         products: [
@@ -74,7 +74,17 @@ export default function BoutiqueModern() {
 
             {/* --- FIXED HEADER (minimal) --- */}
             <header className="fixed top-0 left-0 w-full z-50 p-6 md:p-10 flex justify-between items-center pointer-events-none">
-                <span className="text-[9px] md:text-[10px] font-black tracking-[0.4em] uppercase text-white mix-blend-difference">Boutique Perla · 24</span>
+                <div className="flex items-center gap-4">
+                    <div className="relative w-12 h-12 md:w-16 md:h-16 mix-blend-difference">
+                        <Image
+                            src="/images/lil.png"
+                            alt="LIL Logo"
+                            fill
+                            className="object-contain"
+                        />
+                    </div>
+                    <span className="text-[9px] md:text-[10px] font-black tracking-[0.4em] uppercase text-white mix-blend-difference">Boutique Perla · 24</span>
+                </div>
                 {/* Removido el nav interno que causaba superposición */}
             </header>
 
@@ -122,7 +132,7 @@ export default function BoutiqueModern() {
                                     <span className="text-[10px] font-black uppercase tracking-[0.6em] opacity-40" style={{ color: section.accent }}>{section.subtitle}</span>
                                     <h1 className="text-6xl sm:text-8xl md:text-[12rem] font-serif leading-[0.85] tracking-tighter" style={{ color: section.accent }}>
                                         {section.title.split(' ')[0]} <br />
-                                        <span className="italic">{section.title.split(' ')[1] || ''}</span>
+                                        <span className="italic">{section.title.split(' ').slice(1).join(' ')}</span>
                                     </h1>
                                 </div>
 
@@ -212,7 +222,7 @@ export default function BoutiqueModern() {
 
                                 <div className="space-y-8">
                                     <div>
-                                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 block mb-4">Masterpiece Collection</span>
+                                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 block mb-4">Colección Maestra</span>
                                         <h2 className="text-5xl font-serif text-gray-900 leading-none">{selectedProduct.name}</h2>
                                         <p className="text-2xl font-bold mt-4">S/ {selectedProduct.price}</p>
                                     </div>

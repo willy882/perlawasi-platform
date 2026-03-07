@@ -31,7 +31,7 @@ export default function Header() {
                     <Link href="/" className="flex items-center gap-2 group">
                         <div className="relative w-16 h-16 transition-transform group-hover:scale-105">
                             <Image
-                                src="/images/logo.png"
+                                src={pathname === '/ropa' ? '/images/lil.png' : '/images/logo.png'}
                                 alt="Perlawasi"
                                 fill
                                 className="object-contain"
