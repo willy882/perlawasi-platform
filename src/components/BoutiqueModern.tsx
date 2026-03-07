@@ -118,15 +118,15 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                     </svg>
                 </div>
 
-                {/* LIL Logo */}
+                {/* Perlamayo Logo */}
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                     className="absolute top-6 left-8 z-20"
                 >
-                    <div className="relative w-16 h-16">
-                        <Image src="/images/lil.png" alt="LIL" fill className="object-contain" />
+                    <div className="relative w-24 h-24 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-xl border border-white/20">
+                        <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain p-1" />
                     </div>
                 </motion.div>
 
@@ -323,10 +323,10 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                     <Image src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80" alt="ocean" fill className="object-cover" />
                 </div>
                 <div className="container px-6 mx-auto relative z-10 text-center">
-                    {/* LIL logo */}
+                    {/* Perlamayo logo */}
                     <div className="flex justify-center mb-8">
-                        <div className="relative w-20 h-20">
-                            <Image src="/images/lil.png" alt="LIL" fill className="object-contain" />
+                        <div className="relative w-32 h-32 bg-white/95 rounded-full p-4 shadow-2xl">
+                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain p-2" />
                         </div>
                     </div>
 
