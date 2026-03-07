@@ -54,7 +54,6 @@ export default function BoutiqueModern() {
         offset: ["start start", "end end"]
     })
 
-    // Controlar el cambio de sección basado en el scroll
     useEffect(() => {
         const unsubscribe = scrollYProgress.on("change", (latest) => {
             if (latest < 0.33) setActiveSection(0)
@@ -72,121 +71,128 @@ export default function BoutiqueModern() {
     return (
         <div ref={containerRef} className="relative transition-colors duration-1000" style={{ backgroundColor: SECTIONS[activeSection].color }}>
 
-            {/* Removed internal header that caused duplicate logos */}
-
             {/* --- SECTIONS CONTENT --- */}
             {SECTIONS.map((section, idx) => {
                 // eslint-disable-next-line react-hooks/rules-of-hooks
-                const sectionRef = useRef(null);
+                const sectionRef = useRef(null)
                 // eslint-disable-next-line react-hooks/rules-of-hooks
                 const { scrollYProgress: sectionScroll } = useScroll({
                     target: sectionRef,
                     offset: ["start start", "end start"]
-                });
-
-                // Al subir (progress de 0 a 1 dentro de la sección), la opacidad baja de 1 a 0
-                // Hacemos el desvanecimiento más agresivo para evitar que se vea el fondo amontonado
+                })
                 // eslint-disable-next-line react-hooks/rules-of-hooks
-                const contentOpacity = useTransform(sectionScroll, [0.1, 0.4], [1, 0]);
+                const contentOpacity = useTransform(sectionScroll, [0.1, 0.4], [1, 0])
                 // eslint-disable-next-line react-hooks/rules-of-hooks
-                const contentScale = useTransform(sectionScroll, [0, 0.5], [1, 0.9]);
+                const contentScale = useTransform(sectionScroll, [0, 0.5], [1, 0.95])
 
                 return (
                     <section
                         key={section.id}
                         ref={sectionRef}
                         className="relative min-h-screen flex items-center overflow-hidden py-20"
-                        style={{
-                            backgroundColor: section.color,
-                        }}
+                        style={{ backgroundColor: section.color }}
                     >
                         <motion.div
-                            style={{
-                                opacity: contentOpacity,
-                                scale: contentScale,
-                            }}
-                            className="container-custom relative w-full"
+                            style={{ opacity: contentOpacity, scale: contentScale }}
+                            className="container-custom w-full"
                         >
-                            {/* BACKGROUND TEXT (EDITORIAL LAYER) */}
-                            <div className="absolute inset-0 z-0 flex flex-col justify-center pointer-events-none select-none">
-                                <div className="space-y-4 max-w-4xl">
-                                    <motion.span
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 0.3, y: 0 }}
-                                        className="text-[10px] md:text-xs font-black uppercase tracking-[0.6em] block"
+                            {/*
+                              2-COLUMN LAYOUT — strictly separated:
+                              LEFT  → Title + Subtitle + Description + CTA
+                              RIGHT → Product Images
+                              Text and images NEVER share the same column space.
+                            */}
+                            <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center">
+
+                                {/* ── LEFT: Editorial Title ── */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: -40 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.9, ease: "circOut" }}
+                                    className="flex flex-col justify-center gap-6 py-10 lg:py-0"
+                                >
+                                    <span
+                                        className="text-[10px] font-black uppercase tracking-[0.6em] opacity-50"
                                         style={{ color: section.accent }}
                                     >
                                         {section.subtitle}
-                                    </motion.span>
-                                    <h1 className="text-7xl sm:text-9xl md:text-[14rem] font-serif leading-[0.8] tracking-tighter opacity-80" style={{ color: section.accent }}>
-                                        {section.title.split(' ')[0]} <br />
-                                        <span className="italic ml-[0.1em]">{section.title.split(' ').slice(1).join(' ')}</span>
-                                    </h1>
-                                </div>
-                            </div>
+                                    </span>
 
-                            {/* FORGROUND CONTENT (PRODUCTS & BUTTONS) */}
-                            <div className="relative z-10 grid lg:grid-cols-2 gap-12 md:gap-24 items-center">
-                                {/* TEXT & CTA */}
-                                <motion.div
-                                    initial={{ opacity: 0, x: -50 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 1, ease: "circOut" }}
-                                    className="pt-32 lg:pt-0"
-                                >
-                                    <div className="h-24 md:h-40" /> {/* Spacer to avoid covering top title on laptop */}
-                                    <p className="text-lg md:text-xl font-medium max-w-md leading-relaxed mb-12 drop-shadow-sm" style={{ color: section.accent }}>
+                                    <h1
+                                        className="text-[4.5rem] sm:text-[6rem] lg:text-[8rem] font-serif leading-[0.85] tracking-tighter"
+                                        style={{ color: section.accent }}
+                                    >
+                                        {section.title.split(' ')[0]}
+                                        <br />
+                                        <em className="font-normal not-italic opacity-70">
+                                            {section.title.split(' ').slice(1).join(' ')}
+                                        </em>
+                                    </h1>
+
+                                    <p
+                                        className="text-base md:text-lg font-light leading-relaxed max-w-xs"
+                                        style={{ color: section.accent + 'aa' }}
+                                    >
                                         Una oda a la artesanía local. Cada hilo cuenta una historia de respeto y equilibrio con el corazón de la Amazonía.
                                     </p>
 
-                                    <div className="flex gap-4">
-                                        <button className="px-12 py-5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:px-16 hover:shadow-2xl active:scale-95 shadow-lg"
-                                            style={{ backgroundColor: section.accent, color: section.color }}>
-                                            Descubrir Colección
-                                        </button>
-                                    </div>
+                                    <button
+                                        className="self-start px-10 py-4 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:scale-105 hover:shadow-xl active:scale-95 shadow-md"
+                                        style={{ backgroundColor: section.accent, color: section.color }}
+                                    >
+                                        Descubrir Colección
+                                    </button>
                                 </motion.div>
 
-                                {/* PRODUCT GALLERY FOCUS */}
-                                <div className="grid grid-cols-2 gap-10">
+                                {/* ── RIGHT: Product Gallery ── */}
+                                <div className="grid grid-cols-2 gap-5 md:gap-7">
                                     {section.products.map((p, pIdx) => (
                                         <motion.div
                                             key={p.id}
-                                            initial={{ opacity: 0, y: 100, scale: 0.9 }}
-                                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                            viewport={{ once: false, margin: "-100px" }}
-                                            transition={{ duration: 1.2, delay: pIdx * 0.3, ease: [0.16, 1, 0.3, 1] }}
-                                            className="group cursor-pointer relative z-10" // z-10 keeps images on top of title
-                                            onClick={() => { setSelectedProduct(p); setIsProductOpen(true); }}
+                                            initial={{ opacity: 0, y: 50 }}
+                                            whileInView={{ opacity: 1, y: 0 }}
+                                            viewport={{ once: false, margin: "-60px" }}
+                                            transition={{ duration: 0.9, delay: pIdx * 0.18, ease: [0.16, 1, 0.3, 1] }}
+                                            className="group cursor-pointer"
+                                            onClick={() => { setSelectedProduct(p); setIsProductOpen(true) }}
                                         >
-                                            <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] shadow-2xl transition-all duration-700 group-hover:scale-[1.02] group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.2)]">
-                                                <Image src={p.img} alt={p.name} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
-                                                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                                                <div className="absolute bottom-8 left-8 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                                    <span className="text-white text-[10px] font-black uppercase tracking-widest bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20">
-                                                        Explorar Detalle
+                                            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-lg transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-2xl">
+                                                <Image
+                                                    src={p.img}
+                                                    alt={p.name}
+                                                    fill
+                                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                                />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
+                                                <div className="absolute bottom-5 left-5 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-400">
+                                                    <span className="text-white text-[9px] font-black uppercase tracking-widest bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full border border-white/20">
+                                                        Ver Detalle
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div className="mt-6 flex justify-between items-end">
+                                            <div className="mt-3 flex justify-between items-center px-1">
                                                 <div>
-                                                    <h3 className="text-xs font-black uppercase tracking-widest" style={{ color: section.accent }}>{p.name}</h3>
-                                                    <p className="text-[10px] mt-1 opacity-50" style={{ color: section.accent }}>S/ {p.price}</p>
+                                                    <h3 className="text-[10px] font-black uppercase tracking-wider" style={{ color: section.accent }}>{p.name}</h3>
+                                                    <p className="text-[10px] mt-0.5 opacity-40" style={{ color: section.accent }}>S/ {p.price}</p>
                                                 </div>
-                                                <div className="w-8 h-8 rounded-full border flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity" style={{ borderColor: section.accent }}>
-                                                    <FiArrowRight style={{ color: section.accent }} />
+                                                <div
+                                                    className="w-7 h-7 rounded-full border flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity"
+                                                    style={{ borderColor: section.accent }}
+                                                >
+                                                    <FiArrowRight className="text-xs" style={{ color: section.accent }} />
                                                 </div>
                                             </div>
                                         </motion.div>
                                     ))}
                                 </div>
+
                             </div>
                         </motion.div>
 
-                        {/* DECORATIVE NUMBERS */}
+                        {/* Decorative section number */}
                         <motion.span
                             style={{ opacity: contentOpacity, color: section.accent }}
-                            className="absolute bottom-4 right-4 md:bottom-10 md:right-10 text-[30vw] md:text-[20vw] font-serif opacity-[0.03] select-none"
+                            className="absolute bottom-4 right-4 md:bottom-8 md:right-8 text-[25vw] md:text-[15vw] font-serif opacity-[0.04] select-none pointer-events-none leading-none"
                         >
                             0{idx + 1}
                         </motion.span>
@@ -194,7 +200,7 @@ export default function BoutiqueModern() {
                 )
             })}
 
-            {/* --- MODAL DE PRODUCTO (FLOW DRAWER) --- */}
+            {/* --- MODAL DE PRODUCTO --- */}
             <AnimatePresence>
                 {isProductOpen && selectedProduct && (
                     <motion.div
@@ -212,57 +218,63 @@ export default function BoutiqueModern() {
                             transition={{ type: "spring", damping: 20 }}
                             className="relative w-full max-w-xl h-full bg-white rounded-[3rem] shadow-3xl overflow-hidden flex flex-col"
                         >
-                            <button onClick={() => setIsProductOpen(false)} className="absolute top-10 right-10 z-10 p-4 rounded-full bg-black/5 hover:bg-black/10 transition-all">
+                            <button onClick={() => setIsProductOpen(false)} className="absolute top-8 right-8 z-10 p-4 rounded-full bg-black/5 hover:bg-black/10 transition-all">
                                 <FiX className="text-2xl" />
                             </button>
 
-                            <div className="flex-1 overflow-y-auto p-12 md:p-20 no-scrollbar">
-                                <div className="aspect-[4/5] relative rounded-[2rem] overflow-hidden mb-12 shadow-xl">
+                            <div className="flex-1 overflow-y-auto p-10 md:p-16 no-scrollbar">
+                                <div className="aspect-[4/5] relative rounded-[2rem] overflow-hidden mb-10 shadow-xl">
                                     <Image src={selectedProduct.img} alt={selectedProduct.name} fill className="object-cover" />
                                 </div>
 
-                                <div className="space-y-8">
+                                <div className="space-y-6">
                                     <div>
-                                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 block mb-4">Colección Maestra</span>
-                                        <h2 className="text-5xl font-serif text-gray-900 leading-none">{selectedProduct.name}</h2>
-                                        <p className="text-2xl font-bold mt-4">S/ {selectedProduct.price}</p>
+                                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 block mb-3">Colección Maestra</span>
+                                        <h2 className="text-4xl font-serif text-gray-900 leading-none">{selectedProduct.name}</h2>
+                                        <p className="text-2xl font-bold mt-3">S/ {selectedProduct.price}</p>
                                     </div>
 
-                                    <p className="text-lg text-gray-500 font-light leading-relaxed italic">
-                                        "{selectedProduct.desc}"
-                                        Cada pieza es única, confeccionada con materiales que respetan el ciclo de la vida amazónica.
+                                    <p className="text-base text-gray-500 font-light leading-relaxed italic">
+                                        &ldquo;{selectedProduct.desc}&rdquo;
+                                        <span className="block mt-2 not-italic text-sm">Cada pieza es única, confeccionada con materiales que respetan el ciclo de la vida amazónica.</span>
                                     </p>
 
-                                    <div className="grid grid-cols-2 gap-8 py-8 border-y border-gray-100">
+                                    <div className="grid grid-cols-2 gap-6 py-6 border-y border-gray-100">
                                         <div>
-                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-4">Composición</p>
+                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Composición</p>
                                             <p className="text-sm">Algodón Pima / Lino</p>
                                         </div>
                                         <div>
-                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-4">Tallas</p>
+                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-2">Tallas</p>
                                             <div className="flex gap-2">
-                                                {['S', 'M', 'L'].map(s => <span key={s} className="w-8 h-8 rounded-lg flex items-center justify-center border text-[10px] font-bold">{s}</span>)}
+                                                {['S', 'M', 'L'].map(s => (
+                                                    <span key={s} className="w-8 h-8 rounded-lg flex items-center justify-center border text-[10px] font-bold hover:bg-black hover:text-white cursor-pointer transition-colors">
+                                                        {s}
+                                                    </span>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div className="space-y-4">
-                                        <p className="text-xs text-gray-400 leading-relaxed">
-                                            * Producción limitada. Envío nacional certificado. Packaging 100% libre de plásticos.
-                                        </p>
-                                    </div>
+                                    <p className="text-xs text-gray-400 leading-relaxed">
+                                        * Producción limitada. Envío nacional certificado. Packaging 100% libre de plásticos.
+                                    </p>
                                 </div>
                             </div>
 
-                            <div className="p-12 md:px-20 md:pb-16 bg-white border-t border-gray-50 flex items-center gap-6">
+                            <div className="p-8 md:px-16 md:pb-12 bg-white border-t border-gray-50 flex items-center gap-4">
                                 <button
                                     onClick={handlePurchase}
-                                    className={`flex-1 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center gap-4 transition-all duration-1000 ${added ? 'bg-green-600 text-white' : 'bg-black text-white hover:bg-primary-600'}`}
+                                    className={`flex-1 py-5 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] flex items-center justify-center gap-3 transition-all duration-700 ${added ? 'bg-green-600 text-white' : 'bg-black text-white hover:bg-gray-800'}`}
                                 >
                                     {added ? <FiCheck /> : <FiShoppingBag />}
-                                    {added ? 'Añadido' : 'Adquirir Pieza'}
+                                    {added ? 'Añadido ✓' : 'Adquirir Pieza'}
                                 </button>
-                                <a href={`https://wa.me/51928141669?text=Hola,%20busco%20asesoría%20sobre%20${selectedProduct.name}`} target="_blank" className="p-6 rounded-2xl border border-gray-100 hover:bg-gray-50 transition-all">
+                                <a
+                                    href={`https://wa.me/51928141669?text=Hola,%20busco%20asesoría%20sobre%20${encodeURIComponent(selectedProduct.name)}`}
+                                    target="_blank"
+                                    className="p-5 rounded-2xl border border-gray-100 hover:bg-gray-50 transition-all"
+                                >
                                     <FiArrowRight />
                                 </a>
                             </div>
@@ -276,7 +288,7 @@ export default function BoutiqueModern() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: activeSection > 0 ? 1 : 0 }}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="fixed bottom-10 right-10 w-16 h-16 rounded-full mix-blend-difference border border-white/20 text-white flex items-center justify-center transition-all hover:bg-white hover:text-black"
+                className="fixed bottom-10 right-10 w-14 h-14 rounded-full bg-black/10 backdrop-blur-sm border border-white/20 text-white flex items-center justify-center transition-all hover:bg-black hover:text-white z-40"
             >
                 <FiArrowUp />
             </motion.button>
