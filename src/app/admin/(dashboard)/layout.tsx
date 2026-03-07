@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
@@ -26,19 +26,52 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
         { name: 'Ajustes', icon: <FiSettings />, path: '/admin/ajustes' },
     ]
 
+    // Auto-ocultar sidebar en pantallas pequeñas
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 1024) {
+                setSidebarOpen(false)
+            } else {
+                setSidebarOpen(true)
+            }
+        }
+
+        // Trigger inicial
+        handleResize()
+
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
     return (
         <div className="min-h-screen bg-[#F8FAFB] flex font-sans">
+            {/* OVERLAY PARA MOVILES / PANTALLAS PEQUEÑAS */}
+            {isSidebarOpen && (
+                <div
+                    className="fixed inset-0 bg-[#1a3c1a]/40 backdrop-blur-sm z-40 lg:hidden cursor-pointer transition-opacity"
+                    onClick={() => setSidebarOpen(false)}
+                />
+            )}
+
             {/* SIDEBAR TOTALMENTE FIJO (FIXED) */}
             <aside
                 className={`fixed inset-y-0 left-0 z-50 w-72 bg-[#1a3c1a] text-white transition-all duration-300 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                     } flex flex-col shadow-2xl`}
             >
-                <div className="p-8 border-b border-white/10 shrink-0">
+                <div className="p-8 border-b border-white/10 shrink-0 relative">
+                    {/* Botón cerrar para móviles adentro del sidebar */}
+                    <button
+                        onClick={() => setSidebarOpen(false)}
+                        className="lg:hidden absolute top-6 right-6 p-2 bg-white/10 rounded-full hover:bg-white/20 transition-all text-white"
+                    >
+                        <FiX size={18} />
+                    </button>
+
                     <div className="flex items-center gap-3">
                         <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center p-1 shadow-inner overflow-hidden">
                             <img src="/images/logo.png" alt="Perlawasi Logo" className="w-full h-full object-contain" />
                         </div>
-                        <div>
+                        <div className="pr-4">
                             <h2 className="font-display font-black tracking-tighter text-xl text-white leading-none">PERLAWASI</h2>
                             <p className="text-[10px] uppercase tracking-[0.2em] text-emerald-300 font-bold mt-1">Panel de Administración</p>
                         </div>
@@ -53,8 +86,8 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                                 key={item.path}
                                 href={item.path}
                                 className={`flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all font-bold text-sm ${isActive
-                                        ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-900/40'
-                                        : 'text-white/60 hover:bg-white/5 hover:text-white'
+                                    ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-900/40'
+                                    : 'text-white/60 hover:bg-white/5 hover:text-white'
                                     }`}
                             >
                                 <span className="text-xl">{item.icon}</span>
