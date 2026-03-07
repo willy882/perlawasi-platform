@@ -128,7 +128,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                         className="mb-2"
                     >
                         <div className="relative w-[280px] h-[110px] md:w-[450px] md:h-[160px] drop-shadow-2xl">
-                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain" priority />
+                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain mix-blend-multiply" priority />
                         </div>
                     </motion.div>
 
@@ -230,7 +230,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                                     className="flex flex-col gap-6"
                                 >
                                     <h2
-                                        className="text-[4.5rem] sm:text-[6rem] lg:text-[8rem] font-black tracking-tighter leading-[0.88]"
+                                        className="text-5xl sm:text-7xl md:text-[5.5rem] lg:text-[5rem] xl:text-[7rem] font-black tracking-tighter leading-[0.88] break-words"
                                         style={{ color: section.accent }}
                                     >
                                         {section.title}
@@ -326,7 +326,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                     {/* Perlamayo logo */}
                     <div className="flex justify-center mb-10">
                         <div className="relative w-72 h-40 md:w-96 md:h-56 drop-shadow-2xl">
-                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain" />
+                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain mix-blend-multiply" />
                         </div>
                     </div>
 
