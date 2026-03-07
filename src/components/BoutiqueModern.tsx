@@ -72,21 +72,7 @@ export default function BoutiqueModern() {
     return (
         <div ref={containerRef} className="relative transition-colors duration-1000" style={{ backgroundColor: SECTIONS[activeSection].color }}>
 
-            {/* --- FIXED HEADER (minimal) --- */}
-            <header className="fixed top-0 left-0 w-full z-50 p-6 md:p-10 flex justify-between items-center pointer-events-none">
-                <div className="flex items-center gap-4">
-                    <div className="relative w-12 h-12 md:w-16 md:h-16 mix-blend-difference">
-                        <Image
-                            src="/images/lil.png"
-                            alt="LIL Logo"
-                            fill
-                            className="object-contain"
-                        />
-                    </div>
-                    <span className="text-[9px] md:text-[10px] font-black tracking-[0.4em] uppercase text-white mix-blend-difference">Boutique Perla · 24</span>
-                </div>
-                {/* Removido el nav interno que causaba superposición */}
-            </header>
+            {/* Removed internal header that caused duplicate logos */}
 
             {/* --- SECTIONS CONTENT --- */}
             {SECTIONS.map((section, idx) => {
@@ -109,7 +95,7 @@ export default function BoutiqueModern() {
                     <section
                         key={section.id}
                         ref={sectionRef}
-                        className="relative min-h-screen flex items-center overflow-hidden py-20 px-6"
+                        className="relative min-h-screen flex items-center overflow-hidden py-20"
                         style={{
                             backgroundColor: section.color,
                         }}
@@ -128,8 +114,15 @@ export default function BoutiqueModern() {
                                 transition={{ duration: 1, ease: "circOut" }}
                                 className="space-y-12"
                             >
-                                <div className="space-y-4">
-                                    <span className="text-[10px] font-black uppercase tracking-[0.6em] opacity-40" style={{ color: section.accent }}>{section.subtitle}</span>
+                                <div className="space-y-4 relative z-0"> {/* z-0 ensures it stays behind the images if they overlap */}
+                                    <motion.span
+                                        initial={{ opacity: 0, y: 20 }}
+                                        whileInView={{ opacity: 0.4, y: 0 }}
+                                        className="text-[10px] font-black uppercase tracking-[0.6em] block"
+                                        style={{ color: section.accent }}
+                                    >
+                                        {section.subtitle}
+                                    </motion.span>
                                     <h1 className="text-6xl sm:text-8xl md:text-[12rem] font-serif leading-[0.85] tracking-tighter" style={{ color: section.accent }}>
                                         {section.title.split(' ')[0]} <br />
                                         <span className="italic">{section.title.split(' ').slice(1).join(' ')}</span>
@@ -141,7 +134,7 @@ export default function BoutiqueModern() {
                                 </p>
 
                                 <div className="flex gap-4">
-                                    <button className="px-12 py-5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:px-16"
+                                    <button className="px-12 py-5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all hover:px-16 hover:shadow-xl active:scale-95"
                                         style={{ backgroundColor: section.accent, color: section.color }}>
                                         Descubrir Colección
                                     </button>
@@ -153,18 +146,19 @@ export default function BoutiqueModern() {
                                 {section.products.map((p, pIdx) => (
                                     <motion.div
                                         key={p.id}
-                                        initial={{ opacity: 0, y: 100 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 1, delay: pIdx * 0.2 }}
-                                        className="group cursor-pointer"
+                                        initial={{ opacity: 0, y: 100, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                        viewport={{ once: false, margin: "-100px" }}
+                                        transition={{ duration: 1.2, delay: pIdx * 0.3, ease: [0.16, 1, 0.3, 1] }}
+                                        className="group cursor-pointer relative z-10" // z-10 keeps images on top of title
                                         onClick={() => { setSelectedProduct(p); setIsProductOpen(true); }}
                                     >
-                                        <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] shadow-2xl transition-transform duration-700 group-hover:scale-[0.98]">
+                                        <div className="relative aspect-[3/4] overflow-hidden rounded-[2rem] shadow-2xl transition-all duration-700 group-hover:scale-[1.02] group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.2)]">
                                             <Image src={p.img} alt={p.name} fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
-                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-                                            <div className="absolute bottom-8 left-8 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all">
+                                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                                            <div className="absolute bottom-8 left-8 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500">
                                                 <span className="text-white text-[10px] font-black uppercase tracking-widest bg-white/10 backdrop-blur-md px-6 py-3 rounded-full border border-white/20">
-                                                    Ver Pieza
+                                                    Explorar Detalle
                                                 </span>
                                             </div>
                                         </div>
