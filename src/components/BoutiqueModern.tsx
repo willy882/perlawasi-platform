@@ -12,90 +12,39 @@ const SAND = '#FEF9EF'   // sandy white
 const AQUA = '#06B6D4'   // turquoise water
 const FOAM = '#F0F9FF'   // sea foam / near-white
 
-// ─── Data ────────────────────────────────────────────────────────
-const SECTIONS = [
-    {
-        id: 'swim',
-        label: '01',
-        title: 'SWIM',
-        subtitle: 'Traje de Baño & Bikinis',
-        tagline: 'Hechos para el agua. Diseñados para brillar.',
-        bg: OCEAN,
-        accent: '#ffffff',
-        pill: CORAL,
-        products: [
-            {
-                id: 's1',
-                name: 'Bikini Selva Coral',
-                price: 120,
-                desc: 'Lycra reciclada UPF 50+, corte brasileño. Resistente al cloro y al sol de la Amazonía.',
-                img: 'https://images.unsplash.com/photo-1570976447640-ac859083963f?auto=format&fit=crop&w=900&q=80',
-            },
-            {
-                id: 's2',
-                name: 'Traje Entero Azul Profundo',
-                price: 145,
-                desc: 'La elegancia del océano en un solo trazo de tejido técnico de alto rendimiento.',
-                img: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=900&q=80',
-            },
-        ],
-    },
-    {
-        id: 'cover',
-        label: '02',
-        title: 'COVER UPS',
-        subtitle: 'Pareos & Vestidos de Playa',
-        tagline: 'Del agua a la arena sin perder el estilo.',
-        bg: SAND,
-        accent: OCEAN,
-        pill: OCEAN,
-        products: [
-            {
-                id: 'c1',
-                name: 'Pareo Amazónico',
-                price: 75,
-                desc: 'Viscosa de bambú estampada a mano por artesanas de San Martín. Edición limitada.',
-                img: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?auto=format&fit=crop&w=900&q=80',
-            },
-            {
-                id: 'c2',
-                name: 'Vestido Lino Arena',
-                price: 95,
-                desc: 'Lino 100% natural, corte midi. Perfecto para pasar del río al restaurante.',
-                img: 'https://images.unsplash.com/photo-1559386484-97dfc0e15539?auto=format&fit=crop&w=900&q=80',
-            },
-        ],
-    },
-    {
-        id: 'accesorios',
-        label: '03',
-        title: 'ACCESORIOS',
-        subtitle: 'Sombreros, Bolsas & Más',
-        tagline: 'Cada accesorio, una historia de palma y artesanía.',
-        bg: AQUA,
-        accent: '#ffffff',
-        pill: OCEAN,
-        products: [
-            {
-                id: 'a1',
-                name: 'Sombrero Paja Toquilla',
-                price: 180,
-                desc: 'El sombrero de paja más fino del Perú. Grado 4 con cinta de ancla azul marino.',
-                img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8?auto=format&fit=crop&w=900&q=80',
-            },
-            {
-                id: 'a2',
-                name: 'Bolso Palma de Mar',
-                price: 150,
-                desc: 'Tejido artesanal de palma natural con cierre de concha. Perfecto para la playa.',
-                img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=80',
-            },
-        ],
-    },
+// ─── Section visual config (no products here) ────────────────────
+const SECTION_CONFIG = [
+    { id: 'swim', label: '01', title: 'SWIM', subtitle: 'Trajes de Baño & Bikinis', tagline: 'Hechos para el agua. Diseñados para brillar.', bg: OCEAN, accent: '#ffffff', pill: CORAL },
+    { id: 'cover', label: '02', title: 'COVER UPS', subtitle: 'Pareos & Vestidos de Playa', tagline: 'Del agua a la arena sin perder el estilo.', bg: SAND, accent: OCEAN, pill: OCEAN },
+    { id: 'accesorios', label: '03', title: 'ACCESORIOS', subtitle: 'Sombreros, Bolsas & Más', tagline: 'Cada accesorio, una historia de artesanía.', bg: AQUA, accent: '#ffffff', pill: OCEAN },
 ]
 
+// ─── Fallback products (when DB is empty for a section) ───────────
+const FALLBACK: Record<string, any[]> = {
+    swim: [
+        { id: 'f-s1', name: 'Bikini Selva Coral', price: 120, description: 'Lycra reciclada UPF 50+, corte brasileño.', image_url: 'https://images.unsplash.com/photo-1570976447640-ac859083963f?w=900&q=80', sizes: ['XS', 'S', 'M', 'L'] },
+        { id: 'f-s2', name: 'Traje Entero Azul', price: 145, description: 'Elegancia del océano en tejido técnico.', image_url: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=900&q=80', sizes: ['S', 'M', 'L'] },
+    ],
+    cover: [
+        { id: 'f-c1', name: 'Pareo Amazónico', price: 75, description: 'Viscosa de bambú estampada artesanalmente.', image_url: 'https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b?w=900&q=80', sizes: ['Único'] },
+        { id: 'f-c2', name: 'Vestido Lino Arena', price: 95, description: 'Lino 100% natural. Del río al restaurante.', image_url: 'https://images.unsplash.com/photo-1559386484-97dfc0e15539?w=900&q=80', sizes: ['S', 'M', 'L', 'XL'] },
+    ],
+    accesorios: [
+        { id: 'f-a1', name: 'Sombrero Paja Toquilla', price: 180, description: 'El más fino del Perú. Grado 4.', image_url: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8?w=900&q=80', sizes: ['S', 'M', 'L'] },
+        { id: 'f-a2', name: 'Bolso Palma de Mar', price: 150, description: 'Tejido de palma natural con cierre de concha.', image_url: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=900&q=80', sizes: ['Único'] },
+    ],
+}
+
 // ─── Component ───────────────────────────────────────────────────
-export default function BoutiqueModern() {
+export default function BoutiqueModern({ initialProducts = [] }: { initialProducts?: any[] }) {
+    // Build sections from DB products, falling back to mocks when empty
+    const SECTIONS = SECTION_CONFIG.map(cfg => {
+        const dbItems = initialProducts.filter(p => p.section === cfg.id)
+        const products = (dbItems.length > 0 ? dbItems : FALLBACK[cfg.id]).slice(0, 4)
+        return { ...cfg, products }
+    })
+
+
     const [activeSection, setActiveSection] = useState(0)
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
@@ -328,7 +277,7 @@ export default function BoutiqueModern() {
                                         >
                                             {/* Card img */}
                                             <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-lg transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-2xl">
-                                                <Image src={p.img} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                                                <Image src={p.image_url || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400'} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
                                                 {/* Gradient overlay */}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                                 {/* Hover CTA */}
@@ -434,7 +383,7 @@ export default function BoutiqueModern() {
 
                             {/* Product image */}
                             <div className="relative aspect-[4/3] overflow-hidden flex-shrink-0">
-                                <Image src={selectedProduct.img} alt={selectedProduct.name} fill className="object-cover" />
+                                <Image src={selectedProduct.image_url || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'} alt={selectedProduct.name} fill className="object-cover" />
                                 <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${OCEAN}cc 0%, transparent 60%)` }} />
                                 <div className="absolute bottom-6 left-6">
                                     <h3 className="text-2xl font-black text-white">{selectedProduct.name}</h3>
@@ -458,14 +407,14 @@ export default function BoutiqueModern() {
                                     ))}
                                 </div>
 
-                                <p className="text-gray-500 text-sm leading-relaxed">{selectedProduct.desc}</p>
+                                <p className="text-gray-500 text-sm leading-relaxed">{selectedProduct.description}</p>
 
                                 {/* Sizes */}
                                 <div>
                                     <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">Talla</p>
                                     <div className="flex gap-2">
-                                        {['XS', 'S', 'M', 'L', 'XL'].map(s => (
-                                            <button key={s} className="w-10 h-10 rounded-xl border text-[10px] font-black hover:border-current hover:text-white transition-all"
+                                        {(selectedProduct.sizes && selectedProduct.sizes.length > 0 ? selectedProduct.sizes : ['ÚNICA']).map((s: string) => (
+                                            <button key={s} className="min-w-[40px] px-3 h-10 rounded-xl border text-[10px] font-black hover:border-current hover:text-white transition-all flex items-center justify-center"
                                                 style={{ borderColor: OCEAN + '33', color: OCEAN }}
                                                 onMouseEnter={e => { (e.target as HTMLElement).style.backgroundColor = OCEAN; (e.target as HTMLElement).style.color = '#fff'; }}
                                                 onMouseLeave={e => { (e.target as HTMLElement).style.backgroundColor = 'transparent'; (e.target as HTMLElement).style.color = OCEAN; }}

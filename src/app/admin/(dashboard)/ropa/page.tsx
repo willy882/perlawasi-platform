@@ -20,6 +20,18 @@ export default function AdminRopa() {
     const [showNewCat, setShowNewCat] = useState(false)
     const fileInputRef = useRef<HTMLInputElement>(null)
 
+    const BEACH_SECTIONS = [
+        { value: 'swim', label: '🩱 Trajes de Baño & Bikinis' },
+        { value: 'cover', label: '👗 Pareos & Cover Ups' },
+        { value: 'accesorios', label: '👒 Accesorios de Playa' },
+    ]
+
+    const SECTION_LABELS: Record<string, string> = {
+        swim: '🩱 Trajes de Baño',
+        cover: '👗 Cover Ups',
+        accesorios: '👒 Accesorios',
+    }
+
     useEffect(() => { fetchProducts() }, [])
 
     async function fetchProducts() {
@@ -78,19 +90,20 @@ export default function AdminRopa() {
             if (colorsRaw) {
                 colorsArray = colorsRaw.split(',').map(c => {
                     const [name, hex] = c.split(':').map(s => s.trim())
-                    return { name: name || 'Color', hex: hex || '#D4AF37' }
+                    return { name: name || 'Color', hex: hex || '#06B6D4' }
                 })
             }
 
             const productData: any = {
                 name: formData.get('name'),
                 category: category,
+                section: formData.get('section') || 'swim',
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
                 description: formData.get('description'),
                 material: formData.get('material'),
-                emoji: formData.get('emoji') || '👕',
-                image_url: formData.get('image_url'),
+                emoji: formData.get('emoji') || '🩱',
+                image_url: editingProduct?.image_url || formData.get('image_url'),
                 sizes: (formData.get('sizes') as string)?.split(',').map(s => s.trim().toUpperCase()).filter(Boolean) || [],
                 colors: colorsArray
             }
@@ -101,13 +114,13 @@ export default function AdminRopa() {
                     .update(productData)
                     .eq('id', editingProduct.id)
                 if (error) throw error
-                toast.success('Colección actualizada ✨')
+                toast.success('Producto actualizado ✨')
             } else {
                 const { error } = await supabase
                     .from('productos_ropa')
                     .insert([productData])
                 if (error) throw error
-                toast.success('Nueva prenda publicada 👕')
+                toast.success('Nueva prenda publicada 🩱')
             }
 
             setShowModal(false)
@@ -119,25 +132,44 @@ export default function AdminRopa() {
 
     const filtered = products.filter(p =>
         p.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.category?.toLowerCase().includes(searchTerm.toLowerCase())
+        p.category?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.section?.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
     const categoriesList = Array.from(new Set(products.map(p => p.category).filter(Boolean)))
-    if (categoriesList.length === 0) categoriesList.push('Camisetas', 'Pantalones', 'Vestidos', 'Accesorios', 'Calzado')
+    if (categoriesList.length === 0) categoriesList.push('Bikini', 'Bañador', 'Pareo', 'Vestido Playa', 'Sombrero', 'Bolso', 'Accesorio')
 
     return (
         <div className="space-y-8 animate-fade-in px-4">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
-                    <h2 className="text-4xl font-display font-black text-gray-900 leading-none tracking-tight">Boutique Perlawasi</h2>
-                    <p className="text-gray-500 mt-3 text-sm font-medium italic">Gestión de la colección de moda consciente.</p>
+                    <h2 className="text-4xl font-display font-black text-gray-900 leading-none tracking-tight">Boutique Playa LIL</h2>
+                    <p className="text-gray-500 mt-3 text-sm font-medium italic">Gestión de colección de ropa y accesorios de playa.</p>
                 </div>
                 <button
                     onClick={() => handleOpenModal()}
-                    className="flex items-center gap-2 px-8 py-4 bg-[#1a3c1a] text-white rounded-2xl font-bold text-sm shadow-xl shadow-emerald-900/20 hover:bg-black transition-all"
+                    className="flex items-center gap-2 px-8 py-4 text-white rounded-2xl font-bold text-sm shadow-xl hover:opacity-80 transition-all"
+                    style={{ backgroundColor: '#0C4A6E' }}
                 >
-                    <FiPlus /> Añadir Nueva Prenda
+                    <FiPlus /> Añadir Producto
                 </button>
+            </div>
+
+            {/* Section tabs filter */}
+            <div className="flex gap-3 flex-wrap">
+                {[{ value: '', label: 'Todos' }, ...BEACH_SECTIONS].map(s => (
+                    <button
+                        key={s.value}
+                        onClick={() => setSearchTerm(s.value)}
+                        className={`px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${searchTerm === s.value
+                            ? 'text-white shadow-lg'
+                            : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                            }`}
+                        style={searchTerm === s.value ? { backgroundColor: '#0C4A6E' } : {}}
+                    >
+                        {s.label || 'Todos'}
+                    </button>
+                ))}
             </div>
 
             <div className="max-w-xl relative">
@@ -220,17 +252,28 @@ export default function AdminRopa() {
                         <form onSubmit={handleSave} className="space-y-6">
                             <div className="grid md:grid-cols-2 gap-6">
                                 <div className="space-y-3">
-                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-6">Nombre de la Prenda</label>
-                                    <input name="name" required type="text" defaultValue={editingProduct?.name} placeholder="Ej: Polo Lino Natural" className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-transparent focus:border-emerald-500 border-2 outline-none text-base font-bold transition-all shadow-inner" />
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-6">Nombre del Producto</label>
+                                    <input name="name" required type="text" defaultValue={editingProduct?.name} placeholder="Ej: Bikini Selva Coral" className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-transparent focus:border-blue-400 border-2 outline-none text-base font-bold transition-all shadow-inner" />
                                 </div>
                                 <div className="space-y-3">
-                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-6">Categoría</label>
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-6">Sección de Playa ⚓</label>
+                                    <select name="section" defaultValue={editingProduct?.section || 'swim'} className="w-full px-8 py-5 bg-blue-50 rounded-2xl border-2 border-blue-100 outline-none text-sm font-black appearance-none cursor-pointer">
+                                        <option value="swim">🩱 Trajes de Baño &amp; Bikinis</option>
+                                        <option value="cover">👗 Pareos &amp; Cover Ups</option>
+                                        <option value="accesorios">👒 Accesorios de Playa</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="space-y-3">
+                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-6">Categoría (etiqueta libre)</label>
                                     <div className="space-y-3">
-                                        <select name="category" defaultValue={editingProduct?.category} onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-2 border-transparent outline-none text-sm font-bold appearance-none cursor-pointer focus:border-emerald-500 shadow-inner">
+                                        <select name="category" defaultValue={editingProduct?.category} onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-8 py-5 bg-gray-50 rounded-2xl border-2 border-transparent outline-none text-sm font-bold appearance-none cursor-pointer focus:border-blue-400 shadow-inner">
                                             {categoriesList.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                                            <option value="NEW" className="text-emerald-700 font-black">+ Crear Nueva...</option>
+                                            <option value="NEW" className="text-blue-700 font-black">+ Crear Nueva...</option>
                                         </select>
-                                        {showNewCat && <input name="new_category" required type="text" placeholder="Nueva categoría" className="w-full px-8 py-5 bg-emerald-50 border-2 border-emerald-100 rounded-2xl outline-none font-bold animate-fade-in shadow-inner" />}
+                                        {showNewCat && <input name="new_category" required type="text" placeholder="Nueva categoría" className="w-full px-8 py-5 bg-blue-50 border-2 border-blue-100 rounded-2xl outline-none font-bold animate-fade-in shadow-inner" />}
                                     </div>
                                 </div>
                             </div>
@@ -292,8 +335,8 @@ export default function AdminRopa() {
 
                             <div className="flex gap-5 pt-6">
                                 <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-6 bg-gray-100 text-gray-500 rounded-3xl font-black uppercase text-xs tracking-[0.2em] hover:bg-gray-200 transition-all">Cancelar</button>
-                                <button type="submit" disabled={saving || uploading} className="flex-[2] py-6 bg-[#1a3c1a] text-white rounded-3xl font-black uppercase text-xs tracking-[0.2em] shadow-2xl shadow-emerald-900/30 hover:bg-black transition-all flex items-center justify-center gap-4">
-                                    {(saving || uploading) ? <FiLoader className="animate-spin text-xl" /> : <><FiCheckCircle className="text-xl" /> {editingProduct?.id ? 'Actualizar Colección' : 'Lanzar Prenda'}</>}
+                                <button type="submit" disabled={saving || uploading} className="flex-[2] py-6 text-white rounded-3xl font-black uppercase text-xs tracking-[0.2em] shadow-2xl hover:opacity-80 transition-all flex items-center justify-center gap-4" style={{ backgroundColor: '#0C4A6E' }}>
+                                    {(saving || uploading) ? <FiLoader className="animate-spin text-xl" /> : <><FiCheckCircle className="text-xl" /> {editingProduct?.id ? 'Actualizar Producto' : 'Publicar en Playa'}</>}
                                 </button>
                             </div>
                         </form>
