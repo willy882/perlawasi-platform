@@ -98,7 +98,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
             {/* ═══════════════════════════════════════════════════════
                 HERO — cinematic opener
             ═══════════════════════════════════════════════════════ */}
-            <section className="relative h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: SAND }}>
+            <section className="relative min-h-[100svh] py-32 md:py-0 flex items-center justify-center overflow-hidden" style={{ backgroundColor: SAND }}>
                 {/* Background sandy beach image */}
                 <div className="absolute inset-0 z-0">
                     <Image
@@ -119,33 +119,33 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                 </div>
 
                 {/* Hero content */}
-                <div className="relative z-30 flex flex-col items-center text-center text-[#1B4332] px-6 max-w-4xl mx-auto pt-16">
+                <div className="relative z-30 flex flex-col items-center text-center text-[#1B4332] px-6 max-w-4xl mx-auto mt-12 md:mt-24">
                     {/* Perlamayo Logo */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8 }}
-                        className="mb-8"
+                        className="mb-2"
                     >
-                        <div className="relative w-64 h-32 md:w-80 md:h-40 drop-shadow-2xl">
+                        <div className="relative w-[280px] h-[110px] md:w-[450px] md:h-[160px] drop-shadow-2xl">
                             <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain" priority />
                         </div>
                     </motion.div>
 
                     <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}>
                         <div
-                            className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-[#1B4332]/20 mb-8 text-[10px] font-black uppercase tracking-[0.5em] shadow-sm bg-white/40 backdrop-blur-md"
+                            className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-[#1B4332]/20 mb-6 text-[10px] font-black uppercase tracking-[0.5em] shadow-sm bg-white/40 backdrop-blur-md"
                         >
                             <FiSun className="text-base" style={{ color: CORAL }} />
                             Colección Playa
                         </div>
 
-                        <h1 className="text-6xl sm:text-8xl md:text-[10rem] font-black tracking-tighter leading-[0.85] mb-8 text-[#1B4332]">
+                        <h1 className="text-6xl sm:text-8xl md:text-[9rem] xl:text-[10rem] font-black tracking-tighter leading-[0.85] mb-6 text-[#1B4332]">
                             BAJO<br />
                             <span className="font-serif font-normal italic" style={{ color: AQUA }}>el sol</span>
                         </h1>
 
-                        <p className="text-base md:text-xl text-[#1B4332]/70 max-w-xl mx-auto font-medium leading-relaxed mb-12">
+                        <p className="text-sm md:text-xl text-[#1B4332]/80 max-w-xl mx-auto font-medium leading-relaxed mb-8">
                             Ropa de playa y accesorios elaborados en la Amazonía peruana. Del río a la orilla, con estilo y tradición.
                         </p>
 
