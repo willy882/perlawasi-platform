@@ -29,9 +29,17 @@ export default function Header() {
                 <div className="flex items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-2 group">
-                        <div className={pathname === '/ropa' ? "relative w-24 h-24 md:w-32 md:h-32 transition-transform group-hover:scale-105" : "relative w-16 h-16 transition-transform group-hover:scale-105"}>
+                        <div className={
+                            pathname === '/ropa' ? "relative w-24 h-24 md:w-32 md:h-32 transition-transform group-hover:scale-105" :
+                                pathname === '/plantas' ? "relative w-20 h-20 md:w-28 md:h-28 transition-transform group-hover:scale-105" :
+                                    "relative w-16 h-16 transition-transform group-hover:scale-105"
+                        }>
                             <Image
-                                src={pathname === '/ropa' ? '/images/lil.png' : '/images/logo.png'}
+                                src={
+                                    pathname === '/ropa' ? '/images/lil.png' :
+                                        pathname === '/plantas' ? '/images/buho.png' :
+                                            '/images/logo.png'
+                                }
                                 alt="Perlawasi"
                                 fill
                                 className="object-contain"
