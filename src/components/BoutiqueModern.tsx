@@ -6,11 +6,11 @@ import { FiShoppingBag, FiArrowRight, FiX, FiCheck, FiSun, FiDroplet, FiWind } f
 import Image from 'next/image'
 
 // ─── Brand Palette ───────────────────────────────────────────────
-const OCEAN = '#0C4A6E'   // deep ocean blue
+const OCEAN = '#1B4332'   // deep amazon green (Perlamayo brand)
 const CORAL = '#F97316'   // warm coral / sun
-const SAND = '#FEF9EF'   // sandy white
-const AQUA = '#06B6D4'   // turquoise water
-const FOAM = '#F0F9FF'   // sea foam / near-white
+const SAND = '#FDF8F5'    // warm light sand
+const AQUA = '#F28C28'    // earthy orange
+const FOAM = '#FFFFFF'    // white
 
 // ─── Section visual config (no products here) ────────────────────
 const SECTION_CONFIG = [
@@ -98,17 +98,17 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
             {/* ═══════════════════════════════════════════════════════
                 HERO — cinematic opener
             ═══════════════════════════════════════════════════════ */}
-            <section className="relative h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: OCEAN }}>
-                {/* Background ocean image */}
+            <section className="relative h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: SAND }}>
+                {/* Background sandy beach image */}
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=80"
-                        alt="Playa"
+                        src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=2000&q=80"
+                        alt="Playa Tropical"
                         fill
-                        className="object-cover opacity-30"
+                        className="object-cover opacity-60"
                         priority
                     />
-                    <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${OCEAN}99 0%, ${OCEAN}cc 60%, ${OCEAN} 100%)` }} />
+                    <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${SAND}99 0%, ${SAND}dd 60%, ${SAND} 100%)` }} />
                 </div>
 
                 {/* Animated waves */}
@@ -120,34 +120,33 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
 
                 {/* Perlamayo Logo */}
                 <motion.div
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.8 }}
-                    className="absolute top-6 left-8 z-20"
+                    className="absolute top-2 w-full flex justify-center z-20"
                 >
-                    <div className="relative w-40 h-40 md:w-56 md:h-56 drop-shadow-2xl">
+                    <div className="relative w-48 h-48 md:w-64 md:h-64 drop-shadow-2xl">
                         <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain" priority />
                     </div>
                 </motion.div>
 
                 {/* Hero text */}
-                <div className="relative z-20 text-center text-white px-6 max-w-4xl mx-auto">
-                    <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+                <div className="relative z-20 text-center text-[#1B4332] px-6 max-w-4xl mx-auto pt-20">
+                    <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}>
                         <div
-                            className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-white/20 mb-8 text-[10px] font-black uppercase tracking-[0.5em]"
-                            style={{ backgroundColor: CORAL + '22', backdropFilter: 'blur(10px)' }}
+                            className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-[#1B4332]/20 mb-8 text-[10px] font-black uppercase tracking-[0.5em] shadow-sm bg-white/40 backdrop-blur-md"
                         >
                             <FiSun className="text-base" style={{ color: CORAL }} />
-                            Colección Playa · Perlawasi
+                            Colección Playa · Perlamayo
                         </div>
 
-                        <h1 className="text-6xl sm:text-8xl md:text-[10rem] font-black tracking-tighter leading-[0.85] mb-8">
+                        <h1 className="text-6xl sm:text-8xl md:text-[10rem] font-black tracking-tighter leading-[0.85] mb-8 text-[#1B4332]">
                             BAJO<br />
                             <span className="font-serif font-normal italic" style={{ color: AQUA }}>el sol</span>
                         </h1>
 
-                        <p className="text-base md:text-xl text-white/60 max-w-xl mx-auto font-light leading-relaxed mb-12">
-                            Ropa de playa y accesorios elaborados en la Amazonía peruana. Del río a la orilla, con estilo y conciencia.
+                        <p className="text-base md:text-xl text-[#1B4332]/70 max-w-xl mx-auto font-medium leading-relaxed mb-12">
+                            Ropa de playa y accesorios elaborados en la Amazonía peruana. Del río a la orilla, con estilo y tradición.
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -159,7 +158,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                             </a>
                             <a href="https://wa.me/51928141669?text=Hola,%20quiero%20información%20sobre%20ropa%20de%20playa"
                                 target="_blank"
-                                className="px-12 py-5 rounded-full font-black uppercase tracking-widest text-[10px] border border-white/25 hover:bg-white/10 transition-all"
+                                className="px-12 py-5 rounded-full font-black uppercase tracking-widest text-[10px] border border-[#1B4332]/20 text-[#1B4332] bg-white/30 backdrop-blur-sm hover:bg-white/60 transition-all"
                             >
                                 Consultar Tallas
                             </a>
@@ -318,9 +317,10 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
             {/* ═══════════════════════════════════════════════════════
                 CLOSING CTA SECTION
             ═══════════════════════════════════════════════════════ */}
-            <section className="py-24 md:py-36 relative overflow-hidden" style={{ backgroundColor: OCEAN }}>
-                <div className="absolute inset-0 opacity-10">
-                    <Image src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80" alt="ocean" fill className="object-cover" />
+            <section className="py-24 md:py-36 relative overflow-hidden" style={{ backgroundColor: SAND }}>
+                <div className="absolute inset-0 opacity-40">
+                    <Image src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1920&q=80" alt="sand" fill className="object-cover" />
+                    <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${SAND} 0%, transparent 100%)` }} />
                 </div>
                 <div className="container px-6 mx-auto relative z-10 text-center">
                     {/* Perlamayo logo */}
@@ -331,22 +331,22 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                     </div>
 
                     <div className="inline-flex gap-2 mb-6">
-                        {'🌊🐚☀️🏖️🌴'.split('').map((e, i) => (
-                            <motion.span key={i} animate={{ y: [0, -8, 0] }} transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }} className="text-2xl">
+                        {'🌿🥥☀️🏖️🌴'.split('').map((e, i) => (
+                            <motion.span key={i} animate={{ y: [0, -8, 0] }} transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }} className="text-2xl drop-shadow-sm">
                                 {e}
                             </motion.span>
                         ))}
                     </div>
 
-                    <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none mb-6">
+                    <h2 className="text-4xl md:text-7xl font-black text-[#1B4332] tracking-tighter leading-none mb-6">
                         ¿TU LOOK DE<br />
                         <span style={{ color: CORAL }}>PLAYA PERFECTO?</span>
                     </h2>
-                    <p className="text-white/50 text-base md:text-xl max-w-xl mx-auto font-light mb-10 px-4">
-                        Nuestros asesores de moda te ayudan a armar el look ideal para tu escapada.
+                    <p className="text-[#1B4332]/70 text-base md:text-xl max-w-xl mx-auto font-medium mb-10 px-4">
+                        Nuestros asesores de moda te ayudan a armar el look ideal para tu próxima aventura tropical.
                     </p>
                     <a
-                        href="https://wa.me/51928141669?text=Hola,%20quiero%20armar%20mi%20look%20de%20playa%20con%20LIL"
+                        href="https://wa.me/51928141669?text=Hola,%20quiero%20armar%20mi%20look%20de%20playa%20con%20Perlamayo"
                         target="_blank"
                         className="inline-flex items-center gap-4 px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-[11px] text-white transition-all hover:scale-105 active:scale-95 shadow-2xl"
                         style={{ backgroundColor: CORAL, boxShadow: `0 20px 50px ${CORAL}55` }}
