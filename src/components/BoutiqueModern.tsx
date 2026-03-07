@@ -118,26 +118,26 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                     </svg>
                 </div>
 
-                {/* Perlamayo Logo */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8 }}
-                    className="absolute top-2 w-full flex justify-center z-20"
-                >
-                    <div className="relative w-48 h-48 md:w-64 md:h-64 drop-shadow-2xl">
-                        <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain" priority />
-                    </div>
-                </motion.div>
+                {/* Hero content */}
+                <div className="relative z-30 flex flex-col items-center text-center text-[#1B4332] px-6 max-w-4xl mx-auto pt-16">
+                    {/* Perlamayo Logo */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.8 }}
+                        className="mb-8"
+                    >
+                        <div className="relative w-64 h-32 md:w-80 md:h-40 drop-shadow-2xl">
+                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain" priority />
+                        </div>
+                    </motion.div>
 
-                {/* Hero text */}
-                <div className="relative z-20 text-center text-[#1B4332] px-6 max-w-4xl mx-auto pt-20">
                     <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}>
                         <div
                             className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-[#1B4332]/20 mb-8 text-[10px] font-black uppercase tracking-[0.5em] shadow-sm bg-white/40 backdrop-blur-md"
                         >
                             <FiSun className="text-base" style={{ color: CORAL }} />
-                            Colección Playa · Perlamayo
+                            Colección Playa
                         </div>
 
                         <h1 className="text-6xl sm:text-8xl md:text-[10rem] font-black tracking-tighter leading-[0.85] mb-8 text-[#1B4332]">
@@ -325,13 +325,13 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                 <div className="container px-6 mx-auto relative z-10 text-center">
                     {/* Perlamayo logo */}
                     <div className="flex justify-center mb-10">
-                        <div className="relative w-48 h-48 md:w-64 md:h-64 drop-shadow-2xl">
+                        <div className="relative w-72 h-40 md:w-96 md:h-56 drop-shadow-2xl">
                             <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain" />
                         </div>
                     </div>
 
                     <div className="inline-flex gap-2 mb-6">
-                        {'🌿🥥☀️🏖️🌴'.split('').map((e, i) => (
+                        {['🌿', '🥥', '☀️', '🏖️', '🌴'].map((e, i) => (
                             <motion.span key={i} animate={{ y: [0, -8, 0] }} transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }} className="text-2xl drop-shadow-sm">
                                 {e}
                             </motion.span>
