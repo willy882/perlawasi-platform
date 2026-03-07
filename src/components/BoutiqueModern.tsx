@@ -6,10 +6,10 @@ import { FiShoppingBag, FiArrowRight, FiX, FiCheck, FiSun, FiDroplet, FiWind } f
 import Image from 'next/image'
 
 // ─── Brand Palette ───────────────────────────────────────────────
-const OCEAN = '#1B4332'   // deep amazon green (Perlamayo brand)
-const CORAL = '#F97316'   // warm coral / sun
-const SAND = '#FDF8F5'    // warm light sand
-const AQUA = '#F28C28'    // earthy orange
+const OCEAN = '#114D35'   // deep amazon green (Perlamayo text base)
+const CORAL = '#7AC143'   // leaf bright green (Perlamayo tree accent)
+const SAND = '#F6F3ED'    // warm light sand matching logo white balance
+const AQUA = '#26A0AA'    // hummingbird teal/blue (Perlamayo bird accent)
 const FOAM = '#FFFFFF'    // white
 
 // ─── Section visual config (no products here) ────────────────────
@@ -134,18 +134,18 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
 
                     <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.3 }}>
                         <div
-                            className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-[#1B4332]/20 mb-6 text-[10px] font-black uppercase tracking-[0.5em] shadow-sm bg-white/40 backdrop-blur-md"
+                            className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full border border-[#114D35]/20 mb-6 text-[10px] font-black uppercase tracking-[0.5em] shadow-sm bg-white/40 backdrop-blur-md"
                         >
                             <FiSun className="text-base" style={{ color: CORAL }} />
                             Colección Playa
                         </div>
 
-                        <h1 className="text-6xl sm:text-8xl md:text-[9rem] xl:text-[10rem] font-black tracking-tighter leading-[0.85] mb-6 text-[#1B4332]">
+                        <h1 className="text-6xl sm:text-8xl md:text-[9rem] xl:text-[10rem] font-black tracking-tighter leading-[0.85] mb-6 text-[#114D35]">
                             BAJO<br />
                             <span className="font-serif font-normal italic" style={{ color: AQUA }}>el sol</span>
                         </h1>
 
-                        <p className="text-sm md:text-xl text-[#1B4332]/80 max-w-xl mx-auto font-medium leading-relaxed mb-8">
+                        <p className="text-sm md:text-xl text-[#114D35]/80 max-w-xl mx-auto font-medium leading-relaxed mb-8">
                             Ropa de playa y accesorios elaborados en la Amazonía peruana. Del río a la orilla, con estilo y tradición.
                         </p>
 
@@ -158,7 +158,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                             </a>
                             <a href="https://wa.me/51928141669?text=Hola,%20quiero%20información%20sobre%20ropa%20de%20playa"
                                 target="_blank"
-                                className="px-12 py-5 rounded-full font-black uppercase tracking-widest text-[10px] border border-[#1B4332]/20 text-[#1B4332] bg-white/30 backdrop-blur-sm hover:bg-white/60 transition-all"
+                                className="px-12 py-5 rounded-full font-black uppercase tracking-widest text-[10px] border border-[#114D35]/20 text-[#114D35] bg-white/30 backdrop-blur-sm hover:bg-white/60 transition-all"
                             >
                                 Consultar Tallas
                             </a>
@@ -338,11 +338,11 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                         ))}
                     </div>
 
-                    <h2 className="text-4xl md:text-7xl font-black text-[#1B4332] tracking-tighter leading-none mb-6">
+                    <h2 className="text-4xl md:text-7xl font-black text-[#114D35] tracking-tighter leading-none mb-6">
                         ¿TU LOOK DE<br />
                         <span style={{ color: CORAL }}>PLAYA PERFECTO?</span>
                     </h2>
-                    <p className="text-[#1B4332]/70 text-base md:text-xl max-w-xl mx-auto font-medium mb-10 px-4">
+                    <p className="text-[#114D35]/70 text-base md:text-xl max-w-xl mx-auto font-medium mb-10 px-4">
                         Nuestros asesores de moda te ayudan a armar el look ideal para tu próxima aventura tropical.
                     </p>
                     <a
