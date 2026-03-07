@@ -105,7 +105,7 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                             transition={{ duration: 0.8, delay: 0.2 }}
                             className="flex justify-center mb-10"
                         >
-                            <div className="relative w-36 h-36 md:w-48 md:h-48 drop-shadow-2xl">
+                            <div className="relative w-36 h-36 md:w-48 md:h-48 drop-shadow-2xl bg-white rounded-full p-1">
                                 <Image
                                     src="/images/buho.png"
                                     alt="Buho Plantas & Mariposas"
@@ -315,8 +315,8 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                         <div className="relative z-10">
                             {/* Buho mini logo */}
                             <div className="flex justify-center mb-8">
-                                <div className="relative w-24 h-24">
-                                    <Image src="/images/buho.png" alt="Buho" fill className="object-contain drop-shadow-xl" />
+                                <div className="relative w-24 h-24 bg-white rounded-full p-1 shadow-xl">
+                                    <Image src="/images/buho.png" alt="Buho" fill className="object-contain" />
                                 </div>
                             </div>
 
