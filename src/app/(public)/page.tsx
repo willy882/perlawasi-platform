@@ -92,8 +92,8 @@ export default function HomePage() {
                                 <div className="p-6 relative rounded-2xl border border-white/10 hover:border-primary-500/50 transition-all overflow-hidden group">
                                     <div className="absolute inset-0">
                                         <Image
-                                            src="/images/fondo_cafe1.png"
-                                            alt="Fondo Café"
+                                            src="/images/ozo.png"
+                                            alt="Fondo Café Premium"
                                             fill
                                             className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
                                             quality={100}
