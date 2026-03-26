@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
     FiPlus, FiSearch, FiEdit2, FiTrash2,
-    FiCheckCircle, FiXCircle, FiLoader, FiCoffee, FiShoppingBag
+    FiCheckCircle, FiXCircle, FiLoader, FiCoffee, FiCamera, FiLink
 } from 'react-icons/fi'
-import { supabase } from '@/lib/supabase'
+import { supabase, uploadImage } from '@/lib/supabase'
 import { toast } from 'react-hot-toast'
 
 export default function AdminCafe() {
@@ -14,8 +14,11 @@ export default function AdminCafe() {
     const [editingProduct, setEditingProduct] = useState<any>(null)
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
+    const [uploading, setUploading] = useState(false)
     const [products, setProducts] = useState<any[]>([])
     const [showNewCat, setShowNewCat] = useState(false)
+    const [currentImageUrl, setCurrentImageUrl] = useState('')
+    const fileInputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => { fetchProducts() }, [])
 
@@ -35,8 +38,23 @@ export default function AdminCafe() {
 
     const handleOpenModal = (product: any = null) => {
         setEditingProduct(product)
+        setCurrentImageUrl(product?.image_url || '')
         setShowNewCat(false)
         setShowModal(true)
+    }
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        try {
+            setUploading(true)
+            toast.loading('Subiendo imagen...', { id: 'upload' })
+            const url = await uploadImage(file, 'products')
+            setCurrentImageUrl(url)
+            toast.success('¡Imagen subida!', { id: 'upload' })
+        } catch (error: any) {
+            toast.error('Error al subir: ' + error.message, { id: 'upload' })
+        } finally { setUploading(false) }
     }
 
     const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,24 +65,19 @@ export default function AdminCafe() {
             const category = formData.get('category') === 'NEW' ? formData.get('new_category') : formData.get('category')
             const productData: any = {
                 name: formData.get('name'),
-                category: category,
+                category,
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
                 description: formData.get('description'),
-                image_url: formData.get('image_url')
+                image_url: currentImageUrl || null
             }
 
             if (editingProduct?.id) {
-                const { error } = await supabase
-                    .from('cafe_cacao')
-                    .update(productData)
-                    .eq('id', editingProduct.id)
+                const { error } = await supabase.from('cafe_cacao').update(productData).eq('id', editingProduct.id)
                 if (error) throw error
-                toast.success('Producto actualizado exitosamente ✨')
+                toast.success('Producto actualizado ✨')
             } else {
-                const { error } = await supabase
-                    .from('cafe_cacao')
-                    .insert([productData])
+                const { error } = await supabase.from('cafe_cacao').insert([productData])
                 if (error) throw error
                 toast.success('Producto gourmet guardado ☕')
             }
@@ -148,12 +161,12 @@ export default function AdminCafe() {
                                     <td className="px-8 py-6 font-black text-gray-900 text-lg uppercase tracking-tighter">S/ {p.price}</td>
                                     <td className="px-8 py-6 text-right">
                                         <div className="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
-                                            <button onClick={() => handleOpenModal(p)} className="p-3 bg-white text-gray-400 hover:text-orange-600 rounded-xl border border-gray-100 shadow-sm transition-all"><FiEdit2 size={16} /></button>
+                                            <button onClick={() => handleOpenModal(p)} className="p-3 bg-white text-orange-500 hover:text-orange-600 rounded-xl border border-gray-100 shadow-sm transition-all"><FiEdit2 size={16} /></button>
                                             <button onClick={async () => {
                                                 if (confirm('¿Eliminar producto gourmet?')) {
-                                                    await supabase.from('cafe_cacao').delete().eq('id', p.id);
-                                                    fetchProducts();
-                                                    toast.success('Eliminado');
+                                                    await supabase.from('cafe_cacao').delete().eq('id', p.id)
+                                                    fetchProducts()
+                                                    toast.success('Eliminado')
                                                 }
                                             }} className="p-3 bg-white text-gray-400 hover:text-red-600 rounded-xl border border-gray-100 shadow-sm transition-all"><FiTrash2 size={16} /></button>
                                         </div>
@@ -170,7 +183,7 @@ export default function AdminCafe() {
                     <div className="bg-white w-full max-w-xl rounded-[3rem] p-12 animate-slide-up max-h-[90vh] overflow-y-auto shadow-2xl">
                         <div className="flex justify-between items-start mb-8">
                             <div>
-                                <h3 className="text-3xl font-black text-gray-900">{editingProduct ? 'Editar Producto' : 'Nuevo Producto'}</h3>
+                                <h3 className="text-3xl font-black text-gray-900">{editingProduct?.id ? 'Editar Producto' : 'Nuevo Producto'}</h3>
                                 <p className="text-gray-400 text-sm mt-3 font-medium italic">Actualiza la oferta gourmet de Perlawasi.</p>
                             </div>
                             <button onClick={() => setShowModal(false)} className="p-3 bg-gray-50 text-gray-400 rounded-full hover:bg-gray-100 transition-colors"><FiXCircle size={24} /></button>
@@ -204,9 +217,35 @@ export default function AdminCafe() {
                                 </div>
                             </div>
 
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">URL Imagen (Directo)</label>
-                                <input name="image_url" type="text" defaultValue={editingProduct?.image_url} placeholder="https://..." className="w-full px-6 py-4 bg-gray-50 rounded-2xl outline-none text-sm font-bold" />
+                            {/* Imagen - subir archivo o URL */}
+                            <div className="space-y-3">
+                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Imagen del Producto</label>
+                                <div
+                                    onClick={() => fileInputRef.current?.click()}
+                                    className="border-4 border-dashed border-gray-100 rounded-[2rem] p-6 bg-gray-50 hover:bg-orange-50 hover:border-orange-200 cursor-pointer text-center transition-all group overflow-hidden relative min-h-[140px] flex flex-col items-center justify-center"
+                                >
+                                    <input type="file" hidden ref={fileInputRef} accept="image/*" onChange={handleImageUpload} />
+                                    {uploading ? (
+                                        <FiLoader className="animate-spin text-3xl text-orange-500" />
+                                    ) : currentImageUrl ? (
+                                        <img src={currentImageUrl} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-[1.8rem]" alt="preview" />
+                                    ) : (
+                                        <div className="text-gray-300 group-hover:text-orange-400 transition-colors">
+                                            <FiCamera className="text-4xl mx-auto mb-2" />
+                                            <p className="text-[10px] font-black uppercase tracking-[0.2em]">Subir desde dispositivo</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex items-center gap-2 bg-gray-50 px-4 py-3 rounded-2xl">
+                                    <FiLink className="text-gray-400 shrink-0" />
+                                    <input
+                                        type="text"
+                                        value={currentImageUrl}
+                                        onChange={(e) => setCurrentImageUrl(e.target.value)}
+                                        placeholder="O pega aquí el enlace de la imagen..."
+                                        className="bg-transparent border-none outline-none text-xs w-full font-bold text-gray-500 placeholder:text-gray-300"
+                                    />
+                                </div>
                             </div>
 
                             <div className="space-y-2">
@@ -216,8 +255,8 @@ export default function AdminCafe() {
 
                             <div className="flex gap-4 pt-4">
                                 <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-5 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-gray-200 transition-all">Cancelar</button>
-                                <button type="submit" disabled={saving} className="flex-[2] py-5 bg-orange-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg shadow-orange-900/20 hover:bg-black transition-all flex items-center justify-center gap-3">
-                                    {saving ? <FiLoader className="animate-spin text-lg" /> : <><FiCheckCircle className="text-lg" /> {editingProduct ? 'Actualizar Producto' : 'Guardar Producto'}</>}
+                                <button type="submit" disabled={saving || uploading} className="flex-[2] py-5 bg-orange-600 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg shadow-orange-900/20 hover:bg-black transition-all flex items-center justify-center gap-3">
+                                    {saving ? <FiLoader className="animate-spin text-lg" /> : <><FiCheckCircle className="text-lg" /> {editingProduct?.id ? 'Actualizar Producto' : 'Guardar Producto ☕'}</>}
                                 </button>
                             </div>
                         </form>
