@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
     FiPlus, FiSearch, FiEdit2, FiTrash2,
-    FiCheckCircle, FiLoader, FiXCircle
+    FiCheckCircle, FiLoader, FiXCircle, FiCamera, FiLink
 } from 'react-icons/fi'
-import { supabase } from '@/lib/supabase'
+import { supabase, uploadImage } from '@/lib/supabase'
 import { toast } from 'react-hot-toast'
 
 export default function AdminHeladeria() {
@@ -13,13 +13,14 @@ export default function AdminHeladeria() {
     const [showModal, setShowModal] = useState(false)
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
+    const [uploading, setUploading] = useState(false)
     const [products, setProducts] = useState<any[]>([])
     const [showNewCat, setShowNewCat] = useState(false)
     const [editingProduct, setEditingProduct] = useState<any>(null)
+    const [currentImageUrl, setCurrentImageUrl] = useState('')
+    const fileInputRef = useRef<HTMLInputElement>(null)
 
-    useEffect(() => {
-        fetchProducts()
-    }, [])
+    useEffect(() => { fetchProducts() }, [])
 
     async function fetchProducts() {
         try {
@@ -28,27 +29,38 @@ export default function AdminHeladeria() {
                 .from('heladeria')
                 .select('*')
                 .order('created_at', { ascending: false })
-
             if (error) throw error
             setProducts(data || [])
         } catch (error: any) {
             toast.error('Error al cargar helados: ' + error.message)
-        } finally {
-            setLoading(false)
-        }
+        } finally { setLoading(false) }
     }
 
     const handleOpenModal = (product: any = null) => {
         setEditingProduct(product)
+        setCurrentImageUrl(product?.image_url || '')
         setShowNewCat(false)
         setShowModal(true)
+    }
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        try {
+            setUploading(true)
+            toast.loading('Subiendo imagen...', { id: 'upload' })
+            const url = await uploadImage(file, 'products')
+            setCurrentImageUrl(url)
+            toast.success('¡Imagen subida!', { id: 'upload' })
+        } catch (error: any) {
+            toast.error('Error al subir: ' + error.message, { id: 'upload' })
+        } finally { setUploading(false) }
     }
 
     const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setSaving(true)
         const formData = new FormData(e.currentTarget)
-
         try {
             const category = formData.get('category') === 'NEW'
                 ? formData.get('new_category')
@@ -56,18 +68,15 @@ export default function AdminHeladeria() {
 
             const productData = {
                 name: formData.get('name'),
-                category: category,
+                category,
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
                 description: formData.get('description'),
-                image_url: formData.get('image_url') || null
+                image_url: currentImageUrl || null
             }
 
             if (editingProduct?.id) {
-                const { error } = await supabase
-                    .from('heladeria')
-                    .update(productData)
-                    .eq('id', editingProduct.id)
+                const { error } = await supabase.from('heladeria').update(productData).eq('id', editingProduct.id)
                 if (error) throw error
                 toast.success('Helado actualizado 🍦')
             } else {
@@ -80,9 +89,7 @@ export default function AdminHeladeria() {
             fetchProducts()
         } catch (error: any) {
             toast.error('Error al guardar: ' + error.message)
-        } finally {
-            setSaving(false)
-        }
+        } finally { setSaving(false) }
     }
 
     const filtered = products.filter(p =>
@@ -99,23 +106,14 @@ export default function AdminHeladeria() {
                     <h2 className="text-3xl font-display font-black text-gray-900 leading-none">Heladería Artesanal</h2>
                     <p className="text-gray-500 mt-2 text-sm font-medium italic">Sabores amazónicos únicos.</p>
                 </div>
-                <button
-                    onClick={() => handleOpenModal()}
-                    className="flex items-center gap-2 px-6 py-3.5 bg-pink-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-pink-900/20 hover:bg-black transition-all"
-                >
+                <button onClick={() => handleOpenModal()} className="flex items-center gap-2 px-6 py-3.5 bg-pink-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-pink-900/20 hover:bg-black transition-all">
                     <FiPlus /> Nuevo Helado
                 </button>
             </div>
 
             <div className="max-w-md relative">
                 <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                <input
-                    type="text"
-                    placeholder="Buscar sabor o producto..."
-                    className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-100 rounded-2xl text-sm outline-none shadow-sm"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
+                <input type="text" placeholder="Buscar sabor o producto..." className="w-full pl-12 pr-4 py-3.5 bg-white border border-gray-100 rounded-2xl text-sm outline-none shadow-sm" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
             </div>
 
             <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
@@ -153,19 +151,8 @@ export default function AdminHeladeria() {
                                         <td className="px-8 py-6 font-black text-gray-900">S/ {p.price}</td>
                                         <td className="px-8 py-6 text-right">
                                             <div className="flex justify-end gap-2">
-                                                <button
-                                                    onClick={() => handleOpenModal(p)}
-                                                    className="p-2.5 text-pink-600 hover:bg-pink-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"
-                                                ><FiEdit2 /></button>
-                                                <button
-                                                    onClick={async () => {
-                                                        if (confirm('¿Eliminar este helado?')) {
-                                                            await supabase.from('heladeria').delete().eq('id', p.id)
-                                                            fetchProducts()
-                                                        }
-                                                    }}
-                                                    className="p-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"
-                                                ><FiTrash2 /></button>
+                                                <button onClick={() => handleOpenModal(p)} className="p-2.5 text-pink-600 hover:bg-pink-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><FiEdit2 /></button>
+                                                <button onClick={async () => { if (confirm('¿Eliminar?')) { await supabase.from('heladeria').delete().eq('id', p.id); fetchProducts() } }} className="p-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><FiTrash2 /></button>
                                             </div>
                                         </td>
                                     </tr>
@@ -187,7 +174,8 @@ export default function AdminHeladeria() {
                                 <FiXCircle size={22} />
                             </button>
                         </div>
-                        <form onSubmit={handleSave} className="space-y-4">
+
+                        <form onSubmit={handleSave} className="space-y-5">
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Nombre del Helado</label>
                                 <input name="name" type="text" required defaultValue={editingProduct?.name} placeholder="Ej: Copa Selva Mágica" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-pink-500 outline-none text-sm font-bold" />
@@ -195,21 +183,14 @@ export default function AdminHeladeria() {
 
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Categoría</label>
-                                <select
-                                    name="category"
-                                    defaultValue={editingProduct?.category}
-                                    onChange={(e) => setShowNewCat(e.target.value === 'NEW')}
-                                    className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold appearance-none"
-                                >
+                                <select name="category" defaultValue={editingProduct?.category} onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold appearance-none">
                                     {categories.map(c => <option key={c} value={c}>{c}</option>)}
                                     <option value="NEW" className="text-pink-600 font-bold">+ Nueva Categoría...</option>
                                 </select>
-                                {showNewCat && (
-                                    <input name="new_category" required type="text" placeholder="Nombre de categoría" className="w-full px-5 py-3.5 bg-pink-50 border-pink-100 rounded-2xl outline-none text-sm font-bold animate-fade-in" />
-                                )}
+                                {showNewCat && <input name="new_category" required type="text" placeholder="Nombre de categoría" className="w-full px-5 py-3.5 bg-pink-50 border-pink-100 rounded-2xl outline-none text-sm font-bold animate-fade-in" />}
                             </div>
 
-                            <div className="grid grid-cols-3 gap-4">
+                            <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-1">
                                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Precio S/</label>
                                     <input name="price" type="number" step="0.5" required defaultValue={editingProduct?.price} placeholder="0.00" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold" />
@@ -218,9 +199,40 @@ export default function AdminHeladeria() {
                                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Stock</label>
                                     <input name="stock" type="number" required defaultValue={editingProduct?.stock} placeholder="0" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold" />
                                 </div>
-                                <div className="space-y-1">
-                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">URL Imagen</label>
-                                    <input name="image_url" type="text" defaultValue={editingProduct?.image_url} placeholder="https://..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold" />
+                            </div>
+
+                            {/* Imagen - subir archivo o pegar URL */}
+                            <div className="space-y-3">
+                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Imagen del Producto</label>
+
+                                {/* zona de clic para subir archivo */}
+                                <div
+                                    onClick={() => fileInputRef.current?.click()}
+                                    className="border-4 border-dashed border-gray-100 rounded-[2rem] p-6 bg-gray-50 hover:bg-pink-50 hover:border-pink-200 cursor-pointer text-center transition-all group overflow-hidden relative min-h-[140px] flex flex-col items-center justify-center"
+                                >
+                                    <input type="file" hidden ref={fileInputRef} accept="image/*" onChange={handleImageUpload} />
+                                    {uploading ? (
+                                        <FiLoader className="animate-spin text-3xl text-pink-500" />
+                                    ) : currentImageUrl ? (
+                                        <img src={currentImageUrl} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-[1.8rem]" alt="preview" />
+                                    ) : (
+                                        <div className="text-gray-300 group-hover:text-pink-400 transition-colors">
+                                            <FiCamera className="text-4xl mx-auto mb-2" />
+                                            <p className="text-[10px] font-black uppercase tracking-[0.2em]">Subir desde dispositivo</p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* campo de URL manual */}
+                                <div className="flex items-center gap-2 bg-gray-50 px-4 py-3 rounded-2xl">
+                                    <FiLink className="text-gray-400 shrink-0" />
+                                    <input
+                                        type="text"
+                                        value={currentImageUrl}
+                                        onChange={(e) => setCurrentImageUrl(e.target.value)}
+                                        placeholder="O pega aquí el enlace de la imagen..."
+                                        className="bg-transparent border-none outline-none text-xs w-full font-bold text-gray-500 placeholder:text-gray-300"
+                                    />
                                 </div>
                             </div>
 
@@ -229,9 +241,9 @@ export default function AdminHeladeria() {
                                 <textarea name="description" rows={3} defaultValue={editingProduct?.description} placeholder="Detalla los sabores o ingredientes..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-pink-500 outline-none text-sm font-bold resize-none" />
                             </div>
 
-                            <div className="flex gap-4 pt-6">
+                            <div className="flex gap-4 pt-4">
                                 <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase text-[10px] tracking-widest">Cancelar</button>
-                                <button type="submit" disabled={saving} className="flex-[2] py-4 bg-pink-600 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-pink-900/20 flex items-center justify-center gap-2">
+                                <button type="submit" disabled={saving || uploading} className="flex-[2] py-4 bg-pink-600 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-pink-900/20 flex items-center justify-center gap-2">
                                     {saving ? <FiLoader className="animate-spin" /> : <><FiCheckCircle /> {editingProduct?.id ? 'Actualizar Helado' : 'Guardar Helado 🍦'}</>}
                                 </button>
                             </div>

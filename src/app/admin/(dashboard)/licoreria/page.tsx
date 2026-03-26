@@ -1,11 +1,11 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
     FiPlus, FiSearch, FiEdit2, FiTrash2,
-    FiCheckCircle, FiLoader, FiXCircle
+    FiCheckCircle, FiLoader, FiXCircle, FiCamera, FiLink
 } from 'react-icons/fi'
-import { supabase } from '@/lib/supabase'
+import { supabase, uploadImage } from '@/lib/supabase'
 import { toast } from 'react-hot-toast'
 
 export default function AdminLicoreria() {
@@ -13,19 +13,19 @@ export default function AdminLicoreria() {
     const [showModal, setShowModal] = useState(false)
     const [loading, setLoading] = useState(true)
     const [saving, setSaving] = useState(false)
+    const [uploading, setUploading] = useState(false)
     const [products, setProducts] = useState<any[]>([])
     const [showNewCat, setShowNewCat] = useState(false)
     const [editingProduct, setEditingProduct] = useState<any>(null)
+    const [currentImageUrl, setCurrentImageUrl] = useState('')
+    const fileInputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => { fetchProducts() }, [])
 
     async function fetchProducts() {
         try {
             setLoading(true)
-            const { data, error } = await supabase
-                .from('licoreria')
-                .select('*')
-                .order('created_at', { ascending: false })
+            const { data, error } = await supabase.from('licoreria').select('*').order('created_at', { ascending: false })
             if (error) throw error
             setProducts(data || [])
         } catch (error: any) {
@@ -35,8 +35,23 @@ export default function AdminLicoreria() {
 
     const handleOpenModal = (product: any = null) => {
         setEditingProduct(product)
+        setCurrentImageUrl(product?.image_url || '')
         setShowNewCat(false)
         setShowModal(true)
+    }
+
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (!file) return
+        try {
+            setUploading(true)
+            toast.loading('Subiendo imagen...', { id: 'upload' })
+            const url = await uploadImage(file, 'products')
+            setCurrentImageUrl(url)
+            toast.success('¡Imagen subida!', { id: 'upload' })
+        } catch (error: any) {
+            toast.error('Error al subir: ' + error.message, { id: 'upload' })
+        } finally { setUploading(false) }
     }
 
     const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -47,11 +62,11 @@ export default function AdminLicoreria() {
             const category = formData.get('category') === 'NEW' ? formData.get('new_category') : formData.get('category')
             const productData = {
                 name: formData.get('name'),
-                category: category,
+                category,
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
                 description: formData.get('description'),
-                image_url: formData.get('image_url') || null
+                image_url: currentImageUrl || null
             }
 
             if (editingProduct?.id) {
@@ -63,7 +78,6 @@ export default function AdminLicoreria() {
                 if (error) throw error
                 toast.success('Licor guardado 🥂')
             }
-
             setShowModal(false)
             fetchProducts()
         } catch (error: any) {
@@ -119,7 +133,7 @@ export default function AdminLicoreria() {
                                             {p.image_url ? (
                                                 <img src={p.image_url} alt={p.name} className="w-10 h-10 rounded-xl object-cover" />
                                             ) : (
-                                                <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-900 flex items-center justify-center font-bold text-xl">🥂</div>
+                                                <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-900 flex items-center justify-center text-xl">🥂</div>
                                             )}
                                             <p className="font-bold text-gray-900">{p.name}</p>
                                         </div>
@@ -130,7 +144,7 @@ export default function AdminLicoreria() {
                                     <td className="px-8 py-6 text-right">
                                         <div className="flex justify-end gap-2">
                                             <button onClick={() => handleOpenModal(p)} className="p-2.5 text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><FiEdit2 /></button>
-                                            <button onClick={async () => { if (confirm('¿Eliminar?')) { await supabase.from('licoreria').delete().eq('id', p.id); fetchProducts(); } }} className="p-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><FiTrash2 /></button>
+                                            <button onClick={async () => { if (confirm('¿Eliminar?')) { await supabase.from('licoreria').delete().eq('id', p.id); fetchProducts() } }} className="p-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><FiTrash2 /></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -151,22 +165,23 @@ export default function AdminLicoreria() {
                                 <FiXCircle size={22} />
                             </button>
                         </div>
-                        <form onSubmit={handleSave} className="space-y-4">
+
+                        <form onSubmit={handleSave} className="space-y-5">
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Nombre del Licor</label>
-                                <input name="name" type="text" required defaultValue={editingProduct?.name} placeholder="Ej: Macerado de Uvachado" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none border-transparent focus:border-indigo-500 font-bold" />
+                                <input name="name" type="text" required defaultValue={editingProduct?.name} placeholder="Ej: Macerado de Uvachado" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
                             </div>
 
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Tipo de Licor</label>
                                 <select name="category" defaultValue={editingProduct?.category} onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold appearance-none">
                                     {categories.map(c => <option key={c} value={c}>{c}</option>)}
-                                    <option value="NEW" className="text-indigo-600 font-black">+ Nueva Categoría...</option>
+                                    <option value="NEW">+ Nueva Categoría...</option>
                                 </select>
-                                {showNewCat && <input name="new_category" required type="text" placeholder="Ej: Macerado, Destilado, Vino..." className="w-full px-5 py-3.5 bg-indigo-50 border-indigo-200 rounded-2xl outline-none font-bold animate-fade-in" />}
+                                {showNewCat && <input name="new_category" required type="text" placeholder="Ej: Macerado, Destilado..." className="w-full px-5 py-3.5 bg-indigo-50 rounded-2xl outline-none font-bold animate-fade-in" />}
                             </div>
 
-                            <div className="grid grid-cols-3 gap-4">
+                            <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-1">
                                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Precio S/</label>
                                     <input name="price" type="number" required defaultValue={editingProduct?.price} placeholder="0.00" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
@@ -175,20 +190,47 @@ export default function AdminLicoreria() {
                                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Stock</label>
                                     <input name="stock" type="number" required defaultValue={editingProduct?.stock} placeholder="0" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
                                 </div>
-                                <div className="space-y-1">
-                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">URL Imagen</label>
-                                    <input name="image_url" type="text" defaultValue={editingProduct?.image_url} placeholder="https://..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
+                            </div>
+
+                            {/* Imagen */}
+                            <div className="space-y-3">
+                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Imagen del Producto</label>
+                                <div
+                                    onClick={() => fileInputRef.current?.click()}
+                                    className="border-4 border-dashed border-gray-100 rounded-[2rem] p-6 bg-gray-50 hover:bg-indigo-50 hover:border-indigo-200 cursor-pointer text-center transition-all group overflow-hidden relative min-h-[140px] flex flex-col items-center justify-center"
+                                >
+                                    <input type="file" hidden ref={fileInputRef} accept="image/*" onChange={handleImageUpload} />
+                                    {uploading ? (
+                                        <FiLoader className="animate-spin text-3xl text-indigo-500" />
+                                    ) : currentImageUrl ? (
+                                        <img src={currentImageUrl} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 rounded-[1.8rem]" alt="preview" />
+                                    ) : (
+                                        <div className="text-gray-300 group-hover:text-indigo-400 transition-colors">
+                                            <FiCamera className="text-4xl mx-auto mb-2" />
+                                            <p className="text-[10px] font-black uppercase tracking-[0.2em]">Subir desde dispositivo</p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="flex items-center gap-2 bg-gray-50 px-4 py-3 rounded-2xl">
+                                    <FiLink className="text-gray-400 shrink-0" />
+                                    <input
+                                        type="text"
+                                        value={currentImageUrl}
+                                        onChange={(e) => setCurrentImageUrl(e.target.value)}
+                                        placeholder="O pega aquí el enlace de la imagen..."
+                                        className="bg-transparent border-none outline-none text-xs w-full font-bold text-gray-500 placeholder:text-gray-300"
+                                    />
                                 </div>
                             </div>
 
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Descripción / Notas de Sabor</label>
-                                <textarea name="description" rows={3} defaultValue={editingProduct?.description} placeholder="Detalla el proceso o ingredientes regionales..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-indigo-500 outline-none text-sm font-bold resize-none" />
+                                <textarea name="description" rows={3} defaultValue={editingProduct?.description} placeholder="Detalla el proceso o ingredientes..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none text-sm font-bold resize-none" />
                             </div>
 
-                            <div className="flex gap-4 pt-6">
+                            <div className="flex gap-4 pt-4">
                                 <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase text-[10px] tracking-widest">Cancelar</button>
-                                <button type="submit" disabled={saving} className="flex-[2] py-4 bg-indigo-950 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-indigo-900/20 flex items-center justify-center gap-2">
+                                <button type="submit" disabled={saving || uploading} className="flex-[2] py-4 bg-indigo-950 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg flex items-center justify-center gap-2">
                                     {saving ? <FiLoader className="animate-spin" /> : <><FiCheckCircle /> {editingProduct?.id ? 'Actualizar Licor' : 'Guardar Licor 🥂'}</>}
                                 </button>
                             </div>
