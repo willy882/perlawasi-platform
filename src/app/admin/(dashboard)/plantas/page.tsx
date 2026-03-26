@@ -120,7 +120,7 @@ export default function AdminVivero() {
     )
 
     const categoriesList = Array.from(new Set(plants.map(p => p.category).filter(Boolean)))
-    if (categoriesList.length === 0) categoriesList.push('Interior', 'Exterior', 'Suculentas', 'Ornamentales', 'Huerta')
+    if (categoriesList.length === 0) categoriesList.push('Interior', 'Exterior', 'Suculentas', 'Ornamentales', 'Huerta', 'Sustratos', 'Nutrientes')
 
     return (
         <div className="space-y-8 animate-fade-in px-4">

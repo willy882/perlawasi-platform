@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     description: 'Descubre nuestras variedades de cerveza artesanal elaboradas con agua de manantial y lúpulos seleccionados. Visita nuestro taproom gourmet.',
 }
 
+export const revalidate = 0
+
 export default async function CerveceriaPage() {
     // Fetch beers from Supabase
     const { data: dbBeers } = await supabase
@@ -15,7 +17,7 @@ export default async function CerveceriaPage() {
         .select('*')
         .order('created_at', { ascending: false })
 
-    const beers = dbBeers?.map(b => ({
+    const beers = dbBeers?.map((b: any) => ({
         ...b,
         emoji: '🍺',
         color: b.category?.toLowerCase().includes('ipa') ? 'from-amber-600 to-amber-400' :
@@ -116,7 +118,7 @@ export default async function CerveceriaPage() {
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {beers.map((beer, i) => (
+                        {beers.map((beer: any, i: number) => (
                             <div key={i} className="bg-white/5 backdrop-blur-md rounded-3xl p-8 border border-white/10 hover:bg-white/10 transition-all group">
                                 <div className={`aspect-square relative rounded-2xl bg-gradient-to-br ${beer.color} flex items-center justify-center text-7xl mb-6 transition-transform group-hover:scale-110 overflow-hidden`}>
                                     {beer.image_url ? (

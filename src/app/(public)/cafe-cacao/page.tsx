@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     description: 'Café de especialidad y chocolates artesanales elaborados con cacao ancestral. Experiencia premium de degustación en el corazón de la selva.',
 }
 
+export const revalidate = 0
+
 export default async function CafeCacaoPage() {
     // Fetch products from Supabase
     const { data: products } = await supabase
@@ -15,8 +17,8 @@ export default async function CafeCacaoPage() {
         .order('category', { ascending: true })
 
     // Separate by type or handle categories
-    const ritualBoxes = products?.filter(p => p.category?.toLowerCase().includes('ritual') || p.category?.toLowerCase().includes('caja')) || []
-    const individualProducts = products?.filter(p => !p.category?.toLowerCase().includes('ritual') && !p.category?.toLowerCase().includes('caja')) || []
+    const ritualBoxes = products?.filter((p: any) => p.category?.toLowerCase().includes('ritual') || p.category?.toLowerCase().includes('caja')) || []
+    const individualProducts = products?.filter((p: any) => !p.category?.toLowerCase().includes('ritual') && !p.category?.toLowerCase().includes('caja')) || []
 
     return (
         <div className="min-h-screen bg-white">
@@ -126,7 +128,7 @@ export default async function CafeCacaoPage() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {ritualBoxes.length > 0 ? (
-                            ritualBoxes.map((p, i) => (
+                            ritualBoxes.map((p: any, i: number) => (
                                 <div key={p.id} className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-medium transition-all group">
                                     <div className="aspect-square relative bg-gradient-to-br from-amber-100 to-orange-50 flex items-center justify-center text-8xl group-hover:scale-110 transition-transform duration-500">
                                         {p.image_url ? (
@@ -162,7 +164,7 @@ export default async function CafeCacaoPage() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {individualProducts.length > 0 ? (
-                            individualProducts.map((p, i) => (
+                            individualProducts.map((p: any, i: number) => (
                                 <div key={p.id} className="bg-gray-50 rounded-2xl p-6 hover:shadow-soft transition-all">
                                     <div className="aspect-square relative bg-gradient-to-br from-amber-200 to-amber-100 rounded-xl flex items-center justify-center text-6xl mb-4 overflow-hidden">
                                         {p.image_url ? (

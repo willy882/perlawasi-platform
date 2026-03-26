@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import {
     FiPlus, FiSearch, FiEdit2, FiTrash2,
-    FiCheckCircle, FiLoader, FiZap
+    FiCheckCircle, FiLoader, FiXCircle
 } from 'react-icons/fi'
 import { supabase } from '@/lib/supabase'
 import { toast } from 'react-hot-toast'
@@ -15,6 +15,7 @@ export default function AdminCerveceria() {
     const [saving, setSaving] = useState(false)
     const [products, setProducts] = useState<any[]>([])
     const [showNewCat, setShowNewCat] = useState(false)
+    const [editingProduct, setEditingProduct] = useState<any>(null)
 
     useEffect(() => { fetchProducts() }, [])
 
@@ -32,23 +33,37 @@ export default function AdminCerveceria() {
         } finally { setLoading(false) }
     }
 
+    const handleOpenModal = (product: any = null) => {
+        setEditingProduct(product)
+        setShowNewCat(false)
+        setShowModal(true)
+    }
+
     const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setSaving(true)
         const formData = new FormData(e.currentTarget)
         try {
             const category = formData.get('category') === 'NEW' ? formData.get('new_category') : formData.get('category')
-            const newProduct = {
+            const productData = {
                 name: formData.get('name'),
                 category: category,
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
                 description: formData.get('description'),
-                image_url: formData.get('image_url')
+                image_url: formData.get('image_url') || null
             }
-            const { error } = await supabase.from('cerveceria').insert([newProduct])
-            if (error) throw error
-            toast.success('Cerveza guardada 🍺')
+
+            if (editingProduct?.id) {
+                const { error } = await supabase.from('cerveceria').update(productData).eq('id', editingProduct.id)
+                if (error) throw error
+                toast.success('Cerveza actualizada 🍺')
+            } else {
+                const { error } = await supabase.from('cerveceria').insert([productData])
+                if (error) throw error
+                toast.success('Cerveza guardada 🍺')
+            }
+
             setShowModal(false)
             fetchProducts()
         } catch (error: any) {
@@ -70,7 +85,7 @@ export default function AdminCerveceria() {
                     <h2 className="text-3xl font-display font-black text-gray-900 leading-none">Cervecería Artesanal</h2>
                     <p className="text-gray-500 mt-2 text-sm font-medium italic">Craft beer del Amazonas.</p>
                 </div>
-                <button onClick={() => setShowModal(true)} className="flex items-center gap-2 px-6 py-3.5 bg-amber-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-amber-900/20 hover:bg-black transition-all">
+                <button onClick={() => handleOpenModal()} className="flex items-center gap-2 px-6 py-3.5 bg-amber-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-amber-900/20 hover:bg-black transition-all">
                     <FiPlus /> Nueva Cerveza
                 </button>
             </div>
@@ -113,7 +128,10 @@ export default function AdminCerveceria() {
                                     <td className="px-8 py-6 text-sm font-bold text-gray-600">{p.stock} uds</td>
                                     <td className="px-8 py-6 font-black text-gray-900">S/ {p.price}</td>
                                     <td className="px-8 py-6 text-right">
-                                        <button onClick={async () => { if (confirm('¿Eliminar?')) { await supabase.from('cerveceria').delete().eq('id', p.id); fetchProducts(); } }} className="p-2.5 text-red-600 opacity-0 group-hover:opacity-100 transition-opacity"><FiTrash2 /></button>
+                                        <div className="flex justify-end gap-2">
+                                            <button onClick={() => handleOpenModal(p)} className="p-2.5 text-amber-600 hover:bg-amber-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><FiEdit2 /></button>
+                                            <button onClick={async () => { if (confirm('¿Eliminar?')) { await supabase.from('cerveceria').delete().eq('id', p.id); fetchProducts(); } }} className="p-2.5 text-red-600 hover:bg-red-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"><FiTrash2 /></button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))
@@ -125,16 +143,23 @@ export default function AdminCerveceria() {
             {showModal && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm">
                     <div className="bg-white w-full max-w-xl rounded-[3rem] p-10 animate-slide-up max-h-[90vh] overflow-y-auto">
-                        <h3 className="text-2xl font-black mb-8 text-gray-900">Nueva Cerveza Artesanal</h3>
+                        <div className="flex justify-between items-center mb-8">
+                            <h3 className="text-2xl font-black text-gray-900">
+                                {editingProduct?.id ? 'Editar Cerveza' : 'Nueva Cerveza Artesanal'}
+                            </h3>
+                            <button onClick={() => setShowModal(false)} className="p-2 bg-gray-100 text-gray-400 rounded-full hover:bg-gray-200 transition-all">
+                                <FiXCircle size={22} />
+                            </button>
+                        </div>
                         <form onSubmit={handleSave} className="space-y-4">
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Nombre de la Cerveza</label>
-                                <input name="name" type="text" required placeholder="Ej: IPA Amazónica" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none border-transparent focus:border-amber-500 font-bold" />
+                                <input name="name" type="text" required defaultValue={editingProduct?.name} placeholder="Ej: IPA Amazónica" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none border-transparent focus:border-amber-500 font-bold" />
                             </div>
 
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Estilo</label>
-                                <select name="category" onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold appearance-none">
+                                <select name="category" defaultValue={editingProduct?.category} onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold appearance-none">
                                     {categories.map(c => <option key={c} value={c}>{c}</option>)}
                                     <option value="NEW" className="text-amber-600 font-black">+ Nuevo Estilo...</option>
                                 </select>
@@ -144,26 +169,28 @@ export default function AdminCerveceria() {
                             <div className="grid grid-cols-3 gap-4">
                                 <div className="space-y-1">
                                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Precio S/</label>
-                                    <input name="price" type="number" step="1" required placeholder="0.00" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
+                                    <input name="price" type="number" step="1" required defaultValue={editingProduct?.price} placeholder="0.00" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
                                 </div>
                                 <div className="space-y-1">
                                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Stock</label>
-                                    <input name="stock" type="number" required placeholder="0" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
+                                    <input name="stock" type="number" required defaultValue={editingProduct?.stock} placeholder="0" className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
                                 </div>
                                 <div className="space-y-1">
                                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">URL Imagen</label>
-                                    <input name="image_url" type="text" placeholder="https://..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
+                                    <input name="image_url" type="text" defaultValue={editingProduct?.image_url} placeholder="https://..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold" />
                                 </div>
                             </div>
 
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Descripción / Notas de Cata</label>
-                                <textarea name="description" rows={3} placeholder="Detalla el amargor, cuerpo y aromas..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-amber-500 outline-none text-sm font-bold resize-none" />
+                                <textarea name="description" rows={3} defaultValue={editingProduct?.description} placeholder="Detalla el amargor, cuerpo y aromas..." className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl border-transparent focus:border-amber-500 outline-none text-sm font-bold resize-none" />
                             </div>
 
                             <div className="flex gap-4 pt-6">
                                 <button type="button" onClick={() => setShowModal(false)} className="flex-1 py-4 bg-gray-100 text-gray-500 rounded-2xl font-black uppercase text-[10px] tracking-widest">Cancelar</button>
-                                <button type="submit" disabled={saving} className="flex-[2] py-4 bg-amber-600 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-amber-900/20">{saving ? 'Guardando...' : 'Guardar Cerveza 🍺'}</button>
+                                <button type="submit" disabled={saving} className="flex-[2] py-4 bg-amber-600 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-lg shadow-amber-900/20 flex items-center justify-center gap-2">
+                                    {saving ? <FiLoader className="animate-spin" /> : <><FiCheckCircle /> {editingProduct?.id ? 'Actualizar Cerveza' : 'Guardar Cerveza 🍺'}</>}
+                                </button>
                             </div>
                         </form>
                     </div>

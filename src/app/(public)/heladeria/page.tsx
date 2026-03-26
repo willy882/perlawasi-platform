@@ -2,6 +2,8 @@ import Link from 'next/link'
 import AnimatedIceCreamCharacter from '@/components/AnimatedIceCreamCharacter'
 import { supabase } from '@/lib/supabase'
 
+export const revalidate = 0
+
 export default async function HeladeriaPage() {
     // Fetch products from Supabase
     const { data: dbProducts } = await supabase
@@ -9,8 +11,8 @@ export default async function HeladeriaPage() {
         .select('*')
         .order('created_at', { ascending: false })
 
-    const flavors = dbProducts?.filter(p => !p.category?.toLowerCase().includes('combo')) || []
-    const combos = dbProducts?.filter(p => p.category?.toLowerCase().includes('combo')) || []
+    const flavors = dbProducts?.filter((p: any) => !p.category?.toLowerCase().includes('combo')) || []
+    const combos = dbProducts?.filter((p: any) => p.category?.toLowerCase().includes('combo')) || []
 
     return (
         <div className="min-h-screen bg-white">
@@ -63,7 +65,7 @@ export default async function HeladeriaPage() {
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {flavors.length > 0 ? (
-                            flavors.map((p, i) => (
+                            flavors.map((p: any, i: number) => (
                                 <div key={p.id} className="bg-white rounded-3xl overflow-hidden shadow-soft hover:shadow-strong transition-all group">
                                     <div className="aspect-square relative bg-gradient-to-br from-pink-100 to-orange-100 flex items-center justify-center text-9xl group-hover:scale-110 transition-transform duration-500 overflow-hidden">
                                         {p.image_url ? (
@@ -102,7 +104,7 @@ export default async function HeladeriaPage() {
 
                     <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                         {combos.length > 0 ? (
-                            combos.map((p, i) => (
+                            combos.map((p: any, i: number) => (
                                 <div key={p.id} className="bg-white rounded-3xl p-10 shadow-medium">
                                     <div className="text-6xl mb-6 text-center">{i % 2 === 0 ? '🍪🍪🍪' : '🍨🍨'}</div>
                                     <h3 className="text-3xl font-display font-bold mb-4 text-center text-gray-900">{p.name}</h3>

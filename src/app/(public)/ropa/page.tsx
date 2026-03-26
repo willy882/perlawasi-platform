@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     description: 'Colección de ropa de playa, bikinis, pareos y accesorios artesanales de la Amazonía peruana.',
 }
 
+export const revalidate = 0
+
 export default async function RopaPage() {
     // Fetch products from Supabase, grouped by section
     const { data: dbProducts } = await supabase

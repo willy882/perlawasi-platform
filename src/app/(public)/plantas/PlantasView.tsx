@@ -40,6 +40,19 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
     const [activeTab, setActiveTab] = useState<'info' | 'care' | 'more'>('info')
     const [added, setAdded] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
+    const [activeCategory, setActiveCategory] = useState('Todas')
+
+    // Separar por tipos
+    const floraPlants = initialPlants.filter(p => !['SUSTRATOS', 'NUTRIENTES', 'SUSTRATO', 'NUTRIENTE'].includes(p.category?.toUpperCase()))
+    const accessoryProducts = initialPlants.filter(p => ['SUSTRATOS', 'NUTRIENTES', 'SUSTRATO', 'NUTRIENTE'].includes(p.category?.toUpperCase()))
+
+    // Categorías únicas solo para la sección de Flora
+    const categories = ['Todas', ...Array.from(new Set(floraPlants.map(p => p.category).filter(Boolean)))]
+
+    // Plantas filtradas (Flora)
+    const filteredFlora = activeCategory === 'Todas'
+        ? floraPlants
+        : floraPlants.filter(p => p.category === activeCategory)
 
     if (initialPlants.length === 0) {
         return (
@@ -199,11 +212,28 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                             <div className="h-px w-12" style={{ backgroundColor: BUHO_ORANGE }} />
                         </div>
                         <h2 className="text-4xl md:text-6xl font-black leading-tight" style={{ color: BUHO_GREEN }}>Nuestra Reserva</h2>
+
+                        {/* Category Filter */}
+                        <div className="flex flex-wrap justify-center gap-2 mt-8">
+                            {categories.map((cat: any) => (
+                                <button
+                                    key={cat}
+                                    onClick={() => setActiveCategory(cat)}
+                                    className={`px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${activeCategory === cat
+                                        ? 'text-white shadow-lg'
+                                        : 'bg-white text-gray-400 hover:bg-gray-50 border border-gray-100'
+                                        }`}
+                                    style={activeCategory === cat ? { backgroundColor: BUHO_ORANGE } : {}}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
                     </div>
 
                     {/* Plant Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                        {initialPlants.map((plant, i) => (
+                        {filteredFlora.map((plant: any, i: number) => (
                             <motion.div
                                 key={plant.id}
                                 initial={{ opacity: 0, y: 40 }}
@@ -249,12 +279,52 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                                                     {tag}
                                                 </span>
                                             ))}
-                                        </div>
+                                         </div>
                                     </div>
                                 </div>
                             </motion.div>
                         ))}
                     </div>
+
+                    {/* ══════════ SECCIÓN SUSTRATOS (Dynamic) ══════════ */}
+                    {accessoryProducts.length > 0 && (
+                        <div className="mt-40">
+                            <div className="text-center mb-16">
+                                <div className="inline-flex items-center gap-3 mb-4">
+                                    <div className="h-px w-12" style={{ backgroundColor: BUHO_ORANGE }} />
+                                    <span className="text-[10px] font-black uppercase tracking-[0.4em]" style={{ color: BUHO_ORANGE }}>Especializados</span>
+                                    <div className="h-px w-12" style={{ backgroundColor: BUHO_ORANGE }} />
+                                </div>
+                                <h2 className="text-4xl md:text-5xl font-black leading-tight" style={{ color: BUHO_GREEN }}>Suelo & Nutrición</h2>
+                                <p className="text-gray-400 mt-4 text-sm max-w-lg mx-auto italic font-medium">Sustratos y abonos orgánicos diseñados para potenciar el crecimiento de tus especies.</p>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {accessoryProducts.map((sub, si) => (
+                                    <motion.div
+                                        key={sub.id}
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        whileInView={{ opacity: 1, scale: 1 }}
+                                        onClick={() => handleSelectPlant(sub)}
+                                        className="bg-white rounded-[2.5rem] p-8 border border-gray-100 hover:shadow-2xl transition-all cursor-pointer group"
+                                    >
+                                        <div className="aspect-square flex items-center justify-center text-6xl mb-6 bg-gray-50 rounded-3xl group-hover:bg-emerald-50 transition-colors">
+                                            {sub.image_url ? (
+                                                <img src={sub.image_url} alt={sub.name} className="w-full h-full object-cover" />
+                                            ) : (
+                                                <span className="drop-shadow-lg">{sub.emoji || '🟤'}</span>
+                                            )}
+                                        </div>
+                                        <div className="text-center">
+                                            <span className="text-[9px] font-black uppercase tracking-[0.2em] text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">{sub.category}</span>
+                                            <h4 className="font-bold text-lg mt-3 text-gray-900">{sub.name}</h4>
+                                            <div className="mt-4 font-black text-xl text-orange-500">S/ {sub.price}</div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </section>
 

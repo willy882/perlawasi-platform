@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     description: 'Licorería Perlawasi: destilados premium y macerados artesanales únicos. El espíritu de la selva peruana encapsulado en cada botella.',
 }
 
+export const revalidate = 0
+
 export default async function LicoreriaPage() {
     // Fetch products from Supabase
     const { data: dbProducts } = await supabase
@@ -15,7 +17,7 @@ export default async function LicoreriaPage() {
         .select('*')
         .order('created_at', { ascending: false })
 
-    const products = dbProducts?.map(p => ({
+    const products = dbProducts?.map((p: any) => ({
         ...p,
         badge: p.category === 'Destilados' ? 'Signature' : (p.category === 'Macerados' ? 'Artesanal' : 'Premium'),
         gradient: p.category === 'Destilados' ? 'from-amber-950 via-stone-900 to-black' :
@@ -130,7 +132,7 @@ export default async function LicoreriaPage() {
                     </div>
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {products.map((item, i) => (
+                        {products.map((item: any, i: number) => (
                             <div key={i} className="group relative cursor-pointer">
                                 {/* Badge */}
                                 <div className="absolute top-4 left-4 z-10">
