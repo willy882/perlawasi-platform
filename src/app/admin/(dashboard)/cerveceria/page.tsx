@@ -18,6 +18,7 @@ export default function AdminCerveceria() {
     const [showNewCat, setShowNewCat] = useState(false)
     const [editingProduct, setEditingProduct] = useState<any>(null)
     const [currentImageUrl, setCurrentImageUrl] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState('IPA')
     const fileInputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => { fetchProducts() }, [])
@@ -36,6 +37,7 @@ export default function AdminCerveceria() {
     const handleOpenModal = (product: any = null) => {
         setEditingProduct(product)
         setCurrentImageUrl(product?.image_url || '')
+        setSelectedCategory(product?.category || categories[0] || 'IPA')
         setShowNewCat(false)
         setShowModal(true)
     }
@@ -59,10 +61,13 @@ export default function AdminCerveceria() {
         setSaving(true)
         const formData = new FormData(e.currentTarget)
         try {
-            const category = formData.get('category') === 'NEW' ? formData.get('new_category') : formData.get('category')
+            const rawCat = selectedCategory
+            const category = rawCat === 'NEW'
+                ? (formData.get('new_category') as string)
+                : rawCat
             const productData = {
                 name: formData.get('name'),
-                category,
+                category: category || 'IPA',
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
                 description: formData.get('description'),
@@ -81,7 +86,7 @@ export default function AdminCerveceria() {
             setShowModal(false)
             fetchProducts()
         } catch (error: any) {
-            toast.error('Error: ' + error.message)
+            toast.error('Error al guardar: ' + error.message)
         } finally { setSaving(false) }
     }
 
@@ -174,7 +179,7 @@ export default function AdminCerveceria() {
 
                             <div className="space-y-1">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Estilo</label>
-                                <select name="category" defaultValue={editingProduct?.category} onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold appearance-none">
+                                <select name="category" value={selectedCategory} onChange={(e) => { setSelectedCategory(e.target.value); setShowNewCat(e.target.value === 'NEW') }} className="w-full px-5 py-3.5 bg-gray-50 rounded-2xl outline-none font-bold appearance-none">
                                     {categories.map(c => <option key={c} value={c}>{c}</option>)}
                                     <option value="NEW">+ Nuevo Estilo...</option>
                                 </select>

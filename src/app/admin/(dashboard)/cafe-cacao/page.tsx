@@ -18,6 +18,7 @@ export default function AdminCafe() {
     const [products, setProducts] = useState<any[]>([])
     const [showNewCat, setShowNewCat] = useState(false)
     const [currentImageUrl, setCurrentImageUrl] = useState('')
+    const [selectedCategory, setSelectedCategory] = useState('Café Grano')
     const fileInputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => { fetchProducts() }, [])
@@ -39,6 +40,7 @@ export default function AdminCafe() {
     const handleOpenModal = (product: any = null) => {
         setEditingProduct(product)
         setCurrentImageUrl(product?.image_url || '')
+        setSelectedCategory(product?.category || 'Café Grano')
         setShowNewCat(false)
         setShowModal(true)
     }
@@ -62,10 +64,13 @@ export default function AdminCafe() {
         setSaving(true)
         const formData = new FormData(e.currentTarget)
         try {
-            const category = formData.get('category') === 'NEW' ? formData.get('new_category') : formData.get('category')
+            const rawCat = selectedCategory
+            const category = rawCat === 'NEW'
+                ? (formData.get('new_category') as string)
+                : rawCat
             const productData: any = {
                 name: formData.get('name'),
-                category,
+                category: category || 'Café Grano',
                 price: parseFloat(formData.get('price') as string),
                 stock: parseInt(formData.get('stock') as string),
                 description: formData.get('description'),
@@ -198,7 +203,7 @@ export default function AdminCafe() {
                             <div className="space-y-2">
                                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Categoría / Variedad</label>
                                 <div className="space-y-3">
-                                    <select name="category" defaultValue={editingProduct?.category} onChange={(e) => setShowNewCat(e.target.value === 'NEW')} className="w-full px-6 py-4 bg-gray-50 rounded-2xl outline-none text-sm font-bold appearance-none cursor-pointer">
+                                    <select name="category" value={selectedCategory} onChange={(e) => { setSelectedCategory(e.target.value); setShowNewCat(e.target.value === 'NEW') }} className="w-full px-6 py-4 bg-gray-50 rounded-2xl outline-none text-sm font-bold appearance-none cursor-pointer">
                                         {categoriesList.map(c => <option key={c} value={c}>{c}</option>)}
                                         <option value="NEW" className="text-orange-600 font-bold">+ Crear Nueva...</option>
                                     </select>
