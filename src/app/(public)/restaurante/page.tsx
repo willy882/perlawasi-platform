@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { supabase } from '@/lib/supabase'
+import VerCartaButton from '@/components/VerCartaButton'
 
 export const revalidate = 0
 
@@ -22,9 +23,10 @@ export default async function RestaurantePage() {
                         src="/images/hero_restaurante_v2.png"
                         alt="Gastronomía Perlawasi"
                         fill
+                        sizes="100vw"
                         className="object-cover"
                         priority
-                        quality={100}
+                        quality={82}
                     />
                 </div>
 
@@ -40,9 +42,7 @@ export default async function RestaurantePage() {
                             Celebramos la biodiversidad de San Martín con ingredientes frescos de nuestra huerta. Cada plato cuenta la historia de nuestra tierra.
                         </p>
                         <div className="flex gap-4 flex-wrap">
-                            <Link href="/restaurante/carta" className="btn bg-emerald-600 text-white px-10 py-4 text-lg hover:bg-emerald-700">
-                                Ver La Carta
-                            </Link>
+                            <VerCartaButton />
                             <Link href="#reservar" className="btn bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 px-10 py-4 text-lg">
                                 Reservar Mesa
                             </Link>
@@ -79,9 +79,9 @@ export default async function RestaurantePage() {
                                 src="/images/filosofia_restaurante_v2.png"
                                 alt="Nuestra Filosofía - Kilómetro Cero"
                                 fill
+                                sizes="(min-width: 768px) 50vw, 100vw"
                                 className="object-cover"
-                                quality={100}
-                                priority
+                                quality={82}
                             />
                         </div>
                     </div>
@@ -108,8 +108,9 @@ export default async function RestaurantePage() {
                                             src={dish.image_url || '/images/placeholder_dish.png'}
                                             alt={dish.name || 'Plato Perlawasi'}
                                             fill
+                                            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
                                             className="object-cover group-hover:scale-110 transition-transform duration-500"
-                                            quality={90}
+                                            quality={82}
                                         />
                                     </div>
                                     <div className="p-8 flex flex-col flex-1">
@@ -157,8 +158,9 @@ export default async function RestaurantePage() {
                                     src="/images/exp_chocolate.png"
                                     alt="Degustación de Chocolate"
                                     fill
+                                    sizes="(min-width: 768px) 33vw, 100vw"
                                     className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
-                                    quality={100}
+                                    quality={82}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c1a] via-[#1a3c1a]/40 to-transparent" />
                             </div>
@@ -183,8 +185,9 @@ export default async function RestaurantePage() {
                                     src="/images/exp_cafe.png"
                                     alt="Tour del Café"
                                     fill
+                                    sizes="(min-width: 768px) 33vw, 100vw"
                                     className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
-                                    quality={100}
+                                    quality={82}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c1a] via-[#1a3c1a]/40 to-transparent" />
                             </div>
@@ -209,8 +212,9 @@ export default async function RestaurantePage() {
                                     src="/images/exp_licores_v4.png"
                                     alt="Licores Perlamayo"
                                     fill
+                                    sizes="(min-width: 768px) 33vw, 100vw"
                                     className="object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
-                                    quality={100}
+                                    quality={82}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a3c1a] via-[#1a3c1a]/40 to-transparent" />
                             </div>

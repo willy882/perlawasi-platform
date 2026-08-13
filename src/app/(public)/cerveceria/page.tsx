@@ -78,6 +78,7 @@ export default async function CerveceriaPage() {
                                 src="/images/cerveceria_fermentacion.png"
                                 alt="Proceso de Fermentación"
                                 fill
+                                sizes="(min-width: 768px) 50vw, 100vw"
                                 className="object-cover"
                             />
                         </div>

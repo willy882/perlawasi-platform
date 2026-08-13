@@ -6,9 +6,7 @@ import { FaWhatsapp } from 'react-icons/fa'
 export default function WhatsAppButton() {
     const [isHovered, setIsHovered] = useState(false)
 
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '928141669'
-    const message = encodeURIComponent('Hola, estoy interesado en los productos y servicios de Perlawasi')
-    const whatsappUrl = `https://wa.me/51${whatsappNumber}?text=${message}`
+    const whatsappUrl = `https://wa.me/51928141669?text=${encodeURIComponent('Hola, estoy interesado en los productos y servicios de Perlawasi')}`
 
     return (
         <a

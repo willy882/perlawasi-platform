@@ -7,6 +7,9 @@ import {
     FiDollarSign, FiZap
 } from 'react-icons/fi'
 import { supabase } from '@/lib/supabase'
+import dynamic from 'next/dynamic'
+
+// 3D Búho removed for cleaner UI
 
 export default function AdminDashboard() {
     const [statsData, setStatsData] = useState({
@@ -170,7 +173,7 @@ export default function AdminDashboard() {
                             </div>
                             <p className="text-[10px] font-black uppercase text-emerald-400">Excelente Estado</p>
                         </div>
-                        <div className="absolute -right-10 -bottom-10 text-[10rem] opacity-5 pointer-events-none group-hover:rotate-12 transition-transform duration-700">🌿</div>
+                        {/* Decorative 3D Búho removed */}
                     </div>
 
                     <div className="bg-white rounded-[2.5rem] border border-gray-100 p-8 shadow-sm">

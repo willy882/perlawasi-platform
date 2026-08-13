@@ -16,6 +16,7 @@ export default function Footer() {
                                     src="/images/logo.png"
                                     alt="Perlawasi"
                                     fill
+                                    sizes="80px"
                                     className="object-contain"
                                 />
                             </div>

@@ -1,10 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMinus, FiPlus, FiShoppingBag, FiInfo, FiDroplet, FiSun, FiMapPin, FiHeart, FiX } from 'react-icons/fi'
+
+// 3D Búho removed for cleaner UI
 
 interface Plant {
     id: string
@@ -34,6 +37,14 @@ const BUHO_GREEN = '#1B4332'
 const BUHO_ORANGE = '#F97316'
 const BUHO_LIGHT = '#F0FDF4'
 
+// ─── helpers sustratos ────────────────────────────────────────────────────────
+const SUSTRATO_KEYS = ['sustrato', 'sustratos', 'nutriente', 'nutrientes', 'abono', 'abonos']
+function isSustrato(cat: string) { return SUSTRATO_KEYS.some(k => (cat || '').toLowerCase().includes(k)) }
+function parseVariants(tags: string[]): { size: string; price: number }[] {
+    return (tags || []).filter(t => /^.+:\d/.test(t))
+        .map(t => { const [size, price] = t.split(':'); return { size: size.trim(), price: parseFloat(price) } })
+}
+
 export default function PlantasView({ initialPlants }: { initialPlants: any[] }) {
     const [selectedPlant, setSelectedPlant] = useState<Plant>(initialPlants[0] || {} as Plant)
     const [qty, setQty] = useState(1)
@@ -41,6 +52,7 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
     const [added, setAdded] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [activeCategory, setActiveCategory] = useState('Todas')
+    const [selectedVariant, setSelectedVariant] = useState<{ size: string; price: number } | null>(null)
 
     // Separar por tipos
     const floraPlants = initialPlants.filter(p => !['SUSTRATOS', 'NUTRIENTES', 'SUSTRATO', 'NUTRIENTE'].includes(p.category?.toUpperCase()))
@@ -66,6 +78,9 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
         setSelectedPlant(plant)
         setQty(1)
         setActiveTab('info')
+        // Pre-seleccionar primera variante si es sustrato/abono
+        const vs = parseVariants((plant as any).tags || [])
+        setSelectedVariant(vs.length > 0 ? vs[0] : null)
         setModalOpen(true)
     }
 
@@ -73,6 +88,16 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
         setAdded(true)
         setTimeout(() => setAdded(false), 2000)
     }
+
+    // Bloquear scroll del fondo cuando el modal está abierto
+    React.useEffect(() => {
+        if (modalOpen) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = ''
+        }
+        return () => { document.body.style.overflow = '' }
+    }, [modalOpen])
 
     return (
         <div className="min-h-screen text-gray-900 font-sans" style={{ backgroundColor: BUHO_LIGHT }}>
@@ -86,6 +111,7 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                         src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
                         alt="Naturaleza Amazónica"
                         fill
+                        sizes="100vw"
                         className="object-cover opacity-20"
                         priority
                     />
@@ -123,6 +149,7 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                                     src="/images/buho.png"
                                     alt="Buho Plantas & Mariposas"
                                     fill
+                                    sizes="192px"
                                     className="object-contain"
                                     priority
                                 />
@@ -205,13 +232,18 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                 <div className="max-w-7xl mx-auto">
 
                     {/* Section Header */}
-                    <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-3 mb-4">
-                            <div className="h-px w-12" style={{ backgroundColor: BUHO_ORANGE }} />
-                            <span className="text-[10px] font-black uppercase tracking-[0.4em]" style={{ color: BUHO_ORANGE }}>Portfolio Curado</span>
-                            <div className="h-px w-12" style={{ backgroundColor: BUHO_ORANGE }} />
+                    <div className="relative text-center mb-16">
+
+                        {/* Decorative elements removed for a minimal look */}
+
+                        <div className="relative" style={{ zIndex: 1 }}>
+                            <div className="inline-flex items-center gap-3 mb-4">
+                                <div className="h-px w-12" style={{ backgroundColor: BUHO_ORANGE }} />
+                                <span className="text-[10px] font-black uppercase tracking-[0.4em]" style={{ color: BUHO_ORANGE }}>Portfolio Curado</span>
+                                <div className="h-px w-12" style={{ backgroundColor: BUHO_ORANGE }} />
+                            </div>
+                            <h2 className="text-4xl md:text-6xl font-black leading-tight" style={{ color: BUHO_GREEN }}>Nuestra Reserva</h2>
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-black leading-tight" style={{ color: BUHO_GREEN }}>Nuestra Reserva</h2>
 
                         {/* Category Filter */}
                         <div className="flex flex-wrap justify-center gap-2 mt-8">
@@ -335,6 +367,7 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                         src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"
                         alt="bg"
                         fill
+                        sizes="100vw"
                         className="object-cover grayscale"
                     />
                 </div>
@@ -386,7 +419,7 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                             {/* Buho mini logo */}
                             <div className="flex justify-center mb-8">
                                 <div className="relative w-24 h-24 bg-white rounded-full p-1 shadow-xl">
-                                    <Image src="/images/buho.png" alt="Buho" fill className="object-contain" />
+                                    <Image src="/images/buho.png" alt="Buho" fill sizes="96px" className="object-contain" />
                                 </div>
                             </div>
 
@@ -446,63 +479,133 @@ export default function PlantasView({ initialPlants }: { initialPlants: any[] })
                                 </div>
 
                                 <div className="p-8 md:p-12 space-y-6">
+                                    {/* Header común */}
                                     <div>
                                         <span className="text-[10px] font-black uppercase tracking-[0.4em] mb-2 block" style={{ color: BUHO_ORANGE }}>
-                                            {selectedPlant.difficulty} · {selectedPlant.category}
+                                            {selectedPlant.category}
                                         </span>
                                         <h3 className="text-3xl md:text-4xl font-black" style={{ color: BUHO_GREEN }}>{selectedPlant.name}</h3>
                                         <p className="text-sm italic text-gray-400 mt-1">{selectedPlant.scientific}</p>
                                     </div>
 
-                                    {/* Care grid */}
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="p-4 rounded-2xl" style={{ backgroundColor: BUHO_GREEN + '08' }}>
-                                            <FiSun className="mb-2 text-lg" style={{ color: BUHO_ORANGE }} />
-                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Exposición</p>
-                                            <p className="text-xs font-bold">{selectedPlant.light}</p>
-                                        </div>
-                                        <div className="p-4 rounded-2xl" style={{ backgroundColor: BUHO_GREEN + '08' }}>
-                                            <FiDroplet className="mb-2 text-lg" style={{ color: BUHO_ORANGE }} />
-                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Hidratación</p>
-                                            <p className="text-xs font-bold">{selectedPlant.water}</p>
-                                        </div>
-                                    </div>
+                                    {/* ── PLANTAS: Luz, Riego + Tabs ── */}
+                                    {!isSustrato((selectedPlant as any).category) && (
+                                        <>
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div className="p-4 rounded-2xl" style={{ backgroundColor: BUHO_GREEN + '08' }}>
+                                                    <FiSun className="mb-2 text-lg" style={{ color: BUHO_ORANGE }} />
+                                                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Exposición</p>
+                                                    <p className="text-xs font-bold">{selectedPlant.light}</p>
+                                                </div>
+                                                <div className="p-4 rounded-2xl" style={{ backgroundColor: BUHO_GREEN + '08' }}>
+                                                    <FiDroplet className="mb-2 text-lg" style={{ color: BUHO_ORANGE }} />
+                                                    <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Hidratación</p>
+                                                    <p className="text-xs font-bold">{selectedPlant.water}</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div className="flex gap-6 border-b border-gray-100 mb-4">
+                                                    {(['info', 'care', 'more'] as const).map(tab => (
+                                                        <button key={tab} onClick={() => setActiveTab(tab)}
+                                                            className={`pb-3 text-[10px] font-black uppercase tracking-widest border-b-2 -mb-px transition-all ${activeTab === tab ? 'border-current' : 'text-gray-300 border-transparent'}`}
+                                                            style={activeTab === tab ? { color: BUHO_GREEN, borderColor: BUHO_ORANGE } : {}}>
+                                                            {tab === 'info' ? 'Info' : tab === 'care' ? 'Cuidados' : 'Más'}
+                                                        </button>
+                                                    ))}
+                                                </div>
+                                                <p className="text-sm text-gray-500 leading-relaxed">{selectedPlant.tabs?.[activeTab]}</p>
+                                            </div>
+                                        </>
+                                    )}
 
-                                    {/* Tabs */}
-                                    <div>
-                                        <div className="flex gap-6 border-b border-gray-100 mb-4">
-                                            {(['info', 'care', 'more'] as const).map(tab => (
-                                                <button
-                                                    key={tab}
-                                                    onClick={() => setActiveTab(tab)}
-                                                    className={`pb-3 text-[10px] font-black uppercase tracking-widest border-b-2 -mb-px transition-all ${activeTab === tab ? 'border-current' : 'text-gray-300 border-transparent'}`}
-                                                    style={activeTab === tab ? { color: BUHO_GREEN, borderColor: BUHO_ORANGE } : {}}
-                                                >
-                                                    {tab === 'info' ? 'Info' : tab === 'care' ? 'Cuidados' : 'Más'}
-                                                </button>
-                                            ))}
-                                        </div>
-                                        <p className="text-sm text-gray-500 leading-relaxed">{selectedPlant.tabs?.[activeTab]}</p>
-                                    </div>
+                                    {/* ── SUSTRATOS / ABONOS: selector de tamaño ── */}
+                                    {isSustrato((selectedPlant as any).category) && (() => {
+                                        const vs = parseVariants((selectedPlant as any).tags || [])
+                                        return (
+                                            <div className="space-y-5">
+                                                {/* Info del sustrato */}
+                                                {((selectedPlant as any).water || (selectedPlant as any).env) && (
+                                                    <div className="grid grid-cols-2 gap-3">
+                                                        {(selectedPlant as any).water && (
+                                                            <div className="p-4 rounded-2xl" style={{ backgroundColor: BUHO_GREEN + '08' }}>
+                                                                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Aplicación</p>
+                                                                <p className="text-xs font-bold">{(selectedPlant as any).water}</p>
+                                                            </div>
+                                                        )}
+                                                        {(selectedPlant as any).env && (
+                                                            <div className="p-4 rounded-2xl" style={{ backgroundColor: BUHO_GREEN + '08' }}>
+                                                                <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Composición</p>
+                                                                <p className="text-xs font-bold">{(selectedPlant as any).env}</p>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                )}
+
+                                                {/* Selector de tamaño */}
+                                                {vs.length > 0 && (
+                                                    <div>
+                                                        <p className="text-[10px] font-black uppercase tracking-widest mb-3" style={{ color: BUHO_GREEN }}>
+                                                            Elige el tamaño
+                                                        </p>
+                                                        <div className="flex flex-wrap gap-3">
+                                                            {vs.map((v) => {
+                                                                const active = selectedVariant?.size === v.size
+                                                                return (
+                                                                    <button
+                                                                        key={v.size}
+                                                                        onClick={() => setSelectedVariant(v)}
+                                                                        className="flex flex-col items-center px-5 py-3 rounded-2xl border-2 transition-all font-black"
+                                                                        style={{
+                                                                            borderColor: active ? BUHO_ORANGE : '#e5e7eb',
+                                                                            backgroundColor: active ? BUHO_ORANGE + '10' : 'white',
+                                                                            color: active ? BUHO_ORANGE : '#6b7280'
+                                                                        }}
+                                                                    >
+                                                                        <span className="text-sm font-black">{v.size}</span>
+                                                                        <span className="text-[10px] mt-0.5">S/ {v.price}</span>
+                                                                    </button>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                )}
+
+                                                {/* Descripción / modo de uso */}
+                                                {(selectedPlant as any).description && (
+                                                    <p className="text-sm text-gray-500 leading-relaxed">{(selectedPlant as any).description}</p>
+                                                )}
+                                            </div>
+                                        )
+                                    })()}
                                 </div>
                             </div>
 
                             {/* Footer */}
-                            <div className="p-6 md:px-12 md:pb-10 bg-white border-t border-gray-50 flex flex-col sm:flex-row items-center gap-4">
-                                <div className="flex items-center gap-4 rounded-2xl px-5 py-3 border border-gray-100 w-full sm:w-auto justify-between sm:justify-center">
-                                    <button onClick={() => setQty(q => Math.max(1, q - 1))} className="p-2 text-gray-400 hover:text-black"><FiMinus /></button>
-                                    <span className="font-black text-lg w-5 text-center">{qty}</span>
-                                    <button onClick={() => setQty(q => q + 1)} className="p-2 text-gray-400 hover:text-black"><FiPlus /></button>
+                            {(() => {
+                                const vs = parseVariants((selectedPlant as any).tags || [])
+                                const isS = isSustrato((selectedPlant as any).category)
+                                const unitPrice = isS && selectedVariant ? selectedVariant.price : selectedPlant.price
+                                return (
+                                <div className="p-6 md:px-12 md:pb-10 bg-white border-t border-gray-50 flex flex-col sm:flex-row items-center gap-4">
+                                    <div className="flex items-center gap-4 rounded-2xl px-5 py-3 border border-gray-100 w-full sm:w-auto justify-between sm:justify-center">
+                                        <button onClick={() => setQty(q => Math.max(1, q - 1))} className="p-2 text-gray-400 hover:text-black"><FiMinus /></button>
+                                        <span className="font-black text-lg w-5 text-center">{qty}</span>
+                                        <button onClick={() => setQty(q => q + 1)} className="p-2 text-gray-400 hover:text-black"><FiPlus /></button>
+                                    </div>
+                                    <button
+                                        onClick={handleAddToCart}
+                                        disabled={isS && vs.length > 0 && !selectedVariant}
+                                        className="w-full sm:flex-1 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 transition-all shadow-lg text-white disabled:opacity-50"
+                                        style={{ backgroundColor: added ? '#16a34a' : BUHO_GREEN }}
+                                    >
+                                        <FiShoppingBag />
+                                        {added ? 'Añadido ✓'
+                                            : isS && vs.length > 0 && !selectedVariant ? 'Elige un tamaño'
+                                            : `Añadir · S/ ${(unitPrice * qty).toFixed(2)}`}
+                                    </button>
                                 </div>
-                                <button
-                                    onClick={handleAddToCart}
-                                    className="w-full sm:flex-1 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 transition-all shadow-lg text-white"
-                                    style={{ backgroundColor: added ? '#16a34a' : BUHO_GREEN }}
-                                >
-                                    <FiShoppingBag />
-                                    {added ? 'Añadido ✓' : `Añadir · S/ ${selectedPlant.price * qty}`}
-                                </button>
-                            </div>
+                                )
+                            })()}
                         </motion.div>
                     </motion.div>
                 )}

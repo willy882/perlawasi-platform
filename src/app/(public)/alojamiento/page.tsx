@@ -52,13 +52,13 @@ export default function AlojamientoPage() {
                                 {/* Miniaturas verticales */}
                                 <div className="flex flex-col gap-4 md:gap-8 w-[28%]">
                                     <div className="relative aspect-[3/4] rounded-2xl md:rounded-[2rem] overflow-hidden border border-white/10 shadow-lg hover:scale-[1.03] transition-transform duration-500">
-                                        <Image src="/images/alojamiento_a.png" alt="Suite Interior" fill className="object-cover" />
+                                        <Image src="/images/alojamiento_a.png" alt="Suite Interior" fill sizes="(min-width: 1024px) 16vw, 28vw" className="object-cover" />
                                     </div>
                                     <div className="relative aspect-[1/1] rounded-2xl md:rounded-[2rem] overflow-hidden border border-white/10 shadow-lg hover:scale-[1.03] transition-transform duration-500">
-                                        <Image src="/images/alojamiento_b.png" alt="Exterior Selva" fill className="object-cover" />
+                                        <Image src="/images/alojamiento_b.png" alt="Exterior Selva" fill sizes="(min-width: 1024px) 16vw, 28vw" className="object-cover" />
                                     </div>
                                     <div className="relative aspect-[3/4] rounded-2xl md:rounded-[2rem] overflow-hidden border border-white/10 shadow-lg hover:scale-[1.03] transition-transform duration-500">
-                                        <Image src="/images/alojamiento_c.png" alt="Cabaña Árbol" fill className="object-cover" />
+                                        <Image src="/images/alojamiento_c.png" alt="Cabaña Árbol" fill sizes="(min-width: 1024px) 16vw, 28vw" className="object-cover" />
                                     </div>
                                 </div>
 
@@ -69,9 +69,10 @@ export default function AlojamientoPage() {
                                             src="/images/alojamiento_d.png"
                                             alt="Perlawasi Hospedaje Experience"
                                             fill
+                                            sizes="(min-width: 1024px) 42vw, 72vw"
                                             className="object-cover"
                                             priority
-                                            quality={100}
+                                            quality={82}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
                                         <div className="absolute bottom-8 md:bottom-16 left-8 md:left-16">
@@ -102,7 +103,7 @@ export default function AlojamientoPage() {
                         {/* Suite 1 */}
                         <div className="bg-white/5 backdrop-blur-sm rounded-[2.5rem] overflow-hidden border border-white/10 hover:border-[#86efac]/30 transition-all duration-500 group">
                             <div className="aspect-[16/10] relative overflow-hidden">
-                                <Image src="/images/alojamiento_a.png" alt="Suite Panorámica" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                                <Image src="/images/alojamiento_a.png" alt="Suite Panorámica" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover group-hover:scale-110 transition-transform duration-700" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#050805] via-transparent to-transparent" />
                             </div>
                             <div className="p-10 md:p-12">
@@ -123,7 +124,7 @@ export default function AlojamientoPage() {
                         {/* Suite 2 */}
                         <div className="bg-white/5 backdrop-blur-sm rounded-[2.5rem] overflow-hidden border border-white/10 hover:border-[#86efac]/30 transition-all duration-500 group">
                             <div className="aspect-[16/10] relative overflow-hidden">
-                                <Image src="/images/alojamiento_c.png" alt="Cabaña Rústica" fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+                                <Image src="/images/alojamiento_c.png" alt="Cabaña Rústica" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover group-hover:scale-110 transition-transform duration-700" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#050805] via-transparent to-transparent" />
                             </div>
                             <div className="p-10 md:p-12">

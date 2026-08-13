@@ -19,9 +19,10 @@ export default function HomePage() {
                         src="/images/luisk-chef.png"
                         alt="Restaurante Perlawasi"
                         fill
+                        sizes="100vw"
                         className="object-cover"
                         priority
-                        quality={100}
+                        quality={82}
                     />
                 </div>
 
@@ -46,10 +47,12 @@ export default function HomePage() {
                     <div className="grid lg:grid-cols-3 gap-8 items-center">
                         {/* Imagen de helados */}
                         <div className="relative h-[400px] lg:h-[500px] rounded-[3rem] overflow-hidden shadow-medium bg-icecream-light/30 group">
+                            {/* TODO: reemplazar por foto real de helados Perlawasi cuando esté disponible */}
                             <Image
                                 src="https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&q=80&w=1200"
-                                alt="Helados Artesanales"
+                                alt="Helados Artesanales Perlawasi"
                                 fill
+                                sizes="(min-width: 1024px) 33vw, 100vw"
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -57,7 +60,7 @@ export default function HomePage() {
 
                         {/* Contenido de texto */}
                         <div className="space-y-6 px-4 lg:col-span-1">
-                            <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Felicidad en cada bocado</span>
+                            <span className="text-primary-500 font-serif italic text-base">Felicidad en cada bocado</span>
                             <h2 className="text-4xl md:text-5xl font-display font-bold">Heladería Vibrante</h2>
                             <p className="text-gray-600 text-lg leading-relaxed">
                                 Delicias cremosas preparadas con las mejores frutas de la región. Un paraíso de sabores naturales que celebran la biodiversidad de nuestra tierra.
@@ -81,7 +84,7 @@ export default function HomePage() {
                     <div className="grid md:grid-cols-2 gap-20 items-center">
                         <div className="order-2 md:order-1 space-y-8">
                             <div>
-                                <span className="text-primary-400 font-bold uppercase tracking-tighter text-sm mb-4 block">Herencia & Aroma</span>
+                                <span className="text-primary-400 font-serif italic text-lg mb-4 block">Herencia & Aroma</span>
                                 <h2 className="text-5xl md:text-6xl font-display font-bold leading-tight">Café & Cacao</h2>
                                 <p className="text-xl text-gray-300 mt-6 leading-relaxed">
                                     Dos tesoros peruanos en un solo lugar. El aroma del café premium recién tostado se funde con la intensidad del cacao ancestral para crear una experiencia sensorial única.
@@ -95,8 +98,9 @@ export default function HomePage() {
                                             src="/images/ozo.png"
                                             alt="Fondo Café Premium"
                                             fill
+                                            sizes="(min-width: 768px) 25vw, 50vw"
                                             className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
-                                            quality={100}
+                                            quality={82}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
                                     </div>
@@ -111,8 +115,9 @@ export default function HomePage() {
                                             src="/images/past1.png"
                                             alt="Fondo Cacao Fino"
                                             fill
+                                            sizes="(min-width: 768px) 25vw, 50vw"
                                             className="object-cover opacity-60 transition-transform duration-700 group-hover:scale-110"
-                                            quality={100}
+                                            quality={82}
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
                                     </div>
@@ -131,9 +136,10 @@ export default function HomePage() {
                         <div className="order-1 md:order-2 relative group flex justify-center w-full">
                             <div className="aspect-square w-full max-w-[450px] rounded-[4rem] overflow-hidden shadow-2xl transition-all duration-700 group-hover:rotate-6 group-hover:scale-105 relative">
                                 <Image
-                                    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1000"
-                                    alt="Café y Cacao Premium"
+                                    src="/images/hero_cafe_cacao.png"
+                                    alt="Café y Cacao Premium Ukumari"
                                     fill
+                                    sizes="(min-width: 768px) 450px, 100vw"
                                     className="object-cover"
                                 />
                             </div>
@@ -149,7 +155,7 @@ export default function HomePage() {
             <section className="section bg-brand-light">
                 <div className="container-custom">
                     <div className="text-center mb-16">
-                        <span className="text-primary-600 font-bold uppercase tracking-[0.2em] text-xs">Descanso Profundo</span>
+                        <span className="text-primary-600 font-serif italic text-base">Descanso Profundo</span>
                         <h2 className="text-4xl md:text-6xl font-display font-bold mt-4">Brisa Lodge</h2>
                     </div>
                     <div className="relative h-[600px] rounded-[3rem] overflow-hidden group shadow-soft">
@@ -157,6 +163,7 @@ export default function HomePage() {
                             src="/images/fondo_alojamiento.png"
                             alt="Brisa Lodge - Alojamiento en la Selva"
                             fill
+                            sizes="100vw"
                             className="object-cover transition-transform duration-1000 group-hover:scale-105"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -180,7 +187,7 @@ export default function HomePage() {
                     <div className="grid md:grid-cols-2 gap-16 items-center">
                         <div className="space-y-8">
                             <div>
-                                <span className="text-primary-500 font-bold uppercase tracking-widest text-xs">Maestría en Malta</span>
+                                <span className="text-primary-500 font-serif italic text-base">Maestría en Malta</span>
                                 <h2 className="text-4xl md:text-5xl font-display font-bold mt-2">Cervecería Artesanal</h2>
                                 <p className="text-gray-600 text-lg mt-6 leading-relaxed">
                                     Cervezas únicas con sabores inspirados en las montañas. Utilizamos agua pura de manantial y lúpulos seleccionados para crear variedades que sorprenden al paladar.
@@ -202,11 +209,12 @@ export default function HomePage() {
                         </div>
                         <div className="relative h-[500px] rounded-[3rem] overflow-hidden group shadow-medium">
                             <Image
-                                src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?auto=format&fit=crop&q=80&w=1200"
-                                alt="Cervecería Artesanal"
+                                src="/images/cerveceria_fermentacion.png"
+                                alt="Cervecería Artesanal Perlawasi"
                                 fill
+                                sizes="(min-width: 768px) 50vw, 100vw"
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                quality={100}
+                                quality={82}
                             />
                             <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/10 to-transparent" />
                         </div>
@@ -223,14 +231,15 @@ export default function HomePage() {
                                 src="/images/fondo_licores.png"
                                 alt="Licorería de Autor"
                                 fill
+                                sizes="(min-width: 768px) 50vw, 100vw"
                                 className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                quality={100}
+                                quality={82}
                             />
                             <div className="absolute inset-0 bg-gradient-to-bl from-orange-100/30 to-transparent" />
                         </div>
                         <div className="order-1 md:order-2 space-y-8">
                             <div>
-                                <span className="text-gray-500 font-bold uppercase tracking-widest text-xs">Con Sabor a Selva</span>
+                                <span className="text-gray-500 font-serif italic text-base">Con Sabor a Selva</span>
                                 <h2 className="text-4xl md:text-5xl font-display font-bold mt-2">Licores Perlamayo</h2>
                                 <p className="text-gray-600 text-lg mt-6 leading-relaxed">
                                     Destilados premium, cocteles y macerados artesanales que capturan la esencia de nuestra biodiversidad. Una curaduría de licores diseñados para los momentos más especiales.
@@ -251,7 +260,7 @@ export default function HomePage() {
                         {/* Boutique Section */}
                         <Link href="/ropa" className="group bg-[#F4F1ED] rounded-[3rem] p-12 flex flex-col justify-between relative overflow-hidden transition-all hover:bg-[#EEEAE5]">
                             <div className="z-10 relative">
-                                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest block mb-4">Conscious Wear</span>
+                                <span className="text-base font-serif italic text-gray-400 block mb-4">Conscious Wear</span>
                                 <h3 className="text-4xl font-display font-bold text-gray-900">Ropa Esencial con Boutique Perlamayo</h3>
                                 <p className="text-gray-500 mt-4 max-w-xs text-lg">Básicos sostenibles diseñados para tu ritual diario en armonía con el entorno, desde sandalias, ropa interior y mucho más.</p>
                             </div>
@@ -263,8 +272,9 @@ export default function HomePage() {
                                     src="/images/fondo_boutique.png"
                                     alt="Boutique Perlawasi"
                                     fill
+                                    sizes="(min-width: 768px) 50vw, 100vw"
                                     className="object-cover object-center"
-                                    quality={100}
+                                    quality={82}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-[#F4F1ED] via-[#F4F1ED]/50 to-transparent w-2/3" />
                             </div>
@@ -273,7 +283,7 @@ export default function HomePage() {
                         {/* Plants Section */}
                         <Link href="/plantas" className="group bg-[#E8F3ED] rounded-[3rem] p-12 flex flex-col justify-between relative overflow-hidden transition-all hover:bg-[#DDECE4]">
                             <div className="z-10 relative">
-                                <span className="text-xs font-bold text-plants uppercase tracking-widest block mb-4">Nature Indoors</span>
+                                <span className="text-base font-serif italic text-plants block mb-4">Nature Indoors</span>
                                 <h3 className="text-4xl font-display font-bold text-gray-900">Verdor Interior</h3>
                                 <p className="text-gray-700 mt-4 max-w-xs text-lg">Una selección de plantas nativas y exóticas para transformar tus espacios en oasis de vida.</p>
                             </div>
@@ -285,8 +295,9 @@ export default function HomePage() {
                                     src="/images/fondo_buho.png"
                                     alt="Verdor Interior"
                                     fill
+                                    sizes="(min-width: 768px) 50vw, 100vw"
                                     className="object-cover object-right mask-image-gradient-wide"
-                                    quality={100}
+                                    quality={82}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-r from-[#E8F3ED] via-transparent to-transparent" />
                             </div>
@@ -304,6 +315,7 @@ export default function HomePage() {
                                 src="/images/agencias.png"
                                 alt="Fondo Experiencia Perlawasi"
                                 fill
+                                sizes="100vw"
                                 className="object-cover opacity-60 transition-transform duration-[10s] group-hover:scale-105"
                                 priority
                             />

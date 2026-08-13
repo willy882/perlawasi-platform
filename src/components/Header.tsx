@@ -42,6 +42,7 @@ export default function Header() {
                                 }
                                 alt="Perlawasi"
                                 fill
+                                sizes="128px"
                                 className={`object-contain ${pathname === '/ropa' ? 'mix-blend-multiply' : ''}`}
                                 priority
                             />

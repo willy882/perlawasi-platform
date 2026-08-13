@@ -110,9 +110,15 @@ export default function AdminDashboardLayout({ children }: { children: React.Rea
                             <p className="text-[10px] text-white/40 truncate">admin@perlawasi.com</p>
                         </div>
                     </div>
-                    <Link href="/admin/login" className="flex items-center gap-3 text-xs font-bold text-white/50 hover:text-white transition-colors">
+                    <button 
+                        onClick={() => {
+                            document.cookie = "admin_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;"
+                            window.location.href = '/admin/login'
+                        }} 
+                        className="flex items-center gap-3 text-xs font-bold text-white/50 hover:text-white transition-colors w-full text-left"
+                    >
                         <FiLogOut /> Cerrar Sesión
-                    </Link>
+                    </button>
                 </div>
             </aside>
 

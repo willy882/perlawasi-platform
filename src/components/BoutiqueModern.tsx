@@ -105,6 +105,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                         src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=2000&q=80"
                         alt="Playa Tropical"
                         fill
+                        sizes="100vw"
                         className="object-cover opacity-60"
                         priority
                     />
@@ -128,7 +129,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                         className="mb-2"
                     >
                         <div className="relative w-[280px] h-[110px] md:w-[450px] md:h-[160px] drop-shadow-2xl">
-                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain mix-blend-multiply" priority />
+                            <Image src="/images/punto.png" alt="Perlamayo" fill sizes="(min-width: 768px) 450px, 280px" className="object-contain mix-blend-multiply" priority />
                         </div>
                     </motion.div>
 
@@ -276,7 +277,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
                                         >
                                             {/* Card img */}
                                             <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-lg transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-2xl">
-                                                <Image src={p.image_url || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400'} alt={p.name} fill className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                                                <Image src={p.image_url || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400'} alt={p.name} fill sizes="(min-width: 768px) 25vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                                                 {/* Gradient overlay */}
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                                                 {/* Hover CTA */}
@@ -319,14 +320,14 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
             ═══════════════════════════════════════════════════════ */}
             <section className="py-24 md:py-36 relative overflow-hidden" style={{ backgroundColor: SAND }}>
                 <div className="absolute inset-0 opacity-40">
-                    <Image src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1920&q=80" alt="sand" fill className="object-cover" />
+                    <Image src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1920&q=80" alt="sand" fill sizes="100vw" className="object-cover" />
                     <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${SAND} 0%, transparent 100%)` }} />
                 </div>
                 <div className="container px-6 mx-auto relative z-10 text-center">
                     {/* Perlamayo logo */}
                     <div className="flex justify-center mb-10">
                         <div className="relative w-72 h-40 md:w-96 md:h-56 drop-shadow-2xl">
-                            <Image src="/images/punto.png" alt="Perlamayo" fill className="object-contain mix-blend-multiply" />
+                            <Image src="/images/punto.png" alt="Perlamayo" fill sizes="(min-width: 768px) 384px, 288px" className="object-contain mix-blend-multiply" />
                         </div>
                     </div>
 
@@ -383,7 +384,7 @@ export default function BoutiqueModern({ initialProducts = [] }: { initialProduc
 
                             {/* Product image */}
                             <div className="relative aspect-[4/3] overflow-hidden flex-shrink-0">
-                                <Image src={selectedProduct.image_url || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'} alt={selectedProduct.name} fill className="object-cover" />
+                                <Image src={selectedProduct.image_url || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800'} alt={selectedProduct.name} fill sizes="(min-width: 768px) 500px, 100vw" className="object-cover" />
                                 <div className="absolute inset-0" style={{ background: `linear-gradient(to top, ${OCEAN}cc 0%, transparent 60%)` }} />
                                 <div className="absolute bottom-6 left-6">
                                     <h3 className="text-2xl font-black text-white">{selectedProduct.name}</h3>

@@ -47,9 +47,10 @@ export default async function LicoreriaPage() {
                         src="/images/licoreria_hero_bg.png"
                         alt="Fondo Perlamayo"
                         fill
+                        sizes="100vw"
                         className="object-contain md:object-cover md:object-center"
                         priority
-                        quality={100}
+                        quality={82}
                     />
                     {/* Overlay gradiente lateral para móvil para no tapar el jaguar/botella */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20 md:bg-black/20" />
@@ -72,7 +73,7 @@ export default async function LicoreriaPage() {
                                 // En móvil reducimos la sombra para que no ensucie la imagen
                                 filter: 'drop-shadow(0 2px 5px rgba(0,0,0,0.5))',
                             }}>
-                            PERLAWASI
+                            PERLAMAYO
                         </h1>
                     </div>
 

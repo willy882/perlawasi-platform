@@ -7,6 +7,10 @@ import {
     FiBell, FiDatabase, FiHelpCircle
 } from 'react-icons/fi'
 import { toast } from 'react-hot-toast'
+import dynamic from 'next/dynamic'
+
+// Cargar el componente 3D dinámicamente para que no bloquee la carga SSR
+// 3D Búho removed for cleaner UI
 
 export default function AdminAjustes() {
     const router = useRouter()
@@ -88,7 +92,7 @@ export default function AdminAjustes() {
                             Cambiar Contraseña
                         </button>
                     </div>
-                    <div className="absolute -right-10 -bottom-10 text-[12rem] opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-1000">🦉</div>
+                    {/* Decorative 3D Búho removed */}
                 </div>
             </div>
 

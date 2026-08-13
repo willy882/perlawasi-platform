@@ -159,6 +159,7 @@ export default function ClothingViewer3D({ emoji, color, image, isSpinning, onSp
                                 src={image}
                                 alt="Producto"
                                 fill
+                                sizes="280px"
                                 className="object-contain p-4"
                                 style={{
                                     mixBlendMode: 'multiply',
@@ -206,6 +207,7 @@ export default function ClothingViewer3D({ emoji, color, image, isSpinning, onSp
                                 src={image}
                                 alt="Producto - vista posterior"
                                 fill
+                                sizes="280px"
                                 className="object-contain p-4 opacity-60"
                                 style={{
                                     mixBlendMode: 'multiply',

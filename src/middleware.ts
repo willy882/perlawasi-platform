@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
     if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
         const authCookie = request.cookies.get('admin_auth')
 
-        // Si no existe la cookie de autenticación, redirigir al login
+        // Si no existe la cookie de autenticación o no es válida, redirigir al login
         if (!authCookie || authCookie.value !== 'true') {
             const loginUrl = new URL('/admin/login', request.url)
             return NextResponse.redirect(loginUrl)

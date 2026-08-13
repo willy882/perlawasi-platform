@@ -23,13 +23,19 @@ export default async function PlantasPage() {
         const isInterior = categoryUpper === 'INTERIOR'
         const isExterior = categoryUpper === 'EXTERIOR'
 
+        // Preservar tags reales de la BD (contienen variantes de tamaño para sustratos)
+        // Solo usar tags por defecto si no hay nada guardado
+        const dbTags: string[] = Array.isArray(p.tags) && p.tags.length > 0
+            ? p.tags
+            : [p.category || 'Selva', p.difficulty || 'Baja', 'Amazónico']
+
         return {
             ...p,
             scientific: p.scientific_name || 'Especie nativa',
             bgColor: isInterior ? '#f0fdf4' : (isExterior ? '#eff6ff' : '#fdfaf1'),
             accentColor: isInterior ? '#166534' : (isExterior ? '#1e40af' : '#92400e'),
             thumbnails: [p.image_url || '🌿', '🍃', '🪴'],
-            tags: [p.category || 'Selva', p.difficulty || 'Baja', 'Amazónico'],
+            tags: dbTags,
             tabs: {
                 info: p.description || 'Una planta excepcional de nuestra reserva.',
                 care: `Luz: ${p.light || 'Variable'}. Riego: ${p.water || 'Moderado'}.`,

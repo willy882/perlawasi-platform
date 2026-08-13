@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# standalone remotion sub-project (own package.json/node_modules)
+/remotion-vids/node_modules
+
 # testing
 /coverage
 
@@ -31,6 +34,8 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+vercel.env.txt
+*.env.txt
 
 # vercel
 .vercel

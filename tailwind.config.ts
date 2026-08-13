@@ -130,7 +130,9 @@ const config: Config = {
             fontFamily: {
                 sans: ['Inter', 'system-ui', 'sans-serif'],
                 display: ['Outfit', 'Inter', 'sans-serif'],
-                serif: ['Georgia', 'serif'],
+                // Editorial serif for eyebrows/kickers and accent copy — replaces generic
+                // all-caps sans labels with something that reads as designed, not templated.
+                serif: ['var(--font-lora)', 'Georgia', 'serif'],
             },
 
             borderRadius: {
@@ -140,9 +142,11 @@ const config: Config = {
             },
 
             boxShadow: {
-                'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-                'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 30px -5px rgba(0, 0, 0, 0.04)',
-                'strong': '0 10px 40px -10px rgba(0, 0, 0, 0.2), 0 20px 50px -10px rgba(0, 0, 0, 0.1)',
+                // Tinted with the brand forest-green (#0d542b) instead of flat black —
+                // shadows should carry the hue of the surface they sit on.
+                'soft': '0 2px 15px -3px rgba(13, 84, 43, 0.10), 0 10px 20px -2px rgba(13, 84, 43, 0.05)',
+                'medium': '0 4px 25px -5px rgba(13, 84, 43, 0.14), 0 10px 30px -5px rgba(13, 84, 43, 0.06)',
+                'strong': '0 10px 40px -10px rgba(13, 84, 43, 0.24), 0 20px 50px -10px rgba(13, 84, 43, 0.12)',
             },
 
             animation: {

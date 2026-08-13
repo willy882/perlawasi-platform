@@ -20,7 +20,8 @@ export default function AdminLogin() {
         setTimeout(() => {
             if (email === 'perlawasi_1@gmail.com' && password === 'willydev') {
                 // Establecer cookie de autenticación (sesión simple para este demo)
-                document.cookie = "admin_auth=true; path=/; max-age=86400; SameSite=Strict"
+                const secure = window.location.protocol === 'https:' ? 'Secure;' : ''
+                document.cookie = `admin_auth=true; path=/; max-age=86400; SameSite=Lax; ${secure}`
 
                 toast.success('Acceso permitido. ¡Bienvenido, Willy!')
                 router.push('/admin')
@@ -51,6 +52,7 @@ export default function AdminLogin() {
 
                 {/* Login Card */}
                 <div className="bg-white rounded-[3rem] p-10 shadow-strong border border-gray-100">
+
                     <div className="flex items-center gap-2 mb-8 px-4 py-2 bg-emerald-50 rounded-xl w-fit">
                         <FiShield className="text-emerald-600" />
                         <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700">Acceso Restringido</span>
