@@ -14,6 +14,7 @@
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent, type TouchEvent as ReactTouchEvent } from 'react';
+import { createPortal } from 'react-dom';
 
 type Pagina = { src: string; webp: string; titulo: string };
 
@@ -60,6 +61,12 @@ export default function CartaFlipbook({
   const touch = useRef<{ x: number; y: number; t: number } | null>(null);
   const arrastre = useRef<{ x: number; y: number; px: number; py: number } | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const [montado, setMontado] = useState(false);
+
+  /* ---------------- portal: escapa de cualquier stacking context (headers, z-index, etc.) ---------------- */
+  useEffect(() => {
+    setMontado(true);
+  }, []);
 
   /* ---------------- responsive ---------------- */
   useEffect(() => {
@@ -158,9 +165,9 @@ export default function CartaFlipbook({
 
   const progreso = useMemo(() => ((actual + 1) / total) * 100, [actual, total]);
 
-  if (!open) return null;
+  if (!open || !montado) return null;
 
-  return (
+  return createPortal(
     <div
       className="pw-overlay"
       ref={overlayRef}
@@ -310,7 +317,8 @@ export default function CartaFlipbook({
           </div>
         </div>
       )}
-    </div>
+    </div>,
+    document.body
   );
 }
 
